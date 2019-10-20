@@ -14,6 +14,9 @@
 		7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC032347E74100F5EF15 /* Assets.xcassets */; };
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
+		70AB2A44235CA60D004856D7 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A43235CA60D004856D7 /* Feed.swift */; };
+		70AB2A48235CA8D2004856D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A47235CA8D2004856D7 /* Post.swift */; };
+		70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* homeFeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		7019AC062347E74100F5EF15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7019AC092347E74100F5EF15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70AB2A43235CA60D004856D7 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
+		70AB2A47235CA8D2004856D7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		70AB2A49235CB2C3004856D7 /* homeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeFeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,10 @@
 			children = (
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
+				70AB2A47235CA8D2004856D7 /* Post.swift */,
+				70AB2A43235CA60D004856D7 /* Feed.swift */,
 				7019AC012347E73F00F5EF15 /* ContentView.swift */,
+				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
 				7019AC032347E74100F5EF15 /* Assets.xcassets */,
 				7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */,
 				7019AC0B2347E74100F5EF15 /* Info.plist */,
@@ -150,8 +159,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */,
+				70AB2A44235CA60D004856D7 /* Feed.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
+				70AB2A48235CA8D2004856D7 /* Post.swift in Sources */,
 				7019AC022347E73F00F5EF15 /* ContentView.swift in Sources */,
+				70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */,
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

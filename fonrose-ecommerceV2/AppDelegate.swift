@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        // Fonrose - Remove the footer in all List views (cf https://stackoverflow.com/a/58426517)
+        UITableView.appearance().tableFooterView = UIView()
+        
+        // Fonrose - Remove the line separator in all the List views (cf  https://stackoverflow.com/a/57909325)
+        UITableView.appearance().separatorColor = .clear
+
         return true
     }
 

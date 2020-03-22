@@ -14,9 +14,19 @@
 		7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC032347E74100F5EF15 /* Assets.xcassets */; };
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
+		701C836E2365D1EC007AF339 /* View1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C836D2365D1EC007AF339 /* View1.swift */; };
+		701C83712365DEB2007AF339 /* DressPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83702365DEB2007AF339 /* DressPictures.swift */; };
+		701C837A2365E62C007AF339 /* PicturesItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83792365E62C007AF339 /* PicturesItem.swift */; };
+		701C837C23660B97007AF339 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C837B23660B97007AF339 /* data.swift */; };
+		701C837E23660E5C007AF339 /* PicturesSlideFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C837D23660E5C007AF339 /* PicturesSlideFeed.swift */; };
+		701C83AD23671A3D007AF339 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83AC23671A3D007AF339 /* Home.swift */; };
+		701C83AF23672284007AF339 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83AE23672284007AF339 /* PostView.swift */; };
 		70AB2A44235CA60D004856D7 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A43235CA60D004856D7 /* Feed.swift */; };
 		70AB2A48235CA8D2004856D7 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A47235CA8D2004856D7 /* Post.swift */; };
 		70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* homeFeed.swift */; };
+		70AB2A59235F28B9004856D7 /* videoPlayer1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A58235F28B9004856D7 /* videoPlayer1.swift */; };
+		70AB2A5A235F2A3C004856D7 /* IMG_0247.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70AB2A57235F2894004856D7 /* IMG_0247.mp4 */; };
+		70D9AC892423CDB9009B7EC3 /* PostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D9AC882423CDB9009B7EC3 /* PostStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +39,20 @@
 		7019AC062347E74100F5EF15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7019AC092347E74100F5EF15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		701C836D2365D1EC007AF339 /* View1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View1.swift; sourceTree = "<group>"; };
+		701C83702365DEB2007AF339 /* DressPictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressPictures.swift; sourceTree = "<group>"; };
+		701C83792365E62C007AF339 /* PicturesItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesItem.swift; sourceTree = "<group>"; };
+		701C837B23660B97007AF339 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
+		701C837D23660E5C007AF339 /* PicturesSlideFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicturesSlideFeed.swift; sourceTree = "<group>"; };
+		701C83AC23671A3D007AF339 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		701C83AE23672284007AF339 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		70AB2A43235CA60D004856D7 /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		70AB2A47235CA8D2004856D7 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* homeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeFeed.swift; sourceTree = "<group>"; };
+		70AB2A50235E2265004856D7 /* BTB 9 2019 finalv.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "BTB 9 2019 finalv.mov"; path = "../../../Behindthebrand💋/behind the brand-VIDEO/9:2019/BTB 9 2019 finalv.mov"; sourceTree = "<group>"; };
+		70AB2A57235F2894004856D7 /* IMG_0247.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0247.mp4; sourceTree = "<group>"; };
+		70AB2A58235F28B9004856D7 /* videoPlayer1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = videoPlayer1.swift; sourceTree = "<group>"; };
+		70D9AC882423CDB9009B7EC3 /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStack.swift; path = ../../PostStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,12 +85,13 @@
 		7019ABF92347E73F00F5EF15 /* fonrose-ecommerceV2 */ = {
 			isa = PBXGroup;
 			children = (
+				70AB2A50235E2265004856D7 /* BTB 9 2019 finalv.mov */,
+				70AB2A57235F2894004856D7 /* IMG_0247.mp4 */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
-				70AB2A47235CA8D2004856D7 /* Post.swift */,
-				70AB2A43235CA60D004856D7 /* Feed.swift */,
-				7019AC012347E73F00F5EF15 /* ContentView.swift */,
-				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
+				701C83782365E502007AF339 /* slideImages */,
+				701C836F2365DDA8007AF339 /* homeFeed */,
+				70D9AC852423B64B009B7EC3 /* Videos */,
 				7019AC032347E74100F5EF15 /* Assets.xcassets */,
 				7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */,
 				7019AC0B2347E74100F5EF15 /* Info.plist */,
@@ -85,6 +107,40 @@
 				7019AC062347E74100F5EF15 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		701C836F2365DDA8007AF339 /* homeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				701C83792365E62C007AF339 /* PicturesItem.swift */,
+				701C836D2365D1EC007AF339 /* View1.swift */,
+				7019AC012347E73F00F5EF15 /* ContentView.swift */,
+				70AB2A47235CA8D2004856D7 /* Post.swift */,
+				70AB2A43235CA60D004856D7 /* Feed.swift */,
+				701C837D23660E5C007AF339 /* PicturesSlideFeed.swift */,
+				701C83AC23671A3D007AF339 /* Home.swift */,
+			);
+			path = homeFeed;
+			sourceTree = "<group>";
+		};
+		701C83782365E502007AF339 /* slideImages */ = {
+			isa = PBXGroup;
+			children = (
+				701C837B23660B97007AF339 /* data.swift */,
+				701C83702365DEB2007AF339 /* DressPictures.swift */,
+				701C83AE23672284007AF339 /* PostView.swift */,
+				70D9AC882423CDB9009B7EC3 /* PostStack.swift */,
+				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
+			);
+			path = slideImages;
+			sourceTree = "<group>";
+		};
+		70D9AC852423B64B009B7EC3 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				70AB2A58235F28B9004856D7 /* videoPlayer1.swift */,
+			);
+			path = Videos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70AB2A5A235F2A3C004856D7 /* IMG_0247.mp4 in Resources */,
 				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
@@ -159,11 +216,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */,
+				701C836E2365D1EC007AF339 /* View1.swift in Sources */,
+				701C837A2365E62C007AF339 /* PicturesItem.swift in Sources */,
+				701C83712365DEB2007AF339 /* DressPictures.swift in Sources */,
+				701C837E23660E5C007AF339 /* PicturesSlideFeed.swift in Sources */,
 				70AB2A44235CA60D004856D7 /* Feed.swift in Sources */,
+				70D9AC892423CDB9009B7EC3 /* PostStack.swift in Sources */,
+				701C83AD23671A3D007AF339 /* Home.swift in Sources */,
+				70AB2A59235F28B9004856D7 /* videoPlayer1.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
+				701C837C23660B97007AF339 /* data.swift in Sources */,
 				70AB2A48235CA8D2004856D7 /* Post.swift in Sources */,
 				7019AC022347E73F00F5EF15 /* ContentView.swift in Sources */,
 				70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */,
+				701C83AF23672284007AF339 /* PostView.swift in Sources */,
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

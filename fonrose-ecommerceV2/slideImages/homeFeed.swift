@@ -11,14 +11,18 @@ import SwiftUI
 struct homeFeed: View {
     
     var body: some View {
-        List {
-            ContentView(post: downloadedPosts[0])
-            ContentView(post: downloadedPosts[1])
-            ContentView(post: downloadedPosts[2])
+        
+        NavigationView {
+            List(LoadedPictures) { picture in
+                PostView(picture: picture)
+            }
+            .padding(.horizontal, -20)
+            .padding(.vertical, -20)
+            .edgesIgnoringSafeArea(.all)
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
         }
-        .edgesIgnoringSafeArea(.all)
     }
-    
 }
 
 
@@ -29,3 +33,5 @@ struct homeFeed_Previews: PreviewProvider {
     }
 }
 #endif
+
+

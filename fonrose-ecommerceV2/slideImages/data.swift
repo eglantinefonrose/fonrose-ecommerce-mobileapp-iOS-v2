@@ -15,9 +15,9 @@ func picturesLoaded() -> [DressPictures] {
         
         DressPictures(id: 0, pictureName: "video-promo2", imageNumber: "1"),
         
-        DressPictures(id: 1, pictureName: "Screenshot", imageNumber:  "2"),
+        DressPictures(id: 1, pictureName: "IMG_5195", imageNumber:  "2"),
         
-        DressPictures(id: 2, pictureName: "About us", imageNumber: "3")
+        DressPictures(id: 2, pictureName: "IMG_4814", imageNumber: "3")
 
         ]
     

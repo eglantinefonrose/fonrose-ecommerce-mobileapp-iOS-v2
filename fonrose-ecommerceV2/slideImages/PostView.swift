@@ -18,7 +18,7 @@ struct PostView: View {
             
             PostStack(pictureNamee: picture.pictureName)
             
-        }
+            }
         
     }
 }

@@ -12,12 +12,14 @@ struct homeFeed: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationView {            
             List(LoadedPictures) { picture in
+                
                 PostView(picture: picture)
             }
+            
             .padding(.horizontal, -20)
-            .padding(.vertical, -20)
+            .frame(width: 416)
             .edgesIgnoringSafeArea(.all)
             .navigationBarTitle("")
             .navigationBarHidden(true)

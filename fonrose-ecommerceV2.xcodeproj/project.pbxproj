@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700F201E242A647B00382533 /* DetailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F201D242A647B00382533 /* DetailedView.swift */; };
 		7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */; };
 		7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */; };
 		7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFE2347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		700F201D242A647B00382533 /* DetailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedView.swift; sourceTree = "<group>"; };
 		7019ABF72347E73F00F5EF15 /* fonrose-ecommerceV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fonrose-ecommerceV2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,8 +130,9 @@
 			children = (
 				701C837B23660B97007AF339 /* data.swift */,
 				701C83702365DEB2007AF339 /* DressPictures.swift */,
-				701C83AE23672284007AF339 /* PostView.swift */,
+				700F201D242A647B00382533 /* DetailedView.swift */,
 				70D9AC882423CDB9009B7EC3 /* PostStack.swift */,
+				701C83AE23672284007AF339 /* PostView.swift */,
 				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
 			);
 			path = slideImages;
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				700F201E242A647B00382533 /* DetailedView.swift in Sources */,
 				7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */,
 				701C836E2365D1EC007AF339 /* View1.swift in Sources */,
 				701C837A2365E62C007AF339 /* PicturesItem.swift in Sources */,

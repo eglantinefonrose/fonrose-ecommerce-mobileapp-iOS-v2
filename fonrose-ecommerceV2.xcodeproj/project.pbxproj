@@ -130,10 +130,10 @@
 			children = (
 				701C837B23660B97007AF339 /* data.swift */,
 				701C83702365DEB2007AF339 /* DressPictures.swift */,
-				700F201D242A647B00382533 /* DetailedView.swift */,
 				70D9AC882423CDB9009B7EC3 /* PostStack.swift */,
 				701C83AE23672284007AF339 /* PostView.swift */,
 				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
+				700F201D242A647B00382533 /* DetailedView.swift */,
 			);
 			path = slideImages;
 			sourceTree = "<group>";

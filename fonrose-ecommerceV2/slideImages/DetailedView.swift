@@ -9,13 +9,16 @@
 import SwiftUI
 
 struct DetailedView: View {
+    
+    var name: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("bonjour \(name)")
     }
 }
 
 struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedView()
+        DetailedView(name: "malo")
     }
 }

@@ -12,17 +12,19 @@ struct homeFeed: View {
     
     var body: some View {
         
-        NavigationView {            
-            List(LoadedPictures) { picture in
-                
-                PostView(picture: picture)
+        NavigationView {
+            VStack {
+                List(LoadedPictures) { picture in
+                    NavigationLink(destination: DetailedView(name: picture.cellText)) {
+                        PostView(picture: picture)
+                    }
+                }.buttonStyle(PlainButtonStyle())
+                    .padding(.horizontal, -20)
+                    .frame(width: 416)
+                    .edgesIgnoringSafeArea(.all)
+                    .navigationBarTitle("")
+                    .navigationBarHidden(true)
             }
-            
-            .padding(.horizontal, -20)
-            .frame(width: 416)
-            .edgesIgnoringSafeArea(.all)
-            .navigationBarTitle("")
-            .navigationBarHidden(true)
         }
     }
 }

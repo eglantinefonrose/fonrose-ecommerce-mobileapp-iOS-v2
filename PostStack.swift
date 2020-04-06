@@ -11,24 +11,28 @@ import SwiftUI
 struct PostStack: View {
     
     let pictureNamee: String
+    let ceellText: String
     
     var body: some View {
         
         VStack {
-            //GeometryReader { geometry in
+            ZStack(alignment: .center) {
                 Image(self.pictureNamee)
                     .resizable()
                     .padding(.vertical, -7)
                     .aspectRatio(contentMode: .fill)
                     .frame(width:UIScreen.main.bounds.width, height:UIScreen.main.bounds.height, alignment: .leading)
-                    //.clipped()
-                //}
-            } .padding(.leading, -UIScreen.main.bounds.width / 2)
+                    .padding(.leading, -UIScreen.main.bounds.width / 2)
+                
+                Text(self.ceellText)
+                .font(.system(size: 60))
+            }
         }
     }
+}
 
 struct PostStack_Previews: PreviewProvider {
     static var previews: some View {
-        PostStack(pictureNamee: "video-promo2")
+        PostStack(pictureNamee: "watch the clip-video-promo2_1", ceellText: "watch ")
     }
 }

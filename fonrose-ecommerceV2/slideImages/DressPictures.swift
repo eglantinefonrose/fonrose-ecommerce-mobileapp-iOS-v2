@@ -13,5 +13,6 @@ struct DressPictures: Identifiable {
     var id: Int
     let pictureName: String
     let imageNumber: String
+    let cellText: String
 }
 

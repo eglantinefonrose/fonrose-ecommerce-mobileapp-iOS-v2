@@ -13,11 +13,11 @@ let LoadedPictures = picturesLoaded()
 func picturesLoaded() -> [DressPictures] {
     let pics: [DressPictures] = [
         
-        DressPictures(id: 0, pictureName: "video-promo2", imageNumber: "1"),
+        DressPictures(id: 0, pictureName: "watch the clip-video-promo2_1", imageNumber: "1", cellText: "Watch the clip"),
         
-        DressPictures(id: 1, pictureName: "IMG_5195", imageNumber:  "2"),
+        DressPictures(id: 1, pictureName: "IMG_5195", imageNumber:  "2", cellText: "The dress"),
         
-        DressPictures(id: 2, pictureName: "IMG_4814", imageNumber: "3")
+        DressPictures(id: 2, pictureName: "IMG_4814", imageNumber: "3", cellText: "About us🍑")
 
         ]
     

@@ -10,17 +10,19 @@ import SwiftUI
 
 struct homeFeed: View {
     
+    @EnvironmentObject var userData: UserData
+    
     var body: some View {
         
         NavigationView {
             VStack {
-                List(LoadedPictures) { picture in
-                    NavigationLink(destination: DetailedView(name: picture.cellText)) {
-                        PostView(picture: picture)
+                List(userData.posts) { picture in
+                    NavigationLink(destination: DetailedView(picture: picture)) {
+                PostView(picture: picture)
                     }
                 }.buttonStyle(PlainButtonStyle())
-                    .padding(.horizontal, -20)
-                    .frame(width: 416)
+                    .padding(.horizontal, -15)
+                    .frame(width: UIScreen.main.bounds.width)
                     .edgesIgnoringSafeArea(.all)
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
@@ -29,11 +31,11 @@ struct homeFeed: View {
     }
 }
 
-
 #if DEBUG
 struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
         homeFeed()
+            .environmentObject(UserData())
     }
 }
 #endif

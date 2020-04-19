@@ -16,7 +16,7 @@ struct PostView: View {
         
         HStack {
             
-            PostStack(pictureNamee: picture.pictureName, ceellText: picture.cellText)
+            PostStack(liked: true, saved: false, pictureNamee: picture.pictureName, ceellText: picture.cellText)
             
             }
         
@@ -26,7 +26,7 @@ struct PostView: View {
 #if DEBUG
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView(picture: LoadedPictures[0])
+        PostView(picture: LoadedPictures[1])
     }
 }
 #endif

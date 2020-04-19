@@ -12,7 +12,9 @@ import SwiftUI
 struct DressPictures: Identifiable {
     var id: Int
     let pictureName: String
-    let imageNumber: String
+    //let imageNumber: String
     let cellText: String
+    var liked: Bool
+    var saved: Bool
 }
 

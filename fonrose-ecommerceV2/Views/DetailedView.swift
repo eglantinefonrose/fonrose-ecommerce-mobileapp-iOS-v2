@@ -20,9 +20,9 @@ struct DetailedView: View {
         
     var body: some View {
                 
-        //ZStack {
+        ZStack {
                 
-                VStack {
+                /*VStack {
                     
                     Button(action: {
                         self.userData.posts[self.postIndex].liked.toggle()
@@ -35,12 +35,12 @@ struct DetailedView: View {
                         }) {
                             IconChangableButton(name: "flag", isActive: self.userData.posts[self.postIndex].saved)
                         }
-            }
+            }*/
         //}
             
             // MARK: View2
             
-            /*if picture.id == 1 {
+            if picture.id == 1 {
                 Image("video-promo2")
             }
             
@@ -54,7 +54,7 @@ struct DetailedView: View {
             
             if picture.id == 3 {
                     VStack {
-                        detailedViewTest()
+                        detailedViewTest(parcel: statusParcel()[0])
                 }.frame(width: UIScreen.main.bounds.width)
             }
             
@@ -79,10 +79,10 @@ struct DetailedView: View {
         }
         func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
             
-        }*/
+        }
     }
-    
 }
+
 
 
 

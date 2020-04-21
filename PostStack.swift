@@ -18,9 +18,9 @@ struct PostStack: View {
     var body: some View {
         
         VStack {
-            IconChangableButton(name: "heart", isActive: liked)
-            IconChangableButton(name: "flag", isActive: saved)
-            /*ZStack {
+            /*IconChangableButton(name: "heart", isActive: liked)
+            IconChangableButton(name: "flag", isActive: saved)*/
+            ZStack {
                 Image(self.pictureNamee)
                     .resizable()
                     .padding(.vertical, -7)
@@ -33,7 +33,7 @@ struct PostStack: View {
                 .frame(width:UIScreen.main.bounds.width, height:UIScreen.main.bounds.height, alignment: .center)
                 .foregroundColor(.white)
                 
-            }*/
+            }
         }
     }
 }

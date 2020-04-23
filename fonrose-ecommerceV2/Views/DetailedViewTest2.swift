@@ -21,7 +21,7 @@ struct DetailedViewTest2: View {
         VStack { //VStack globale
             
             Spacer()
-                .frame(height: 100)
+                .frame(height: 150)
             
              VStack {//élement 1
                        
@@ -38,61 +38,59 @@ struct DetailedViewTest2: View {
                    
             Spacer()
                 .frame(height: 150)//élement 2
-                       
-            VStack { //vstack de livraison & renvoi de colis //élement 3
-                
-                //MARK: Livraison
-                
-                VStack { //élement 3.1
-                    
+            
+            //MARK: Livraison
+            
+            ZStack {//élément 3
                         ZStack {
-                        
-                        Button(action: {
-                                self.showCard.toggle()
-                            }) {
-                            if showCard == false {
-                                Text("Fiche de livraison")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 28, weight: .medium, design: .default))
-                                }
-                            else {
-                                }
-                            } }.frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                            .padding(.leading, 80)
-                    
-                    if showDelivery {
-                        VStack {
-                            VStack {
-                                ZStack {
-                                    Button(action: {
-                                        self.showDelivery.toggle()
-                                    }) {
-                                        Text("Back")
+                            
+                            Button(action: {
+                                    self.showDelivery.toggle()
+                                }) {
+                                if showDelivery == false {
+                                    Text("Fiche de livraison")
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 28, weight: .medium, design: .default))
                                     }
-                                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                                .padding(EdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 0))
-                                
-                                Spacer()
-                                
-                                VStack {
-                                    Text("Livraison")
-                                    .font(.system(size: 40, weight: .bold, design: .default))
-                                    .foregroundColor(Color.white)
-                                            
-                                    Text("en collaboration avec")
-                                        .foregroundColor(Color.gray)
-                                        .font(.system(size: 25, weight: .semibold, design: .default))
-                                }
-                                
-                                Spacer()
-                                
-                            }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                        }.edgesIgnoringSafeArea(.all)
-                    }
-                                    
-                        }//acollade fermante de la VStack
+                                else {
+                                    }
+                                } }.frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
+                                .padding(.leading, 80)
                 
-                 }
+                            if showDelivery {
+                               VStack {
+                                   
+                                   ZStack {
+                                       Button(action: {
+                                           self.showDelivery.toggle()
+                                       }) {
+                                           Text("Back")
+                                       }
+                                   }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
+                                   .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                                   
+                                   Spacer()
+                                   
+                                   VStack {
+                                       Text("Livraison")
+                                           .font(.system(size: 40, weight: .bold, design: .default))
+                                           .foregroundColor(Color.white)
+                                               
+                                       Text("en collaboration avec")
+                                           .foregroundColor(Color.gray)
+                                           .font(.system(size: 25, weight: .semibold, design: .default))
+                                   }
+                                
+                                Spacer()
+                                                                   
+                               }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                                .background(Color.red)
+                                .edgesIgnoringSafeArea(.all)
+                                
+                            }
+            }
+                    
+
                                 
                 Spacer()
                     .frame(height: 20)
@@ -101,9 +99,7 @@ struct DetailedViewTest2: View {
                 
                 VStack {//élement 3.3
                     
-                    
-                    
-                        ZStack {
+                    ZStack {
                                     
                             Button(action: {
                                 self.showReturn.toggle()
@@ -127,7 +123,7 @@ struct DetailedViewTest2: View {
                                                 Text("Back")
                                             }
                                         }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                                            .padding(EdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 0))
+                                            .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
                                         
                                         VStack {
                                             
@@ -184,7 +180,6 @@ struct DetailedViewTest2: View {
                 
                 if showCard {
                     VStack {
-                        VStack {
                             ZStack {
                                 Button(action: {
                                     self.showCard.toggle()
@@ -192,24 +187,58 @@ struct DetailedViewTest2: View {
                                     Text("Back")
                                 }
                             }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                            .padding(EdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 0))
+                            .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
                             
                             Spacer()
                             
                             VStack {
-                                Text("Livraison")
-                                //.font(.system(size: 40, weight: .bold, design: .default))
+                            Text("Fiche")
+                                .font(.system(size: 40, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                                
+                            Text("complète de commande")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default))
+                                .frame(alignment: .center)
+                                            
+                            Spacer()
+                                .frame(height: 100)
+                                                
+                            VStack {
+                                                    
+                                Text("N° de commande")
                                     .foregroundColor(Color.white)
-                                        
-                                Text("en collaboration avec")
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 25, weight: .semibold, design: .default))
-                            }
+                                    .font(.system(size: 20, design: .default))
+                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                                    
+                                                Text("Date d’expedition prévue")
+                                                    .foregroundColor(Color.white)
+                                                    .font(.system(size: 20, design: .default))
+                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                                    
+                                                Text("Date de livraison")
+                                                    .foregroundColor(Color.white)
+                                                    .font(.system(size: 20, design: .default))
+                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                                    
+                                                Text("Nom du transporteur")
+                                                    .foregroundColor(Color.white)
+                                                    .font(.system(size: 20, design: .default))
+                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                                    
+                                                Text("N° de suivi")
+                                                    .foregroundColor(Color.white)
+                                                    .font(.system(size: 20, design: .default))
+                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                                    
+                                            }.padding(.leading, 80)
+                                        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-118)
                             
                             Spacer()
                             
                         }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
-                    }.edgesIgnoringSafeArea(.all)
+                        .edgesIgnoringSafeArea(.all)
+                        .background(Color.green)
                 }
                 
                 //MARK: Service
@@ -217,10 +246,10 @@ struct DetailedViewTest2: View {
                 Spacer()
                 .frame(height: 20)//élement 5.2
                 
-                VStack {//élement 5.3
+                ZStack {//élement 5.3
                     
                     
-                    ZStack {
+                    VStack {
                     
                         Button(action: {
                                 self.showServices.toggle()
@@ -235,20 +264,79 @@ struct DetailedViewTest2: View {
                                     }
                             } .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
                             .padding(.leading, 80)
+                    
+                    
+                    
                         }
+                Spacer()
                 
-                
-                    }//acolade fermante de la VStack fiche + service
+            }//acolade fermante de la VStack fiche + service
             
-            Spacer()
-            
-        }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        .background(Color.black)
+        }.frame(width: UIScreen.main.bounds.width)
+        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .background(Color.black)
+            .edgesIgnoringSafeArea(.all)
+        
+        if showServices {
+            VStack {
                 
+                ZStack {
+                    Button(action: {
+                        self.showServices.toggle()
+                    }) {
+                        Text("Back")
+                    }
+                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
+                .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                
+                Spacer()
+                
+                VStack {
+                    ZStack {
+                        Rectangle()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                        .foregroundColor(Color.black)
+                        
+                        VStack {
+                            Text("Service")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(alignment: .center)
+                                
+                            Text("client")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default))
+                        }
+                    }
+                    
+                    ZStack {
+                        Rectangle()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                        .foregroundColor(Color.gray)
+                        
+                        VStack {
+                            Text("24/7")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(alignment: .center)
+                        }
+                    }
+                }
+             
+             Spacer()
+                                                
+            }
         }
-        //.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        //.padding(EdgeInsets(top: -100, leading: 0, bottom: 0, trailing: 0))
+    
     }
+    
+}
+                
+
+//
+
+
+
 
 
 

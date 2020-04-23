@@ -17,7 +17,9 @@ struct DetailedViewTest2: View {
     var parcel: ParcelInfos
     
     var body: some View {
-        //NavigationView {
+        
+        NavigationView {
+        
         VStack { //VStack globale
             
             Spacer()
@@ -88,9 +90,17 @@ struct DetailedViewTest2: View {
                                 .edgesIgnoringSafeArea(.all)
                                 
                             }
-            }
-                    
-
+                        }
+            
+                ZStack {
+                    NavigationLink(destination: SuiviDeCommande(model: statusParcel()[0], statuus: "fekir")) {
+                        Text("Suivi en temps réel")
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 28, weight: .medium, design: .default))
+                            .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
+                            .padding(.leading, 80)
+                    }
+                }
                                 
                 Spacer()
                     .frame(height: 20)
@@ -246,91 +256,88 @@ struct DetailedViewTest2: View {
                 Spacer()
                 .frame(height: 20)//élement 5.2
                 
-                ZStack {//élement 5.3
+                VStack {
                     
+                    ZStack {//élement 5.3
                     
-                    VStack {
-                    
-                        Button(action: {
-                                self.showServices.toggle()
-                            }) {
-                            if showServices == false {
-                                Text("Service client")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 28, weight: .medium, design: .default))
-                                }
-                            else {
+                        VStack {
+                        
+                            Button(action: {
+                                    self.showServices.toggle()
+                                }) {
+                                if showServices == false {
+                                    Text("Service client")
+                                        .foregroundColor(Color.white)
+                                        .font(.system(size: 28, weight: .medium, design: .default))
                                     }
-                                    }
-                            } .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                            .padding(.leading, 80)
-                    
-                    
+                                else {
+                                        }
+                                        }
+                                } .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
+                                .padding(.leading, 80)
                     
                         }
-                Spacer()
+                    
+                    if showServices {
+                        VStack {
+                            
+                            ZStack {
+                                Button(action: {
+                                    self.showServices.toggle()
+                                }) {
+                                    Text("Back")
+                                }
+                            }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
+                            .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
+                            
+                            Spacer()
+                            
+                            VStack {
+                                ZStack {
+                                    Rectangle()
+                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                                    .foregroundColor(Color.black)
+                                    
+                                    VStack {
+                                        Text("Service")
+                                            .font(.system(size: 35, weight: .bold, design: .default))
+                                            .foregroundColor(Color.white)
+                                            .frame(alignment: .center)
+                                            
+                                        Text("client")
+                                            .foregroundColor(Color.gray)
+                                            .font(.system(size: 25, weight: .semibold, design: .default))
+                                    }
+                                }
+                                
+                                ZStack {
+                                    Rectangle()
+                                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                                    .foregroundColor(Color.gray)
+                                    
+                                    VStack {
+                                        Text("24/7")
+                                            .font(.system(size: 35, weight: .bold, design: .default))
+                                            .foregroundColor(Color.white)
+                                            .frame(alignment: .center)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }//fin VStack
                 
-            }//acolade fermante de la VStack fiche + service
-            
-        }.frame(width: UIScreen.main.bounds.width)
-        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                }
+        
+        Spacer()
+        
+            }.frame(width: UIScreen.main.bounds.width)
             .background(Color.black)
             .edgesIgnoringSafeArea(.all)
-        
-        if showServices {
-            VStack {
-                
-                ZStack {
-                    Button(action: {
-                        self.showServices.toggle()
-                    }) {
-                        Text("Back")
-                    }
-                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                .padding(EdgeInsets(top: 20, leading: 40, bottom: 0, trailing: 0))
-                
-                Spacer()
-                
-                VStack {
-                    ZStack {
-                        Rectangle()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
-                        .foregroundColor(Color.black)
-                        
-                        VStack {
-                            Text("Service")
-                                .font(.system(size: 35, weight: .bold, design: .default))
-                                .foregroundColor(Color.white)
-                                .frame(alignment: .center)
-                                
-                            Text("client")
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 25, weight: .semibold, design: .default))
-                        }
-                    }
-                    
-                    ZStack {
-                        Rectangle()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
-                        .foregroundColor(Color.gray)
-                        
-                        VStack {
-                            Text("24/7")
-                                .font(.system(size: 35, weight: .bold, design: .default))
-                                .foregroundColor(Color.white)
-                                .frame(alignment: .center)
-                        }
-                    }
-                }
-             
-             Spacer()
-                                                
-            }
         }
-    
     }
-    
 }
+
                 
 
 //

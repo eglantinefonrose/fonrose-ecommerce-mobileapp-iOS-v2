@@ -9,14 +9,12 @@
 import SwiftUI
 
 struct homeFeed: View {
-    
-    @EnvironmentObject var userData: UserData
-    
+        
     var body: some View {
         
         NavigationView {
             VStack {
-                List(userData.posts) { picture in
+                List(LoadedPictures) { picture in
                     NavigationLink(destination: DetailedView(picture: picture)) {
                 PostView(picture: picture)
                     }

@@ -10,8 +10,6 @@ import SwiftUI
 
 struct PostStack: View {
     
-    var liked: Bool
-    var saved: Bool
     let pictureNamee: String
     let ceellText: String
     
@@ -40,6 +38,6 @@ struct PostStack: View {
 
 struct PostStack_Previews: PreviewProvider {
     static var previews: some View {
-        PostStack(liked: true, saved: false, pictureNamee: "Screenshot 2020-04-06 at 18.29.34", ceellText: "Watch the clip")
+        PostStack(pictureNamee: "Screenshot 2020-04-06 at 18.29.34", ceellText: "Watch the clip")
     }
 }

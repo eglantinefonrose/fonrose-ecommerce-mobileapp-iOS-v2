@@ -11,62 +11,141 @@ import AVKit
 
 struct DetailedView: View {
     
-    @EnvironmentObject var userData: UserData
+    //@EnvironmentObject var userData: UserData
     var picture: DressPictures
     
-    var postIndex: Int {
+    /*var postIndex: Int {
         userData.posts.firstIndex(where: { $0.id == picture.id })!
-    }
+    }*/
+    
         
     var body: some View {
-                
-        ZStack {
-                
-                /*VStack {
-                    
-                    Button(action: {
-                        self.userData.posts[self.postIndex].liked.toggle()
-                    }) {
-                        IconChangableButton(name: "heart", isActive: self.userData.posts[self.postIndex].liked)
-                    }
-                    
-                        Button(action: {
-                            self.userData.posts[self.postIndex].saved.toggle()
-                        }) {
-                            IconChangableButton(name: "flag", isActive: self.userData.posts[self.postIndex].saved)
-                        }
-            }*/
-        //}
-            
+        
             // MARK: View2
             
-            if picture.id == 1 {
-                Image("video-promo2")
+           if picture.id == 0 {
+                VStack {
+                    player()
+                }
             }
             
             // MARK: View3
             
-            if picture.id == 2 {
-                Image("About us")
-            }
+            if picture.id == 1 {
+
+            
+            NavigationView {
+                
+                VStack {
+                    
+                    ZStack {
+                        List {
+                            ScrollView(.horizontal, content: {
+                                HStack(spacing: 0) {
+                                    
+                                    ImagesHStack(imageHStack: "IMG_0858(1) copy")
+                                    ImagesHStack(imageHStack: "PHOTO DOS")
+                                    ImagesHStack(imageHStack: "IMG_1019 copy")
+                                    ImagesHStack(imageHStack: "IMG_0869(1) copy")
+                                    ImagesHStack(imageHStack: "IMG_0854(2)")
+                                    ImagesHStack(imageHStack: "IMG_1033")
+                                    
+                                }
+                                
+                            })
+                        }.frame(height: UIScreen.main.bounds.height-100, alignment: .top)
+                        .navigationBarTitle("")
+                        .navigationBarHidden(true)
+                        .padding(.horizontal, -15)
+                            
+                        
+                        VStack {
+                            Text("La robe")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(alignment: .center)
+                            
+                            Spacer()
+                                .frame(height: 30)
+                            
+                            Text("85€")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default)) }
+                    HStack {
+                        
+                        Spacer()
+                        
+                        Text("⏩")
+                            .font(.system(size: 30))
+                        
+                    }.frame(width: UIScreen.main.bounds.width)
+                        
+                                                   
+                    }
+                
+                Spacer()
+                    .frame(height: 40)
+                    
+                VStack {
+                    NavigationLink(destination: Mensurations()) {
+                        Text("Acheter")
+                    }
+                    
+                    Spacer()
+                        .frame(height: 10)
+                    
+                    NavigationLink(destination: About_us()) {
+                        Text("About the dress")
+                    }
+                    
+                }
+                
+                Spacer()
+                    
+                }//acolade fermante VStack
+                .frame(width: UIScreen.main.bounds.width)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .background(Color.black)
+                .edgesIgnoringSafeArea(.all)
+                  
+        }//acolade fermante NavigationView
+            
+        if picture.id == 2 {
+            
+        }
+                
+        if picture.id == 3 {
+            VStack {
+                detailedViewTest(parcel: statusParcel()[0])
+            }.frame(width: UIScreen.main.bounds.width)
+        }
+                        
+                //.edgesIgnoringSafeArea(.all)
             
             // MARK: View4
-            
-            if picture.id == 3 {
-                    VStack {
-                        detailedViewTest(parcel: statusParcel()[0])
-                }.frame(width: UIScreen.main.bounds.width)
-            }
-            
-        }//.background(Color.black)
-        .frame(width: UIScreen.main.bounds.height, height: UIScreen.main.bounds.height)
-            .padding(.top, -20)
-            .padding(.horizontal, -20)
+        }
+    
+}
+
+    //MARK: Format image pour 
+    struct ImagesHStack: View {
         
+        let imageHStack: String
+        
+        var body: some View {
+            
+            VStack {
+                Image(imageHStack)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: (UIScreen.main.bounds.width+UIScreen.main.bounds.height)/2, height: UIScreen.main.bounds.height-100, alignment: .center)
+                            
+            }
+
+        }
     }
-    
-    
-    
+
+
     // MARK: Controller pour video
     struct player : UIViewControllerRepresentable {
                 
@@ -79,10 +158,8 @@ struct DetailedView: View {
         }
         func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
             
-        }
     }
 }
-
 
 
 

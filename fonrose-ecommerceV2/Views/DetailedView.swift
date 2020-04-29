@@ -13,6 +13,7 @@ struct DetailedView: View {
     
     //@EnvironmentObject var userData: UserData
     var picture: DressPictures
+    var test: MeasurementInfos
     
     /*var postIndex: Int {
         userData.posts.firstIndex(where: { $0.id == picture.id })!
@@ -23,108 +24,92 @@ struct DetailedView: View {
         
             // MARK: View2
             
-           if picture.id == 0 {
+           /*if picture.id == 0 {
                 VStack {
                     player()
                 }
-            }
+            }*/
             
             // MARK: View3
-            
-            if picture.id == 1 {
 
-            
-            NavigationView {
-                
-                VStack {
-                    
-                    ZStack {
-                        List {
-                            ScrollView(.horizontal, content: {
-                                HStack(spacing: 0) {
-                                    
-                                    ImagesHStack(imageHStack: "IMG_0858(1) copy")
-                                    ImagesHStack(imageHStack: "PHOTO DOS")
-                                    ImagesHStack(imageHStack: "IMG_1019 copy")
-                                    ImagesHStack(imageHStack: "IMG_0869(1) copy")
-                                    ImagesHStack(imageHStack: "IMG_0854(2)")
-                                    ImagesHStack(imageHStack: "IMG_1033")
-                                    
-                                }
-                                
-                            })
-                        }.frame(height: UIScreen.main.bounds.height-100, alignment: .top)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true)
-                        .padding(.horizontal, -15)
-                            
-                        
+                    NavigationView {
+                                               
                         VStack {
-                            Text("La robe")
-                                .font(.system(size: 35, weight: .bold, design: .default))
-                                .foregroundColor(Color.white)
-                                .frame(alignment: .center)
                             
-                            Spacer()
-                                .frame(height: 30)
-                            
-                            Text("85€")
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 25, weight: .semibold, design: .default)) }
-                    HStack {
+                            ZStack {
+                                List {
+                                    ScrollView(.horizontal, content: {
+                                        HStack(spacing: 0) {
+                                            
+                                            ImagesHStack(imageHStack: "IMG_0858(1) copy")
+                                            ImagesHStack(imageHStack: "PHOTO DOS")
+                                            ImagesHStack(imageHStack: "IMG_1019 copy")
+                                            ImagesHStack(imageHStack: "IMG_0869(1) copy")
+                                            ImagesHStack(imageHStack: "IMG_0854(2)")
+                                            ImagesHStack(imageHStack: "IMG_1033")
+                                            
+                                        }
+                                        
+                                    })
+                                }.frame(height: UIScreen.main.bounds.height-100, alignment: .top)
+                                .navigationBarTitle("")
+                                .navigationBarHidden(true)
+                                .padding(.horizontal, -15)
+                                    
+                                
+                                VStack {
+                                    Text("La robe")
+                                        //.font(.system(size: 35, weight: .bold, design: .default))
+                                        .foregroundColor(Color.white)
+                                        .frame(alignment: .center)
+                                    
+                                    Spacer()
+                                        .frame(height: 30)
+                                    
+                                    Text("85€")
+                                        .foregroundColor(Color.gray)
+                                        .font(.system(size: 25, weight: .semibold, design: .default)) }
+                            HStack {
+                                
+                                Spacer()
+                                
+                                Text("⏩")
+                                    .font(.system(size: 30))
+                                
+                            }.frame(width: UIScreen.main.bounds.width)
+                                
+                                                           
+                            }
                         
                         Spacer()
+                            .frame(height: 40)
+                            
+                        VStack {
+                            NavigationLink(destination: Mensurations(test: test)) {
+                                Text("Acheter")
+                            }
+                            
+                            Spacer()
+                                .frame(height: 10)
+                            
+                            NavigationLink(destination: About_us()) {
+                                Text("About the dress")
+                            }
+                            
+                        }
                         
-                        Text("⏩")
-                            .font(.system(size: 30))
-                        
-                    }.frame(width: UIScreen.main.bounds.width)
-                        
-                                                   
-                    }
+                        Spacer()
+                            
+                        }//acolade fermante VStack
+                        .frame(width: UIScreen.main.bounds.width)
+                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                        .background(Color.black)
+                        .edgesIgnoringSafeArea(.all)
+                          
+                    }//acolade fermante NavigationView
                 
-                Spacer()
-                    .frame(height: 40)
-                    
-                VStack {
-                    NavigationLink(destination: Mensurations()) {
-                        Text("Acheter")
-                    }
-                    
-                    Spacer()
-                        .frame(height: 10)
-                    
-                    NavigationLink(destination: About_us()) {
-                        Text("About the dress")
-                    }
-                    
-                }
                 
-                Spacer()
-                    
-                }//acolade fermante VStack
-                .frame(width: UIScreen.main.bounds.width)
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .background(Color.black)
-                .edgesIgnoringSafeArea(.all)
-                  
-        }//acolade fermante NavigationView
-            
-        if picture.id == 2 {
-            
-        }
-                
-        if picture.id == 3 {
-            VStack {
-                detailedViewTest(parcel: statusParcel()[0])
-            }.frame(width: UIScreen.main.bounds.width)
-        }
-                        
-                //.edgesIgnoringSafeArea(.all)
-            
-            // MARK: View4
-        }
-    
+    }//body
 }
 
     //MARK: Format image pour 
@@ -166,7 +151,7 @@ struct DetailedView: View {
 
 struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedView(picture: LoadedPictures[0])
+        DetailedView(picture: LoadedPictures[0], test: Measurement[0])
             .environmentObject(UserData())
     }
 }

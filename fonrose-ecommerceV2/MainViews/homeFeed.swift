@@ -10,14 +10,14 @@ import SwiftUI
 
 struct homeFeed: View {
     
-    var test: MeasurementInfos
-        
+    var model: MeasurementInfos
+
     var body: some View {
         
         NavigationView {
             VStack {
                 List(LoadedPictures) { picture in
-                    NavigationLink(destination: DetailedView(picture: picture, test: self.test)) {
+                    NavigationLink(destination: DetailedView(picture: picture, model: self.model)) {
                 PostView(picture: picture)
                     }
                 }.buttonStyle(PlainButtonStyle())
@@ -34,7 +34,7 @@ struct homeFeed: View {
 #if DEBUG
 struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
-        homeFeed(test: Measurement[0])
+        homeFeed(model: Measurement[0])
             .environmentObject(UserData())
     }
 }

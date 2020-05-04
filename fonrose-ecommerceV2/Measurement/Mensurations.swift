@@ -10,60 +10,58 @@ import SwiftUI
 
 struct Mensurations: View {
     
-    /*@State var ArmpitsMeasurement = ""
-    @State var ArmsLength = ""
-    @State var HeadMeasurement = ""
-    @State var PelvisMeasurement = ""
-    @State var PelvisKnee = ""
-    @State var ShouldersMeasurement = ""
-    @State var ShouldersPelvis = ""*/
+    @EnvironmentObject var userData: UserData
+    @State var value : CGFloat = 0
     
-    var test: MeasurementInfos
-    
-    //@State var value : CGFloat = 0
-    
-    
+    var model: MeasurementInfos
     var body: some View {
         
-        //HStack {
-            
-            //Spacer()
-            
-            //VStack {
-            
-            //Spacer()
-            
-            //VStack {
+        NavigationView {
                 
-        Text(test.ArmpitsMeasurement)
+        /*HStack {
+            
+            Spacer()
+            
+            VStack {
+            
+            Spacer()
+            
+            VStack {
                 
-            //}
+                Text("Mensurations")
+                    .font(.system(size: 35, weight: .bold, design: .default))
+                    .foregroundColor(Color.white)
+                    .frame(alignment: .center)
+                
+            }
             
-            //Spacer()
-                //.frame(height: 80)
-            
-            /*VStack {
+            Spacer()
+                .frame(height: 80)*/
+                            
+            //VStack {
                  
                  //MARK: Armpits Measurement
                  VStack {
                      
-                     Spacer()
-                         .frame(height: 20)
-                     
-                     TextField("Armpits Measurement", text: $ArmpitsMeasurement)
-                     .background(Color.gray)
+                    TextField("Armpits Measurement", text: model.$ArmpitsMeasurement)
+                    
+                    NavigationLink(destination: About_us(model: model)) {
+                        Text("Validax")
+                            .foregroundColor(.blue)
+                    }
+                     /*.background(Color.gray)
                      .textFieldStyle(RoundedBorderTextFieldStyle())
-                     .frame(width: UIScreen.main.bounds.width*3/4)
-                     
+                     .frame(width: UIScreen.main.bounds.width*3/4)*/
+                                         
                  }
                  
                  //MARK: Arms Length
-                 VStack {
+                 /*VStack {
                      
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("Arms Length", text: $ArmsLength)
+                     TextField("Arms Length", text: test.$ArmsLength)
                      .background(Color.gray)
                      .textFieldStyle(RoundedBorderTextFieldStyle())
                      .frame(width: UIScreen.main.bounds.width*3/4)
@@ -76,7 +74,7 @@ struct Mensurations: View {
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("Head Measurement", text: $HeadMeasurement)
+                    TextField("Head Measurement", text: test.$HeadMeasurement)
                      .background(Color.gray)
                      .textFieldStyle(RoundedBorderTextFieldStyle())
                      .frame(width: UIScreen.main.bounds.width*3/4)
@@ -89,7 +87,7 @@ struct Mensurations: View {
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("Pelvis Measurement", text: $PelvisMeasurement)
+                    TextField("Pelvis Measurement", text: test.$PelvisMeasurement)
                      .background(Color.gray)
                      .textFieldStyle(RoundedBorderTextFieldStyle())
                      .frame(width: UIScreen.main.bounds.width*3/4)
@@ -102,10 +100,10 @@ struct Mensurations: View {
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("PelvisKnee", text: $PelvisKnee)
-                     .background(Color.gray)
-                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                     .frame(width: UIScreen.main.bounds.width*3/4)
+                    TextField("PelvisKnee", text: test.$PelvisKnee)
+                         .background(Color.gray)
+                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                         .frame(width: UIScreen.main.bounds.width*3/4)
                      
                  }
                  
@@ -115,10 +113,10 @@ struct Mensurations: View {
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("Shoulders Measurement", text: $ShouldersMeasurement)
-                     .background(Color.gray)
-                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                     .frame(width: UIScreen.main.bounds.width*3/4)
+                    TextField("Shoulders Measurement", text: test.$ShouldersMeasurement)
+                         .background(Color.gray)
+                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                         .frame(width: UIScreen.main.bounds.width*3/4)
                      
                  }
                  
@@ -128,18 +126,20 @@ struct Mensurations: View {
                      Spacer()
                          .frame(height: 20)
                      
-                     TextField("Shoulders Pelvis", text: $ShouldersPelvis)
+                    TextField("Shoulders Pelvis", text: test.$ShouldersPelvis)
                      .background(Color.gray)
                      .textFieldStyle(RoundedBorderTextFieldStyle())
                      .frame(width: UIScreen.main.bounds.width*3/4)
                      
                  }
                  
-                 }//acolade fermante big VStack
+                 }
+                //acolade fermante big VStack
                  
                 Spacer()
                 
-                 }.offset(y: -self.value)
+                 }
+                .offset(y: -self.value)
                  .animation(.spring())
                  .onAppear() {
                      
@@ -157,23 +157,27 @@ struct Mensurations: View {
             }
                  
                     }
-                }*/
-            //}
+            
+                //Spacer()
+            
+                }.edgesIgnoringSafeArea(.all)
+                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+                .background(Color.black)
+                .padding(.vertical, -44)*/
+            }
             //.edgesIgnoringSafeArea(.all)
             
-            
+        }
             
             //Spacer()
             
-        //}//.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+    }//.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
         //.background(Color.black)
         //.padding(.vertical, -44)
-    }
-}
 
 
 struct Mensurations_Previews: PreviewProvider {
     static var previews: some View {
-        Mensurations(test: Measurement[0])
+        Mensurations(model: Measurement[0])
     }
 }

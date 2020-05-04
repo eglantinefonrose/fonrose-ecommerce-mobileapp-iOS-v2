@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct DetailedViewTest2: View {
+struct ServiceClientInfos: View {
     
     @State var showDelivery = false
     @State var showReturn = false
@@ -350,6 +350,6 @@ struct DetailedViewTest2: View {
         
 struct DetailedViewTest2_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedViewTest2(parcel: statusParcel()[0])
+        ServiceClientInfos(parcel: statusParcel()[0])
     }
 }

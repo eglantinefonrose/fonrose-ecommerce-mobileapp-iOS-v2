@@ -2,7 +2,7 @@
 //  UserData.swift
 //  fonrose-ecommerceV2
 //
-//  Created by Eglantine on 14/04/2020.
+//  Created by Eglantine on 04/05/2020.
 //  Copyright © 2020 fonrose. All rights reserved.
 //
 
@@ -11,8 +11,8 @@ import Combine
 
 final class UserData: ObservableObject {
     let didChange = PassthroughSubject<UserData, Never>()
-        
-    /*@Published*/ var posts = LoadedPictures {
+    
+@Published var measurementTextFields = Measurement {
         didSet {
             didChange.send(self)
         }

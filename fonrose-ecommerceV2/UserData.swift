@@ -10,11 +10,13 @@ import SwiftUI
 import Combine
 
 final class UserData: ObservableObject {
+    
     let didChange = PassthroughSubject<UserData, Never>()
     
-@Published var measurementTextFields = Measurement {
+    @Published var measurementTextFields = Measurement {
         didSet {
             didChange.send(self)
         }
     }
+    
 }

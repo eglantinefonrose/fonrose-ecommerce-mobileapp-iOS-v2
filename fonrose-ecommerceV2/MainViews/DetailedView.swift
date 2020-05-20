@@ -25,93 +25,24 @@ struct DetailedView: View {
             // MARK: View2
             
     if picture.id == 0 {
-            VStack {
-                    player()
-                }
+                player()
             }
             
             // MARK: View3
         if picture.id == 1 {
             
-                                       
-                VStack {
-                    
-                    ZStack {
-                        List {
-                            ScrollView(.horizontal, content: {
-                                HStack(spacing: 0) {
-                                    
-                                    ImagesHStack(imageHStack: "IMG_0858(1) copy")
-                                    ImagesHStack(imageHStack: "PHOTO DOS")
-                                    ImagesHStack(imageHStack: "IMG_1019 copy")
-                                    ImagesHStack(imageHStack: "IMG_0869(1) copy")
-                                    ImagesHStack(imageHStack: "IMG_0854(2)")
-                                    ImagesHStack(imageHStack: "IMG_1033")
-                                    
-                                }
-                                
-                            })
-                        }.frame(height: UIScreen.main.bounds.height-100, alignment: .top)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true)
-                        .padding(.horizontal, -15)
-                            
-                        
-                        VStack {
-                            Text("La robe")
-                                //.font(.system(size: 35, weight: .bold, design: .default))
-                                .foregroundColor(Color.white)
-                                .frame(alignment: .center)
-                            
-                            Spacer()
-                                .frame(height: 30)
-                            
-                            Text("85€")
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 25, weight: .semibold, design: .default)) }
-                    HStack {
-                        
-                        Spacer()
-                        
-                        Text("⏩")
-                            .font(.system(size: 30))
-                        
-                    }.frame(width: UIScreen.main.bounds.width)
-                        
-                                                   
-                    }
-                
-                Spacer()
-                    .frame(height: 40)
-                    
-                VStack {
-                    NavigationLink(destination: Mensurations(model: model)) {
-                        Text("Acheter")
-                            .foregroundColor(.blue)
-                    }
-                    
-                    Spacer()
-                        .frame(height: 10)
-                    
-                    /*NavigationLink(destination: About_us(test: test)) {
-                        Text("About the dress")
-                    }*/
-                    
-                }
-                
-                Spacer()
-                    
-                }//acolade fermante VStack
-                .frame(width: UIScreen.main.bounds.width)
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .background(Color.black)
-                .edgesIgnoringSafeArea(.all)
-                  
-            }//acolade fermante NavigationView
+                CarouselView()
+            
+            }//acolade fermante du if
+        
+        if picture.id == 3 {
+        
+            ServiceClientInfos(parcel: statusParcel()[0])
+        
         }
-                    
-                
-                
+            
+            
+        }//acolade fermante NavigationView
     }
 }
 
@@ -134,9 +65,13 @@ struct DetailedView: View {
     }
 
 
+
     // MARK: Controller pour video
-    struct player : UIViewControllerRepresentable {
-                
+struct player : UIViewControllerRepresentable {
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
+        
+    }
+    
         func makeUIViewController(context: UIViewControllerRepresentableContext<player>) -> AVPlayerViewController {
             let controller = AVPlayerViewController()
             let url = "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4"
@@ -144,9 +79,6 @@ struct DetailedView: View {
             controller.player = player1
             return controller
         }
-        func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
-            
-    }
 }
 
 

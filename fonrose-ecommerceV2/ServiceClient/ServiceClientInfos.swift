@@ -23,8 +23,7 @@ struct ServiceClientInfos: View {
         VStack { //VStack globale
             
             Spacer()
-                .frame(height: 150)
-            
+                
              VStack {//élement 1
                        
                    Text("Informations client")
@@ -50,9 +49,22 @@ struct ServiceClientInfos: View {
                                     self.showDelivery.toggle()
                                 }) {
                                 if showDelivery == false {
-                                    Text("Fiche de livraison")
+                                    HStack {
+                                        Text("Livraison")
                                         .foregroundColor(Color.white)
                                         .font(.system(size: 28, weight: .medium, design: .default))
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "info.circle")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.blue)
+                                        
+                                        Spacer()
+                                            .frame(width: 70)
+                                    }
+                                    
                                     }
                                 else {
                                     }
@@ -63,7 +75,7 @@ struct ServiceClientInfos: View {
                                VStack {
                                    
                                    ZStack {
-                                       Button(action: {
+                                      Button(action: {
                                            self.showDelivery.toggle()
                                        }) {
                                            Text("Back")
@@ -92,13 +104,29 @@ struct ServiceClientInfos: View {
                             }
                         }
             
+            
                 ZStack {
                     NavigationLink(destination: SuiviDeCommande(model: statusParcel()[0], statuus: "fekir")) {
-                        Text("Suivi en temps réel")
+                        
+                        HStack {
+                            
+                            Spacer()
+                                .frame(width: 30)
+                            
+                            Text("Suivi en temps réel")
                             .foregroundColor(Color.white)
                             .font(.system(size: 28, weight: .medium, design: .default))
-                            .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                            .padding(.leading, 80)
+                            
+                            Spacer()
+                            
+                            Image(systemName: "info.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.blue)
+                            
+                            Spacer()
+                                .frame(width: 30)
+                        }
                     }
                 }
                                 
@@ -115,9 +143,22 @@ struct ServiceClientInfos: View {
                                 self.showReturn.toggle()
                                 }) {
                                 if showReturn == false {
-                                Text("Renvoi de colis")
+                                    
+                                HStack {
+                                    Text("Renvoi de colis")
                                     .foregroundColor(Color.white)
                                     .font(.system(size: 28, weight: .medium, design: .default))
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "info.circle")
+                                        .resizable()
+                                        .frame(width: 25, height: 25)
+                                        .foregroundColor(.blue)
+                                    
+                                    Spacer()
+                                        .frame(width: 70)
+                                }
                                 }
                                     else {
                                     }
@@ -179,9 +220,22 @@ struct ServiceClientInfos: View {
                             self.showCard.toggle()
                         }) {
                         if showCard == false {
-                            Text("Fiche de livraison")
+                            
+                            HStack {
+                                Text("Fiche de livraison")
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 28, weight: .medium, design: .default))
+                                
+                                Spacer()
+                                
+                                Image(systemName: "info.circle")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.blue)
+                                
+                                Spacer()
+                                    .frame(width: 70)
+                            }
                             }
                         else {
                             }
@@ -221,25 +275,25 @@ struct ServiceClientInfos: View {
                                     .font(.system(size: 20, design: .default))
                                     .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
                                                     
-                                                Text("Date d’expedition prévue")
-                                                    .foregroundColor(Color.white)
-                                                    .font(.system(size: 20, design: .default))
-                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                                    
-                                                Text("Date de livraison")
-                                                    .foregroundColor(Color.white)
-                                                    .font(.system(size: 20, design: .default))
-                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                                    
-                                                Text("Nom du transporteur")
-                                                    .foregroundColor(Color.white)
-                                                    .font(.system(size: 20, design: .default))
-                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                                    
-                                                Text("N° de suivi")
-                                                    .foregroundColor(Color.white)
-                                                    .font(.system(size: 20, design: .default))
-                                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                Text("Date d’expedition prévue")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 20, design: .default))
+                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                    
+                                Text("Date de livraison")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 20, design: .default))
+                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                    
+                                Text("Nom du transporteur")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 20, design: .default))
+                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                    
+                                Text("N° de suivi")
+                                    .foregroundColor(Color.white)
+                                    .font(.system(size: 20, design: .default))
+                                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
                                                     
                                             }.padding(.leading, 80)
                                         }.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-118)
@@ -266,9 +320,21 @@ struct ServiceClientInfos: View {
                                     self.showServices.toggle()
                                 }) {
                                 if showServices == false {
-                                    Text("Service client")
+                                    HStack {
+                                        Text("Service client")
                                         .foregroundColor(Color.white)
                                         .font(.system(size: 28, weight: .medium, design: .default))
+                                        
+                                        Spacer()
+                                        
+                                        Image(systemName: "info.circle")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.blue)
+                                        
+                                        Spacer()
+                                            .frame(width: 70)
+                                    }
                                     }
                                 else {
                                         }

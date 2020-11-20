@@ -10,16 +10,16 @@ import SwiftUI
 
 struct PostView: View {
 
+    @EnvironmentObject var bigModel: BigModel
     var picture: DressPictures
-    
+
     var body: some View {
         
         HStack {
             
-            PostStack(pictureNamee: picture.pictureName, ceellText: picture.cellText)
+            PostStack(picture: picture, pictureNamee: picture.pictureName, ceellText: picture.cellText)
             
-            }
-        
+        }
     }
 }
 

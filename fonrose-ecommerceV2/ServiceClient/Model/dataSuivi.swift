@@ -11,7 +11,7 @@ import SwiftUI
 
 
 struct ParcelInfos {
-    let status: String
+    let status: SuiviStatusEnum
 }
 
 
@@ -21,10 +21,10 @@ let parcelStatus = statusParcel()
 
 func statusParcel() -> [ParcelInfos] {
     let parcels: [ParcelInfos] = [
-        ParcelInfos(status: "En cours d'expedition"),
-        ParcelInfos(status: "Livré"),
-        ParcelInfos(status: "Prets à être expédié"),
-        ParcelInfos(status: "Pris en charge")]
+        ParcelInfos(status: .EnCoursDExpedition),
+        ParcelInfos(status: .Livré),
+        ParcelInfos(status: .PrisEnCharge),
+        ParcelInfos(status: .PretsAEtreExpédié)]
     
     return parcels
     

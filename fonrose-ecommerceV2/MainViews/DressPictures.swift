@@ -16,5 +16,6 @@ struct DressPictures: Identifiable {
     let cellText: String
     var liked: Bool
     var saved: Bool
+    var navigationViewName: ViewEnum
 }
 

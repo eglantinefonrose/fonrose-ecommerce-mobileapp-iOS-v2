@@ -18,9 +18,6 @@ struct home: View {
         
         VStack {
             
-            Spacer()
-                .frame(height: 30)
-            
             HStack {
                 Spacer()
                     .frame(width: 30)
@@ -39,6 +36,7 @@ struct home: View {
             player2(videoName: CPSMVideoName)
             
         }.background(Color.black)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 

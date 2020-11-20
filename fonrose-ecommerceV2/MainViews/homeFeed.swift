@@ -10,16 +10,14 @@ import SwiftUI
 
 struct homeFeed: View {
     
+    @EnvironmentObject var bigModel: BigModel
     var model: MeasurementInfos
 
     var body: some View {
         
-        NavigationView {
             VStack {
                 List(LoadedPictures) { picture in
-                    NavigationLink(destination: DetailedView(picture: picture, model: self.model)) {
-                PostView(picture: picture)
-                    }
+                    PostView(picture: picture)
                 }.buttonStyle(PlainButtonStyle())
                     .padding(.horizontal, -15)
                     .frame(width: UIScreen.main.bounds.width)
@@ -29,7 +27,6 @@ struct homeFeed: View {
             }
         }
     }
-}
 
 #if DEBUG
 struct homeFeed_Previews: PreviewProvider {

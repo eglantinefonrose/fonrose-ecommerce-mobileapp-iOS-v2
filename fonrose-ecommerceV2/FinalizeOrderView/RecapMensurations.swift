@@ -10,24 +10,20 @@ import SwiftUI
 
 struct RecapMensurations: View {
     
-    var model: MeasurementInfos
+    @EnvironmentObject var bigModel: BigModel
+    
     var body: some View {
-        
-        VStack {
-            
-            Spacer()
-            
-            NavigationView {
-                VStack {
+                                
+            VStack {
                 
                 Spacer()
-                    .frame(height: 120)
+                    .frame(height: 100)
                 
                 HStack {
                     Spacer()
                         .frame(width: 50)
                     
-                    Text("Renvoi")
+                    Text("Recap")
                         .font(.system(size: 45, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                     
@@ -37,263 +33,118 @@ struct RecapMensurations: View {
                 Spacer()
                 
                 VStack {
+                                        
+                    RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: bigModel.armpitsMeasurement)
+                        
+                    RecapMensurationsTextStruct(recapMeasurementText: "Arms Length", recapMeasurementText2: bigModel.armsLength)
                     
-                    Spacer()
+                    RecapMensurationsTextStruct(recapMeasurementText: "Head Measurement", recapMeasurementText2: bigModel.headMeasurement)
                     
-                    VStack {
-                        HStack {
-                            
-                        Spacer()
-                            .frame(width: 50)
-                                           
-                            Text("Armpits Measurement")
-                                .foregroundColor(Color.white)
-                                .font(.system(size: 20, design: .default))
-                                .frame(height: 50, alignment: .leading)
-                                           
-                            Spacer()
-                                           
-                            Text(model.ArmpitsMeasurement)
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 20, design: .default))
-                                .frame(height: 50, alignment: .leading)
-                                           
-                            Spacer()
-                                .frame(width: 50)
-                        
-                        }
-                        
-                        Spacer()
-                            .frame(height: 7)
-                    }
+                    RecapMensurationsTextStruct(recapMeasurementText: "Pelvis knee", recapMeasurementText2: bigModel.pelvisKnee)
                     
-
+                    RecapMensurationsTextStruct(recapMeasurementText: "Pelvis Measurement", recapMeasurementText2: bigModel.pelvisMeasurement)
                     
-                    VStack {
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Arms Length")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.ArmsLength)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Head Measurement")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.HeadMeasurement)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                        
-                        
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Pelvis knee")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.PelvisKnee)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Pelvis Measurement")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.PelvisMeasurement)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Shoulders measurement")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.ShouldersMeasurement)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                            Spacer()
-                                .frame(height: 7)
-                        }
-                        
-                        VStack {
-                            HStack {
-                            
-                            Spacer()
-                                .frame(width: 50)
-                                               
-                                Text("Shoulders Pelvis")
-                                    .foregroundColor(Color.white)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                               
-                                Text(model.ShouldersPelvis)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 20, design: .default))
-                                    .frame(height: 50, alignment: .leading)
-                                               
-                                Spacer()
-                                    .frame(width: 50)
-                            }
-                            
-                        }
-                    }
+                    RecapMensurationsTextStruct(recapMeasurementText: "Shoulders measurement", recapMeasurementText2: bigModel.shouldersMeasurement)
                     
-                    Spacer()
+                    RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Pelvis", recapMeasurementText2: bigModel.shouldersPelvis)
                         
                     }
                 
+                    Spacer()
+                
                     VStack {
                     
-                    NavigationLink(destination: LocationView()) {
-                        
-                    Spacer()
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            HStack {
+                    Button(action: {
+                        self.bigModel.currentview = .FinalizeOrderViews_Livraison
+                        }) {
+                            //Spacer()
                                 
-                                Spacer()
-                                Text("Paiement")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                Spacer()
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        Text("Location")
+                                            .foregroundColor(Color.white)
+                                            .fontWeight(.semibold)
+                                        Spacer()
+                                    
+                                    }.background(Color.blue)
+                                    .frame(width: 150)
+                                    .cornerRadius(5)
+                                    
+                                    Spacer()
+                                    
+                            }.frame(width: 120, height: 35)
+                            .background(Color.blue)
+                            .cornerRadius(15)
                             
-                            }.background(Color.blue)
-                            .frame(width: 150)
-                            .cornerRadius(5)
-                            
-                            Spacer()
-                            
-                        }.frame(width: 120, height: 35)
-                        .background(Color.blue)
-                        .cornerRadius(15)
+                        //Spacer()
+                    }
                     
                     Spacer()
-                        
+                        .frame(height: 20)
+                       
+                    Button(action: {
+                        self.bigModel.currentview = .Measurement_Mensurations
+                    }) {
+                        Text("Edit measurements")
+                            .foregroundColor(Color.blue)
                     }
                     
                     Spacer()
                         .frame(height: 25)
                     
-                    NavigationLink(destination: Mensurations(model: model)) {
-                        Text("Modifier mes mesures")
-                            .foregroundColor(.blue)
-                    }
                 }
-                
-                Spacer()
-                .frame(height: 60)
-                    
-                }.edgesIgnoringSafeArea(.all)
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-                .background(Color.black)
-                //.padding(.vertical, -44)
-            
-            }.padding(.top, -16)
-            
-            Spacer()
-            
-        }
-        
+                            
+            }.background(Color.black)
+                .edgesIgnoringSafeArea(.all)
     }
         
 }
 
+struct RecapMensurationsTextStruct: View {
+    
+    var recapMeasurementText: String
+    var recapMeasurementText2: String
+    
+    var body : some View {
+        
+        VStack {
+            HStack {
+                
+            Spacer()
+                .frame(width: 50)
+                               
+                Text(recapMeasurementText)
+                    .foregroundColor(Color.white)
+                    .font(.system(size: 20, design: .default))
+                    .frame(height: 50, alignment: .leading)
+                               
+                Spacer()
+                               
+                Text(recapMeasurementText2)
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 20, design: .default))
+                    .frame(height: 50, alignment: .leading)
+                               
+                Spacer()
+                    .frame(width: 50)
+            
+            }
+            
+            Spacer()
+                .frame(height: 7)
+        }
+        
+    }
+    
+}
 
 struct RecapMensurations_Previews: PreviewProvider {
     static var previews: some View {
-        RecapMensurations(model: Measurement[0])
+        RecapMensurations()
     }
 }

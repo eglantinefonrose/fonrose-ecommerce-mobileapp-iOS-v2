@@ -125,7 +125,7 @@ struct Home : View {
                 
                 VStack {
                     
-                    NavigationLink(destination: Mensurations(model: model)) {
+                    NavigationLink(destination: Mensurations(armpitsNewValue: model.ArmpitsMeasurement)) {
                         Text("Acheter")
                     }
                     

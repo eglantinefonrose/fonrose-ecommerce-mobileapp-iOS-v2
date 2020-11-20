@@ -10,6 +10,8 @@ import SwiftUI
 
 struct PostStack: View {
     
+    @EnvironmentObject var bigModel: BigModel
+    var picture: DressPictures
     let pictureNamee: String
     let ceellText: String
     
@@ -26,11 +28,15 @@ struct PostStack: View {
                     .frame(width:UIScreen.main.bounds.width, height:UIScreen.main.bounds.height, alignment: .leading)
                     .padding(.leading, -UIScreen.main.bounds.width/2)
                 
-                Text(self.ceellText)
-                .font(.system(size: 60))
-                .frame(width:UIScreen.main.bounds.width, height:UIScreen.main.bounds.height, alignment: .center)
-                .foregroundColor(.white)
                 
+                Button(action: {
+                    self.bigModel.currentview = self.picture.navigationViewName
+                }) {
+                    Text(self.ceellText)
+                        .font(.system(size: 60))
+                        .foregroundColor(.white)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
+                }
             }
         }
     }
@@ -38,6 +44,6 @@ struct PostStack: View {
 
 struct PostStack_Previews: PreviewProvider {
     static var previews: some View {
-        PostStack(pictureNamee: "Screenshot 2020-04-06 at 18.29.34", ceellText: "Watch the clip")
+        PostStack(picture: LoadedPictures[0], pictureNamee: "Screenshot 2020-04-06 at 18.29.34", ceellText: "Watch the clip")
     }
 }

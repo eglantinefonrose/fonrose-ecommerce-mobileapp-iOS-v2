@@ -10,6 +10,7 @@ import SwiftUI
 
 struct PagingView<Content>: View where Content: View {
 
+    @EnvironmentObject var bigModel: BigModel
     @Binding var index: Int
     let maxIndex: Int
     let content: () -> Content
@@ -26,9 +27,7 @@ struct PagingView<Content>: View where Content: View {
     //var model: MeasurementInfos
     
     var body: some View {
-        
-        NavigationView {
-            
+                    
             VStack {
                 
                 ZStack {
@@ -76,41 +75,88 @@ struct PagingView<Content>: View where Content: View {
                     
                     Text("85€")
                         .foregroundColor(Color.gray)
-                        .font(.system(size: 25, weight: .semibold, design: .default)) }
+                        .font(.system(size: 25, weight: .semibold, design: .default))
+                        
+                    }
+                    
+                    HStack {
+                        
+                        Spacer()
+                        .frame(width: 30)
+                        
+                        VStack {
+                            
+                            Spacer()
+                                .frame(height: 45)
+                            
+                            Button(action: {
+                                self.bigModel.currentview = .Measurement_Mensurations
+                            }) {
+                                Text("< Back")
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: 17, weight: .bold, design: .default))
+                            }
+                            
+                            Spacer()
+                            
+                        }
+                        
+                        Spacer()
+                        
+                    }
                     
                 }
-                
-                Spacer()
-                
+                                
                 VStack {
                     
-                    NavigationLink(destination: Mensurations(model: Measurement[0])) {
-                        Text("Acheter")
+                    Spacer()
+                    
+                    HStack {
+                        
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Button(action: {
+                                self.bigModel.currentview = .Measurement_Mensurations
+                            }) {
+                                Text("Acheter")
+                                    .foregroundColor(.blue)
+                                    .font(.system(size: 17, weight: .bold, design: .default))
+                            }
+                            
+                            Spacer()
+                            
+                        }
+                        
                     }
-                    .frame(width: UIScreen.main.bounds.width)
-                    .foregroundColor(.blue)
                     
                     Spacer()
-                        .frame(height: 30)
+                        .frame(height: 20)
                     
-                    NavigationLink(destination: LogInScreen()) {
-                        Text("About us")
+                    HStack {
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            self.bigModel.currentview = .AboutUsScreen
+                        }) {
+                            Text("About us")
+                                .foregroundColor(.blue)
+                                .font(.system(size: 17, weight: .regular, design: .default))
+                        }
+                        
+                        Spacer()
+                        
                     }
-                    .foregroundColor(.blue)
-                    
-                }
                 
                 Spacer()
                 
+            }
+            //.padding(.vertical, -16)
+                            
             }.background(Color.black)
             .edgesIgnoringSafeArea(.all)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            //.padding(.vertical, -16)
-            
-        }
-        .padding(.vertical, -16)
-        
-
         
     }//acolade fermante body
 
@@ -167,7 +213,7 @@ struct CarouselView: View {
                             Image(imageName)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                                .frame(height: UIScreen.main.bounds.height-150, alignment: .top)
+                                .frame(alignment: .top)
                         }
                     }
                     .aspectRatio(4/3, contentMode: .fill)

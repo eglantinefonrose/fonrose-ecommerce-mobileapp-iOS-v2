@@ -9,13 +9,16 @@
 import SwiftUI
 
 struct PaymentScreen: View {
+
+    @EnvironmentObject var bigModel: BigModel
+    @State var commingFromMeasurement: Bool
+    
     var body: some View {
         
-        NavigationView {
             VStack {
                 
                 Spacer()
-                    .frame(height: 150)
+                    .frame(height: 70)
                 
                 HStack {
                     Spacer()
@@ -32,36 +35,64 @@ struct PaymentScreen: View {
                 
                 ZStack {
                     LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    .frame(width: UIScreen.main.bounds.width-50, height: UIScreen.main.bounds.width-50)
+                    .frame(width: UIScreen.main.bounds.width-20, height: UIScreen.main.bounds.width-20)
                     
                     Text("Pay")
                         .font(.system(size: 40, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                 }
                     
-                /*(LinearGradient(gradient: Gradient(colors: [.white, .gray
-                    ]), startPoint: .topLeading, endPoint: .bottomTrailing))*/
-                
                 Spacer()
                 
-                NavigationLink(destination: FinDeCommande()) {
-                    Text("navigation")
+                Button(action: {
+                    self.bigModel.currentview = .FinalizeOrderViews_FinDeCommande
+                    }) {
+                        //Spacer()
+                            
+                            HStack {
+                                
+                                Spacer()
+                                
+                                HStack {
+                                    
+                                    Spacer()
+                                    Text("Valider")
+                                        .foregroundColor(Color.white)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                
+                                }.background(Color.blue)
+                                .frame(width: 150)
+                                .cornerRadius(5)
+                                
+                                Spacer()
+                                
+                        }.frame(width: 120, height: 35)
+                        .background(Color.blue)
+                        .cornerRadius(15)
+                    
                 }
+                
+                Spacer()
+                .frame(height: 20)
+                
+                Button(action: {
+                    self.bigModel.commingFromMeasurement.toggle()
+                }) {
+                    Text("Modifier mes mesures")
+                        .foregroundColor(.blue)
+                    }
                 
                 Spacer()
                     .frame(height: 50)
                 
-            }.edgesIgnoringSafeArea(.all)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            .background(Color.black)
-            .padding(.vertical, -44)
-        }//.padding(.top, -40)
-        
+            }.background(Color.black)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
-struct PaymentScreen_Previews: PreviewProvider {
+/*struct PaymentScreen_Previews: PreviewProvider {
     static var previews: some View {
-        PaymentScreen()
+        PaymentScreen(commingFromMeasurement: $commingFromMeasurement)
     }
-}
+}*/

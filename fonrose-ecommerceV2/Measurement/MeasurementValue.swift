@@ -10,10 +10,11 @@ import SwiftUI
 
 struct MeasurementValue: View {
     
-    @State var MeasurementName: String
+    var buttonCurrentSize: CGFloat
+    @Binding var MeasurementName: String
     @State var showingSecondView: Bool = false
     let MeasurementVideoName: String
-    let textFieldText: String
+    @State var textFieldText: String
     
     var body: some View {
 
@@ -29,7 +30,10 @@ struct MeasurementValue: View {
                     
                     VStack {
                         Spacer()
-                       TextField(textFieldText, text: $MeasurementName)
+                        
+                        TextField("\(textFieldText) in mm", text: $MeasurementName)
+                            .keyboardType(.decimalPad)
+                        
                         Spacer()
                     }.background(Color.white)
                     .cornerRadius(7)
@@ -44,12 +48,13 @@ struct MeasurementValue: View {
                 
                  VStack {
                    Button(action: {
-                       self.showingSecondView.toggle()
+                       self.showingSecondView = true
                    }){
                     Image(systemName: "info.circle")
                         .resizable()
                         .foregroundColor(.blue)
                         .frame(width: 20, height: 20)
+                        .offset(x: self.buttonCurrentSize)
                    }
                }.sheet(isPresented: $showingSecondView, onDismiss: {
                print("frkl")

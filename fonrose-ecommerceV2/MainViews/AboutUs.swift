@@ -44,7 +44,7 @@ struct AboutUs: View {
 
             }.frame(height: UIScreen.main.bounds.height)
 
-            Text("Hi, my name’s Eglantine Fonrose and I’m a 15 years old creative girl. I really like to make videos, sew, create and discover new things. Hoping you will like the brand, an about the brand video will be available soon ツ")
+            Text("Hi, my name’s Eglantine Fonrose and I’m a 16 years old creative girl. I really like to make videos, sew, create and discover new things. Hoping you will like the brand, an about the brand video will be available soon ツ")
                 .multilineTextAlignment(.center)
                 .foregroundColor(.white)
                 .font(.system(size: 16, weight: .heavy, design: .default))

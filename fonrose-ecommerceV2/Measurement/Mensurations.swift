@@ -45,37 +45,40 @@ struct Mensurations: View {
                         
         GeometryReader { reader in
 
-            ZStack {
-                
-                VStack {
-
-                    Spacer()
-                        .frame(height: 50)
-
-                    HStack {
-
-                       Spacer()
-                            .frame(width: 30)
-
-                       Button(action: {
-                           self.bigModel.currentview = .MeasurementCarouselView
-                       }) {
-                           Text("Back")
-                       }
-
-                       Spacer()
-
-                    }.frame(width: UIScreen.main.bounds.width)
-
-                    Spacer()
-
-                }.frame(height: UIScreen.main.bounds.height)
                 
                 VStack {
                     
-                    Spacer()
-                        .frame(height: 150)
+                    //bouton back
                     
+                    Spacer()
+                        .frame(height: 30)
+                    
+                    ZStack {
+                        
+                        VStack {
+                            
+                            HStack {
+                                
+                                Spacer()
+                                    .frame(width: 30)
+                                
+                                Button(action: {
+                                    self.bigModel.currentview = .MeasurementCarouselView
+                                }) {
+                                    Text("Back")
+                                }
+                                
+                                Spacer()
+                                
+                            }.frame(width: UIScreen.main.bounds.width)
+                                                        
+                        }
+                        
+                    }
+                    
+                    Spacer()
+                    
+                    //Texte "Mensurations all values in millimeters" + texts fields
                     VStack {
                         
                                                  
@@ -89,7 +92,7 @@ struct Mensurations: View {
                                         .frame(width: UIScreen.main.bounds.width)
                                     
                                     Spacer()
-                                        .frame(height: 15)
+                                        .frame(height: 10)
                                     
                                     Text("all values in millimeters")
                                     .foregroundColor(Color.gray)
@@ -100,6 +103,7 @@ struct Mensurations: View {
                             }
                             
                         Spacer()
+                            .frame(height: 50)
                             
                         VStack {
                                 
@@ -108,62 +112,61 @@ struct Mensurations: View {
                                 
                                 VStack {
                                     
-                                    MeasurementValue(buttonCurrentSize: self.size1, MeasurementName: self.$armpitsNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Armpits Measurement")
+                                    MeasurementValue(textFieldColor: false, buttonCurrentSize: self.size1, MeasurementName: self.$armpitsNewValue, textFieldText: "Armpits Measurement")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                 
                                 
                                 //MARK: Arms Length
                                 VStack {
                                     
-                                    MeasurementValue(buttonCurrentSize: self.size2, MeasurementName: self.$armsNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Arms Length")
+                                    MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size2, MeasurementName: self.$armsNewValue, textFieldText: "Arms Length")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                 
                                 //MARK: Head Measurement
                                 VStack {
-                                    MeasurementValue(buttonCurrentSize: self.size3, MeasurementName: self.$headNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Head Measurement")
+                                    MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size3, MeasurementName: self.$headNewValue, textFieldText: "Head Measurement")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                 
                                 //MARK: Pelvis knee
                                 VStack {
-                                    MeasurementValue(buttonCurrentSize: self.size4, MeasurementName: self.$pelvisKneeNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Pelvis knee")
+                                    MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size4, MeasurementName: self.$pelvisKneeNewValue, textFieldText: "Pelvis knee")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                 
                                 //MARK: Pelvis Measurement
                                 VStack {
-                                    MeasurementValue(buttonCurrentSize: self.size5, MeasurementName: self.$pelvisNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Pelvis Measurement")
+                                    MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size5, MeasurementName: self.$pelvisNewValue, textFieldText: "Pelvis Measurement")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                 
                                 //MARK: Shoulders Measurement
                                 VStack {
-                                    MeasurementValue(buttonCurrentSize: self.size6, MeasurementName: self.$shouldersNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Shoulders Measurement")
+                                    MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size6, MeasurementName: self.$shouldersNewValue, textFieldText: "Shoulders Measurement")
                                     
                                     Spacer()
-                                        .frame(height: 30)
+                                        .frame(height: 15)
                                 }
                                
                                 //MARK: Shouders Pelvis
-                            MeasurementValue(buttonCurrentSize: self.size7, MeasurementName: self.$shoudersPelvisNewValue, MeasurementVideoName: "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4", textFieldText: "Shoulders Measurement")
+                            MeasurementValue(textFieldColor: true, buttonCurrentSize: self.size7, MeasurementName: self.$shoudersPelvisNewValue, textFieldText: "Shoulders Measurement")
                                 
                             }
                             
-                        Spacer()
                         
-                        }//acolade fermante de la big VStack + button
+                        }
                         
                         Spacer()
                         
@@ -221,6 +224,7 @@ struct Mensurations: View {
                             Text("Comment prendre ses mesures ?")
                                 .foregroundColor(.blue)
                                 .fontWeight(.semibold)
+                                .font(.system(size: 15))
                         }
                         
                         Spacer()
@@ -228,12 +232,12 @@ struct Mensurations: View {
                         
                         Button(action: {
                             
-                            if self.bigModel.commingFromMeasurement == false {
+                            /*if self.bigModel.commingFromMeasurement == false {*/
                                 self.bigModel.currentview = .FinalizeOrderViews_RecapMensurations
-                            }
+                            /*}
                             else {
                                 self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
-                            }
+                            }*/
                             
                             self.bigModel.armpitsMeasurement = self.armpitsNewValue
                             self.bigModel.armsLength = self.armsNewValue
@@ -241,6 +245,7 @@ struct Mensurations: View {
                             self.bigModel.pelvisKnee = self.pelvisKneeNewValue
                             self.bigModel.pelvisMeasurement = self.pelvisNewValue
                             self.bigModel.shouldersMeasurement = self.shouldersNewValue
+                            self.bigModel.shouldersPelvis = self.shoudersPelvisNewValue
                             
                         }) {
                             
@@ -258,11 +263,9 @@ struct Mensurations: View {
                     }
                     
                     Spacer()
-                    .frame(height: 50)
+                        .frame(height: 50)
                     
-                }
-            
-            }.background(Color.black)
+                }.background(Color.black)
             .edgesIgnoringSafeArea(.all)
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 .animation(.spring(response: 0.3, dampingFraction: 0.3, blendDuration: 0.3))

@@ -12,13 +12,14 @@ import AVKit
 struct TrailerPlayer: View {
     
     @EnvironmentObject var bigModel: BigModel
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
 
         VStack {
             
             ZStack {
-                //player()
+                player()
                 
                 HStack {
                     

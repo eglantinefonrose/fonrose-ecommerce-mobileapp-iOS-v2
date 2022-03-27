@@ -23,6 +23,7 @@
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
 		701FE11524587AB600E91EFA /* MeasurementInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE11424587AB600E91EFA /* MeasurementInfos.swift */; };
 		70295CB8246049A800BE8D33 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70295CB7246049A800BE8D33 /* UserData.swift */; };
+		703C28AF27E755BC00DE8B3B /* Binding-test1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 703C28AE27E755BC00DE8B3B /* Binding-test1.swift */; };
 		7045357C24770D84001F20A8 /* AboutUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357B24770D84001F20A8 /* AboutUs.swift */; };
 		7045357E2477BB29001F20A8 /* BigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357D2477BB29001F20A8 /* BigModel.swift */; };
 		704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357F2477BB8F001F20A8 /* ViewEnum.swift */; };
@@ -67,6 +68,7 @@
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		701FE11424587AB600E91EFA /* MeasurementInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementInfos.swift; sourceTree = "<group>"; };
 		70295CB7246049A800BE8D33 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		703C28AE27E755BC00DE8B3B /* Binding-test1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-test1.swift"; sourceTree = "<group>"; };
 		7045357B24770D84001F20A8 /* AboutUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUs.swift; sourceTree = "<group>"; };
 		7045357D2477BB29001F20A8 /* BigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigModel.swift; sourceTree = "<group>"; };
 		7045357F2477BB8F001F20A8 /* ViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEnum.swift; sourceTree = "<group>"; };
@@ -85,7 +87,6 @@
 		70BB819B246D88CA00695F19 /* LocationViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewTest.swift; sourceTree = "<group>"; };
 		70BF9DB124CC22EA005CD668 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		70BF9DB324CC2348005CD668 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		70C04B11248299B10024745C /* IMG_0247.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = IMG_0247.mp4; path = ../../../../../../../../../Users/eglantine/Desktop/IMG_0247.mp4; sourceTree = "<group>"; };
 		70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviStatusEnum.swift; sourceTree = "<group>"; };
 		70CB0995248262EA00D9BC7D /* BTB-9-2019-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "BTB-9-2019-2.mov"; sourceTree = "<group>"; };
 		70CB09962482631800D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; sourceTree = "<group>"; };
@@ -130,8 +131,8 @@
 		7019ABF92347E73F00F5EF15 /* fonrose-ecommerceV2 */ = {
 			isa = PBXGroup;
 			children = (
-				7033727E2482636900E94699 /* Assets */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
+				703C28AE27E755BC00DE8B3B /* Binding-test1.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				704535812477BD85001F20A8 /* BigRootView.swift */,
 				7025B19024699EED00F43171 /* SandboxViews */,
@@ -201,14 +202,6 @@
 				70C04B182482B3280024745C /* Model */,
 			);
 			path = ServiceClient;
-			sourceTree = "<group>";
-		};
-		7033727E2482636900E94699 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-				70C04B11248299B10024745C /* IMG_0247.mp4 */,
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		704535832477BF03001F20A8 /* Model */ = {
@@ -373,6 +366,7 @@
 				704535822477BD85001F20A8 /* BigRootView.swift in Sources */,
 				7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */,
 				7045357C24770D84001F20A8 /* AboutUs.swift in Sources */,
+				703C28AF27E755BC00DE8B3B /* Binding-test1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,19 +502,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
 				DEVELOPMENT_TEAM = 27DU3FB9N5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fonrose.eglantine.sandbox.swiftui.firstappeg.fonrose-ecommerceV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -528,19 +525,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
 				DEVELOPMENT_TEAM = 27DU3FB9N5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fonrose.eglantine.sandbox.swiftui.firstappeg.fonrose-ecommerceV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

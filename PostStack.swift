@@ -34,7 +34,7 @@ struct PostStack: View {
                 }) {
                     Text(self.ceellText)
                         .font(.system(size: 60))
-                        .foregroundColor(.white)
+                        .foregroundColor(Color(red: 200/255, green: 200/255, blue: 200/255))
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
                 }
             }

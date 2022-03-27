@@ -74,7 +74,7 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .FinalizeOrderViews_PaymentScreen) {
-                    PaymentScreen(commingFromMeasurement: false)
+                    PaymentScreen()
                 }
                 
                 if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {

@@ -13,7 +13,7 @@ let LoadedPictures = picturesLoaded()
 func picturesLoaded() -> [DressPictures] {
     let pics: [DressPictures] = [
         
-        DressPictures(id: 0, pictureName: "Screenshot 2020-04-06 at 18.29.34",/* imageNumber: "1", */cellText: "Watch the clip", liked: false, saved: true, navigationViewName: .VideoPlayer_trailerPlayer),
+        DressPictures(id: 0, pictureName: "watch the clip-video-promo2_1",/* imageNumber: "1", */cellText: "Watch the clip", liked: false, saved: true, navigationViewName: .VideoPlayer_trailerPlayer),
         
         DressPictures(id: 1, pictureName: "IMG_5195",/* imageNumber:  "2", */cellText: "The dress", liked: true, saved: false, navigationViewName: .MeasurementCarouselView),
         

@@ -20,42 +20,46 @@ struct FinDeCommande : View {
             
             Spacer()
             
-            ZStack {
+            HStack {
                 
                 Spacer()
-                
-                Text("\(seconds)").onReceive(timer) { input in
-                    self.seconds += 1
-                }
-                
-                //PlayerView()
-                
-                VStack {//élement 1
-                          
-                    if seconds < 4 {
-                        Text("Félicitations")
-                            .font(.system(size: 45, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                    } else {
-                        Text("Merci")
-                        .font(.system(size: 45, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
+                ZStack {
+                    
+                    Spacer()
+                    
+                    Text("\(seconds)").onReceive(timer) { input in
+                        self.seconds += 1
                     }
                     
-                    if seconds < 4 {
-                        Text("pour votre achat")
-                        .foregroundColor(Color.gray)
-                        .font(.system(size: 30, weight: .semibold, design: .default))
+                    //PlayerView()
+                    
+                    VStack {//élement 1
+                              
+                        if seconds < 4 {
+                            Text("Félicitations")
+                                .font(.system(size: 45, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                        } else {
+                            Text("Merci")
+                            .font(.system(size: 45, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                        }
                         
-                    } else {
-                        Text("d'avoir choisi fonrose")
-                        .foregroundColor(Color.gray)
-                        .font(.system(size: 30, weight: .semibold, design: .default))
+                        if seconds < 4 {
+                            Text("pour votre achat")
+                            .foregroundColor(Color.gray)
+                            .font(.system(size: 30, weight: .semibold, design: .default))
+                            
+                        } else {
+                            
+                        }
+                              
                     }
-                          
-                }
-            
-                }
+                
+                    }
+                Spacer()
+                
+            }
             
             Spacer()
             

@@ -8,12 +8,21 @@
 
 import SwiftUI
 
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
 struct MeasurementValue: View {
     
+    @State var textFieldColor: Bool = true
     var buttonCurrentSize: CGFloat
     @Binding var MeasurementName: String
     @State var showingSecondView: Bool = false
-    let MeasurementVideoName: String
+    var MeasurementVideoName: String!
     @State var textFieldText: String
     
     var body: some View {
@@ -29,16 +38,22 @@ struct MeasurementValue: View {
                     Spacer()
                     
                     VStack {
-                        Spacer()
+                            
+                            Spacer()
+                            
+                            HStack {
+                                Spacer()
+                                    //.frame(width: 5)
+                                TextField("\(textFieldText) in mm", text: $MeasurementName)
+                                .keyboardType(.decimalPad)
+                                Spacer()
+                            }
+                            
+                            Spacer()
                         
-                        TextField("\(textFieldText) in mm", text: $MeasurementName)
-                            .keyboardType(.decimalPad)
-                        
-                        Spacer()
-                    }.background(Color.white)
-                    .cornerRadius(7)
-                    //.padding(10)
-                    .frame(height: 30)
+                        }.background(Color.white)
+                        .cornerRadius(7)
+                        .frame(height: 30)
                     
                 }.background(Color.white)
                 .cornerRadius(7)
@@ -48,18 +63,14 @@ struct MeasurementValue: View {
                 
                  VStack {
                    Button(action: {
-                       self.showingSecondView = true
+                        hideKeyboard()
                    }){
-                    Image(systemName: "info.circle")
+                    Image(systemName: "checkmark.circle")
                         .resizable()
                         .foregroundColor(.blue)
                         .frame(width: 20, height: 20)
                         .offset(x: self.buttonCurrentSize)
                    }
-               }.sheet(isPresented: $showingSecondView, onDismiss: {
-               print("frkl")
-               }) {
-                home(isPresented: self.$showingSecondView, CPSMVideoName: self.MeasurementVideoName)
                }
                 
                 Spacer()
@@ -73,3 +84,5 @@ struct MeasurementValue: View {
                 
     }
 }
+
+

@@ -58,6 +58,7 @@ struct Caca : View {
                                                     .fontWeight(.bold)
                                                     .foregroundColor(.black)
                                             }
+                                            
                                         }
                                         
                                         Spacer()

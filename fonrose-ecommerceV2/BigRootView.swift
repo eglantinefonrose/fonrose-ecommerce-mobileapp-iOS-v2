@@ -77,10 +77,6 @@ struct BigRootView: View {
                     PaymentScreen()
                 }
                 
-                if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {
-                    LocationView()
-                }
-                
                 if (self.bigModel.currentview == .FinalizeOrderViews_RecapMensurations) {
                     RecapMensurations()
                 }

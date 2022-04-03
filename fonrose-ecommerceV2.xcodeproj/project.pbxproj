@@ -37,8 +37,7 @@
 		705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF2243F988100D47D6C /* dataSuivi.swift */; };
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
-		70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* homeFeed.swift */; };
-		70AB2A5A235F2A3C004856D7 /* IMG_0247.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 70AB2A57235F2894004856D7 /* IMG_0247.mp4 */; };
+		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */; };
 		70B9B1842566C64E00317086 /* test-binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9B1832566C64E00317086 /* test-binding.swift */; };
 		70BB819A246D7EC500695F19 /* About_us.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8199246D7EC500695F19 /* About_us.swift */; };
@@ -82,17 +81,11 @@
 		705ABCF2243F988100D47D6C /* dataSuivi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataSuivi.swift; sourceTree = "<group>"; };
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
-		70AB2A49235CB2C3004856D7 /* homeFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeFeed.swift; sourceTree = "<group>"; };
-		70AB2A57235F2894004856D7 /* IMG_0247.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = IMG_0247.mp4; sourceTree = "<group>"; };
+		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapMensurations.swift; sourceTree = "<group>"; };
 		70B9B1832566C64E00317086 /* test-binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "test-binding.swift"; sourceTree = "<group>"; };
 		70BB8199246D7EC500695F19 /* About_us.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_us.swift; sourceTree = "<group>"; };
 		70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviStatusEnum.swift; sourceTree = "<group>"; };
-		70CB0995248262EA00D9BC7D /* BTB-9-2019-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "BTB-9-2019-2.mov"; sourceTree = "<group>"; };
-		70CB09962482631800D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; sourceTree = "<group>"; };
-		70CB09982482631800D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; path = "../../../../Trailers🌋/CPSM - final version/EXPORTS MOV/COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; sourceTree = "<group>"; };
-		70CB09992482631900D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; path = "../../../../Trailers🌋/CPSM - final version/EXPORTS MOV/COMMENT PRENDRE SES MESURES- pt2 🌶.mov"; sourceTree = "<group>"; };
-		70CB099B2482631900D9BC7D /* BTB-9-2019-2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "BTB-9-2019-2.mov"; path = "../../../../Trailers🌋/BTB-9-2019-2.mov"; sourceTree = "<group>"; };
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
 		70D9AC882423CDB9009B7EC3 /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStack.swift; path = ../../PostStack.swift; sourceTree = "<group>"; };
@@ -166,7 +159,7 @@
 				701C83702365DEB2007AF339 /* DressPictures.swift */,
 				70D9AC882423CDB9009B7EC3 /* PostStack.swift */,
 				701C83AE23672284007AF339 /* PostView.swift */,
-				70AB2A49235CB2C3004856D7 /* homeFeed.swift */,
+				70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */,
 				700F201D242A647B00382533 /* TrailerPlayer.swift */,
 				7053C99C2464420300DF1E0C /* LogInScreen.swift */,
 				7045357B24770D84001F20A8 /* AboutUs.swift */,
@@ -257,12 +250,6 @@
 		70CB0994248262C600D9BC7D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				70CB09992482631900D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */,
-				70CB099B2482631900D9BC7D /* BTB-9-2019-2.mov */,
-				70CB09962482631800D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */,
-				70AB2A57235F2894004856D7 /* IMG_0247.mp4 */,
-				70CB09982482631800D9BC7D /* COMMENT PRENDRE SES MESURES- pt2 🌶.mov */,
-				70CB0995248262EA00D9BC7D /* BTB-9-2019-2.mov */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -325,7 +312,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70AB2A5A235F2A3C004856D7 /* IMG_0247.mp4 in Resources */,
 				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
@@ -367,7 +353,7 @@
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
 				701C837C23660B97007AF339 /* data.swift in Sources */,
 				70295CB8246049A800BE8D33 /* UserData.swift in Sources */,
-				70AB2A4A235CB2C3004856D7 /* homeFeed.swift in Sources */,
+				70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */,
 				701C83AF23672284007AF339 /* PostView.swift in Sources */,
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,
 				704535822477BD85001F20A8 /* BigRootView.swift in Sources */,
@@ -516,7 +502,7 @@
 				DEVELOPMENT_TEAM = 27DU3FB9N5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,7 +525,7 @@
 				DEVELOPMENT_TEAM = 27DU3FB9N5;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

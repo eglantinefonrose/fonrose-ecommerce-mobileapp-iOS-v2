@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct homeFeed: View {
+struct HomeFeedView: View {
     
     @EnvironmentObject var bigModel: BigModel
     var model: MeasurementInfos
@@ -26,14 +26,17 @@ struct homeFeed: View {
                     .navigationBarHidden(true)
             }
         }
+            
+
     }
 
 #if DEBUG
 struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
-        homeFeed(model: Measurement[0])
+        HomeFeedView(model: Measurement[0])
             .environmentObject(UserData())
     }
+        
 }
 #endif
 

@@ -22,7 +22,7 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .Home_homeFeed) {
-                    homeFeed(model: Measurement[0])
+                    HomeFeedView(model: Measurement[0])
                 }
                 
                 if (self.bigModel.currentview == .MeasurementCarouselView) {

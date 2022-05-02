@@ -43,10 +43,7 @@ struct MeasurementValue: View {
                             Spacer()
                             
                             HStack {
-                                
-                                let lettersCharacters = CharacterSet.letters
-                                let lettersRange = MeasurementName.rangeOfCharacter(from: lettersCharacters)
-                                
+                                                                
                                 Spacer()
                                     //.frame(width: 5)
                                 

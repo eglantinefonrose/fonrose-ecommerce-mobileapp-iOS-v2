@@ -8,9 +8,10 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 struct CarouselViewTesf: View {
     
-    
+    @available(iOS 14.0, *)
     var body: some View {
         
         Home(model: Measurement[0])
@@ -19,7 +20,7 @@ struct CarouselViewTesf: View {
 }
 
 //code source du tuto de kavsoft
-
+@available(iOS 14.0, *)
 struct Home : View {
     
     @State var hiddingNavBar = true
@@ -41,6 +42,7 @@ struct Home : View {
 
     ]
     
+    @available(iOS 14.0, *)
     var body : some View{
         
         NavigationView{

@@ -15,8 +15,10 @@ struct AboutUs: View {
     
     var body: some View {
         
+        Text("")
         
-        ZStack {
+        
+        /*ZStack {
         
             LoopingPlayer()
 
@@ -100,5 +102,6 @@ class PlayerUIView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }*/
     }
 }

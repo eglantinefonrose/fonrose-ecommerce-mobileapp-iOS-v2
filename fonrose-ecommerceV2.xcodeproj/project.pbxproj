@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */; };
 		700D82992444D8C4001CFDDB /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D82982444D8C4001CFDDB /* IconButton.swift */; };
+		700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */; };
 		700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F201D242A647B00382533 /* TrailerPlayer.swift */; };
 		7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */; };
 		7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */; };
@@ -31,6 +32,7 @@
 		7045357E2477BB29001F20A8 /* BigModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357D2477BB29001F20A8 /* BigModel.swift */; };
 		704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357F2477BB8F001F20A8 /* ViewEnum.swift */; };
 		704535822477BD85001F20A8 /* BigRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704535812477BD85001F20A8 /* BigRootView.swift */; };
+		7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7049ED27281E7C2B00C16C3B /* PostStack.swift */; };
 		704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D2197245B377500D0B13F /* SANDBOX_textField.swift */; };
 		7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7053C99C2464420300DF1E0C /* LogInScreen.swift */; };
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
@@ -44,13 +46,13 @@
 		70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */; };
 		70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */; };
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
-		70D9AC892423CDB9009B7EC3 /* PostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D9AC882423CDB9009B7EC3 /* PostStack.swift */; };
 		70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E599342472C6B600F84295 /* MeasurementValue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewTesf.swift; sourceTree = "<group>"; };
 		700D82982444D8C4001CFDDB /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
+		700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetectorTest.swift; sourceTree = "<group>"; };
 		700F201D242A647B00382533 /* TrailerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPlayer.swift; sourceTree = "<group>"; };
 		7019ABF72347E73F00F5EF15 /* fonrose-ecommerceV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fonrose-ecommerceV2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		7045357D2477BB29001F20A8 /* BigModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigModel.swift; sourceTree = "<group>"; };
 		7045357F2477BB8F001F20A8 /* ViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEnum.swift; sourceTree = "<group>"; };
 		704535812477BD85001F20A8 /* BigRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRootView.swift; sourceTree = "<group>"; };
+		7049ED27281E7C2B00C16C3B /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStack.swift; sourceTree = "<group>"; };
 		704D2197245B377500D0B13F /* SANDBOX_textField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANDBOX_textField.swift; sourceTree = "<group>"; };
 		7053C99C2464420300DF1E0C /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
@@ -88,7 +91,6 @@
 		70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviStatusEnum.swift; sourceTree = "<group>"; };
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
-		70D9AC882423CDB9009B7EC3 /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PostStack.swift; path = ../../PostStack.swift; sourceTree = "<group>"; };
 		70E599342472C6B600F84295 /* MeasurementValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementValue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,17 +126,13 @@
 		7019ABF92347E73F00F5EF15 /* fonrose-ecommerceV2 */ = {
 			isa = PBXGroup;
 			children = (
+				700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				703C28AE27E755BC00DE8B3B /* Binding-test1.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				704535812477BD85001F20A8 /* BigRootView.swift */,
-				7031EF9827F04C34009CA3A2 /* Location */,
-				7025B19024699EED00F43171 /* SandboxViews */,
-				7025B18F24699EB400F43171 /* FinalizeOrderView */,
-				70295CB924604E3A00BE8D33 /* ServiceClient */,
 				704535832477BF03001F20A8 /* Model */,
-				70BB608A245B2D1800F4CCDF /* Measurement */,
-				701C83782365E502007AF339 /* MainViews */,
+				7049ED23281E7B3F00C16C3B /* Views */,
 				7019AC032347E74100F5EF15 /* Assets.xcassets */,
 				7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */,
 				7019AC0B2347E74100F5EF15 /* Info.plist */,
@@ -155,11 +153,7 @@
 		701C83782365E502007AF339 /* MainViews */ = {
 			isa = PBXGroup;
 			children = (
-				701C837B23660B97007AF339 /* data.swift */,
-				701C83702365DEB2007AF339 /* DressPictures.swift */,
-				70D9AC882423CDB9009B7EC3 /* PostStack.swift */,
-				701C83AE23672284007AF339 /* PostView.swift */,
-				70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */,
+				7049ED24281E7B5300C16C3B /* HomeFeed */,
 				700F201D242A647B00382533 /* TrailerPlayer.swift */,
 				7053C99C2464420300DF1E0C /* LogInScreen.swift */,
 				7045357B24770D84001F20A8 /* AboutUs.swift */,
@@ -208,12 +202,52 @@
 		704535832477BF03001F20A8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				70CB0994248262C600D9BC7D /* Assets */,
 				70295CB7246049A800BE8D33 /* UserData.swift */,
 				7045357F2477BB8F001F20A8 /* ViewEnum.swift */,
 				7045357D2477BB29001F20A8 /* BigModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		7049ED23281E7B3F00C16C3B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7031EF9827F04C34009CA3A2 /* Location */,
+				7025B19024699EED00F43171 /* SandboxViews */,
+				7025B18F24699EB400F43171 /* FinalizeOrderView */,
+				70295CB924604E3A00BE8D33 /* ServiceClient */,
+				70BB608A245B2D1800F4CCDF /* Measurement */,
+				701C83782365E502007AF339 /* MainViews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7049ED24281E7B5300C16C3B /* HomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				7049ED25281E7B7300C16C3B /* Model */,
+				7049ED26281E7BA700C16C3B /* View */,
+			);
+			path = HomeFeed;
+			sourceTree = "<group>";
+		};
+		7049ED25281E7B7300C16C3B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				701C837B23660B97007AF339 /* data.swift */,
+				701C83702365DEB2007AF339 /* DressPictures.swift */,
+				7049ED27281E7C2B00C16C3B /* PostStack.swift */,
+				701C83AE23672284007AF339 /* PostView.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7049ED26281E7BA700C16C3B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		70BB608A245B2D1800F4CCDF /* Measurement */ = {
@@ -245,13 +279,6 @@
 				70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		70CB0994248262C600D9BC7D /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -337,6 +364,7 @@
 				704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */,
 				708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */,
 				70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */,
+				700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */,
 				70B9B1842566C64E00317086 /* test-binding.swift in Sources */,
 				701F4C37245493CF009EB8B9 /* Mensurations.swift in Sources */,
 				701FE11524587AB600E91EFA /* MeasurementInfos.swift in Sources */,
@@ -344,10 +372,10 @@
 				701C83712365DEB2007AF339 /* DressPictures.swift in Sources */,
 				7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */,
 				70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */,
+				7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,
 				700D82992444D8C4001CFDDB /* IconButton.swift in Sources */,
-				70D9AC892423CDB9009B7EC3 /* PostStack.swift in Sources */,
 				704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */,
 				705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,

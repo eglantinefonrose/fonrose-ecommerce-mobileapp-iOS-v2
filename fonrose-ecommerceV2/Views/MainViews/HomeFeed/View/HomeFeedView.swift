@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct HomeFeedView: View {
-    
+   
     @EnvironmentObject var bigModel: BigModel
     var model: MeasurementInfos
 
@@ -18,13 +18,12 @@ struct HomeFeedView: View {
             VStack {
                 List(LoadedPictures) { picture in
                     PostView(picture: picture)
-                }.buttonStyle(PlainButtonStyle())
-                    .padding(.horizontal, -15)
+                  } .buttonStyle(PlainButtonStyle())
                     .frame(width: UIScreen.main.bounds.width)
                     .edgesIgnoringSafeArea(.all)
                     .navigationBarTitle("")
                     .navigationBarHidden(true)
-            }
+            }.edgesIgnoringSafeArea(.all)
         }
             
 

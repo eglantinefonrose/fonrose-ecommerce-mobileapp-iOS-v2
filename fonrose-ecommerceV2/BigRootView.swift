@@ -8,11 +8,13 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 struct BigRootView: View {
     
     @EnvironmentObject var bigModel: BigModel
     //var model: ParcelInfos
     
+    @available(iOS 14.0, *)
     var body: some View {
         
         VStack {

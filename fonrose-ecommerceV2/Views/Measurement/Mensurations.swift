@@ -9,7 +9,7 @@
 import SwiftUI
 import AVKit
 
-
+@available(iOS 14.0, *)
 struct Mensurations: View {
     
     @State var armpitsNewValue: String = ""
@@ -41,6 +41,7 @@ struct Mensurations: View {
     @State var size6 : CGFloat = 0
     @State var size7 : CGFloat = 0
         
+    @available(iOS 14.0, *)
     var body: some View {
                         
         GeometryReader { reader in
@@ -305,6 +306,7 @@ struct ButtonModel: View {
     }
 }
 
+@available(iOS 14.0, *)
 struct Mensurations_Previews: PreviewProvider {
         
     static var previews: some View {

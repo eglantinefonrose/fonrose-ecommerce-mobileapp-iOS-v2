@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-#if canImport(UIKit)
+/*#if canImport(UIKit)
 extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-#endif
-
+#endif*/
+@available(iOS 14.0, *)
 struct MeasurementValue: View {
     
     @State var textFieldColor: Bool = true
@@ -25,6 +25,7 @@ struct MeasurementValue: View {
     var MeasurementVideoName: String!
     @State var textFieldText: String
     
+    @available(iOS 14.0, *)
     var body: some View {
 
         VStack {
@@ -42,11 +43,24 @@ struct MeasurementValue: View {
                             Spacer()
                             
                             HStack {
+                                
+                                let lettersCharacters = CharacterSet.letters
+                                let lettersRange = MeasurementName.rangeOfCharacter(from: lettersCharacters)
+                                
                                 Spacer()
                                     //.frame(width: 5)
-                                TextField("\(textFieldText) in mm", text: $MeasurementName)
-                                .keyboardType(.decimalPad)
-                                Spacer()
+                                
+                                TextField("text", text: $MeasurementName)
+                                    .background(Color.white)
+                                    .onChange(of: (MeasurementName), perform: { value in
+                                        perform: do {
+                                            if MeasurementName.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                        }
+                                    })
                             }
                             
                             Spacer()
@@ -61,7 +75,7 @@ struct MeasurementValue: View {
                 
                 Spacer()
                 
-                 VStack {
+                 /*VStack {
                    Button(action: {
                         hideKeyboard()
                    }){
@@ -74,9 +88,7 @@ struct MeasurementValue: View {
                }
                 
                 Spacer()
-                    .frame(width: 30)
-                
-               
+                    .frame(width: 30)*/
                 
             }.frame(width: UIScreen.main.bounds.width)
             
@@ -85,4 +97,26 @@ struct MeasurementValue: View {
     }
 }
 
-
+extension View {
+    func alertTF(title: String, message: String, primaryTitle: String, action: @escaping ()->()) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(.init(title: primaryTitle, style: .cancel, handler: { _ in
+            action()
+        }))
+        
+        rootController().present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func rootController() -> UIViewController {
+        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return .init()
+        }
+        guard let root = screen.windows.first?.rootViewController else {
+            return .init()
+        }
+        return root
+    }
+    
+}

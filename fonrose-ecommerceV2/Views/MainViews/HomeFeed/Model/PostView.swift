@@ -17,7 +17,7 @@ struct PostView: View {
         
         HStack {
             
-            PostStack(picture: picture, pictureNamee: picture.pictureName, ceellText: picture.cellText)
+            PostStack(picture: picture, pictureNamee: picture.pictureName, ceellText: picture.cellText, navigationName: picture.navigationViewName)
             
         }
     }

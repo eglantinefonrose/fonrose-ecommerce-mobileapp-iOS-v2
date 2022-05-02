@@ -45,9 +45,8 @@ struct MeasurementValue: View {
                             HStack {
                                                                 
                                 Spacer()
-                                    //.frame(width: 5)
                                 
-                                TextField("text", text: $MeasurementName)
+                                TextField(textFieldText, text: $MeasurementName)
                                     .background(Color.white)
                                     .onChange(of: (MeasurementName), perform: { value in
                                         perform: do {

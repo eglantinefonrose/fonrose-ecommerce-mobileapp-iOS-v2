@@ -83,6 +83,10 @@ struct BigRootView: View {
                     RecapMensurations()
                 }
                 
+                if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {
+                    LocationHome()
+                }
+                
             }
             
         }

@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 14.0, *)
 struct PaymentScreen: View {
 
     @EnvironmentObject var bigModel: BigModel
@@ -20,6 +21,7 @@ struct PaymentScreen: View {
     @State var isShouldersPelvisNil: Bool = false
     @State var isModifyMeasurementButtonBlue: Bool = false
     
+    @available(iOS 14.0, *)
     var body: some View {
         
         VStack {
@@ -48,8 +50,10 @@ struct PaymentScreen: View {
                     LinearGradient(gradient: Gradient(colors: [.white, .gray]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .frame(width: UIScreen.main.bounds.width-20, height: UIScreen.main.bounds.width-20)
                     
-                    Text("Pay")
-                        .font(.system(size: 40, weight: .bold, design: .default))
+                    Link("Pay", destination: URL(string: "https://www.jacquemus.com")!)
+                    
+                    //Text("Pay")
+                        //.font(.system(size: 40, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                 }
                     
@@ -177,7 +181,9 @@ struct PaymentScreen: View {
 }
 
 
+@available(iOS 14.0, *)
 struct PaymentScreen_Previews: PreviewProvider {
+    @available(iOS 14.0, *)
     static var previews: some View {
         PaymentScreen()
     }

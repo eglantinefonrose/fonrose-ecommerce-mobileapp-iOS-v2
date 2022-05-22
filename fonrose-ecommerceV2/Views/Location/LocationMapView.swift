@@ -9,30 +9,57 @@
 import SwiftUI
 import MapKit
 
+@available(iOS 14.0, *)
 struct LocationMapView: UIViewRepresentable {
     
-    @EnvironmentObject var mapData: MapViewModel
-        
+    @available(iOS 14.0, *)
+    @EnvironmentObject var mapData: LocationViewModel
+    
     func makeCoordinator() -> Coordinator {
         return LocationMapView.Coordinator()
     }
-        
+    
     func makeUIView(context: Context) -> MKMapView {
+        
         let view = mapData.mapView
         
         view.showsUserLocation = true
-        //quand qqch se passe dans la vue, elle informe le controller pour pouvoir communiquer les infos
         view.delegate = context.coordinator
+        //delegate = objet qui répond à des événements qui se produisent ailleurs
+        //coordinator sont comme des delegates pour les view controllers
         
         return view
-    }
-    
-    func updateUIView(_ uiView: MKMapView, context: Context) {
         
     }
     
-    class Coordinator: NSObject,MKMapViewDelegate {
+    func updateUIView(_ uiView: UIViewType, context: Context) {
         
     }
     
+    class Coordinator: NSObject, MKMapViewDelegate {
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            
+            if annotation.isKind(of: MKUserLocation.self) {return nil}
+            else {
+                let pinAnnotation = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "PIN_VIEW")
+                pinAnnotation.tintColor = .red
+                pinAnnotation.animatesDrop = true
+                pinAnnotation.canShowCallout = true
+             
+                return pinAnnotation
+            }
+            
+        }
+        
+    }
+    
+}
+
+@available(iOS 14.0, *)
+struct LocationMapView_Previews: PreviewProvider {
+    @available(iOS 14.0, *)
+    static var previews: some View {
+        LocationMapView()
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 class BigModel : ObservableObject {
     
@@ -15,6 +16,7 @@ class BigModel : ObservableObject {
     //@Published var commingFromMeasurement: Bool = false
     @Published var currentview = ViewEnum.Home_homeFeed
     
+    //MARK: Measurement
     @Published var armpitsMeasurement: String! = ""
     @Published var armsLength: String! = ""
     @Published var headMeasurement: String! = ""
@@ -24,6 +26,10 @@ class BigModel : ObservableObject {
     @Published var shouldersPelvis: String! = ""
     @Published var commingFromPaymentScreen: Bool = false
 
+    //MARK: Service Client
     @Published var orderID : String? = nil
     @Published var orderStatus : SuiviStatusEnum? = nil
+    
+    //MARK: Location
+    @Published var selectedPlacemark: CLPlacemark? = nil
 }

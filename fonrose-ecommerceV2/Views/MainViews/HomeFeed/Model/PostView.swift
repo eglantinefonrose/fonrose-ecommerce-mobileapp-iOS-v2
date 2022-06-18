@@ -26,7 +26,7 @@ struct PostView: View {
 #if DEBUG
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView(picture: LoadedPictures[1])
+        PostView(picture: dressPictures[1])
     }
 }
 #endif

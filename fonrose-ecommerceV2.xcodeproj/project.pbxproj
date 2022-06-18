@@ -18,7 +18,6 @@
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
 		701C83712365DEB2007AF339 /* DressPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83702365DEB2007AF339 /* DressPictures.swift */; };
-		701C837C23660B97007AF339 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C837B23660B97007AF339 /* data.swift */; };
 		701C83AF23672284007AF339 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83AE23672284007AF339 /* PostView.swift */; };
 		701F4C37245493CF009EB8B9 /* Mensurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701F4C36245493CF009EB8B9 /* Mensurations.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
@@ -64,7 +63,6 @@
 		7019AC092347E74100F5EF15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		701C83702365DEB2007AF339 /* DressPictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressPictures.swift; sourceTree = "<group>"; };
-		701C837B23660B97007AF339 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		701C83AE23672284007AF339 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		701F4C36245493CF009EB8B9 /* Mensurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mensurations.swift; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 		7049ED25281E7B7300C16C3B /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				701C837B23660B97007AF339 /* data.swift */,
 				701C83702365DEB2007AF339 /* DressPictures.swift */,
 				7049ED27281E7C2B00C16C3B /* PostStack.swift */,
 				701C83AE23672284007AF339 /* PostView.swift */,
@@ -399,7 +396,6 @@
 				704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */,
 				705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
-				701C837C23660B97007AF339 /* data.swift in Sources */,
 				70295CB8246049A800BE8D33 /* UserData.swift in Sources */,
 				70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */,
 				701C83AF23672284007AF339 /* PostView.swift in Sources */,

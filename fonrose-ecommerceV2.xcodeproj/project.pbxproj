@@ -42,6 +42,7 @@
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */; };
 		70B9B1842566C64E00317086 /* test-binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9B1832566C64E00317086 /* test-binding.swift */; };
+		70BB78CC285E1D7A00A0A3B4 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB78CB285E1D7A00A0A3B4 /* TestList.swift */; };
 		70BB819A246D7EC500695F19 /* About_us.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8199246D7EC500695F19 /* About_us.swift */; };
 		70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */; };
 		70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */; };
@@ -87,6 +88,7 @@
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapMensurations.swift; sourceTree = "<group>"; };
 		70B9B1832566C64E00317086 /* test-binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "test-binding.swift"; sourceTree = "<group>"; };
+		70BB78CB285E1D7A00A0A3B4 /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		70BB8199246D7EC500695F19 /* About_us.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_us.swift; sourceTree = "<group>"; };
 		70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviStatusEnum.swift; sourceTree = "<group>"; };
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				704D2197245B377500D0B13F /* SANDBOX_textField.swift */,
 				700D82982444D8C4001CFDDB /* IconButton.swift */,
 				700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */,
+				70BB78CB285E1D7A00A0A3B4 /* TestList.swift */,
 			);
 			path = SandboxViews;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
 				70295CB8246049A800BE8D33 /* UserData.swift in Sources */,
+				70BB78CC285E1D7A00A0A3B4 /* TestList.swift in Sources */,
 				70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */,
 				701C83AF23672284007AF339 /* PostView.swift in Sources */,
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,

@@ -20,97 +20,157 @@ struct HomeFeedView: View {
     var body: some View {
         
         if #available(iOS 14.0, *) {
-            ZStack {
-                HStack(spacing: 0) {
+            ScrollViewReader { proxy in
+                ZStack {
+                    HStack(spacing: 0) {
+                                        
+                        HStack {
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(Color.primary.opacity(0.4))
+                                    .edgesIgnoringSafeArea(.all)
+                                .frame(width: UIScreen.main.bounds.width/2)
+                                
+                                VStack(alignment: .leading, spacing: 20) {
                                     
-                    HStack {
-                        SideMenu()
-                        
-                    }
-                    
-                    ZStack {
-                        
-                        List {
-                            ForEach(dressPictures) { picture in
-                                PostView(picture: picture)
-                            } .buttonStyle(PlainButtonStyle())
-                            .frame(width: UIScreen.main.bounds.width)
-                            .edgesIgnoringSafeArea(.all)
-                            .navigationBarTitle("")
-                            .navigationBarHidden(true)
-                            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                        }.onAppear(perform: {
-                            UITableView.appearance().contentInset.top = -47
-                        })
-                        
-                        VStack {
-                            HStack {
-                                
-                                Spacer()
-                                    .frame(width: 20)
-                                
-                                Image(systemName: "text.justify")
-                                    .foregroundColor(.white)
-                                    .font(.system(size: 20))
-                                    .onTapGesture {
-                                        withAnimation {
-                                            showMenu.toggle()
-                                            if showMenu {
-                                                print("menu")
-                                            } else {
-                                                print("no menu")
+                                    Spacer()
+                                        .frame(height: 0)
+                                    
+                                    VStack(alignment: .leading, spacing: 20) {
+                                        Text("Watch the clip")
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                            .onTapGesture {
+                                                proxy.scrollTo(0)
+                                                self.showMenu = false
                                             }
-                                        }
+                                        
+                                        Text("The dress")
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                            .onTapGesture {
+                                                proxy.scrollTo(1)
+                                                self.showMenu = false
+                                            }
+                                        
+                                        Text("About us")
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                            .onTapGesture {
+                                                proxy.scrollTo(2)
+                                                self.showMenu = false
+                                            }
                                     }
-                                
-                                
-                                Spacer()
-                            }
-                            Spacer()
-                        }
-                        
-                    }
-                }.frame(width: UIScreen.main.bounds.width/2 + UIScreen.main.bounds.width)
-                .animation(.easeOut, value: offset == -UIScreen.main.bounds.width/4)
-                .offset(x: offset)
-                .onChange(of: showMenu, perform: { value in
-                    //le menu n'est pas affiché
-                    if showMenu == false {
-                        offset = -UIScreen.main.bounds.width/4
-                    }
-                    //le menu est affiché
-                    if showMenu {
-                        offset = UIScreen.main.bounds.width/4
-                    }
-            })
-                
-            VStack {
-                HStack {
-                    
-                    Spacer()
-                    
-                    Image(systemName: "person.circle")
-                        .foregroundColor(.white)
-                        .font(.system(size: 20))
-                        .onTapGesture {
-                            withAnimation {
-                                showMenu.toggle()
-                                if showMenu {
-                                    print("menu")
-                                } else {
-                                    print("no menu")
+                                    
+                                    Text("Customer service")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                        .onTapGesture {
+                                            proxy.scrollTo(3)
+                                            self.showMenu = false
+                                        }
+                                    
+                                    Text("Measurement")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                    
+                                    Text("Location")
+                                        .foregroundColor(.white)
+                                        .font(.headline)
+                                        
+                                    
+                                    Spacer()
+                                    
                                 }
                             }
+                            
                         }
+                        
+                        ZStack {
+                            
+                            List {
+                                ForEach(dressPictures) { picture in
+                                    PostView(picture: picture)
+                                        .id(picture.id)
+                                } .buttonStyle(PlainButtonStyle())
+                                .frame(width: UIScreen.main.bounds.width)
+                                .edgesIgnoringSafeArea(.all)
+                                .navigationBarTitle("")
+                                .navigationBarHidden(true)
+                                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                            }.onAppear(perform: {
+                                UITableView.appearance().contentInset.top = -47
+                            })
+                            
+                            VStack {
+                                HStack {
+                                    
+                                    Spacer()
+                                        .frame(width: 20)
+                                    
+                                    Image(systemName: "text.justify")
+                                        .foregroundColor(.white)
+                                        .font(.system(size: 20))
+                                        .onTapGesture {
+                                            withAnimation {
+                                                showMenu.toggle()
+                                                if showMenu {
+                                                    print("menu")
+                                                } else {
+                                                    print("no menu")
+                                                }
+                                            }
+                                        }
+                                    
+                                    
+                                    Spacer()
+                                }
+                                Spacer()
+                            }
+                            
+                        }
+                    }.frame(width: UIScreen.main.bounds.width/2 + UIScreen.main.bounds.width)
+                    .animation(.easeOut, value: offset == -UIScreen.main.bounds.width/4)
+                    .offset(x: offset)
+                    .onChange(of: showMenu, perform: { value in
+                        //le menu n'est pas affiché
+                        if showMenu == false {
+                            offset = -UIScreen.main.bounds.width/4
+                        }
+                        //le menu est affiché
+                        if showMenu {
+                            offset = UIScreen.main.bounds.width/4
+                        }
+                })
                     
+                VStack {
+                    HStack {
+                        
+                        Spacer()
+                        
+                        Image(systemName: "person.circle")
+                            .foregroundColor(.white)
+                            .font(.system(size: 20))
+                            .onTapGesture {
+                                withAnimation {
+                                    showMenu.toggle()
+                                    if showMenu {
+                                        print("menu")
+                                    } else {
+                                        print("no menu")
+                                    }
+                                }
+                            }
+                        
+                        Spacer()
+                            .frame(width: UIScreen.main.bounds.width/4 + 20)
+                        
+                    }
                     Spacer()
-                        .frame(width: UIScreen.main.bounds.width/4 + 20)
-                    
                 }
-                Spacer()
+                    
             }
-                
-            }
+        }
         } else {
             // Fallback on earlier versions
         }
@@ -119,55 +179,6 @@ struct HomeFeedView: View {
             
 }
 
-struct SideMenu: View {
-        
-    var body: some View {
-        
-        ZStack {
-            Rectangle()
-                .foregroundColor(Color.primary.opacity(0.4))
-                .edgesIgnoringSafeArea(.all)
-            .frame(width: UIScreen.main.bounds.width/2)
-            
-            VStack(alignment: .leading, spacing: 20) {
-                
-                Spacer()
-                    .frame(height: 0)
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Watch the clip")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                    
-                    Text("The dress")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                    
-                    Text("About us")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                }
-                
-                Text("Customer service")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                
-                Text("Measurement")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                
-                Text("Location")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                
-                Spacer()
-                
-            }
-        }
-        
-    }
-    
-}
 
 #if DEBUG
 struct homeFeed_Previews: PreviewProvider {

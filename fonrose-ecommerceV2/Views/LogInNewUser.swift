@@ -7,15 +7,52 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct LogInNewUser: View {
+    
+    @EnvironmentObject var bigModel: BigModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+     
+        VStack {
+            
+            Spacer()
+            
+            Text(bigModel.newEmail)
+            Text(bigModel.newPassword)
+            
+            Spacer()
+            
+            Text("Modify email or password")
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    bigModel.currentview = .Auth_SignUpView
+                }
+            
+            Spacer()
+                .frame(height: 30)
+            
+            Text("Log in")
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    bigModel.currentview = .Home_homeFeed
+                    guard !bigModel.newEmail.isEmpty, !bigModel.newPassword.isEmpty else {
+                        return
+                    }
+                    
+                    bigModel.newUserSignIn(email: bigModel.newEmail, password: bigModel.newPassword)
+                }
+            
+            Spacer()
+            
+            Text(Auth.auth().currentUser?.uid ?? "nil")
+            
+            Spacer()
+                .frame(height: 50)
+            
+        }
+        
     }
-}
-
-struct LogInNewUser_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInNewUser()
-    }
+    
 }

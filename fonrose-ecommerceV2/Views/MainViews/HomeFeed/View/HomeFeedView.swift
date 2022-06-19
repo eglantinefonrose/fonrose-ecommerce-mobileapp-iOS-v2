@@ -159,6 +159,8 @@ struct HomeFeedView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .onTapGesture {
+                                bigModel.lastViews.append(.Home_homeFeed)
+                                self.bigModel.currentview = .Auth_SignInView
                                 withAnimation {
                                     bigModel.showMenu.toggle()
                                     if bigModel.showMenu {

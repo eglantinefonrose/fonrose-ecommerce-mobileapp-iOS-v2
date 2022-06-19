@@ -7,15 +7,33 @@
 //
 
 import SwiftUI
+import MapKit
 
-struct UserModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+struct User: Identifiable {
+    var id: Int
+    var userID: String
+    var email: String
+    var persons: [Person] = []
 }
 
-struct UserModel_Previews: PreviewProvider {
-    static var previews: some View {
-        UserModel()
-    }
+struct Location {
+    var adress: String
+}
+
+struct Measurements {
+    var ArmpitsMeasurement: String
+    var ArmsLength: String
+    var HeadMeasurement: String
+    var PelvisMeasurement: String
+    var PelvisKnee: String
+    var ShouldersMeasurement: String
+    var ShouldersPelvis: String
+}
+
+struct Person: Identifiable {
+    var id: Int
+    var email: String
+    var name: String
+    var measurements: Measurements?
+    var location: Location?
 }

@@ -25,5 +25,8 @@ enum ViewEnum {
     case ServiceClient_showCard
     case ServiceClient_showServices
     case ServiceClient_ServiceClientInfos
+    case Auth_SignInView
+    case Auth_SignUpView
+    case Auth_LogInNewUserView
     
 }

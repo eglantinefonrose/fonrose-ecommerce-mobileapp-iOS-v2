@@ -11,7 +11,6 @@ import SwiftUI
 @available(iOS 14.0, *)
 struct HomeFeedView: View {
    
-    @State var showMenu: Bool = false
     @State var offset: CGFloat = -UIScreen.main.bounds.width/4
     @EnvironmentObject var bigModel: BigModel
     var model: MeasurementInfos
@@ -19,7 +18,6 @@ struct HomeFeedView: View {
     @available(iOS 14.0, *)
     var body: some View {
         
-        if #available(iOS 14.0, *) {
             ScrollViewReader { proxy in
                 ZStack {
                     HStack(spacing: 0) {
@@ -42,7 +40,7 @@ struct HomeFeedView: View {
                                             .font(.headline)
                                             .onTapGesture {
                                                 proxy.scrollTo(0)
-                                                self.showMenu = false
+                                                self.bigModel.showMenu = false
                                             }
                                         
                                         Text("The dress")
@@ -50,7 +48,7 @@ struct HomeFeedView: View {
                                             .font(.headline)
                                             .onTapGesture {
                                                 proxy.scrollTo(1)
-                                                self.showMenu = false
+                                                self.bigModel.showMenu = false
                                             }
                                         
                                         Text("About us")
@@ -58,7 +56,7 @@ struct HomeFeedView: View {
                                             .font(.headline)
                                             .onTapGesture {
                                                 proxy.scrollTo(2)
-                                                self.showMenu = false
+                                                self.bigModel.showMenu = false
                                             }
                                     }
                                     
@@ -67,17 +65,24 @@ struct HomeFeedView: View {
                                         .font(.headline)
                                         .onTapGesture {
                                             proxy.scrollTo(3)
-                                            self.showMenu = false
+                                            self.bigModel.showMenu = false
                                         }
                                     
                                     Text("Measurement")
                                         .foregroundColor(.white)
                                         .font(.headline)
+                                        .onTapGesture {
+                                            bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                            bigModel.lastViews.append(.Home_homeFeed)
+                                        }
                                     
                                     Text("Location")
                                         .foregroundColor(.white)
                                         .font(.headline)
-                                        
+                                        .onTapGesture {
+                                            bigModel.currentview = ViewEnum.FinalizeOrderViews_Livraison
+                                            bigModel.lastViews.append(.Home_homeFeed)
+                                        }
                                     
                                     Spacer()
                                     
@@ -90,8 +95,10 @@ struct HomeFeedView: View {
                             
                             List {
                                 ForEach(dressPictures) { picture in
-                                    PostView(picture: picture)
+                                    PostStack(picture: picture)
                                         .id(picture.id)
+                                        .onTapGesture {
+                                        }
                                 } .buttonStyle(PlainButtonStyle())
                                 .frame(width: UIScreen.main.bounds.width)
                                 .edgesIgnoringSafeArea(.all)
@@ -113,8 +120,8 @@ struct HomeFeedView: View {
                                         .font(.system(size: 20))
                                         .onTapGesture {
                                             withAnimation {
-                                                showMenu.toggle()
-                                                if showMenu {
+                                                bigModel.showMenu.toggle()
+                                                if bigModel.showMenu {
                                                     print("menu")
                                                 } else {
                                                     print("no menu")
@@ -132,13 +139,13 @@ struct HomeFeedView: View {
                     }.frame(width: UIScreen.main.bounds.width/2 + UIScreen.main.bounds.width)
                     .animation(.easeOut, value: offset == -UIScreen.main.bounds.width/4)
                     .offset(x: offset)
-                    .onChange(of: showMenu, perform: { value in
+                    .onChange(of: bigModel.showMenu, perform: { value in
                         //le menu n'est pas affiché
-                        if showMenu == false {
+                        if bigModel.showMenu == false {
                             offset = -UIScreen.main.bounds.width/4
                         }
                         //le menu est affiché
-                        if showMenu {
+                        if bigModel.showMenu {
                             offset = UIScreen.main.bounds.width/4
                         }
                 })
@@ -153,8 +160,8 @@ struct HomeFeedView: View {
                             .font(.system(size: 20))
                             .onTapGesture {
                                 withAnimation {
-                                    showMenu.toggle()
-                                    if showMenu {
+                                    bigModel.showMenu.toggle()
+                                    if bigModel.showMenu {
                                         print("menu")
                                     } else {
                                         print("no menu")
@@ -170,9 +177,6 @@ struct HomeFeedView: View {
                 }
                     
             }
-        }
-        } else {
-            // Fallback on earlier versions
         }
         
     }

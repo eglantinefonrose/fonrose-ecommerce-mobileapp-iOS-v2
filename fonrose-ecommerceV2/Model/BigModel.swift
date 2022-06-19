@@ -15,6 +15,14 @@ class BigModel : ObservableObject {
     
     //@Published var commingFromMeasurement: Bool = false
     @Published var currentview = ViewEnum.Home_homeFeed
+    @Published var lastViews: [ViewEnum]
+    init(lastViews: [ViewEnum] = []) {
+        self.lastViews = lastViews
+    }
+    @Published var previousView: ViewEnum? = nil
+    
+    //MARK: HomeFeed
+    @Published var showMenu: Bool = false
     
     //MARK: Measurement
     @Published var armpitsMeasurement: String! = ""

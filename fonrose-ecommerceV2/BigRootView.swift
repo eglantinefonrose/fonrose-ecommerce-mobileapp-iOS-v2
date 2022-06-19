@@ -87,6 +87,10 @@ struct BigRootView: View {
                     LocationHome()
                 }
                 
+                if (self.bigModel.currentview == .FinalizeOrderViews_FinDeCommande) {
+                    FinDeCommande()
+                }
+                
             }
             
         }

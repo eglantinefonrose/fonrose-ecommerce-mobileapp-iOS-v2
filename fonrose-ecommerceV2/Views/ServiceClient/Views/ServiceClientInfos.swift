@@ -27,12 +27,12 @@ struct ServiceClientInfos: View {
                 Spacer()
                     .frame(width: 30)
                 
-                Button(action: {
-                    self.bigModel.currentview = .Home_homeFeed
-                }) {
-                    Text("Back")
-                        .foregroundColor(.blue)
-                }
+                Text("Back")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                        print("back")
+                    }
                 
                 Spacer()
                 
@@ -63,6 +63,7 @@ struct ServiceClientInfos: View {
                             
                             Button(action: {
                                 self.bigModel.currentview = .ServiceClient_showDelivery
+                                self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
                                 }) {
                                     HStack {
                                         Text("Livraison")
@@ -90,6 +91,7 @@ struct ServiceClientInfos: View {
                             
                     Button(action: {
                         self.bigModel.currentview = .ServiceClient_showSuiviDeCommande
+                        self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
                         }) {
                             HStack {
                                 Text("Suivi en temps réel")
@@ -122,6 +124,7 @@ struct ServiceClientInfos: View {
                                     
                         Button(action: {
                             self.bigModel.currentview = .ServiceClient_showReturn
+                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
                             }) {
                                 
                             HStack {
@@ -158,6 +161,7 @@ struct ServiceClientInfos: View {
                     
                     Button(action: {
                         self.bigModel.currentview = .ServiceClient_showCard
+                        self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
                         }) {
                             
                             HStack {
@@ -194,6 +198,7 @@ struct ServiceClientInfos: View {
                         
                             Button(action: {
                                 self.bigModel.currentview = .ServiceClient_showServices
+                                self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
                                 }) {
                                     HStack {
                                         Text("Service client")
@@ -241,7 +246,8 @@ struct ShowDeliveryView: View {
             
             ZStack {
                Button(action: {
-                    self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                    bigModel.lastViews.removeLast()
                 }) {
                     Text("Back")
                 }
@@ -283,7 +289,8 @@ struct showReturnView: View {
             
             ZStack {
                 Button(action: {
-                    self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                    bigModel.lastViews.removeLast()
                 }) {
                         Text("Back")
                     }
@@ -333,7 +340,8 @@ struct showCardView: View {
             
             ZStack {
                 Button(action: {
-                    self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                    bigModel.lastViews.removeLast()
                 }) {
                         Text("Back")
                     }
@@ -406,7 +414,8 @@ struct ShowServicesView: View {
             
             ZStack {
                 Button(action: {
-                    self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                    bigModel.lastViews.removeLast()
                 }) {
                         Text("Back")
                     }

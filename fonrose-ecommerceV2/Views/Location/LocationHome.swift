@@ -31,6 +31,36 @@ struct LocationHome: View {
                 
                 VStack {
                     VStack {
+                        
+                        HStack {
+                            Spacer()
+                                .frame(width: 20)
+                            
+                            Text("Back")
+                                .foregroundColor(Color.blue)
+                                .fontWeight(.semibold)
+                                .onTapGesture {
+                                    if !self.bigModel.lastViews.isEmpty {
+                                        print("back")
+                                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                        self.bigModel.lastViews.removeLast()
+                                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                    } else { print("array empty") }
+                                }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "house")
+                                .foregroundColor(Color.blue)
+                                .onTapGesture {
+                                    self.bigModel.currentview = .Home_homeFeed
+                                }
+                            
+                            Spacer()
+                                .frame(width: 20)
+                            
+                        }
+                        
                         HStack {
                             
                             Image(systemName: "magnifyingglass")
@@ -147,6 +177,8 @@ struct LocationHome: View {
                         }
                         .onTapGesture {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
+                            self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
+                            print("back")
                         }
                         
                         Spacer()
@@ -194,5 +226,6 @@ struct LocationHome_Previews: PreviewProvider {
     @available(iOS 14.0, *)
     static var previews: some View {
         LocationHome()
+            .environmentObject(BigModel())
     }
 }

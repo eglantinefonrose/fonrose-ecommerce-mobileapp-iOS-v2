@@ -28,135 +28,140 @@ struct PagingView<Content>: View where Content: View {
     
     var body: some View {
                     
+        ZStack {
             VStack {
-                
-                ZStack {
                     
-                    ZStack(alignment: .bottomTrailing) {
-                        GeometryReader { geometry in
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 0) {
-                                    self.content()
-                                        .frame(width: geometry.size.width, height: geometry.size.height)
-                                        .clipped()
-                                }
-                            }
-                            .content.offset(x: self.offset(in: geometry), y: 0)
-                            .frame(width: geometry.size.width, alignment: .leading)
-                            .gesture(
-                                DragGesture().onChanged { value in
-                                    self.dragging = true
-                                    self.offset = -CGFloat(self.index) * geometry.size.width + value.translation.width
-                                }
-                                .onEnded { value in
-                                    let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
-                                    let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
-                                    self.index = self.clampedIndex(from: predictedIndex)
-                                    withAnimation(.easeOut) {
-                                        self.dragging = false
+                    ZStack {
+                        
+                        ZStack(alignment: .bottomTrailing) {
+                            GeometryReader { geometry in
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 0) {
+                                        self.content()
+                                            .frame(width: geometry.size.width, height: geometry.size.height)
+                                            .clipped()
                                     }
                                 }
-                            )
-                        }
-                        .clipped()
+                                .content.offset(x: self.offset(in: geometry), y: 0)
+                                .frame(width: geometry.size.width, alignment: .leading)
+                                .gesture(
+                                    DragGesture().onChanged { value in
+                                        self.dragging = true
+                                        self.offset = -CGFloat(self.index) * geometry.size.width + value.translation.width
+                                    }
+                                    .onEnded { value in
+                                        let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
+                                        let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
+                                        self.index = self.clampedIndex(from: predictedIndex)
+                                        withAnimation(.easeOut) {
+                                            self.dragging = false
+                                        }
+                                    }
+                                )
+                            }
+                            .clipped()
 
-                        PageControl(index: $index, maxIndex: maxIndex)
-                        
-                    }.frame(height: UIScreen.main.bounds.height-150)
-                    
-                    VStack {
-                    Text("La robe")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
-                        .frame(width: 200)
-                        
-                    Spacer()
-                        .frame(height: 30)
-                    
-                    Text("85€")
-                        .foregroundColor(Color.gray)
-                        .font(.system(size: 25, weight: .semibold, design: .default))
-                        
-                    }
-                    
-                    HStack {
-                        
-                        Spacer()
-                        .frame(width: 30)
+                            PageControl(index: $index, maxIndex: maxIndex)
+                            
+                        }.frame(height: UIScreen.main.bounds.height-150)
                         
                         VStack {
+                        Text("La robe")
+                            .font(.system(size: 35, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .frame(width: 200)
                             
-                            Spacer()
-                                .frame(height: 45)
+                        Spacer()
+                            .frame(height: 30)
+                        
+                        Text("85€")
+                            .foregroundColor(Color.gray)
+                            .font(.system(size: 25, weight: .semibold, design: .default))
                             
-                            Button(action: {
-                                self.bigModel.currentview = .Measurement_Mensurations
-                            }) {
-                                Text("< Back")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 17, weight: .bold, design: .default))
+                        }
+                        
+                    }
+                                    
+                    VStack {
+                        
+                        Spacer()
+                        
+                        HStack {
+                            
+                            HStack {
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    self.bigModel.currentview = .Measurement_Mensurations
+                                    self.bigModel.lastViews.append(.MeasurementCarouselView)
+                                }) {
+                                    Text("Acheter")
+                                        .foregroundColor(.blue)
+                                        .font(.system(size: 17, weight: .bold, design: .default))
+                                }
+                                
+                                Spacer()
+                                
                             }
-                            
-                            Spacer()
                             
                         }
                         
                         Spacer()
-                        
-                    }
-                    
-                }
-                                
-                VStack {
-                    
-                    Spacer()
-                    
-                    HStack {
+                            .frame(height: 20)
                         
                         HStack {
                             
                             Spacer()
                             
                             Button(action: {
-                                self.bigModel.currentview = .Measurement_Mensurations
+                                self.bigModel.currentview = .AboutUsScreen
+                                self.bigModel.lastViews.append(.MeasurementCarouselView)
                             }) {
-                                Text("Acheter")
+                                Text("About us")
                                     .foregroundColor(.blue)
-                                    .font(.system(size: 17, weight: .bold, design: .default))
+                                    .font(.system(size: 17, weight: .regular, design: .default))
                             }
                             
                             Spacer()
                             
                         }
-                        
-                    }
                     
                     Spacer()
-                        .frame(height: 20)
                     
-                    HStack {
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            self.bigModel.currentview = .AboutUsScreen
-                        }) {
-                            Text("About us")
-                                .foregroundColor(.blue)
-                                .font(.system(size: 17, weight: .regular, design: .default))
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                
-                Spacer()
-                
-            }
-            //.padding(.vertical, -16)
-                            
-            }.background(Color.black)
+                }
+                //.padding(.vertical, -16)
+                                
+                }.background(Color.black)
             .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                Spacer()
+                    .frame(height: 10)
+                HStack {
+                    Spacer()
+                        .frame(width: 20)
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                        }
+                    Spacer()
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = .Home_homeFeed
+                        }
+                    
+                    Spacer()
+                        .frame(width: 20)
+                }
+                .frame(width: UIScreen.main.bounds.width)
+                Spacer()
+            }
+            
+        }
         
     }//acolade fermante body
 

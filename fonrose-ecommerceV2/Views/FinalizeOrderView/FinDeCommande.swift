@@ -13,6 +13,7 @@ struct FinDeCommande : View {
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var seconds: Int = 0
+    @EnvironmentObject var bigModel: BigModel
     
     var body : some View {
         
@@ -55,13 +56,27 @@ struct FinDeCommande : View {
                         }
                               
                     }
+                    
+                    VStack {
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                self.bigModel.currentview = .Home_homeFeed
+                                self.bigModel.lastViews.removeAll()
+                            }
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                    }
                 
                     }
                 Spacer()
                 
             }
-            
-            Spacer()
             
         }.background(Color.black)
             .edgesIgnoringSafeArea(.all)

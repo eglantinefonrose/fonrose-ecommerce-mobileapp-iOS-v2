@@ -16,34 +16,54 @@ struct TrailerPlayer: View {
     
     var body: some View {
 
-        VStack {
+        ZStack {
             
-            ZStack {
-                player()
+            player()
+        
+            VStack {
                 
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 30)
-                    VStack {
+                Spacer()
+                    .frame(height: 40)
+                
+                if #available(iOS 14.0, *) {
+                    HStack {
                         
                         Spacer()
-                            .frame(height: 30)
-                        Button(action: {
-                            self.bigModel.currentview = .Home_homeFeed
-                        }) {
-                            Text("< Back")
-                                .foregroundColor(Color.blue)
-                                .fontWeight(.semibold)
-                        }
+                            .frame(width: 20)
+                        
+                        Text("Back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                        
                         Spacer()
                         
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                self.bigModel.currentview = .Home_homeFeed
+                                self.bigModel.lastViews.removeAll()
+                            }
+                        
+                        Spacer()
+                            .frame(width: 20)
+                        
+                    }.onTapGesture {
+                        if !self.bigModel.lastViews.isEmpty {
+                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                            self.bigModel.lastViews.removeLast()
+                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                        } else { print("array empty") }
                     }
-                    Spacer()
-                    
-                }//.frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .topLeading)
+                } else {
+                    // Fallback on earlier versions
+                }
+                
+                Spacer()
+                
             }
+            
         }.edgesIgnoringSafeArea(.all)
+        .background(Color.black)
 
     }
     

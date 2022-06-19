@@ -32,7 +32,8 @@ struct SuiviDeCommande: View {
                             .frame(width: 30)
                         
                         Button(action: {
-                            self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                            self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                            bigModel.lastViews.removeLast()
                         }) {
                             Text("Back")
                                 .foregroundColor(.blue)
@@ -123,7 +124,8 @@ struct SuiviDeCommande: View {
                                 .frame(width: 30)
                             
                             Button(action: {
-                                self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                                self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                                bigModel.lastViews.removeLast()
                             }) {
                                 Text("Back")
                                     .foregroundColor(.blue)
@@ -213,7 +215,8 @@ struct SuiviDeCommande: View {
                                 
                                 ZStack {
                                    Button(action: {
-                                        self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                                        self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                                        bigModel.lastViews.removeLast()
                                     }) {
                                         Text("Back")
                                     }
@@ -295,7 +298,8 @@ struct SuiviDeCommande: View {
                             
                             ZStack {
                                Button(action: {
-                                    self.bigModel.currentview = .ServiceClient_ServiceClientInfos
+                                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
+                                    bigModel.lastViews.removeLast()
                                 }) {
                                     Text("Back")
                                 }

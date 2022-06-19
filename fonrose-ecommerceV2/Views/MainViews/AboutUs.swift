@@ -15,7 +15,10 @@ struct AboutUs: View {
     
     var body: some View {
         
-        Text("")
+        Text("Back")
+            .onTapGesture {
+                print("back")
+            }
         
         
         /*ZStack {

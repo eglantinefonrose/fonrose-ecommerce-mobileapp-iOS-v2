@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>552378032566-9ncba45r5vmqdtb1nuff1iv9k7k6sh32.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.552378032566-9ncba45r5vmqdtb1nuff1iv9k7k6sh32</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCjuY7-_dX5DdunjSg1u81MzVyyeN-zenw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>552378032566</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.fonrose.eglantine.sandbox.swiftui.firstappeg.fonrose-ecommerceV2</string>
+	<key>PROJECT_ID</key>
+	<string>fonrose-ecommerce-v2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fonrose-ecommerce-v2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:552378032566:ios:ab8aa5d7d2828b1349e117</string>
+</dict>
+</plist>

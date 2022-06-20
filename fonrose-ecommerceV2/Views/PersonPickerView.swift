@@ -20,6 +20,8 @@ struct PersonPickerView: View {
     
     var body: some View {
         
+        Spacer()
+        
         VStack {
             
             Spacer()
@@ -84,7 +86,9 @@ struct PersonPickerView: View {
                             
                         }
                 }
-            }
+            }.onAppear(perform: {
+                UITableView.appearance().contentInset.top = 0
+            })
             
             Spacer()
             

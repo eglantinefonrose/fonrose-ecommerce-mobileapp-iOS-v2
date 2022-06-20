@@ -19,7 +19,6 @@ extension View {
 struct MeasurementValue: View {
     
     @State var textFieldColor: Bool = true
-    var buttonCurrentSize: CGFloat
     @Binding var MeasurementName: String
     @State var showingSecondView: Bool = false
     var MeasurementVideoName: String!

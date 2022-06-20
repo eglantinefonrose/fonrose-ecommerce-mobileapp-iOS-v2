@@ -14,7 +14,7 @@ struct CarouselViewTesf: View {
     @available(iOS 14.0, *)
     var body: some View {
         
-        Home(model: Measurement[0])
+        Home()
         
     }
 }
@@ -29,7 +29,6 @@ struct Home : View {
     @State var count : CGFloat = 0
     @State var screen = UIScreen.main.bounds.width - 30
     @State var op : CGFloat = 0
-    var model: MeasurementInfos
     
     @State var data = [
 
@@ -127,16 +126,21 @@ struct Home : View {
                 
                 VStack {
                     
-                    NavigationLink(destination: Mensurations(armpitsNewValue: model.ArmpitsMeasurement)) {
-                        Text("Acheter")
-                    }
+                    
+                    Text("Acheter")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            
+                        }
                     
                     Spacer()
                         .frame(height: 30)
                     
-                    NavigationLink(destination: About_us()) {
-                        Text("About us")
-                    }
+                    Text("About us")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            
+                        }
                     
                 }
                 

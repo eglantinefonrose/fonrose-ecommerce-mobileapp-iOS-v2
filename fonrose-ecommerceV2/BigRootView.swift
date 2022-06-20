@@ -24,7 +24,7 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .Home_homeFeed) {
-                    HomeFeedView(model: Measurement[0])
+                    HomeFeedView()
                 }
                 
                 if (self.bigModel.currentview == .MeasurementCarouselView) {
@@ -32,7 +32,7 @@ struct BigRootView: View {
                 }
                 
                 if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    Mensurations(armpitsNewValue: bigModel.armpitsMeasurement)
+                    MeasurementView()
                     
                 }
                 

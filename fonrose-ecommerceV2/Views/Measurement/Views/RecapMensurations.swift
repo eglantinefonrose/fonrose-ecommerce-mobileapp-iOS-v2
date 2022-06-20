@@ -35,19 +35,19 @@ struct RecapMensurations: View {
                     
                     VStack {
                                             
-                        RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: bigModel.armpitsMeasurement)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil")
                             
-                        RecapMensurationsTextStruct(recapMeasurementText: "Arms Length", recapMeasurementText2: bigModel.armsLength)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Arms Length", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil")
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Head Measurement", recapMeasurementText2: bigModel.headMeasurement)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Head Measurement", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil")
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis knee", recapMeasurementText2: bigModel.pelvisKnee)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis knee", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil")
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis Measurement", recapMeasurementText2: bigModel.pelvisMeasurement)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis Measurement", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil")
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders measurement", recapMeasurementText2: bigModel.shouldersMeasurement)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Measurement", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil")
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Pelvis", recapMeasurementText2: bigModel.shouldersPelvis)
+                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Pelvis", recapMeasurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
                             
                         }
                     

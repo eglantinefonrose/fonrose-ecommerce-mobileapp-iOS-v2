@@ -109,6 +109,7 @@ class BigModel : ObservableObject {
             DispatchQueue.main.async {
                 self!.signedIn = true
             }
+
             
         }
         
@@ -150,6 +151,59 @@ class BigModel : ObservableObject {
         try? auth.signOut()
         self.signedIn = false
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
+    }
+    
+    func getCurrentPersonMeasurement() {
+        
+        if self.currentPersonIndex+1 < 10 {
+            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                        
+                        self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                        
+                    }
+                }
+                self.currentview = ViewEnum.Measurement_Mensurations
+            }
+        }
+        
+        else {
+            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                        
+                        self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                        
+                    }
+                }
+            }
+        }
+        
     }
     
 }

@@ -7,13 +7,13 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 @available(iOS 14.0, *)
 struct HomeFeedView: View {
    
     @State var offset: CGFloat = -UIScreen.main.bounds.width/4
     @EnvironmentObject var bigModel: BigModel
-    var model: MeasurementInfos
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -72,7 +72,11 @@ struct HomeFeedView: View {
                                         .foregroundColor(.white)
                                         .font(.headline)
                                         .onTapGesture {
-                                            bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                            if !bigModel.signedIn {
+                                                bigModel.currentview = ViewEnum.Auth_SignInView
+                                            } else {
+                                                bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                            }
                                             bigModel.lastViews.append(.Home_homeFeed)
                                         }
                                     
@@ -190,8 +194,8 @@ struct HomeFeedView: View {
 struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            HomeFeedView(model: Measurement[0])
-                .environmentObject(UserData())
+            HomeFeedView()
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

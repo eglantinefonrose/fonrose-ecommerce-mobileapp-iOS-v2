@@ -33,56 +33,9 @@ struct PersonPickerView: View {
                             bigModel.currentPersonIndex = index
                             print(bigModel.currentPersonIndex)
                             
-                            if index+1 < 10 {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(index+1)").collection("Mensurations").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    if let snapshot = snapshot {
-                                        for document in snapshot.documents {
-                                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                            
-                                            bigModel.persons[index].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                            
-                                        }
-                                    }
-                                    bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                }
-                            }
+                            bigModel.getCurrentPersonMeasurement()
                             
-                            else {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(index+1)").collection("Mensurations").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    if let snapshot = snapshot {
-                                        for document in snapshot.documents {
-                                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                            
-                                            bigModel.persons[index].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                            
-                                        }
-                                    }
-                                    
-                                    bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                }
-                            }
+                            bigModel.currentview = ViewEnum.Measurement_Mensurations
                             
                         }
                 }

@@ -28,5 +28,6 @@ enum ViewEnum {
     case Auth_SignInView
     case Auth_SignUpView
     case Auth_LogInNewUserView
+    case Auth_PersonPickerView
     
 }

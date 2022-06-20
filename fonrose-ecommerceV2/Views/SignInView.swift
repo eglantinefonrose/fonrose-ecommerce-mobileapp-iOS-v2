@@ -44,7 +44,7 @@ struct SignInView: View {
                                 Spacer()
                                 Text("sign out")
                                     .onTapGesture {
-                                        //bigModel.signOut()
+                                        bigModel.signOut()
                                     }
                                 Spacer()
                             }

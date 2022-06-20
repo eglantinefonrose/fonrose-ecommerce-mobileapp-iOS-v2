@@ -36,7 +36,7 @@ struct LogInNewUser: View {
             Text("Log in")
                 .foregroundColor(.blue)
                 .onTapGesture {
-                    bigModel.currentview = .Home_homeFeed
+                    bigModel.currentview = .Auth_PersonPickerView
                     guard !bigModel.newEmail.isEmpty, !bigModel.newPassword.isEmpty else {
                         return
                     }

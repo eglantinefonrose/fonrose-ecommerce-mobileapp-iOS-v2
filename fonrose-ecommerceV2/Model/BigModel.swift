@@ -69,7 +69,7 @@ class BigModel : ObservableObject {
             print(self.auth.currentUser?.email ?? "nil")
             
             DispatchQueue.main.async {
-                self.currentview = .Home_homeFeed
+                self.currentview = .Auth_PersonPickerView
             }
             
             self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
@@ -109,9 +109,6 @@ class BigModel : ObservableObject {
             DispatchQueue.main.async {
                 self!.signedIn = true
             }
-            
-            Firestore.firestore().collection("user\(Auth.auth().currentUser?.uid ?? "")").document("person01").setData(["email": "", "name": ""])
-            Firestore.firestore().collection("user\(Auth.auth().currentUser?.uid ?? "")").document("person01").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "")-person01-Mensurations").setData(["measurementValue1": ":)1", "measurementValue2": ":)2", "measurementValue3": ":)3", "measurementValue4": ":)4", "measurementValue5": ":)5", "measurementValue6": ":)6", "measurementValue7": ":)7"])
             
         }
         

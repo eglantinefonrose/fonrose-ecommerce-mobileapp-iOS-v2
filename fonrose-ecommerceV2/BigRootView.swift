@@ -109,6 +109,10 @@ struct BigRootView: View {
                     LogInNewUser()
                 }
                 
+                if (self.bigModel.currentview == .Auth_PersonPickerView) {
+                    PersonPickerView()
+                }
+                
             }
             
         }

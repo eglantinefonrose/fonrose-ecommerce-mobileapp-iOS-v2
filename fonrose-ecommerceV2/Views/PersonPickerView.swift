@@ -32,10 +32,71 @@ struct PersonPickerView: View {
                         .onTapGesture {
                             bigModel.currentPersonIndex = index
                             print(bigModel.currentPersonIndex)
-                            
-                            bigModel.getCurrentPersonMeasurement()
-                            
-                            bigModel.currentview = ViewEnum.Measurement_Mensurations
+                        
+                            if bigModel.signedIn {
+                                
+                                print("signed in")
+                                
+                                if bigModel.currentPersonIndex+1 < 10 {
+                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                                        guard error == nil else {
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        if let snapshot = snapshot {
+                                            for document in snapshot.documents {
+                                                let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                                                let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                                                let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                                                let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                                                let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                                                let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                                                let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                                                
+                                                bigModel.persons[bigModel.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                                
+                                            }
+                                        }
+                                        
+                                        bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                        
+                                    }
+                                    
+                                }
+                                
+                                else {
+                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                                        guard error == nil else {
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        if let snapshot = snapshot {
+                                            for document in snapshot.documents {
+                                                let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                                                let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                                                let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                                                let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                                                let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                                                let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                                                let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                                                
+                                                bigModel.persons[bigModel.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                                
+                                            }
+                                        }
+                                        
+                                        bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                        
+                                    }
+                                }
+                                
+                            } else {
+                                print("not signed in")
+                            }
+                        
+                            print(index)
                             
                         }
                 }
@@ -98,7 +159,7 @@ struct PersonPickerView: View {
                     .foregroundColor(.blue)
                     .onTapGesture {
                         
-                        //Firestore.firestore().collection("user\(Auth.auth().currentUser?.uid ?? "")").document("person01").setData(["email": "", "name": ""])
+                        //Firestore.firestore().collection("user\(Auth.auth().currentUser?.uid ?? "")").document("person01").t  ata(["email": "", "name": ""])
                         //Firestore.firestore().collection("user\(Auth.auth().currentUser?.uid ?? "")").document("person01").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "")-person01-Mensurations").setData(["ArmpitsMeasurement": ":)1", "ArmsLength": ":)2", "HeadMeasurement": ":)3", "PelvisMeasurement": ":)4", "PelvisKnee": ":)5", "ShouldersMeasurement": ":)6", "ShouldersPelvis": ":)7"])
                         
                     if bigModel.persons.count < 9 {

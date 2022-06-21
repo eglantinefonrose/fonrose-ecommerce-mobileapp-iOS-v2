@@ -67,6 +67,7 @@ class BigModel : ObservableObject {
             //Success
             print("groovy baby!")
             print(self.auth.currentUser?.email ?? "nil")
+            self.signedIn = true
             
             DispatchQueue.main.async {
                 self.currentview = .Auth_PersonPickerView
@@ -155,53 +156,56 @@ class BigModel : ObservableObject {
     
     func getCurrentPersonMeasurement() {
         
-        if self.currentPersonIndex+1 < 10 {
-            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot {
-                    for document in snapshot.documents {
-                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                        
-                        self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                        
+        if signedIn {
+            
+            if self.currentPersonIndex+1 < 10 {
+                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
                     }
-                }
-                self.currentview = ViewEnum.Measurement_Mensurations
-            }
-        }
-        
-        else {
-            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                
-                if let snapshot = snapshot {
-                    for document in snapshot.documents {
-                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                        
-                        self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                        
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                            
+                            self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                            
+                        }
                     }
                 }
             }
+            
+            else {
+                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(self.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                            
+                            self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                            
+                        }
+                    }
+                }
+            }
+            
         }
         
     }

@@ -164,7 +164,8 @@ struct HomeFeedView: View {
                             .font(.system(size: 20))
                             .onTapGesture {
                                 bigModel.lastViews.append(.Home_homeFeed)
-                                self.bigModel.currentview = .Auth_SignInView
+                                self.bigModel.currentview = bigModel.signedIn ? .Auth_UserInfo : .Auth_SignInView
+                                //.standard ? "network" : "map"
                                 withAnimation {
                                     bigModel.showMenu.toggle()
                                     if bigModel.showMenu {
@@ -173,6 +174,7 @@ struct HomeFeedView: View {
                                         print("no menu")
                                     }
                                 }
+                                
                             }
                         
                         Spacer()

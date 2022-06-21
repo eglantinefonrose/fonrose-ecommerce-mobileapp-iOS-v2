@@ -130,6 +130,7 @@ class BigModel : ObservableObject {
             DispatchQueue.main.async {
                 self.signedIn = true
             }
+            self.currentview = .Auth_LogInNewUserView
         }
     
     }

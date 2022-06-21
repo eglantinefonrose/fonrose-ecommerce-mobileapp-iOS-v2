@@ -19,59 +19,272 @@ struct SignInView: View {
     @available(iOS 14.0, *)
     var body: some View {
         
-        NavigationView {
+        ZStack {
             
+            VStack {
+                    
+                Spacer()
+                
                 VStack {
+                    
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         TextField("Email", text: $email)
+                             .background(Color.white)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                     }
+                     
+                     Spacer()
+
+                    }.background(Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    
+                    Spacer()
+                        .frame(height: 30)
+                    
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         SecureField("Password", text: $password)
+                             .background(Color.white)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                     }
+                     
+                     Spacer()
+
+                    }.background(Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    
+                }
                     
                     Spacer()
                     
-                        TextField("Email", text: $email)
-                            .background(Color(.secondarySystemBackground))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
+                    VStack {
                         
-                        SecureField("Password", text: $password)
-                            .background(Color(.secondarySystemBackground))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                        
-                        Spacer()
-                        
-                        if bigModel.signedIn {
-                            VStack {
-                                Spacer()
-                                Text(Auth.auth().currentUser?.uid ?? "nil")
-                                Spacer()
-                                Text("sign out")
-                                    .onTapGesture {
-                                        bigModel.signOut()
-                                    }
-                                Spacer()
-                            }
-                        }
-                    
-                        Spacer()
-                    
-                        Text("Sign in")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
+                            Button(action: {
+                                
                                 print("sign in")
+                                print()
                                 guard !email.isEmpty, !password.isEmpty else {
                                     return
                                 }
                                 bigModel.signIn(email: email, password: password)
-                            }
+                                self.bigModel.lastViews.append(.Auth_SignInView)
+                                
+                            }) {
+                            //Spacer()
+                                
+                            HStack {
+                                    
+                                Spacer()
+                                    
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    if !email.isEmpty, !password.isEmpty {
+                                        Text("Sign in")
+                                            .foregroundColor(Color.white)
+                                            .fontWeight(.semibold)
+                                    } else {
+                                        Text("Sign in")
+                                            .foregroundColor(Color.black)
+                                            .fontWeight(.semibold)
+                                    }
+        
+                                    Spacer()
+                                
+                                }
+                                .frame(width: 150)
+                                .cornerRadius(5)
+                                
+                                Spacer()
+                                
+                            }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
+                            .background(Color.blue)
+                            .cornerRadius(15)
+                            
+                        //Spacer()
+                        }
+                        
+                        Spacer()
+                            .frame(height: 10)
+                        
+                    }
+                
+                    VStack {
+                    
+                        Button(action: {
+                            
+                            self.bigModel.currentview = .Auth_SignUpView
+                            self.bigModel.lastViews.append(.Auth_SignInView)
+                            
+                        }) {
+                        //Spacer()
+                            
+                        HStack {
+                                
+                            Spacer()
+                                
+                            HStack {
+                                
+                                Spacer()
+                                Text("Sign up")
+                                    .foregroundColor(Color.black)
+                                    .fontWeight(.medium)
+                                Spacer()
+                            
+                            }.background(Color(UIColor.lightGray))
+                            .frame(width: 150)
+                            .cornerRadius(5)
+                            
+                            Spacer()
+                            
+                        }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
+                        .background(Color(UIColor.lightGray))
+                        .cornerRadius(15)
+                        
+                    //Spacer()
+                    }
+                    
+                    Spacer()
+                        .frame(height: 25)
+                    
+                }
+                            
+            }.background(Color.black)
+            .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+                Spacer()
+                    .frame(height: 20)
+                
+                HStack {
+                    
+                    Spacer()
+                        .frame(width: 20)
+                    
+                    
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
                     
                     Spacer()
                     
-                    Text("Sign up")
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
                         .onTapGesture {
-                            bigModel.currentview = ViewEnum.Auth_SignUpView
+                            self.bigModel.currentview = .Home_homeFeed
                         }
                     
+                    Spacer()
+                        .frame(width: 20)
+                    
+                }.frame(width: UIScreen.main.bounds.width)
+                
+                
+                Spacer()
+                    .frame(height: UIScreen.main.bounds.height/10)
+                
+                if !email.isEmpty, !password.isEmpty {
+                    Text("Sign In")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                        .frame(width: UIScreen.main.bounds.width)
+                } else {
+                    Text("Sign In")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                        .frame(width: UIScreen.main.bounds.width)
                 }
+                
+                Spacer()
+                
+            }
             
         }
+        
+    }
+}
+
+struct TextFieldModel: View {
+    
+    @State var text: String = ""
+    
+    var body: some View {
+
+        VStack {
+         
+         Spacer()
+         
+         HStack {
+                                             
+             Spacer()
+            
+             TextField("Email", text: $text)
+                 .background(Color.white)
+                 .disableAutocorrection(true)
+                 .autocapitalization(.none)
+         }
+         
+         Spacer()
+
+        }.background(Color.white)
+        .cornerRadius(7)
+        .frame(height: 30)
+        
+    }
+}
+
+struct SecureFieldModel: View {
+    
+    @State var text: String = ""
+    
+    var body: some View {
+
+        VStack {
+         
+         Spacer()
+         
+         HStack {
+                                             
+             Spacer()
+            
+             SecureField("Password", text: $text)
+                 .background(Color.white)
+                 .disableAutocorrection(true)
+                 .autocapitalization(.none)
+         }
+         
+         Spacer()
+
+        }.background(Color.white)
+        .cornerRadius(7)
+        .frame(height: 30)
         
     }
 }

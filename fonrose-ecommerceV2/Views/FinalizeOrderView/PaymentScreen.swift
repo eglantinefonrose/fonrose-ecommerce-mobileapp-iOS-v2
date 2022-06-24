@@ -115,7 +115,7 @@ struct PaymentScreen: View {
                 
                 //bouton "Valider"
                 
-                VStack {
+                /*VStack {
                     Button(action: {
                         
                     if self.bigModel.armpitsMeasurement == nil {
@@ -172,7 +172,7 @@ struct PaymentScreen: View {
                         
                     }
                     
-                }
+                }*/
                 
                 Spacer()
                     .frame(height: 30)

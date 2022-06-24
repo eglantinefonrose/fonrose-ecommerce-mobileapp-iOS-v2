@@ -15,13 +15,86 @@ struct UserInfo: View {
     @EnvironmentObject var bigModel: BigModel
     
     var body: some View {
-        VStack {
-            Text(auth.currentUser?.email ?? "nil")
-            Text(bigModel.persons[bigModel.currentPersonIndex].name)
-            Text("change person")
-                .onTapGesture {
-                    bigModel.currentview = .Auth_PersonPickerView
+        
+        ZStack {
+            
+            HStack {
+                
+                Spacer()
+                
+                VStack {
+                    
+                    Spacer()
+                    
+                    Text("your email is \(auth.currentUser?.email ?? "nil")")
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Text("the current person is \(bigModel.persons[bigModel.currentPersonIndex].name)")
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    Text("change person")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            bigModel.currentview = .Auth_PersonPickerView
+                        }
+                    
+                    Spacer()
+                        .frame(height: 50)
+                    
                 }
+                
+                Spacer()
+                
+            }.background(Color.black)
+            .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    
+                    Spacer()
+                        .frame(height: 20)
+                    
+                    HStack {
+                        
+                        Spacer()
+                            .frame(width: 20)
+                        
+                        
+                        Text("Back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                            .onTapGesture {
+                                if !self.bigModel.lastViews.isEmpty {
+                                    print("back")
+                                    self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                    self.bigModel.lastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                } else { print("array empty") }
+                            }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                self.bigModel.currentview = .Home_homeFeed
+                            }
+                        
+                        Spacer()
+                            .frame(width: 20)
+                        
+                    }.frame(width: UIScreen.main.bounds.width)
+                    
+                    Spacer()
+                    
+                }
+                
+                Spacer()
+                
         }
     }
 }

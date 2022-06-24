@@ -48,6 +48,7 @@ struct PersonPickerView: View {
                                         .foregroundColor(.white)
                                         .onTapGesture {
                                             bigModel.currentPersonIndex = index
+                                            bigModel.isPersonChosen = true
                                             print(bigModel.currentPersonIndex)
                                             bigModel.lastViews.append(.Auth_PersonPickerView)
                                             

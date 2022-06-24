@@ -72,11 +72,7 @@ struct HomeFeedView: View {
                                         .foregroundColor(.white)
                                         .font(.headline)
                                         .onTapGesture {
-                                            if !bigModel.signedIn {
-                                                bigModel.currentview = ViewEnum.Auth_SignInView
-                                            } else {
-                                                bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                            }
+                                            bigModel.currentview = ViewEnum.Measurement_Mensurations
                                             bigModel.lastViews.append(.Home_homeFeed)
                                         }
                                     

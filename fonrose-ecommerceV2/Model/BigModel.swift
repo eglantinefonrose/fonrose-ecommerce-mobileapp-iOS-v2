@@ -17,6 +17,7 @@ class BigModel : ObservableObject {
     
     //@Published var commingFromMeasurement: Bool = false
     @Published var currentview = ViewEnum.Home_homeFeed
+    @Published var currentPopUpView = ViewEnum.Auth_SignInView
     @Published var lastViews: [ViewEnum]
     init(lastViews: [ViewEnum] = []) {
         self.lastViews = lastViews
@@ -25,16 +26,6 @@ class BigModel : ObservableObject {
     
     //MARK: HomeFeed
     @Published var showMenu: Bool = false
-    
-    //MARK: Measurement
-    @Published var armpitsMeasurement: String! = ""
-    @Published var armsLength: String! = ""
-    @Published var headMeasurement: String! = ""
-    @Published var pelvisMeasurement: String! = ""
-    @Published var pelvisKnee: String! = ""
-    @Published var shouldersMeasurement: String! = ""
-    @Published var shouldersPelvis: String! = ""
-    @Published var commingFromPaymentScreen: Bool = false
 
     //MARK: Service Client
     @Published var orderID : String? = nil
@@ -44,7 +35,6 @@ class BigModel : ObservableObject {
     @Published var selectedPlacemark: CLPlacemark? = nil
     
     //MARK: Authentification
-    
     @Published var currentUserName: String = ""
     
     let auth = Auth.auth()
@@ -52,6 +42,8 @@ class BigModel : ObservableObject {
     @Published var signedIn = false
     @Published var persons: [Person] = []
     @Published var currentPersonIndex: Int = 0
+    @Published var isPersonChosen = false
+    @Published var isSignInPopUpPresented = false
     
     func signIn(email: String, password: String) {
         

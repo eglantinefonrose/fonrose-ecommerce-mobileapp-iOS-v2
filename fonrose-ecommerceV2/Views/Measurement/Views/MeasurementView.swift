@@ -17,13 +17,19 @@ struct MeasurementView: View {
     var body: some View {
         
         if #available(iOS 14.0, *) {
-            HomeView(measurementText1: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
-                     measurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
-                     measurementText3: bigModel.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
-                     measurementText4: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
-                     measurementText5: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
-                     measurementText6: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
-                     measurementText7: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+            
+            if bigModel.isPersonChosen {
+                HomeView(measurementText1: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
+                         measurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
+                         measurementText3: bigModel.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
+                         measurementText4: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
+                         measurementText5: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
+                         measurementText6: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
+                         measurementText7: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+            } else {
+                AuthView()
+            }
+            
         } else {
             // Fallback on earlier versions
         }
@@ -36,6 +42,7 @@ struct MeasurementView: View {
 struct HomeView: View {
     
     @EnvironmentObject var bigModel: BigModel
+    @State var showPopup = false
     @State var measurementText1: String
     @State var measurementText2: String
     @State var measurementText3: String
@@ -238,6 +245,9 @@ struct HomeView: View {
                             
             }.background(Color.black)
             .edgesIgnoringSafeArea(.all)
+            .onChange(of: bigModel.currentview) { _ in
+                showPopup = !bigModel.isPersonChosen
+            }
             
             VStack {
                 

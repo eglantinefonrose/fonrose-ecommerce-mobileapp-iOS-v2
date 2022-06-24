@@ -18,6 +18,7 @@ struct AboutUs: View {
         Text("Back")
             .onTapGesture {
                 print("back")
+                bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
             }
         
         

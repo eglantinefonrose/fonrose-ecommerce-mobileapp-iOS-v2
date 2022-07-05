@@ -17,24 +17,28 @@ struct AuthView: View {
     @available(iOS 14.0, *)
     var body: some View {
                                                 
-        if (self.bigModel.currentPopUpView == .Auth_SignInView) {
-            SignInView()
-        }
-        
-        if (self.bigModel.currentPopUpView == .Auth_SignUpView) {
-            SignUpView()
-        }
-        
-        if (self.bigModel.currentPopUpView == .Auth_LogInNewUserView) {
-            LogInNewUser()
-        }
-        
-        if (self.bigModel.currentPopUpView == .Auth_PersonPickerView) {
-            PersonPickerView()
-        }
-        
-        if (self.bigModel.currentPopUpView == .Auth_UserInfo) {
-            UserInfo()
+        VStack {
+            
+            if (self.bigModel.authCurrentView == .Auth_SignInView) {
+                SignInView()
+            }
+            
+            if (self.bigModel.authCurrentView == .Auth_SignUpView) {
+                SignUpView()
+            }
+            
+            if (self.bigModel.authCurrentView == .Auth_LogInNewUserView) {
+                LogInNewUser()
+            }
+            
+            if (self.bigModel.authCurrentView == .Auth_PersonPickerView) {
+                PersonPickerView()
+            }
+            
+            if (self.bigModel.authCurrentView == .Auth_UserInfo) {
+                UserInfo()
+            }
+            
         }
         
     }

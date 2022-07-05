@@ -99,29 +99,7 @@ struct BigRootView: View {
             
             //MARK: Auth
             
-            VStack {
-                
-                if (self.bigModel.currentview == .Auth_SignInView) {
-                    SignInView()
-                }
-                
-                if (self.bigModel.currentview == .Auth_SignUpView) {
-                    SignUpView()
-                }
-                
-                if (self.bigModel.currentview == .Auth_LogInNewUserView) {
-                    LogInNewUser()
-                }
-                
-                if (self.bigModel.currentview == .Auth_PersonPickerView) {
-                    PersonPickerView()
-                }
-                
-                if (self.bigModel.currentview == .Auth_UserInfo) {
-                    UserInfo()
-                }
-                
-            }
+            
             
         }
     }

@@ -78,7 +78,7 @@ struct PersonPickerView: View {
                                                             }
                                                         }
                                                         
-                                                        bigModel.currentview = ViewEnum.Measurement_Mensurations
+                                                        //bigModel.currentview = ViewEnum.Home_homeFeed
                                                         
                                                     }
                                                     
@@ -105,9 +105,7 @@ struct PersonPickerView: View {
                                                                 
                                                             }
                                                         }
-                                                        
-                                                        bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                                        
+                                                                                                                
                                                     }
                                                 }
                                                 

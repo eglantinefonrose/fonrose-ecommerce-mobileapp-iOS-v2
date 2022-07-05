@@ -93,7 +93,7 @@ struct PagingView<Content>: View where Content: View {
                                 Spacer()
                                 
                                 Button(action: {
-                                    self.bigModel.currentview = bigModel.signedIn ? ViewEnum.Measurement_Mensurations : ViewEnum.Auth_SignInView
+                                    self.bigModel.currentview = bigModel.isPersonChosen ? ViewEnum.Measurement_Mensurations : ViewEnum.Auth_SignInView
                                     self.bigModel.lastViews.append(.MeasurementCarouselView)
                                 }) {
                                     Text("Acheter")

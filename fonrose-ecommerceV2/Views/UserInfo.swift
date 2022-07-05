@@ -30,6 +30,15 @@ struct UserInfo: View {
                         .foregroundColor(.white)
                     
                     Spacer()
+                        .frame(height: 20)
+                    
+                    Text("Sign out")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            bigModel.signOut()
+                        }
+                    
+                    Spacer()
                     
                     Text("the current person is \(bigModel.persons[bigModel.currentPersonIndex].name)")
                         .foregroundColor(.white)

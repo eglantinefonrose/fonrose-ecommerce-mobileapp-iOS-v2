@@ -131,8 +131,8 @@ struct SignInView: View {
                     
                         Button(action: {
                             
-                            self.bigModel.currentview = .Auth_SignUpView
-                            self.bigModel.lastViews.append(.Auth_SignInView)
+                            self.bigModel.authCurrentView = .Auth_SignUpView
+                            self.bigModel.authLastViews.append(.Auth_SignInView)
                             
                         }) {
                         //Spacer()

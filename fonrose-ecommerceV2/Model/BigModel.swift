@@ -18,10 +18,7 @@ class BigModel : ObservableObject {
     //@Published var commingFromMeasurement: Bool = false
     @Published var currentview = ViewEnum.Home_homeFeed
     @Published var currentPopUpView = ViewEnum.Auth_SignInView
-    @Published var lastViews: [ViewEnum]
-    init(lastViews: [ViewEnum] = []) {
-        self.lastViews = lastViews
-    }
+    @Published var lastViews: [ViewEnum] = []
     @Published var previousView: ViewEnum? = nil
     
     //MARK: HomeFeed
@@ -109,6 +106,10 @@ class BigModel : ObservableObject {
     }
     
     //MARK: Sign up
+    
+    @Published var authCurrentView =  ViewEnum.Home_homeFeed
+    @Published var authLastViews: [ViewEnum] = []
+    
     var newUserAccountEmail: String = ""
     var newUserAccountPassword: String = ""
     
@@ -145,6 +146,7 @@ class BigModel : ObservableObject {
         try? auth.signOut()
         self.signedIn = false
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
+        self.isPersonChosen = false
     }
     
     func getCurrentPersonMeasurement() {

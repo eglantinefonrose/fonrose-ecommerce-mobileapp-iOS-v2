@@ -10,12 +10,44 @@ import Foundation
 import CoreLocation
 import FirebaseAuth
 import FirebaseFirestore
+import MapKit
 
 class BigModel : ObservableObject {
     
     public static var shared = BigModel()
+    var user = User(id: 0, userID: "", email: "", persons: [])
     
-    //@Published var commingFromMeasurement: Bool = false
+    //MARK: UserModel
+    struct User: Identifiable {
+        var id: Int
+        var userID: String
+        var email: String
+        var persons: [Person]
+    }
+
+    struct Location {
+        var adress: String
+    }
+
+    struct Measurements {
+        var ArmpitsMeasurement: String
+        var ArmsLength: String
+        var HeadMeasurement: String
+        var PelvisMeasurement: String
+        var PelvisKnee: String
+        var ShouldersMeasurement: String
+        var ShouldersPelvis: String
+    }
+
+    struct Person: Identifiable {
+        var id: Int
+        var email: String
+        var name: String
+        var measurements: Measurements?
+        var location: Location?
+    }
+
+
     @Published var currentview = ViewEnum.Home_homeFeed
     @Published var currentPopUpView = ViewEnum.Auth_SignInView
     @Published var lastViews: [ViewEnum] = []
@@ -37,7 +69,6 @@ class BigModel : ObservableObject {
     let auth = Auth.auth()
     let db = Firestore.firestore()
     @Published var signedIn = false
-    @Published var persons: [Person] = []
     @Published var currentPersonIndex: Int = 0
     @Published var isPersonChosen = false
     @Published var isSignInPopUpPresented = false
@@ -56,6 +87,8 @@ class BigModel : ObservableObject {
             //Success
             print("groovy baby!")
             print(self.auth.currentUser?.email ?? "nil")
+            self.user.userID = self.auth.currentUser?.uid ?? "nil"
+            self.user.email = self.auth.currentUser?.email ?? "nil"
             self.signedIn = true
             
             self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
@@ -64,13 +97,13 @@ class BigModel : ObservableObject {
                     return
                 }
                 
-                self.persons.removeAll()
+                self.user.persons.removeAll()
                 if let snapshot = snapshot {
                     for document in snapshot.documents {
                         let dbName = document.data()["name"] as? String ?? ""
                         let dbEmail = document.data()["email"] as? String ?? ""
                         
-                        self.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                        self.user.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
                         
                         DispatchQueue.main.async {
                             self.authCurrentView = .Auth_PersonPickerView
@@ -147,7 +180,16 @@ class BigModel : ObservableObject {
         try? auth.signOut()
         self.signedIn = false
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
+        
         self.isPersonChosen = false
+        self.user.id = 0
+        self.user.userID = ""
+        self.user.email = ""
+        self.user.persons = []
+        
+        self.currentview = .Home_homeFeed
+        
+        self.signedIn = false
     }
     
     func getCurrentPersonMeasurement() {
@@ -171,7 +213,7 @@ class BigModel : ObservableObject {
                             let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
                             let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
                             
-                            self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                            self.user.persons[self.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
                             
                         }
                     }
@@ -195,7 +237,7 @@ class BigModel : ObservableObject {
                             let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
                             let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
                             
-                            self.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                            self.user.persons[self.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
                             
                         }
                     }

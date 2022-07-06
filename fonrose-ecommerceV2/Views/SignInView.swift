@@ -79,7 +79,6 @@ struct SignInView: View {
                             Button(action: {
                                 
                                 print("sign in")
-                                print()
                                 guard !email.isEmpty, !password.isEmpty else {
                                     return
                                 }

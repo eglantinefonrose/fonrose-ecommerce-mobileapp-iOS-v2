@@ -14,6 +14,7 @@ struct MeasurementView: View {
     
     @EnvironmentObject var bigModel: BigModel
     @State var showPopup = !BigModel().isPersonChosen
+    var user = BigModel.User.self
     
     var body: some View {
         
@@ -25,13 +26,13 @@ struct MeasurementView: View {
                 
             } else {
 
-                HomeView(measurementText1: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
-                             measurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
-                             measurementText3: bigModel.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
-                             measurementText4: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
-                             measurementText5: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
-                             measurementText6: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
-                             measurementText7: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
+                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
+                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
+                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
+                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
+                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
+                             measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
 
             }
             
@@ -55,6 +56,7 @@ struct HomeView: View {
     @State var measurementText6: String
     @State var measurementText7: String
     var db = Firestore.firestore()
+    var user = BigModel.User.self
     
     var body: some View {
         
@@ -174,7 +176,10 @@ struct HomeView: View {
                                         let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
                                         let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
                                         
-                                        bigModel.persons[bigModel.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                        
+                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                        
                                         
                                     }
                                 }
@@ -202,7 +207,7 @@ struct HomeView: View {
                                         let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
                                         let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
                                         
-                                        bigModel.persons[bigModel.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
                                         
                                     }
                                 }
@@ -295,9 +300,9 @@ struct HomeView: View {
     
 }
 
-struct MeasurementView_Previews: PreviewProvider {
+/*struct MeasurementView_Previews: PreviewProvider {
     static var previews: some View {
-        MeasurementView()
+        MeasurementView(, user: <#BigModel.User#>)
             .environmentObject(BigModel())
     }
-}
+}*/

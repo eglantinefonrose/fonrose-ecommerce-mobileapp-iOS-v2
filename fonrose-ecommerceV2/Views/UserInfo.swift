@@ -40,8 +40,10 @@ struct UserInfo: View {
                     
                     Spacer()
                     
-                    Text("the current person is \(bigModel.persons[bigModel.currentPersonIndex].name)")
-                        .foregroundColor(.white)
+                    if bigModel.signedIn {
+                        Text("the current person is \(bigModel.user.persons[bigModel.currentPersonIndex].name)")
+                            .foregroundColor(.white)
+                    }
                     
                     Spacer()
                         .frame(height: 20)

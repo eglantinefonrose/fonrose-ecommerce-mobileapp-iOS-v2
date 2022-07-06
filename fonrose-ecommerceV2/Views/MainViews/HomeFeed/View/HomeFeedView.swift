@@ -163,6 +163,8 @@ struct HomeFeedView: View {
                             .onTapGesture {
                                 bigModel.lastViews.append(.Home_homeFeed)
                                 self.bigModel.currentview = !bigModel.isPersonChosen ? .Auth_AuthView : .Auth_UserInfo
+                                print(bigModel.user.userID)
+                                print(bigModel.user.email)
                                 //.standard ? "network" : "map"
                                 withAnimation {
                                     if bigModel.showMenu {
@@ -188,7 +190,7 @@ struct HomeFeedView: View {
                         
                         if bigModel.isPersonChosen && !bigModel.showMenu {
                             
-                            Text(bigModel.persons[bigModel.currentPersonIndex].name)
+                            Text(bigModel.user.persons[bigModel.currentPersonIndex].name)
                                 .foregroundColor(.white)
                                 .font(.system(size: 17, weight: .bold, design: .default))
                             

@@ -28,7 +28,6 @@
 		70347545285F6A940030C906 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 70347544285F6A940030C906 /* FirebaseFirestore */; };
 		70347547285F6A940030C906 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 70347546285F6A940030C906 /* FirebaseDatabase */; };
 		70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70347548285F6B910030C906 /* GoogleService-Info.plist */; };
-		7034754B285F6FB20030C906 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754A285F6FB20030C906 /* UserModel.swift */; };
 		7034754D285F7D000030C906 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754C285F7D000030C906 /* SignUpView.swift */; };
 		7034754F285F7D460030C906 /* LogInNewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754E285F7D460030C906 /* LogInNewUser.swift */; };
 		70347551285F8F170030C906 /* PersonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347550285F8F160030C906 /* PersonPickerView.swift */; };
@@ -81,7 +80,6 @@
 		7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		7034753C285F67BD0030C906 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		70347548285F6B910030C906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7034754A285F6FB20030C906 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7034754C285F7D000030C906 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		7034754E285F7D460030C906 /* LogInNewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInNewUser.swift; sourceTree = "<group>"; };
 		70347550285F8F160030C906 /* PersonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPickerView.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 			children = (
 				7045357F2477BB8F001F20A8 /* ViewEnum.swift */,
 				7045357D2477BB29001F20A8 /* BigModel.swift */,
-				7034754A285F6FB20030C906 /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -456,7 +453,6 @@
 				7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
 				7034755528623D450030C906 /* SwiftUIView.swift in Sources */,
-				7034754B285F6FB20030C906 /* UserModel.swift in Sources */,
 				7045357C24770D84001F20A8 /* AboutUs.swift in Sources */,
 				703C28AF27E755BC00DE8B3B /* Binding-test1.swift in Sources */,
 				7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */,

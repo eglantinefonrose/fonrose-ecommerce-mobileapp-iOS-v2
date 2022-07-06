@@ -165,7 +165,6 @@ struct HomeFeedView: View {
                                 self.bigModel.currentview = !bigModel.isPersonChosen ? .Auth_AuthView : .Auth_UserInfo
                                 //.standard ? "network" : "map"
                                 withAnimation {
-                                    bigModel.showMenu.toggle()
                                     if bigModel.showMenu {
                                         print("menu")
                                     } else {
@@ -187,7 +186,7 @@ struct HomeFeedView: View {
                         
                         Spacer()
                         
-                        if bigModel.isPersonChosen {
+                        if bigModel.isPersonChosen && !bigModel.showMenu {
                             
                             Text(bigModel.persons[bigModel.currentPersonIndex].name)
                                 .foregroundColor(.white)

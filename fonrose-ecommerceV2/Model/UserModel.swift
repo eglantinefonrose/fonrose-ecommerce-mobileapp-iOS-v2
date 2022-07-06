@@ -10,9 +10,9 @@ import SwiftUI
 import MapKit
 
 struct User: Identifiable {
-    var id: Int
-    var userID: String
-    var email: String
+    var id: Int = 0
+    var userID: String = ""
+    var email: String = ""
     var persons: [Person] = []
 }
 

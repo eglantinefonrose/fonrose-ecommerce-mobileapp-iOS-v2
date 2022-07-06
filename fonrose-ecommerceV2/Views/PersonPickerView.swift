@@ -48,7 +48,6 @@ struct PersonPickerView: View {
                                         .foregroundColor(.white)
                                         .onTapGesture {
                                             bigModel.currentPersonIndex = index
-                                            bigModel.isPersonChosen = true
                                             print(bigModel.currentPersonIndex)
                                             bigModel.lastViews.append(.Auth_PersonPickerView)
                                             
@@ -75,11 +74,12 @@ struct PersonPickerView: View {
                                                                 
                                                                 bigModel.persons[bigModel.currentPersonIndex].measurements = Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
                                                                 
+                                                                print("measurement got")
+                                                                bigModel.isPersonChosen = true
+                                                                
                                                             }
                                                         }
-                                                        
-                                                        //bigModel.currentview = ViewEnum.Home_homeFeed
-                                                        
+                                                                                                                
                                                     }
                                                     
                                                 }

@@ -79,14 +79,20 @@ struct SignUpView: View {
                     .frame(height: 30)
                     
                 }
-                    
-                    Spacer()
+                
+                Spacer()
+            
+                Text(bigModel.signOutErrorMessage)
+                    .foregroundColor(.red)
+                
+                Spacer()
+                    .frame(height: 30)
                     
                     VStack {
                         
                             Button(action: {
                                 
-                                self.bigModel.lastViews.append(.Auth_SignUpView)
+                                self.bigModel.authLastViews.append(.Auth_SignUpView)
                                 guard !email.isEmpty, !password.isEmpty else {
                                     return
                                 }

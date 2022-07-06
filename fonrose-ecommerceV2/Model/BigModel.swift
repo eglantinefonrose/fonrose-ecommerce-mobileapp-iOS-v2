@@ -16,6 +16,8 @@ class BigModel : ObservableObject {
     
     public static var shared = BigModel()
     var user = User(id: 0, userID: "", email: "", persons: [])
+    @Published var signInErrorMessage = ""
+    @Published var signOutErrorMessage = ""
     
     //MARK: UserModel
     struct User: Identifiable {
@@ -81,7 +83,8 @@ class BigModel : ObservableObject {
         auth.signIn(withEmail: email, password: password) { Result, Error in
             guard Result != nil, Error == nil else {
                 print("yeah")
-                print((Error != nil) ? "error message = \(Error.debugDescription)" : "no error")
+                //print((Error != nil) ? "error message = \(String(describing: Error?.localizedDescription))" : "no error")
+                self.signInErrorMessage = Error?.localizedDescription ?? ""
                 return
             }
             //Success
@@ -151,13 +154,14 @@ class BigModel : ObservableObject {
         
         auth.createUser(withEmail: newUserEmail, password: newUserPassword) { Result, Error in
             guard Result != nil, Error == nil else {
+                self.signOutErrorMessage = Error?.localizedDescription ?? ""
                 return
             }
             
             DispatchQueue.main.async {
                 self.signedIn = true
             }
-            self.currentview = .Auth_LogInNewUserView
+            self.authCurrentView = .Auth_LogInNewUserView
         }
     
     }
@@ -189,6 +193,7 @@ class BigModel : ObservableObject {
         
         self.currentview = .Home_homeFeed
         
+
         self.signedIn = false
     }
     

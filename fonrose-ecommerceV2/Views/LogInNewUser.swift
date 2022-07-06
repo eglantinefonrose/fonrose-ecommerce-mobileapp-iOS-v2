@@ -55,7 +55,7 @@ struct LogInNewUser: View {
                                 .foregroundColor(.blue)
                                 .onTapGesture {
                                     bigModel.lastViews.append(.Auth_LogInNewUserView)
-                                    bigModel.currentview = .Auth_PersonPickerView
+                                    bigModel.authCurrentView = .Auth_PersonPickerView
                                     guard !bigModel.newEmail.isEmpty, !bigModel.newPassword.isEmpty else {
                                         return
                                     }
@@ -98,7 +98,7 @@ struct LogInNewUser: View {
                          .onTapGesture {
                              if !self.bigModel.lastViews.isEmpty {
                                  print("back")
-                                 self.bigModel.authCurrentView = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                 self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
                                  self.bigModel.authLastViews.removeLast()
                                  print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
                              } else { print("array empty") }

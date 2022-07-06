@@ -151,73 +151,86 @@ struct HomeView: View {
                     VStack {
                     
                     Button(action: {
-                        self.bigModel.lastViews.append(.Measurement_Mensurations)
                         
-                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                        
-                        print(self.bigModel.lastViews.count)
-                        
-                        db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Mensurations").setData(["ArmpitsMeasurement": self.measurementText1, "ArmsLength": self.measurementText2, "HeadMeasurement": self.measurementText3, "PelvisMeasurement": self.measurementText4, "PelvisKnee": self.measurementText5, "ShouldersMeasurement": self.measurementText6, "ShouldersPelvis": self.measurementText7])
-                        
-                        if bigModel.currentPersonIndex+1 < 10 {
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                
-                                if let snapshot = snapshot {
-                                    for document in snapshot.documents {
-                                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                        
-                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                        
-                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                        
-                                        
+                        if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
+                            
+                            self.bigModel.lastViews.append(.Measurement_Mensurations)
+                            
+                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            
+                            print(self.bigModel.lastViews.count)
+                            
+                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Mensurations").setData(["ArmpitsMeasurement": self.measurementText1, "ArmsLength": self.measurementText2, "HeadMeasurement": self.measurementText3, "PelvisMeasurement": self.measurementText4, "PelvisKnee": self.measurementText5, "ShouldersMeasurement": self.measurementText6, "ShouldersPelvis": self.measurementText7])
+                            
+                            if bigModel.currentPersonIndex+1 < 10 {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                                    guard error == nil else {
+                                        print(error!.localizedDescription)
+                                        return
                                     }
+                                    
+                                    if let snapshot = snapshot {
+                                        for document in snapshot.documents {
+                                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                                            
+                                            bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                            
+                                            bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                            
+                                            
+                                        }
+                                    }
+                                    
+                                    bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
+                                    
                                 }
                                 
-                                bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
+                            }
+                            
+                            else {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
+                                    guard error == nil else {
+                                        print(error!.localizedDescription)
+                                        return
+                                    }
+                                    
+                                    if let snapshot = snapshot {
+                                        for document in snapshot.documents {
+                                            let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                                            let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                                            let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                                            let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                                            let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                                            let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                                            let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                                            
+                                            bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                            
+                                        }
+                                    }
+                                    
+                                    bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
+                                    
+                                }
+                            }
+                            
+                            print("recap")
+                            
+                        } else {
+                            
+                            alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
                                 
                             }
                             
                         }
                         
-                        else {
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                
-                                if let snapshot = snapshot {
-                                    for document in snapshot.documents {
-                                        let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                        let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                        let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                        let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                        let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                        let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                        let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                        
-                                        bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                        
-                                    }
-                                }
-                                
-                                bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
-                                
-                            }
-                        }
-                        
-                        print("recap")
+                        /**/
                         
                         }) {
                         //Spacer()

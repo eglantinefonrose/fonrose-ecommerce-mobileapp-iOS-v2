@@ -71,8 +71,14 @@ struct SignInView: View {
                     .frame(height: 30)
                     
                 }
+                
+                    Spacer()
+                
+                    Text(bigModel.signInErrorMessage)
+                        .foregroundColor(.red)
                     
                     Spacer()
+                        .frame(height: 30)
                     
                     VStack {
                         
@@ -83,7 +89,7 @@ struct SignInView: View {
                                     return
                                 }
                                 bigModel.signIn(email: email, password: password)
-                                self.bigModel.lastViews.append(.Auth_SignInView)
+                                self.bigModel.authLastViews.append(.Auth_SignInView)
                                 
                             }) {
                             //Spacer()

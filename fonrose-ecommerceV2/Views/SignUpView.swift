@@ -148,7 +148,7 @@ struct SignUpView: View {
                             if !self.bigModel.authLastViews.isEmpty {
                                 print("back")
                                 self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
+                                self.bigModel.authLastViews.removeLast()
                                 print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
                             } else { print("array empty") }
                         }

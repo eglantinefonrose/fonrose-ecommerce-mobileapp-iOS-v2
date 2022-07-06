@@ -19,26 +19,20 @@ struct MeasurementView: View {
         
         if #available(iOS 14.0, *) {
             
-            if showPopup {
-                Text("")
-                    .sheet(isPresented: $showPopup) {
-                        Text("close")
-                            .onTapGesture {
-                                bigModel.isPersonChosen.toggle()
-                            }
-                            .onChange(of: bigModel.isPersonChosen) { value in
-                                showPopup.toggle()
-                            }
-                    }
+            if !bigModel.isPersonChosen {
+    
+                AuthView()
+                
             } else {
-                /*HomeView(measurementText1: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
+
+                HomeView(measurementText1: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
                              measurementText2: bigModel.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
                              measurementText3: bigModel.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
                              measurementText4: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
                              measurementText5: bigModel.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
                              measurementText6: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
-                             measurementText7: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")*/
-                Text("measurement")
+                             measurementText7: bigModel.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+
             }
             
         } else {

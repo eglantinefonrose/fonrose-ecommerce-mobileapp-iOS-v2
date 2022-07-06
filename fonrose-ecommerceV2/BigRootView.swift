@@ -97,9 +97,6 @@ struct BigRootView: View {
                 
             }
             
-            //MARK: Auth
-            
-            
             
         }
     }

@@ -59,7 +59,7 @@ class BigModel : ObservableObject {
             self.signedIn = true
             
             DispatchQueue.main.async {
-                self.currentview = .Auth_PersonPickerView
+                self.authCurrentView = .Auth_PersonPickerView
             }
             
             self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
@@ -107,7 +107,7 @@ class BigModel : ObservableObject {
     
     //MARK: Sign up
     
-    @Published var authCurrentView =  ViewEnum.Home_homeFeed
+    @Published var authCurrentView =  ViewEnum.Auth_SignInView
     @Published var authLastViews: [ViewEnum] = []
     
     var newUserAccountEmail: String = ""

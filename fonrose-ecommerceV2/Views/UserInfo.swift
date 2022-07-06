@@ -49,7 +49,7 @@ struct UserInfo: View {
                     Text("change person")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            bigModel.currentview = .Auth_PersonPickerView
+                            bigModel.authCurrentView = .Auth_PersonPickerView
                         }
                     
                     Spacer()
@@ -77,11 +77,11 @@ struct UserInfo: View {
                             .foregroundColor(Color.blue)
                             .fontWeight(.semibold)
                             .onTapGesture {
-                                if !self.bigModel.lastViews.isEmpty {
+                                if !self.bigModel.authLastViews.isEmpty {
                                     print("back")
-                                    self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                    self.bigModel.lastViews.removeLast()
-                                    print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                    self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
+                                    self.bigModel.authLastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
                                 } else { print("array empty") }
                             }
                         

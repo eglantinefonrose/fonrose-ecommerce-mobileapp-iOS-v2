@@ -98,9 +98,9 @@ struct LogInNewUser: View {
                          .onTapGesture {
                              if !self.bigModel.lastViews.isEmpty {
                                  print("back")
-                                 self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                 self.bigModel.lastViews.removeLast()
-                                 print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                 self.bigModel.authCurrentView = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                 self.bigModel.authLastViews.removeLast()
+                                 print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
                              } else { print("array empty") }
                          }
                      

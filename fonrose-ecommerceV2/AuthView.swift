@@ -18,25 +18,21 @@ struct AuthView: View {
     var body: some View {
                                                 
         VStack {
-            
+                            
             if (self.bigModel.authCurrentView == .Auth_SignInView) {
                 SignInView()
             }
-            
+                
             if (self.bigModel.authCurrentView == .Auth_SignUpView) {
                 SignUpView()
             }
-            
+                
             if (self.bigModel.authCurrentView == .Auth_LogInNewUserView) {
                 LogInNewUser()
             }
-            
+                
             if (self.bigModel.authCurrentView == .Auth_PersonPickerView) {
                 PersonPickerView()
-            }
-            
-            if (self.bigModel.authCurrentView == .Auth_UserInfo) {
-                UserInfo()
             }
             
         }

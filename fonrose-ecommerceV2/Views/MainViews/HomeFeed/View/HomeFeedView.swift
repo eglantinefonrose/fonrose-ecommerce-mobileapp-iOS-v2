@@ -74,6 +74,7 @@ struct HomeFeedView: View {
                                         .onTapGesture {
                                             bigModel.currentview = ViewEnum.Measurement_Mensurations
                                             bigModel.lastViews.append(.Home_homeFeed)
+                                            self.bigModel.showMenu = false
                                         }
                                     
                                     Text("Location")
@@ -82,6 +83,7 @@ struct HomeFeedView: View {
                                         .onTapGesture {
                                             bigModel.currentview = ViewEnum.FinalizeOrderViews_Livraison
                                             bigModel.lastViews.append(.Home_homeFeed)
+                                            self.bigModel.showMenu = false
                                         }
                                     
                                     Spacer()
@@ -160,7 +162,7 @@ struct HomeFeedView: View {
                             .font(.system(size: 20))
                             .onTapGesture {
                                 bigModel.lastViews.append(.Home_homeFeed)
-                                self.bigModel.currentview = bigModel.signedIn ? .Auth_UserInfo : .Auth_SignInView
+                                self.bigModel.currentview = !bigModel.isPersonChosen ? .Auth_AuthView : .Auth_UserInfo
                                 //.standard ? "network" : "map"
                                 withAnimation {
                                     bigModel.showMenu.toggle()
@@ -175,6 +177,25 @@ struct HomeFeedView: View {
                         
                         Spacer()
                             .frame(width: UIScreen.main.bounds.width/4 + 20)
+                        
+                    }
+                    Spacer()
+                }
+                    
+                VStack {
+                    HStack {
+                        
+                        Spacer()
+                        
+                        if bigModel.isPersonChosen {
+                            
+                            Text(bigModel.persons[bigModel.currentPersonIndex].name)
+                                .foregroundColor(.white)
+                                .font(.system(size: 17, weight: .bold, design: .default))
+                            
+                        }
+                        
+                        Spacer()
                         
                     }
                     Spacer()

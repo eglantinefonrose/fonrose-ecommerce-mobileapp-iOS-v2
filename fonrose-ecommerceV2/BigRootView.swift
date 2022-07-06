@@ -27,6 +27,10 @@ struct BigRootView: View {
                     HomeFeedView()
                 }
                 
+                if (self.bigModel.currentview == .Auth_UserInfo) {
+                    UserInfo()
+                }
+                
                 if (self.bigModel.currentview == .MeasurementCarouselView) {
                     CarouselView()
                 }
@@ -97,6 +101,19 @@ struct BigRootView: View {
                 
             }
             
+            //MARK: Auth
+            
+                if (self.bigModel.currentview == .Auth_AuthView) {
+                    AuthView()
+                }
+            
+                if (self.bigModel.currentview == .Auth_PersonPickerView) {
+                    PersonPickerView()
+                }
+            
+                if (self.bigModel.currentview == .Auth_UserInfo) {
+                    UserInfo()
+                }
             
         }
     }

@@ -50,6 +50,7 @@ struct UserInfo: View {
                         .foregroundColor(.blue)
                         .onTapGesture {
                             bigModel.authCurrentView = .Auth_PersonPickerView
+                            print("change person")
                         }
                     
                     Spacer()

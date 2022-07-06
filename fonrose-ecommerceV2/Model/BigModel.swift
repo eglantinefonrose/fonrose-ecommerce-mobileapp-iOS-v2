@@ -58,10 +58,6 @@ class BigModel : ObservableObject {
             print(self.auth.currentUser?.email ?? "nil")
             self.signedIn = true
             
-            DispatchQueue.main.async {
-                self.authCurrentView = .Auth_PersonPickerView
-            }
-            
             self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
                 guard error == nil else {
                     print(error!.localizedDescription)
@@ -75,6 +71,11 @@ class BigModel : ObservableObject {
                         let dbEmail = document.data()["email"] as? String ?? ""
                         
                         self.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                        
+                        DispatchQueue.main.async {
+                            self.authCurrentView = .Auth_PersonPickerView
+                        }
+                        
                         print("doc added")
                     }
                 }

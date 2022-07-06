@@ -27,10 +27,6 @@ struct BigRootView: View {
                     HomeFeedView()
                 }
                 
-                if (self.bigModel.currentview == .Auth_UserInfo) {
-                    UserInfo()
-                }
-                
                 if (self.bigModel.currentview == .MeasurementCarouselView) {
                     CarouselView()
                 }

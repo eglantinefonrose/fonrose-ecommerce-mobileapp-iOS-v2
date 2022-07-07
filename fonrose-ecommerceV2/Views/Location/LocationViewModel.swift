@@ -113,10 +113,8 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         fetchCountryAndCity(for: locations.first)
         //"region" correspond à une zone autour de laquelle la map va se centrer
         
-        self.region = MKCoordinateRegion(center: lastSeenLocation.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
-        //self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 25.276987, longitude: 55.296249), latitudinalMeters: 10000, longitudinalMeters: 10000)
-        
-        pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+        //self.region = MKCoordinateRegion(center: lastSeenLocation.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 25.276987, longitude: 55.296249), latitudinalMeters: 100000, longitudinalMeters: 100000)
         
         //CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)
         

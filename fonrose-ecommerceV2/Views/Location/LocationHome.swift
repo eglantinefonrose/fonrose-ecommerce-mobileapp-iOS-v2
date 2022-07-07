@@ -108,13 +108,22 @@ struct LocationHome: View {
                 
                 VStack {
                     
-                    Button(action: mapData.focusLocation, label: {
+                    //25.276987, 55.296249
+                    
+                    /*mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))*/
+                    
+                    Button {
+                        
+                        mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                        
+                    } label: {
                         Image(systemName: "location.fill")
                             .font(.title2)
                             .padding(10)
                             .background(Color.primary)
                             .clipShape(Circle())
-                    })
+                    }
+
                     
                     Button(action: mapData.updateMapType, label: {
                         Image(systemName: mapData.mapType == .standard ? "network" : "map")
@@ -138,10 +147,6 @@ struct LocationHome: View {
                             .font(.headline)
                             .onTapGesture {
                                 mapData.pinHome()
-                                isHomeSelected = true
-                                if isHomeSelected == true {
-                                    bigModel.selectedPlacemark = mapData.userHomePlacemark!
-                                }
                             }
                     }
                     
@@ -161,6 +166,10 @@ struct LocationHome: View {
                                     isHomeSelected = true
                                     if isHomeSelected == true {
                                         bigModel.selectedPlacemark = mapData.userHomePlacemark!
+                                    
+                                    //convertir le placemark en coordonnées GPS
+                                    //bigModel.selectedPlacemark?.location?.coordinate
+                                    
                                     }
                                 }
                         }
@@ -194,6 +203,9 @@ struct LocationHome: View {
             
         }
         .onAppear(perform: {
+            
+            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+            
             locationManager.delegate = mapData
             //le delegate est le LocationViewModel
             locationManager.requestWhenInUseAuthorization()

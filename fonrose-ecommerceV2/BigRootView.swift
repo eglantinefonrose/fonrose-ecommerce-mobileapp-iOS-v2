@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 @available(iOS 14.0, *)
 struct BigRootView: View {
     
     @EnvironmentObject var bigModel: BigModel
-    //var model: ParcelInfos
+    @StateObject var mapData = LocationViewModel()
     
     @available(iOS 14.0, *)
     var body: some View {
@@ -86,6 +87,7 @@ struct BigRootView: View {
                 if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {
                     if bigModel.isPersonChosen {
                         LocationHome()
+                        
                     } else {
                         AuthView()
                     }

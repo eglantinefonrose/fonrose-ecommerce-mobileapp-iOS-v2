@@ -17,6 +17,7 @@
 		7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC032347E74100F5EF15 /* Assets.xcassets */; };
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
+		701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B9E1D2876DF90004DE780 /* Test-coordinate.swift */; };
 		701C83712365DEB2007AF339 /* DressPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701C83702365DEB2007AF339 /* DressPictures.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
 		7031EF9727F04C27009CA3A2 /* LocationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9627F04C27009CA3A2 /* LocationHome.swift */; };
@@ -74,6 +75,7 @@
 		7019AC062347E74100F5EF15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7019AC092347E74100F5EF15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		701B9E1D2876DF90004DE780 /* Test-coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test-coordinate.swift"; sourceTree = "<group>"; };
 		701C83702365DEB2007AF339 /* DressPictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressPictures.swift; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		7031EF9627F04C27009CA3A2 /* LocationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHome.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				704535812477BD85001F20A8 /* BigRootView.swift */,
 				7034755A2864D0F70030C906 /* AuthView.swift */,
+				701B9E1D2876DF90004DE780 /* Test-coordinate.swift */,
 				704535832477BF03001F20A8 /* Model */,
 				7049ED23281E7B3F00C16C3B /* Views */,
 				7019AC032347E74100F5EF15 /* Assets.xcassets */,
@@ -434,6 +437,7 @@
 				704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */,
 				708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */,
 				70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */,
+				701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */,
 				700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */,
 				70B9B1842566C64E00317086 /* test-binding.swift in Sources */,
 				7034753D285F67BD0030C906 /* SignInView.swift in Sources */,

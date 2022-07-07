@@ -8,12 +8,14 @@
 
 import SwiftUI
 import FirebaseAuth
+import MapKit
 
 @available(iOS 14.0, *)
 struct HomeFeedView: View {
    
     @State var offset: CGFloat = -UIScreen.main.bounds.width/4
     @EnvironmentObject var bigModel: BigModel
+    @StateObject var mapData = LocationViewModel()
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -84,6 +86,9 @@ struct HomeFeedView: View {
                                             bigModel.currentview = ViewEnum.FinalizeOrderViews_Livraison
                                             bigModel.lastViews.append(.Home_homeFeed)
                                             self.bigModel.showMenu = false
+                                            
+                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                                            
                                         }
                                     
                                     Spacer()

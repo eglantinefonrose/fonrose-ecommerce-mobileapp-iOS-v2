@@ -18,6 +18,9 @@ class BigModel : ObservableObject {
     var user = User(id: 0, userID: "", email: "", persons: [])
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
+    @Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
+    @Published var userDBLat = 0
+    @Published var userDBLong = 0
     
     //MARK: UserModel
     struct User: Identifiable {
@@ -28,7 +31,10 @@ class BigModel : ObservableObject {
     }
 
     struct Location {
-        var adress: String
+        var adressName: String
+        var adressLat: Int
+        var adressLong: Int
+        
     }
 
     struct Measurements {
@@ -252,5 +258,54 @@ class BigModel : ObservableObject {
         }
         
     }
+    
+    func getCurrentPersonLocation() {
+        
+        if signedIn {
+            
+            if self.currentPersonIndex+1 < 10 {
+                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(self.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            let dbAdressName = document.data()["adressName"] as? String ?? ""
+                            let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                            let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                            
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                            
+                        }
+                    }
+                }
+            }
+            
+            else {
+                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(self.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                    guard error == nil else {
+                        print(error!.localizedDescription)
+                        return
+                    }
+                    
+                    if let snapshot = snapshot {
+                        for document in snapshot.documents {
+                            let dbAdressName = document.data()["adressName"] as? String ?? ""
+                            let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                            let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                            
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    }
+
     
 }

@@ -109,15 +109,13 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
          ensuite si lastSeenLocation est diférrent de 0 on appelle les fonctions fetchCountryAndCity et self.region
          sinon on fait return
          */
-        guard let lastSeenLocation = locations.first else { return }
-        fetchCountryAndCity(for: locations.first)
+        
+        guard let lastSeenLocation = (BigModel().userDBLat == 0) && (BigModel().userDBLong == 0) ? locations.first?.coordinate : CLLocationCoordinate2D(latitude: CLLocationDegrees(BigModel().userDBLat), longitude: CLLocationDegrees(BigModel().userDBLong)) else { return }
+        
         //"region" correspond à une zone autour de laquelle la map va se centrer
         
-        //self.region = MKCoordinateRegion(center: lastSeenLocation.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
-        self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 25.276987, longitude: 55.296249), latitudinalMeters: 100000, longitudinalMeters: 100000)
-        
-        //CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)
-        
+        self.region = MKCoordinateRegion(center: lastSeenLocation, latitudinalMeters: 10000, longitudinalMeters: 10000)
+                
         //la fonction configure la region sur laquelle la map se centre
         //donc quand on affiche une mapView, elle est centrée sur la region
         self.mapView.setRegion(self.region, animated: true)
@@ -208,7 +206,6 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
         let pointHomeAnnotation = MKPointAnnotation()
         pointHomeAnnotation.coordinate = homeCoordinate
-        pointHomeAnnotation.title = userHomePlacemark?.name ?? "No name"
         
         let coordinateHomeRegion = MKCoordinateRegion(center: homeCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
         mapView.setRegion(coordinateHomeRegion, animated: true)
@@ -220,30 +217,25 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func pinSelectedPlace(pointSelectedPlaceLat: Int, pointSelectedPlaceLong: Int) {
-        
+                  
+        //la variable "coordinate" correspond aux coordonnées d'un objet place de type "Place"
         let selectedPlaceCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pointSelectedPlaceLat), longitude: CLLocationDegrees(pointSelectedPlaceLong))
-        
-        let pointSelectedPlaceAnnotation = MKPointAnnotation()
-        pointSelectedPlaceAnnotation.coordinate = selectedPlaceCoordinate
-        pointSelectedPlaceAnnotation.title = "No name"
-        
-        let coordinateSelectedPlaceRegion = MKCoordinateRegion(center: selectedPlaceCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
-        mapView.setRegion(coordinateSelectedPlaceRegion, animated: true)
+         
+        //un MKPointAnnotation correspond au nom qu'il y a marqué à côté de l'épingle qui s'affiche sur la map
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = selectedPlaceCoordinate
+        pointAnnotation.title = "No name"
+         
+        //Moving map to that location
+             
+        let coordinateRegion = MKCoordinateRegion(center: selectedPlaceCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        mapView.setRegion(coordinateRegion, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
-        
+         
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(pointSelectedPlaceAnnotation)
-        
-        /*let homeCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(25.276987), longitude: CLLocationDegrees(55.296249))
-        
-        let coordinateSelectedPlaceRegion = MKCoordinateRegion(center: homeCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
-        mapView.setRegion(coordinateSelectedPlaceRegion, animated: true)
-        mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
-        
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(MKPointAnnotation())*/
+        mapView.addAnnotation(pointAnnotation)
         
     }
-    
+        
 }
 

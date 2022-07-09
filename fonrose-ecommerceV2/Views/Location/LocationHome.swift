@@ -8,6 +8,8 @@
 
 import SwiftUI
 import CoreLocation
+import FirebaseAuth
+import FirebaseFirestore
 
 @available(iOS 14.0, *)
 struct LocationHome: View {
@@ -19,6 +21,7 @@ struct LocationHome: View {
     @State var currentLocation: CLPlacemark?
     @State var isHomeSelected: Bool = true
     @State var isLocationSelected: Bool = false
+    var db = Firestore.firestore()
     
     var body: some View {
         
@@ -158,20 +161,26 @@ struct LocationHome: View {
                             RoundedRectangle(cornerRadius: 15)
                                 .fill(Color.white)
                                 .frame(width: 300, height: 50)
-                            Text(bigModel.selectedPlacemark?.name ?? "No location selected")
-                                .foregroundColor(.black)
-                                .font(.callout)
-                                .onTapGesture {
-                                    mapData.pinHome()
-                                    isHomeSelected = true
-                                    if isHomeSelected == true {
-                                        bigModel.selectedPlacemark = mapData.userHomePlacemark!
-                                    
-                                    //convertir le placemark en coordonnées GPS
-                                    //bigModel.selectedPlacemark?.location?.coordinate
-                                    
+
+                            if bigModel.isPersonChosen {
+                                
+                                Text(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))
+                                        
+                                    .foregroundColor(.black)
+                                    .font(.callout)
+                                    .onTapGesture {
+                                        mapData.pinHome()
+                                        isHomeSelected = true
+                                        if isHomeSelected == true {
+                                            bigModel.selectedPlacemark = mapData.userHomePlacemark!
+                                        
+                                        //convertir le placemark en coordonnées GPS
+                                        //bigModel.selectedPlacemark?.location?.coordinate
+                                        
+                                        }
                                     }
-                                }
+                                
+                            }
                         }
                         
                         Spacer()
@@ -187,6 +196,9 @@ struct LocationHome: View {
                         .onTapGesture {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                             self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
+                            
+                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Mensurations").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
+                            
                             print("back")
                         }
                         
@@ -203,9 +215,7 @@ struct LocationHome: View {
             
         }
         .onAppear(perform: {
-            
-            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
-            
+                        
             locationManager.delegate = mapData
             //le delegate est le LocationViewModel
             locationManager.requestWhenInUseAuthorization()

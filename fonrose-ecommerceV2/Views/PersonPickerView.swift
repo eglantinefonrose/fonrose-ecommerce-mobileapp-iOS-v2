@@ -58,6 +58,7 @@ struct PersonPickerView: View {
                                                 print("signed in")
                                                 
                                                 if bigModel.currentPersonIndex+1 < 10 {
+                                                    
                                                     db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").getDocuments { snapshot, error in
                                                         guard error == nil else {
                                                             print(error!.localizedDescription)
@@ -86,6 +87,29 @@ struct PersonPickerView: View {
                                                                                                                 
                                                     }
                                                     
+                                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                                        guard error == nil else {
+                                                            print(error!.localizedDescription)
+                                                            return
+                                                        }
+                                                        
+                                                        if let snapshot = snapshot {
+                                                            for document in snapshot.documents {
+                                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                                                                
+                                                            }
+                                                        }
+                                                        
+                                                        bigModel.userDBLat = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0
+                                                        bigModel.userDBLong = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0
+                                                        bigModel.isPersonChosen = true
+                                                        
+                                                    }
+                                                      
                                                 }
                                                 
                                                 else {

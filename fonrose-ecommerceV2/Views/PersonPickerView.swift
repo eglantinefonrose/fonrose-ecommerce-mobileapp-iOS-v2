@@ -9,7 +9,9 @@
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
+import MapKit
 
+@available(iOS 14.0, *)
 struct PersonPickerView: View {
 
     let db = Firestore.firestore()
@@ -17,6 +19,7 @@ struct PersonPickerView: View {
     @State var name: String = ""
     @EnvironmentObject var bigModel: BigModel
     @State var showPopup = false
+    @StateObject var mapData = LocationViewModel()
     
     var body: some View {
         
@@ -41,12 +44,14 @@ struct PersonPickerView: View {
                             Spacer()
                         }
                         
-                        if #available(iOS 14.0, *) {
                             List {
                                 ForEach(bigModel.user.persons.indices, id: \.self) { index in
                                     Text(bigModel.user.persons[index].name)
                                         .foregroundColor(.white)
                                         .onTapGesture {
+                                            
+                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                                            
                                             bigModel.currentPersonIndex = index
                                             print(bigModel.currentPersonIndex)
                                             bigModel.lastViews.append(.Auth_PersonPickerView)
@@ -152,10 +157,7 @@ struct PersonPickerView: View {
                             })
                             .onAppear(perform: {
                                     UITableView.appearance().contentInset.top = 0
-                                })
-                        } else {
-                            // Fallback on earlier versions
-                        }
+                            })
                         
                         Spacer()
                         

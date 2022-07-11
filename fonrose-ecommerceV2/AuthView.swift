@@ -30,6 +30,7 @@ struct AuthView: View {
                 LogInNewUser()
             }
                 
+            
             if (self.bigModel.authCurrentView == .Auth_PersonPickerView) {
                 PersonPickerView()
             }

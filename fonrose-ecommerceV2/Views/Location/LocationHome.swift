@@ -199,7 +199,7 @@ struct LocationHome: View {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                             self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
                             
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Mensurations").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
+                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
                             
                             print("back")
                         }

@@ -119,7 +119,7 @@ struct LocationHome: View {
                     
                     Button {
                         
-                        mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CGFloat(CLLocationDegrees(25.276987))), pointSelectedPlaceLong: Int(CGFloat(CLLocationDegrees(55.296249))))
+                        mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(Int(CGFloat(CLLocationDegrees(25.276987)))), pointSelectedPlaceLong: CGFloat(Int(CGFloat(CLLocationDegrees(55.296249)))))
                         
                     } label: {
                         Image(systemName: "location.fill")
@@ -266,7 +266,7 @@ struct LocationHome: View {
                                             .foregroundColor(.white)
                                             .onTapGesture {
                                                 
-                                                mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 48)), pointSelectedPlaceLong: Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 2)))
+                                                /*mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 48)), pointSelectedPlaceLong: Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 2)))*/
                                                 
                                                 bigModel.currentPersonIndex = index
                                                 print(bigModel.currentPersonIndex)
@@ -317,17 +317,17 @@ struct LocationHome: View {
                                                             if let snapshot = snapshot {
                                                                 for document in snapshot.documents {
                                                                     let dbAdressName = document.data()["adressName"] as? String ?? ""
-                                                                    let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
-                                                                    let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 0
+                                                                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 0
                                                                     
                                                                     bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
                                                                     
                                                                 }
                                                             }
                                                             
-                                                            bigModel.userDBLat = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0
-                                                            bigModel.userDBLong = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0
                                                             bigModel.isPersonChosen = true
+                                                            
+                                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 48)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 2)))
                                                             
                                                         }
                                                           
@@ -356,6 +356,33 @@ struct LocationHome: View {
                                                             }
                                                                                                                     
                                                         }
+                                                        
+                                                        db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                                            guard error == nil else {
+                                                                print(error!.localizedDescription)
+                                                                return
+                                                            }
+                                                            
+                                                            if let snapshot = snapshot {
+                                                                for document in snapshot.documents {
+                                                                    let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                                    let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                                                                    let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                    
+                                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                    
+                                                                }
+                                                            }
+                                                            
+                                                            bigModel.userDBLat = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0
+                                                            bigModel.userDBLong = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0
+                                                            bigModel.isPersonChosen = true
+                                                            
+                                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 48))), pointSelectedPlaceLong: CGFloat(Int(CLLocationDegrees(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 2))))
+                                                            
+                                                        }
+
+                                                        
                                                     }
                                                     
                                                 } else {
@@ -481,6 +508,9 @@ struct LocationHome: View {
                     self.mapData.searchQuery()
                 }
             }
+            
+            
+            
         })
     }
 }

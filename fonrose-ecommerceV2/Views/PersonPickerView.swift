@@ -50,7 +50,7 @@ struct PersonPickerView: View {
                                         .foregroundColor(.white)
                                         .onTapGesture {
                                             
-                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                                            //mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(Int(CLLocationDegrees(25.276987))), pointSelectedPlaceLong: CGFloat(Int(CLLocationDegrees(55.296249))))
                                             
                                             bigModel.currentPersonIndex = index
                                             print(bigModel.currentPersonIndex)
@@ -104,7 +104,7 @@ struct PersonPickerView: View {
                                                                 let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
                                                                 let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                                                                 
-                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                                 
                                                             }
                                                         }

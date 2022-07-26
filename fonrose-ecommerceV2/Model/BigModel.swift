@@ -19,8 +19,8 @@ class BigModel : ObservableObject {
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
     @Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
-    @Published var userDBLat = 0
-    @Published var userDBLong = 0
+    @Published var userDBLat: CGFloat = 0
+    @Published var userDBLong: CGFloat = 0
     
     //MARK: UserModel
     struct User: Identifiable {
@@ -32,8 +32,8 @@ class BigModel : ObservableObject {
 
     struct Location {
         var adressName: String
-        var adressLat: Int
-        var adressLong: Int
+        var adressLat: CGFloat
+        var adressLong: CGFloat
         
     }
 
@@ -276,7 +276,7 @@ class BigModel : ObservableObject {
                             let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
                             let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                             
-                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                             
                         }
                     }
@@ -296,7 +296,7 @@ class BigModel : ObservableObject {
                             let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
                             let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                             
-                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                             
                         }
                     }

@@ -87,7 +87,7 @@ struct HomeFeedView: View {
                                             bigModel.lastViews.append(.Home_homeFeed)
                                             self.bigModel.showMenu = false
                                             
-                                            mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                                            //mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
                                             
                                         }
                                     

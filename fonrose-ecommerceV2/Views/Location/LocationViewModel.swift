@@ -216,7 +216,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    func pinSelectedPlace(pointSelectedPlaceLat: Int, pointSelectedPlaceLong: Int) {
+    func pinSelectedPlace(pointSelectedPlaceLat: CGFloat, pointSelectedPlaceLong: CGFloat) {
                   
         //la variable "coordinate" correspond aux coordonnées d'un objet place de type "Place"
         let selectedPlaceCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pointSelectedPlaceLat), longitude: CLLocationDegrees(pointSelectedPlaceLong))

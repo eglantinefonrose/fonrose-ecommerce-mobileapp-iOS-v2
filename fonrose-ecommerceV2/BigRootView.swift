@@ -85,7 +85,11 @@ struct BigRootView: View {
                 }
                 
                 if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {
-                    LocationHome()
+                    if !bigModel.isPersonChosen {
+                        AuthView()
+                    } else {
+                        LocationHome()
+                    }
                 }
             
                 if (self.bigModel.currentview == .FinalizeOrderViews_FinDeCommande) {

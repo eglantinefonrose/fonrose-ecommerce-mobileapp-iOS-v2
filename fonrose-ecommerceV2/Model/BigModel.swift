@@ -19,8 +19,8 @@ class BigModel : ObservableObject {
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
     @Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
-    @Published var userDBLat: CGFloat = 0
-    @Published var userDBLong: CGFloat = 0
+    @Published var userDBLat: CGFloat = 50.073658
+    @Published var userDBLong: CGFloat = 14.418540
     
     //MARK: UserModel
     struct User: Identifiable {

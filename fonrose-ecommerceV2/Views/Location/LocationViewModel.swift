@@ -110,11 +110,11 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
          sinon on fait return
          */
         
-        guard let lastSeenLocation = (BigModel().userDBLat == 0) && (BigModel().userDBLong == 0) ? locations.first?.coordinate : CLLocationCoordinate2D(latitude: CLLocationDegrees(BigModel().userDBLat), longitude: CLLocationDegrees(BigModel().userDBLong)) else { return }
+        guard let lastSeenLocation = locations.first else { return }
         
         //"region" correspond à une zone autour de laquelle la map va se centrer
         
-        self.region = MKCoordinateRegion(center: lastSeenLocation, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        self.region = MKCoordinateRegion(center: lastSeenLocation.coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
                 
         //la fonction configure la region sur laquelle la map se centre
         //donc quand on affiche une mapView, elle est centrée sur la region

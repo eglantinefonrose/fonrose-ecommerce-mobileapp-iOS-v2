@@ -101,17 +101,19 @@ struct PersonPickerView: View {
                                                         if let snapshot = snapshot {
                                                             for document in snapshot.documents {
                                                                 let dbAdressName = document.data()["adressName"] as? String ?? ""
-                                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
-                                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                                
+                                                                bigModel.userDBLat = CGFloat(50.1109221)
+                                                                bigModel.userDBLong = CGFloat(8.6821267)
                                                                 
                                                                 bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
+                                                         
+                                                                bigModel.isPersonChosen = true
                                                                 
                                                             }
                                                         }
-                                                        
-                                                        bigModel.userDBLat = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0
-                                                        bigModel.userDBLong = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0
-                                                        bigModel.isPersonChosen = true
                                                         
                                                     }
                                                       

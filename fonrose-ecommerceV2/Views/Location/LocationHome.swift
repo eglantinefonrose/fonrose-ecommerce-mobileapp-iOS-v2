@@ -23,6 +23,8 @@ struct LocationHome: View {
     @State var isLocationSelected: Bool = false
     var db = Firestore.firestore()
     @State var disablePopUp: Bool = false
+    @State var isAlertPresented: Bool = false
+    var previousLocationKept = false
     
     var body: some View {
         
@@ -161,23 +163,23 @@ struct LocationHome: View {
 
                             if bigModel.isPersonChosen {
                                 
-                                Text(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))
-                                        
-                                    .foregroundColor(.black)
-                                    .font(.callout)
-                                    .onTapGesture {
-                                        mapData.pinHome()
-                                        isHomeSelected = true
-                                        if isHomeSelected == true {
-                                            bigModel.selectedPlacemark = mapData.userHomePlacemark!
-                                        
-                                        //convertir le placemark en coordonnées GPS
-                                        //bigModel.selectedPlacemark?.location?.coordinate
-                                        
+                                Text("\(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" && previousLocationKept ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))+\(CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0))+\(CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0))")
+                                            
+                                        .foregroundColor(.black)
+                                        .font(.callout)
+                                        .onTapGesture {
+                                            mapData.pinHome()
+                                            isHomeSelected = true
+                                            if isHomeSelected == true {
+                                                bigModel.selectedPlacemark = mapData.userHomePlacemark!
+                                            
+                                            //convertir le placemark en coordonnées GPS
+                                            //bigModel.selectedPlacemark?.location?.coordinate
+                                            
+                                            }
                                         }
-                                    }
+                                }
                                 
-                            }
                         }
                         
                         Spacer()
@@ -224,6 +226,8 @@ struct LocationHome: View {
             locationManager.delegate = mapData
             //le delegate est le LocationViewModel
             locationManager.requestWhenInUseAuthorization()
+            isAlertPresented = true
+            
         })
         //if permission is denied
         .alert(isPresented: $mapData.permissionDenied, content: {
@@ -232,6 +236,17 @@ struct LocationHome: View {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         })
+        .alert(isPresented: $isAlertPresented, content: {
+            /*Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), dismissButton: .default(Text("Keep"),action: {
+                mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0), pointSelectedPlaceLong: CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0))
+            }))*/
+            Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), primaryButton: .default(Text("Keep")) {
+                mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
+            }, secondaryButton: .default(Text("Change")) {
+                
+            })
+        })
+        
         .onChange(of: mapData.searchTxt, perform: { value in
             
             let delay = 0.3

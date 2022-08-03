@@ -109,7 +109,11 @@ struct BigRootView: View {
                 }
             
                 if (self.bigModel.currentview == .Auth_UserInfo) {
-                    UserInfo()
+                    if !bigModel.isPersonChosen {
+                        AuthView()
+                    } else {
+                        UserInfo()
+                    }
                 }
             
         }

@@ -198,8 +198,8 @@ class BigModel : ObservableObject {
         self.user.persons = []
         
         self.currentview = .Home_homeFeed
+        self.authCurrentView = .Auth_SignInView
         
-
         self.signedIn = false
     }
     

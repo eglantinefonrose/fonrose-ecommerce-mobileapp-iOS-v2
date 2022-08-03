@@ -24,7 +24,7 @@ struct LocationHome: View {
     var db = Firestore.firestore()
     @State var disablePopUp: Bool = false
     @State var isAlertPresented: Bool = false
-    var previousLocationKept = false
+    @State var previousLocationKept = false
     
     var body: some View {
         
@@ -97,6 +97,7 @@ struct LocationHome: View {
                                             isHomeSelected = false
                                             mapData
                                                 .selectPlace(place: place)
+                                            previousLocationKept = false
                                             
                                             if isHomeSelected == false {
                                                 bigModel.selectedPlacemark = place.placemark
@@ -163,7 +164,7 @@ struct LocationHome: View {
 
                             if bigModel.isPersonChosen {
                                 
-                                Text("\(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" && previousLocationKept ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))+\(CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0))+\(CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0))")
+                                Text("\(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" && previousLocationKept ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))")
                                             
                                         .foregroundColor(.black)
                                         .font(.callout)
@@ -189,14 +190,23 @@ struct LocationHome: View {
                                 .fill(Color.gray)
                                 .frame(width: 65, height: 50)
                             Image(systemName: "checkmark")
-                                .foregroundColor(bigModel.selectedPlacemark == nil ? .black : .white)
-                                .font(bigModel.selectedPlacemark == nil ? .footnote : .headline)
+                                .foregroundColor(bigModel.selectedPlacemark == nil && !previousLocationKept ? .black : .white)
+                                .font(bigModel.selectedPlacemark == nil && !previousLocationKept ? .footnote : .headline)
                         }
                         .onTapGesture {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                             self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
+                            isAlertPresented = true
                             
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
+                            if bigModel.selectedPlacemark != nil {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
+                            } else {
+                                
+                            }
+                            
+                            if previousLocationKept {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "", "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
+                            }
                             
                             print("back")
                         }
@@ -208,14 +218,6 @@ struct LocationHome: View {
                 }
                 
             }
-            
-        VStack {
-            
-            if !bigModel.signedIn {
-                AuthView()
-            }
-        
-        }
             
         Spacer()
             .frame(height: 40)
@@ -237,14 +239,16 @@ struct LocationHome: View {
             }))
         })
         .alert(isPresented: $isAlertPresented, content: {
-            /*Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), dismissButton: .default(Text("Keep"),action: {
-                mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0), pointSelectedPlaceLong: CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0))
-            }))*/
-            Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), primaryButton: .default(Text("Keep")) {
-                mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
-            }, secondaryButton: .default(Text("Change")) {
+            
+            Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), primaryButton: .default(Text("Change")) {
+            
+            }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
+                mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
+                self.previousLocationKept = true
+            
             })
+            
         })
         
         .onChange(of: mapData.searchTxt, perform: { value in

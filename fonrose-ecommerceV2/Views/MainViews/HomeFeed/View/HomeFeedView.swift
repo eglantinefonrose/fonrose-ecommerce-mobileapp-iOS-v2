@@ -167,7 +167,7 @@ struct HomeFeedView: View {
                             .font(.system(size: 20))
                             .onTapGesture {
                                 bigModel.lastViews.append(.Home_homeFeed)
-                                self.bigModel.currentview = !bigModel.isPersonChosen ? .Auth_AuthView : .Auth_UserInfo
+                                self.bigModel.currentview = .Auth_UserInfo
                                 print(bigModel.user.userID)
                                 print(bigModel.user.email)
                                 //.standard ? "network" : "map"

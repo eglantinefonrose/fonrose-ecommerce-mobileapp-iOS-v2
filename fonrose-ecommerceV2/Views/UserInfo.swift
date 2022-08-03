@@ -36,6 +36,7 @@ struct UserInfo: View {
                         .foregroundColor(.blue)
                         .onTapGesture {
                             bigModel.signOut()
+                            print("\(bigModel.$authCurrentView)")
                         }
                     
                     Spacer()

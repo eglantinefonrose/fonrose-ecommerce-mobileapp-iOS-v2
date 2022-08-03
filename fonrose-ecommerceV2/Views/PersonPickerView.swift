@@ -54,6 +54,7 @@ struct PersonPickerView: View {
                                             
                                             bigModel.currentPersonIndex = index
                                             print(bigModel.currentPersonIndex)
+                                            bigModel.authCurrentView = .Auth_UserInfo 
                                             bigModel.lastViews.append(.Auth_PersonPickerView)
                                             print(bigModel.user.userID)
                                             print(bigModel.user.email)

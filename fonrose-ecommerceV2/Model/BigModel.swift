@@ -31,7 +31,12 @@ class BigModel : ObservableObject {
     }
 
     struct Location {
-        var adressName: String
+        var adressPostalCode: String
+        var adressCity: String
+        var adressStreet: String
+        var adressMailBox: String
+        var adressBasement: String
+        var adressStage: String
         var adressLat: CGFloat
         var adressLong: CGFloat
         
@@ -267,13 +272,20 @@ class BigModel : ObservableObject {
                         return
                     }
                     
+                    //["adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0]
+                    
                     if let snapshot = snapshot {
                         for document in snapshot.documents {
-                            let dbAdressName = document.data()["adressName"] as? String ?? ""
+                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
                             let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
                             let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                             
-                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                             
                         }
                     }
@@ -289,11 +301,16 @@ class BigModel : ObservableObject {
                     
                     if let snapshot = snapshot {
                         for document in snapshot.documents {
-                            let dbAdressName = document.data()["adressName"] as? String ?? ""
+                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
                             let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
                             let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                             
-                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                            self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                             
                         }
                     }

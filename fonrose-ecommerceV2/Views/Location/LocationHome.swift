@@ -195,7 +195,7 @@ struct LocationHome: View {
                             isAlertPresented = true
                             
                             if self.adressName != "No location selected" {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": adressName, "adressLat": adressLat, "adressLong": adressLong])
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                             } else {
                                 
                             }
@@ -237,7 +237,8 @@ struct LocationHome: View {
             }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
                 mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
-                adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? ""
+                //adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
+                adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
                 adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0)
                 adressLong = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
             

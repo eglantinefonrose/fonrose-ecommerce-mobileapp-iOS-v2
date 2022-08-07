@@ -80,17 +80,16 @@ struct RecapMensurations: View {
                                         
                                         if let snapshot = snapshot {
                                             for document in snapshot.documents {
-                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
-                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
-                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                                let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                                let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                                let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                                let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                                let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                                                 
-                                                bigModel.userDBLat = CGFloat(50.1109221)
-                                                bigModel.userDBLong = CGFloat(8.6821267)
-                                                
-                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
-                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
-                                         
-                                                bigModel.isPersonChosen = true
+                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                 
                                             }
                                         }
@@ -109,17 +108,16 @@ struct RecapMensurations: View {
                                         
                                         if let snapshot = snapshot {
                                             for document in snapshot.documents {
-                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
-                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
-                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                                let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                                let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                                let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                                let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                                let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
+                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
                                                 
-                                                bigModel.userDBLat = CGFloat(50.1109221)
-                                                bigModel.userDBLong = CGFloat(8.6821267)
-                                                
-                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
-                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
-                                         
-                                                bigModel.isPersonChosen = true
+                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                 
                                             }
                                         }

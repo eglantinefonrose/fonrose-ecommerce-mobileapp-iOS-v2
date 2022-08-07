@@ -8,6 +8,7 @@
 
 import SwiftUI
 import FirebaseAuth
+import FirebaseFirestore
 import MapKit
 
 @available(iOS 14.0, *)
@@ -16,6 +17,7 @@ struct HomeFeedView: View {
     @State var offset: CGFloat = -UIScreen.main.bounds.width/4
     @EnvironmentObject var bigModel: BigModel
     @StateObject var mapData = LocationViewModel()
+    var db = Firestore.firestore()
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -87,7 +89,69 @@ struct HomeFeedView: View {
                                             bigModel.lastViews.append(.Home_homeFeed)
                                             self.bigModel.showMenu = false
                                             
-                                            //mapData.pinSelectedPlace(pointSelectedPlaceLat: Int(CLLocationDegrees(25.276987)), pointSelectedPlaceLong: Int(CLLocationDegrees(55.296249)))
+                                            if bigModel.signedIn {
+                                                
+                                                print("signed in")
+                                                
+                                                if bigModel.currentPersonIndex+1 < 10 {
+                                                    
+                                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                                        guard error == nil else {
+                                                            print(error!.localizedDescription)
+                                                            return
+                                                        }
+                                                        
+                                                        if let snapshot = snapshot {
+                                                            for document in snapshot.documents {
+                                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                                
+                                                                bigModel.userDBLat = CGFloat(50.1109221)
+                                                                bigModel.userDBLong = CGFloat(8.6821267)
+                                                                
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
+                                                         
+                                                                bigModel.isPersonChosen = true
+                                                                
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                      
+                                                }
+                                                
+                                                else {
+                                                    
+                                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                                        guard error == nil else {
+                                                            print(error!.localizedDescription)
+                                                            return
+                                                        }
+                                                        
+                                                        if let snapshot = snapshot {
+                                                            for document in snapshot.documents {
+                                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                                
+                                                                bigModel.userDBLat = CGFloat(50.1109221)
+                                                                bigModel.userDBLong = CGFloat(8.6821267)
+                                                                
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
+                                                         
+                                                                bigModel.isPersonChosen = true
+                                                                
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                    
+                                                }
+                                                
+                                            }
                                             
                                         }
                                     

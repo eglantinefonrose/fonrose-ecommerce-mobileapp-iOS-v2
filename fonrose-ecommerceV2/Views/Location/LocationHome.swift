@@ -19,13 +19,13 @@ struct LocationHome: View {
     @StateObject var mapData = LocationViewModel()
     @State var locationManager = CLLocationManager()
     @State var currentLocation: CLPlacemark?
-    @State var isHomeSelected: Bool = false
     @State var isLocationSelected: Bool = false
     var db = Firestore.firestore()
     @State var disablePopUp: Bool = false
     @State var isAlertPresented: Bool = false
-    @State var previousLocationKept = false
     @State var adressName: String = "No location selected"
+    @State var adressLat: CGFloat = 0
+    @State var adressLong: CGFloat = 0
     
     var body: some View {
         
@@ -99,13 +99,11 @@ struct LocationHome: View {
                                         .foregroundColor(.black)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .onTapGesture {
-                                            
                                             mapData
                                                 .selectPlace(place: place)
-                                            //bigModel.selectedPlacemark = place.placemark
                                             self.adressName = "\(place.placemark.name ?? ""), \(place.placemark.postalCode ?? "")"
-                                            isHomeSelected = false
-                
+                                            self.adressLat = CGFloat(place.placemark.location?.coordinate.latitude ?? 0)
+                                            self.adressLong = CGFloat(place.placemark.location?.coordinate.longitude ?? 0)
                                         }
                                     Divider()
                                 }
@@ -121,7 +119,7 @@ struct LocationHome: View {
                     
                     Button {
                         
-                        mapData.pinSelectedPlace(pointSelectedPlaceLat: CGFloat(Int(CGFloat(CLLocationDegrees(25.276987)))), pointSelectedPlaceLong: CGFloat(Int(CGFloat(CLLocationDegrees(55.296249)))))
+                        //bouton permet de centrer la map sur sa loc
                         
                     } label: {
                         Image(systemName: "location.fill")
@@ -152,9 +150,10 @@ struct LocationHome: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .onTapGesture {
-                                isHomeSelected = true
-                                self.adressName = homeCoordinateName
                                 mapData.pinHome(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(homeCoordinateLat)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(homeCoordinateLong)))
+                                self.adressName = homeCoordinateName
+                                self.adressLat = CGFloat(homeCoordinateLat)
+                                self.adressLong = CGFloat(homeCoordinateLong)
                                 print(homeCoordinateLat)
                                 print(homeCoordinateLong)
                                 print(homeCoordinateName)
@@ -171,16 +170,6 @@ struct LocationHome: View {
                                 .frame(width: 300, height: 50)
 
                             if bigModel.isPersonChosen {
-                                
-                                /*if !isHomeSelected {
-                                    Text("\(bigModel.selectedPlacemark?.name ?? (bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName != "" && previousLocationKept ? bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "" : "No location selected"))")
-                                        .foregroundColor(.black)
-                                        .font(.callout)
-                                } else {
-                                    Text(homeCoordinateName)
-                                        .foregroundColor(.black)
-                                        .font(.callout)
-                                }*/
                                 
                                 Text(adressName)
                                     .foregroundColor(.black)
@@ -204,16 +193,11 @@ struct LocationHome: View {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                             self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
                             isAlertPresented = true
-                            isHomeSelected = false
                             
-                            if bigModel.selectedPlacemark != nil {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.selectedPlacemark?.name ?? "", "adressLat": bigModel.selectedPlacemark?.location?.coordinate.latitude ?? 0, "adressLong": bigModel.selectedPlacemark?.location?.coordinate.longitude ?? 0])
+                            if self.adressName != "No location selected" {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": adressName, "adressLat": adressLat, "adressLong": adressLong])
                             } else {
                                 
-                            }
-                            
-                            if previousLocationKept {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressName": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? "", "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
                             }
                             
                             print("back")
@@ -253,8 +237,9 @@ struct LocationHome: View {
             }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
                 mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
-                self.previousLocationKept = true
                 adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressName ?? ""
+                adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0)
+                adressLong = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
             
             })
             

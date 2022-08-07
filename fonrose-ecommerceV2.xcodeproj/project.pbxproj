@@ -39,6 +39,7 @@
 		704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357F2477BB8F001F20A8 /* ViewEnum.swift */; };
 		704535822477BD85001F20A8 /* BigRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704535812477BD85001F20A8 /* BigRootView.swift */; };
 		7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7049ED27281E7C2B00C16C3B /* PostStack.swift */; };
+		704D0A2928A0286100AACF36 /* LocationRecap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D0A2828A0286100AACF36 /* LocationRecap.swift */; };
 		704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D2197245B377500D0B13F /* SANDBOX_textField.swift */; };
 		7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7053C99C2464420300DF1E0C /* LogInScreen.swift */; };
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
@@ -97,6 +98,7 @@
 		7045357F2477BB8F001F20A8 /* ViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEnum.swift; sourceTree = "<group>"; };
 		704535812477BD85001F20A8 /* BigRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRootView.swift; sourceTree = "<group>"; };
 		7049ED27281E7C2B00C16C3B /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStack.swift; sourceTree = "<group>"; };
+		704D0A2828A0286100AACF36 /* LocationRecap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecap.swift; sourceTree = "<group>"; };
 		704D2197245B377500D0B13F /* SANDBOX_textField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANDBOX_textField.swift; sourceTree = "<group>"; };
 		7053C99C2464420300DF1E0C /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				7031EF9627F04C27009CA3A2 /* LocationHome.swift */,
 				7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */,
 				7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */,
+				704D0A2828A0286100AACF36 /* LocationRecap.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				7031EF9727F04C27009CA3A2 /* LocationHome.swift in Sources */,
 				701FE113245722E600E91EFA /* CarouselView.swift in Sources */,
 				70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */,
+				704D0A2928A0286100AACF36 /* LocationRecap.swift in Sources */,
 				70BB819A246D7EC500695F19 /* About_us.swift in Sources */,
 				70347553286090590030C906 /* MeasurementView.swift in Sources */,
 				7045357E2477BB29001F20A8 /* BigModel.swift in Sources */,

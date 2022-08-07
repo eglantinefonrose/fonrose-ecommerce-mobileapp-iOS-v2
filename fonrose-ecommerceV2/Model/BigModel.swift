@@ -68,9 +68,6 @@ class BigModel : ObservableObject {
     @Published var orderID : String? = nil
     @Published var orderStatus : SuiviStatusEnum? = nil
     
-    //MARK: Location
-    @Published var selectedPlacemark: CLPlacemark? = nil
-    
     //MARK: Authentification
     @Published var currentUserName: String = ""
     

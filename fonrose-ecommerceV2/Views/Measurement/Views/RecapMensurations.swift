@@ -7,10 +7,14 @@
 //
 
 import SwiftUI
+import FirebaseAuth
+import FirebaseFirestore
 
 struct RecapMensurations: View {
     
     @EnvironmentObject var bigModel: BigModel
+    var auth = Auth.auth()
+    var db = Firestore.firestore()
     
     var body: some View {
                                 
@@ -61,6 +65,71 @@ struct RecapMensurations: View {
                             print("previous View = \(String(describing: self.bigModel.lastViews.last))")
                             print(self.bigModel.lastViews.count)
                             print("location")
+                            
+                            if bigModel.signedIn {
+                                
+                                print("signed in")
+                                
+                                if bigModel.currentPersonIndex+1 < 10 {
+                                    
+                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                        guard error == nil else {
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        if let snapshot = snapshot {
+                                            for document in snapshot.documents {
+                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
+                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                
+                                                bigModel.userDBLat = CGFloat(50.1109221)
+                                                bigModel.userDBLong = CGFloat(8.6821267)
+                                                
+                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
+                                         
+                                                bigModel.isPersonChosen = true
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                      
+                                }
+                                
+                                else {
+                                    
+                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                        guard error == nil else {
+                                            print(error!.localizedDescription)
+                                            return
+                                        }
+                                        
+                                        if let snapshot = snapshot {
+                                            for document in snapshot.documents {
+                                                let dbAdressName = document.data()["adressName"] as? String ?? ""
+                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 55
+                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 55
+                                                
+                                                bigModel.userDBLat = CGFloat(50.1109221)
+                                                bigModel.userDBLong = CGFloat(8.6821267)
+                                                
+                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressName: dbAdressName, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 4)
+                                         
+                                                bigModel.isPersonChosen = true
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
                             }) {
                                 //Spacer()
                                     

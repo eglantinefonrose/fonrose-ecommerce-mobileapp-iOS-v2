@@ -8,12 +8,15 @@
 
 import SwiftUI
 import MapKit
+import FirebaseAuth
+import FirebaseFirestore
 
 @available(iOS 14.0, *)
 struct BigRootView: View {
     
     @EnvironmentObject var bigModel: BigModel
     @StateObject var mapData = LocationViewModel()
+    var db = Firestore.firestore()
     
     @available(iOS 14.0, *)
     var body: some View {

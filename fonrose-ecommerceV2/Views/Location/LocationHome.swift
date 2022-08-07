@@ -28,6 +28,10 @@ struct LocationHome: View {
     
     var body: some View {
         
+        let homeCoordinateLat = mapData.locationLat ?? 40
+        let homeCoordinateLong = mapData.locationLong ?? 40
+        let homeCoordinateName = mapData.placemarkName ?? ""
+        
         ZStack {
             
             LocationMapView()
@@ -149,7 +153,10 @@ struct LocationHome: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .onTapGesture {
-                                mapData.pinHome()
+                                mapData.pinHome(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(homeCoordinateLat)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(homeCoordinateLong)))
+                                print(homeCoordinateLat)
+                                print(homeCoordinateLong)
+                                print(homeCoordinateName)
                             }
                     }
                     
@@ -169,7 +176,6 @@ struct LocationHome: View {
                                         .foregroundColor(.black)
                                         .font(.callout)
                                         .onTapGesture {
-                                            mapData.pinHome()
                                             isHomeSelected = true
                                             if isHomeSelected == true {
                                                 bigModel.selectedPlacemark = mapData.userHomePlacemark!

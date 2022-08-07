@@ -24,6 +24,10 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     //MARK: User's location
     
     @Published var authorizationStatus: CLAuthorizationStatus
+    @Published var location: CLLocation? = nil
+    @Published var locationLat: CLLocationDegrees? = nil
+    @Published var locationLong: CLLocationDegrees? = nil
+    @Published var placemarkName: String? = nil
     
     private let locationManager: CLLocationManager
     //CLLocationManager = big boss qui gère CoreLocation
@@ -111,6 +115,21 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
          */
         
         guard let lastSeenLocation = locations.first else { return }
+        locationLat = lastSeenLocation.coordinate.latitude
+        locationLong = lastSeenLocation.coordinate.longitude
+        
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(lastSeenLocation) { (placemarks, error) in
+            if (error != nil) {
+                print(error?.localizedDescription ?? "")
+            }
+            
+            if placemarks?.count != 0 {
+                let placemark = placemarks!.first
+                self.placemarkName = "\(placemark?.name ?? ""), \(placemark?.postalCode ?? "")"
+            }
+            
+        }
         
         //"region" correspond à une zone autour de laquelle la map va se centrer
         
@@ -201,18 +220,23 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    func pinHome() {
-        guard let homeCoordinate = userHomePlacemark?.location?.coordinate else {return}
+    func pinHome(pointSelectedPlaceLat: CGFloat, pointSelectedPlaceLong: CGFloat) {
         
-        let pointHomeAnnotation = MKPointAnnotation()
-        pointHomeAnnotation.coordinate = homeCoordinate
-        
-        let coordinateHomeRegion = MKCoordinateRegion(center: homeCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
-        mapView.setRegion(coordinateHomeRegion, animated: true)
+        let selectedPlaceCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(pointSelectedPlaceLat), longitude: CLLocationDegrees(pointSelectedPlaceLong))
+         
+        //un MKPointAnnotation correspond au nom qu'il y a marqué à côté de l'épingle qui s'affiche sur la map
+        let pointAnnotation = MKPointAnnotation()
+        pointAnnotation.coordinate = selectedPlaceCoordinate
+        pointAnnotation.title = "No name"
+         
+        //Moving map to that location
+             
+        let coordinateRegion = MKCoordinateRegion(center: selectedPlaceCoordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
+        mapView.setRegion(coordinateRegion, animated: true)
         mapView.setVisibleMapRect(mapView.visibleMapRect, animated: true)
-        
+         
         mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(pointHomeAnnotation)
+        mapView.addAnnotation(pointAnnotation)
         
     }
     

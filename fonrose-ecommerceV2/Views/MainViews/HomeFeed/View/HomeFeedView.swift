@@ -109,8 +109,8 @@ struct HomeFeedView: View {
                                                                 let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
                                                                 let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
                                                                 let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
-                                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                                 
                                                                 bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                                 
@@ -138,8 +138,8 @@ struct HomeFeedView: View {
                                                                 let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
                                                                 let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
                                                                 let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
-                                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                                 
                                                                 bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                                 

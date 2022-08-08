@@ -27,7 +27,8 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published var location: CLLocation? = nil
     @Published var locationLat: CLLocationDegrees? = nil
     @Published var locationLong: CLLocationDegrees? = nil
-    @Published var placemarkName: String? = nil
+    @Published var placemarkStreet: String? = nil
+    @Published var placemarkPostalCode: String? = nil
     
     private let locationManager: CLLocationManager
     //CLLocationManager = big boss qui gère CoreLocation
@@ -126,7 +127,8 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             
             if placemarks?.count != 0 {
                 let placemark = placemarks!.first
-                self.placemarkName = "\(placemark?.name ?? ""), \(placemark?.postalCode ?? "")"
+                self.placemarkStreet = placemark?.name ?? ""
+                self.placemarkPostalCode = placemark?.postalCode ?? ""
             }
             
         }

@@ -107,10 +107,10 @@ struct PersonPickerView: View {
                                                                 let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
                                                                 let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
                                                                 let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                                                let dbAdressLat = document.data()["adressLat"] as? Int ?? 0
-                                                                let dbAdressLong = document.data()["adressLong"] as? Int ?? 0
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                                 
-                                                                //self.user.persons[self.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                                 
                                                             }
                                                         }
@@ -142,6 +142,32 @@ struct PersonPickerView: View {
                                                         }
                                                                                                                 
                                                     }
+                                                    
+                                                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                                        guard error == nil else {
+                                                            print(error!.localizedDescription)
+                                                            return
+                                                        }
+                                                        
+                                                        if let snapshot = snapshot {
+                                                            for document in snapshot.documents {
+                                                                let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                                                let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                                                let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                                                let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                                                let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                                                let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+                                                                
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                
+                                                            }
+                                                        }
+                                                        
+                                                    }
+
+                                                    
                                                 }
                                                 
                                             } else {

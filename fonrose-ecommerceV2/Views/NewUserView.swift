@@ -62,7 +62,7 @@ struct NewUserView: View {
                                     }
                                 }
                                 
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": ":)1", "ArmsLength": ":)2", "HeadMeasurement": ":)3", "PelvisMeasurement": ":)4", "PelvisKnee": ":)5", "ShouldersMeasurement": ":)6", "ShouldersPelvis": ":)7"])
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
                                 
                                 db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Location").setData(["adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                             
@@ -105,7 +105,7 @@ struct NewUserView: View {
                         print(bigModel.user.persons.count)
                         print(Auth.auth().currentUser?.uid ?? "nil")
                             
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": ":)1", "ArmsLength": ":)2", "HeadMeasurement": ":)3", "PelvisMeasurement": ":)4", "PelvisKnee": ":)5", "ShouldersMeasurement": ":)6", "ShouldersPelvis": ":)7"])
+                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
                             
                             //["adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0]
                             

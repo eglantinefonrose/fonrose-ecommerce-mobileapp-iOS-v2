@@ -23,15 +23,12 @@ struct LocationHome: View {
     var db = Firestore.firestore()
     @State var disablePopUp: Bool = false
     @State var isAlertPresented: Bool = false
-    @State var adressName: String = "No location selected"
+    @State var adressStreet: String = "No location selected"
+    @State var adressPostalCode: String = ""
     @State var adressLat: CGFloat = 0
     @State var adressLong: CGFloat = 0
     
     var body: some View {
-        
-        let homeCoordinateLat = mapData.locationLat ?? 40
-        let homeCoordinateLong = mapData.locationLong ?? 40
-        let homeCoordinateName = mapData.placemarkName ?? ""
         
         ZStack {
             
@@ -101,7 +98,8 @@ struct LocationHome: View {
                                         .onTapGesture {
                                             mapData
                                                 .selectPlace(place: place)
-                                            self.adressName = "\(place.placemark.name ?? ""), \(place.placemark.postalCode ?? "")"
+                                            self.adressStreet = place.placemark.name ?? ""
+                                            self.adressPostalCode = place.placemark.postalCode ?? ""
                                             self.adressLat = CGFloat(place.placemark.location?.coordinate.latitude ?? 0)
                                             self.adressLong = CGFloat(place.placemark.location?.coordinate.longitude ?? 0)
                                         }
@@ -150,13 +148,14 @@ struct LocationHome: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .onTapGesture {
-                                mapData.pinHome(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(homeCoordinateLat)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(homeCoordinateLong)))
-                                self.adressName = homeCoordinateName
-                                self.adressLat = CGFloat(homeCoordinateLat)
-                                self.adressLong = CGFloat(homeCoordinateLong)
-                                print(homeCoordinateLat)
-                                print(homeCoordinateLong)
-                                print(homeCoordinateName)
+                                mapData.pinHome(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(mapData.locationLat ?? 40)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(mapData.locationLong ?? 40)))
+                                self.adressStreet = mapData.placemarkStreet ?? ""
+                                self.adressPostalCode = mapData.placemarkPostalCode ?? ""
+                                self.adressLat = CGFloat(mapData.locationLat ?? 40)
+                                self.adressLong = CGFloat(mapData.locationLong ?? 40)
+                                print(mapData.locationLat ?? 40)
+                                print(mapData.locationLong ?? 40)
+                                print(mapData.placemarkStreet ?? "")
                             }
                     }
                     
@@ -171,7 +170,7 @@ struct LocationHome: View {
 
                             if bigModel.isPersonChosen {
                                 
-                                Text(adressName)
+                                Text("\(adressStreet) \(adressPostalCode)")
                                     .foregroundColor(.black)
                                     .font(.callout)
                                 
@@ -186,16 +185,16 @@ struct LocationHome: View {
                                 .fill(Color.gray)
                                 .frame(width: 65, height: 50)
                             Image(systemName: "checkmark")
-                                .foregroundColor(adressName == "No location selected" ? .black : .white)
-                                .font(adressName == "No location selected" ? .footnote : .headline)
+                                .foregroundColor(adressStreet == "No location selected" ? .black : .white)
+                                .font(adressStreet == "No location selected" ? .footnote : .headline)
                         }
                         .onTapGesture {
                             self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                             self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
                             isAlertPresented = true
                             
-                            if self.adressName != "No location selected" {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+                            if self.adressStreet != "No location selected" {
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong])
                             } else {
                                 
                             }
@@ -237,8 +236,8 @@ struct LocationHome: View {
             }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
                 mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
-                //adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
-                adressName = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
+                adressStreet = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
+                adressPostalCode = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? ""
                 adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0)
                 adressLong = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
             

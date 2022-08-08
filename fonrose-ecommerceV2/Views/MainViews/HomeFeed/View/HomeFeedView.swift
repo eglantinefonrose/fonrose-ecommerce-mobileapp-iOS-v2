@@ -85,7 +85,7 @@ struct HomeFeedView: View {
                                         .foregroundColor(.white)
                                         .font(.headline)
                                         .onTapGesture {
-                                            bigModel.currentview = ViewEnum.FinalizeOrderViews_Livraison
+                                            bigModel.currentview = ViewEnum.LivraisonViews_Livraison
                                             bigModel.lastViews.append(.Home_homeFeed)
                                             self.bigModel.showMenu = false
                                             

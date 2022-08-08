@@ -83,16 +83,8 @@ struct BigRootView: View {
                     PaymentScreen()
                 }
                 
-                if (self.bigModel.currentview == .FinalizeOrderViews_RecapMensurations) {
+                if (self.bigModel.currentview == .Measurement_RecapMensurations) {
                     RecapMensurations()
-                }
-                
-                if (self.bigModel.currentview == .FinalizeOrderViews_Livraison) {
-                    if !bigModel.isPersonChosen {
-                        AuthView()
-                    } else {
-                        LocationHome()
-                    }
                 }
             
                 if (self.bigModel.currentview == .FinalizeOrderViews_FinDeCommande) {
@@ -101,8 +93,28 @@ struct BigRootView: View {
                 
             }
             
+            //MARK: Location
+            
+            VStack {
+                
+                if (self.bigModel.currentview == .LivraisonViews_Livraison) {
+                    if !bigModel.isPersonChosen {
+                        AuthView()
+                    } else {
+                        LocationHome()
+                    }
+                }
+                
+                if (self.bigModel.currentview == .LivraisonViews_RecapLivraison) {
+                    LocationRecap()
+                }
+                
+            }
+            
             //MARK: Auth
             
+            VStack {
+                
                 if (self.bigModel.currentview == .Auth_AuthView) {
                     AuthView()
                 }
@@ -118,6 +130,8 @@ struct BigRootView: View {
                         UserInfo()
                     }
                 }
+                
+            }
             
         }
     }

@@ -60,8 +60,8 @@ struct RecapMensurations: View {
                         VStack {
                         
                         Button(action: {
-                            self.bigModel.lastViews.append(.FinalizeOrderViews_RecapMensurations)
-                            self.bigModel.currentview = .FinalizeOrderViews_Livraison
+                            self.bigModel.lastViews.append(.Measurement_RecapMensurations)
+                            self.bigModel.currentview = .LivraisonViews_Livraison
                             print("previous View = \(String(describing: self.bigModel.lastViews.last))")
                             print(self.bigModel.lastViews.count)
                             print("location")

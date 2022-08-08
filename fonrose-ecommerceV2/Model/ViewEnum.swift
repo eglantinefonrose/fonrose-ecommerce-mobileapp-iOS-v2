@@ -10,21 +10,33 @@ import Foundation
 
 enum ViewEnum {
     
+    //MARK: Main views
     case Home_homeFeed
     case MeasurementCarouselView
-    case Measurement_Mensurations
     case VideoPlayer_trailerPlayer
     case AboutUsScreen
-    case FinalizeOrderViews_RecapMensurations
-    case FinalizeOrderViews_Livraison
+    
+    //MARK: Measurement
+    case Measurement_Mensurations
+    case Measurement_RecapMensurations
+    
+    //MARK: Delivery
+    case LivraisonViews_Livraison
+    case LivraisonViews_RecapLivraison
+    
+    //MARK: Finalize Order
     case FinalizeOrderViews_PaymentScreen
     case FinalizeOrderViews_FinDeCommande
+        
+    //MARK: Service Client
     case ServiceClient_showDelivery
     case ServiceClient_showSuiviDeCommande
     case ServiceClient_showReturn
     case ServiceClient_showCard
     case ServiceClient_showServices
     case ServiceClient_ServiceClientInfos
+    
+    //MARK: Auth
     case Auth_SignInView
     case Auth_SignUpView
     case Auth_LogInNewUserView

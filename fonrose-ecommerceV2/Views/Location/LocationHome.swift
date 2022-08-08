@@ -189,12 +189,73 @@ struct LocationHome: View {
                                 .font(adressStreet == "No location selected" ? .footnote : .headline)
                         }
                         .onTapGesture {
-                            self.bigModel.currentview = .FinalizeOrderViews_PaymentScreen
-                            self.bigModel.lastViews.append(.FinalizeOrderViews_Livraison)
-                            isAlertPresented = true
+                            self.bigModel.lastViews.append(.LivraisonViews_Livraison)
                             
                             if self.adressStreet != "No location selected" {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong])
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
+                                    
+                                    self.bigModel.currentview = .LivraisonViews_RecapLivraison
+                                    isAlertPresented = true
+                                    
+                                    if bigModel.currentPersonIndex+1 < 10 {
+                                        
+                                        db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                            guard error == nil else {
+                                                print(error!.localizedDescription)
+                                                return
+                                            }
+                                            
+                                            if let snapshot = snapshot {
+                                                for document in snapshot.documents {
+                                                    let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                                    let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                                    let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                                    let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                                    let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                                    let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+                                                    
+                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                    
+                                                }
+                                            }
+
+                                            
+                                        }
+                                          
+                                    }
+                                    
+                                    else {
+                                        
+                                        db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                            guard error == nil else {
+                                                print(error!.localizedDescription)
+                                                return
+                                            }
+                                            
+                                            if let snapshot = snapshot {
+                                                for document in snapshot.documents {
+                                                    let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                                    let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                                    let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                                    let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                                    let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                                    let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+                                                    
+                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                    
+                                                }
+                                            }
+                                            
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                
                             } else {
                                 
                             }

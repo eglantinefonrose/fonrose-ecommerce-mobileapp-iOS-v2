@@ -187,7 +187,7 @@ struct HomeView: View {
                                         }
                                     }
                                     
-                                    bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
+                                    bigModel.currentview = ViewEnum.Measurement_RecapMensurations
                                     
                                 }
                                 
@@ -215,7 +215,7 @@ struct HomeView: View {
                                         }
                                     }
                                     
-                                    bigModel.currentview = ViewEnum.FinalizeOrderViews_RecapMensurations
+                                    bigModel.currentview = ViewEnum.Measurement_RecapMensurations
                                     
                                 }
                             }

@@ -148,6 +148,7 @@ struct LocationHome: View {
                             .foregroundColor(.white)
                             .font(.headline)
                             .onTapGesture {
+                                print("currentPersonIndex = \(bigModel.currentPersonIndex)")
                                 mapData.pinHome(pointSelectedPlaceLat: CGFloat(CLLocationDegrees(mapData.locationLat ?? 40)), pointSelectedPlaceLong: CGFloat(CLLocationDegrees(mapData.locationLong ?? 40)))
                                 self.adressStreet = mapData.placemarkStreet ?? ""
                                 self.adressPostalCode = mapData.placemarkPostalCode ?? ""
@@ -192,7 +193,7 @@ struct LocationHome: View {
                             self.bigModel.lastViews.append(.LivraisonViews_Livraison)
                             
                             if self.adressStreet != "No location selected" {
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.currentPersonIndex+1)-Location").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": bigModel.user.persons[bigModel.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
                                     
                                     self.bigModel.currentview = .LivraisonViews_RecapLivraison
                                     isAlertPresented = true
@@ -207,6 +208,11 @@ struct LocationHome: View {
                                             
                                             if let snapshot = snapshot {
                                                 for document in snapshot.documents {
+                                                    let dbCivility = document.data()["civility"] as? String ?? ""
+                                                    let dbFirstName = document.data()["firstName"] as? String ?? ""
+                                                    let dbLastName = document.data()["lastName"] as? String ?? ""
+                                                    let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
+                                                    let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
                                                     let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
                                                     let dbAdressCity = document.data()["adressCity"] as? String ?? ""
                                                     let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
@@ -216,11 +222,10 @@ struct LocationHome: View {
                                                     let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                                     let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                     
-                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(civility: dbCivility, lastName: dbLastName, firstName: dbFirstName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                     
                                                 }
                                             }
-
                                             
                                         }
                                           
@@ -235,7 +240,13 @@ struct LocationHome: View {
                                             }
                                             
                                             if let snapshot = snapshot {
+                                                
                                                 for document in snapshot.documents {
+                                                    let dbCivility = document.data()["civility"] as? String ?? ""
+                                                    let dbFirstName = document.data()["firstName"] as? String ?? ""
+                                                    let dbLastName = document.data()["lastName"] as? String ?? ""
+                                                    let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
+                                                    let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
                                                     let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
                                                     let dbAdressCity = document.data()["adressCity"] as? String ?? ""
                                                     let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
@@ -245,9 +256,10 @@ struct LocationHome: View {
                                                     let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                                     let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                     
-                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                    bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(civility: dbCivility, lastName: dbLastName, firstName: dbFirstName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                     
                                                 }
+                                                
                                             }
                                             
                                         }

@@ -31,6 +31,11 @@ class BigModel : ObservableObject {
     }
 
     struct Location {
+        var civility: String
+        var lastName: String
+        var firstName: String
+        var emailAdress: String
+        var phoneNumber: String
         var adressPostalCode: String
         var adressCity: String
         var adressStreet: String

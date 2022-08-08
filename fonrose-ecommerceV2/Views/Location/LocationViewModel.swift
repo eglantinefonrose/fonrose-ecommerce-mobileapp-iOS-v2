@@ -126,7 +126,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
             }
             
             if placemarks?.count != 0 {
-                let placemark = placemarks!.first
+                let placemark = placemarks?.first ?? nil
                 self.placemarkStreet = placemark?.name ?? ""
                 self.placemarkPostalCode = placemark?.postalCode ?? ""
             }

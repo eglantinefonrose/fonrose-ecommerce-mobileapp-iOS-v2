@@ -41,6 +41,7 @@ enum ViewEnum {
     case Auth_SignUpView
     case Auth_LogInNewUserView
     case Auth_PersonPickerView
+    case Auth_DeleteScreen
     case Auth_UserInfo
     case Auth_AuthView
     case Auth_NewUserView

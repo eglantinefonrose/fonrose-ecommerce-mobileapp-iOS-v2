@@ -162,6 +162,31 @@ class BigModel : ObservableObject {
             } else {
                 self.user.persons.removeAll()
                 print("Document successfully removed!")
+                if self.user.persons.count == 0 {
+                    self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        
+                        self.user.persons.removeAll()
+                        if let snapshot = snapshot {
+                            for document in snapshot.documents {
+                                let dbName = document.data()["name"] as? String ?? ""
+                                let dbEmail = document.data()["email"] as? String ?? ""
+                                
+                                self.user.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                                
+                                DispatchQueue.main.async {
+                                    self.authCurrentView = .Auth_PersonPickerView
+                                }
+                                
+                                print("doc added")
+                            }
+                        }
+                        
+                    }
+                }
             }
         }
     }

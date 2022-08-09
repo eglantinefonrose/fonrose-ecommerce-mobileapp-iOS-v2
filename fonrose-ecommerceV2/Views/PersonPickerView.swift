@@ -208,6 +208,7 @@ struct PersonPickerView: View {
                                             .foregroundColor(.blue)
                                             .onTapGesture {
                                                 bigModel.deletePerson(personNumber: bigModel.user.persons.count < 10 ? "0\(index+1)" : "\(index+1)")
+                                                bigModel.currentview = .Auth_DeleteScreen
                                             }
                                         
                                         Spacer()
@@ -295,7 +296,30 @@ struct PersonPickerView: View {
     }
 }
 
+struct DeleteScreen: View {
+    
+    @EnvironmentObject var bigModel: BigModel
+    
+    var body: some View {
+        
+        VStack {
+            
+            Text("Are you sure you want to delete you want to delete this person?")
+            Text("Associated informations such as measurements or location adress will be definitively lost.")
+            
+            Text("Delete")
+                .onTapGesture {
+                    bigModel.currentview = .Auth_PersonPickerView
+                }
+            Text("Cancel")
+            
+        }
+        
+    }
+}
+
 struct PersonPickerView_Previews: PreviewProvider {
+    
     static var previews: some View {
         if #available(iOS 14.0, *) {
             PersonPickerView()

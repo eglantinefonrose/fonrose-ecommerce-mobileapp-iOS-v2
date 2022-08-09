@@ -122,6 +122,10 @@ struct BigRootView: View {
                 if (self.bigModel.currentview == .Auth_PersonPickerView) {
                     PersonPickerView()
                 }
+                
+                if (self.bigModel.currentview == .Auth_DeleteScreen) {
+                    DeleteScreen()
+                }
             
                 if (self.bigModel.currentview == .Auth_UserInfo) {
                     if !bigModel.isPersonChosen {

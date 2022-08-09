@@ -156,7 +156,7 @@ class BigModel : ObservableObject {
     }
     
     func deletePerson(personNumber: String) {
-        db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person0\(personNumber)").delete() { err in
+        db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person\(personNumber)").delete() { err in
             if let err = err {
                 print("Error removing document: \(err)")
             } else {

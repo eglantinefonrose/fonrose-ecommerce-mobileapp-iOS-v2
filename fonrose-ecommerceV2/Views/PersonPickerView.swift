@@ -207,7 +207,7 @@ struct PersonPickerView: View {
                                         Image(systemName: "trash")
                                             .foregroundColor(.blue)
                                             .onTapGesture {
-                                                bigModel.deletePerson(personNumber: "\(index+1)")
+                                                bigModel.deletePerson(personNumber: bigModel.user.persons.count < 10 ? "0\(index+1)" : "\(index+1)")
                                             }
                                         
                                         Spacer()

@@ -155,6 +155,17 @@ class BigModel : ObservableObject {
         
     }
     
+    func deletePerson(personNumber: String) {
+        db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person0\(personNumber)").delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                self.user.persons.removeAll()
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
     //MARK: Sign up
     
     @Published var authCurrentView =  ViewEnum.Auth_SignInView

@@ -36,7 +36,7 @@ struct AuthView: View {
             }
             
             if (self.bigModel.authCurrentView == .Auth_NewUserView) {
-                NewUserView()
+                NewPersonView()
             }
             
         }

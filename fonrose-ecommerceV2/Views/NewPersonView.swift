@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
-struct NewUserView: View {
+struct NewPersonView: View {
     
     let db = Firestore.firestore()
     @State var email: String = ""
@@ -124,6 +124,6 @@ struct NewUserView: View {
 
 struct NewUserView_Previews: PreviewProvider {
     static var previews: some View {
-        NewUserView()
+        NewPersonView()
     }
 }

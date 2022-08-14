@@ -207,7 +207,8 @@ struct PersonPickerView: View {
                                         Image(systemName: "trash")
                                             .foregroundColor(.blue)
                                             .onTapGesture {
-                                                bigModel.deletePerson(personNumber: bigModel.user.persons.count < 10 ? "0\(index+1)" : "\(index+1)")
+                                                bigModel.personNumber = bigModel.user.persons.count < 10 ? "0\(index+1)" : "\(index+1)"
+                                                bigModel.deletePerson()
                                                 bigModel.currentview = .Auth_DeleteScreen
                                             }
                                         
@@ -250,7 +251,6 @@ struct PersonPickerView: View {
                    Spacer()
                    
                }.background(Color.black)
-               .edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     
@@ -298,20 +298,156 @@ struct PersonPickerView: View {
 
 struct DeleteScreen: View {
     
+    let db = Firestore.firestore()
+    let auth = Auth.auth()
     @EnvironmentObject var bigModel: BigModel
     
     var body: some View {
         
         VStack {
             
-            Text("Are you sure you want to delete you want to delete this person?")
-            Text("Associated informations such as measurements or location adress will be definitively lost.")
+            VStack {
+                
+                Spacer()
+                
+                Text("Are you sure you want to delete you want to delete this person?")
+                Text("Associated informations such as measurements or location adress will be definitively lost.")
+                
+                Spacer()
+                
+                Text("Delete")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        bigModel.currentview = .Auth_PersonPickerView
+                    }
+                
+                Spacer()
+                
+            }
             
-            Text("Delete")
+            Text("delete all informations of the intern arraw")
+                .foregroundColor(.blue)
                 .onTapGesture {
-                    bigModel.currentview = .Auth_PersonPickerView
+                    print("delete intern data")
+                    bigModel.user.persons.removeAll()
                 }
-            Text("Cancel")
+            
+            Spacer()
+            
+            Text("get fb data")
+                .foregroundColor(.blue)
+                .onTapGesture {
+                    
+                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
+                        
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        
+                        if let snapshot = snapshot {
+                            
+                            for document in snapshot.documents {
+                                
+                                let dbName = document.data()["name"] as? String ?? ""
+                                let dbEmail = document.data()["email"] as? String ?? ""
+                                
+                                bigModel.user.persons.append(BigModel.Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                                print("get data")
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    /*db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        
+                        if let snapshot = snapshot {
+                            
+                            for document in snapshot.documents {
+                                let dbCivility = document.data()["civility"] as? String ?? ""
+                                let dbFirstName = document.data()["firstName"] as? String ?? ""
+                                let dbLastName = document.data()["lastName"] as? String ?? ""
+                                let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
+                                let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
+                                let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+                                
+                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(civility: dbCivility, lastName: dbLastName, firstName: dbFirstName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                
+                            }
+                            
+                        }
+                        
+                    }*/
+                    
+                }
+            
+            Spacer()
+                
+            Text("print intern arraw data")
+                .onTapGesture {
+                    print("intern arraw")
+                    var number = 0
+                    for _ in bigModel.user.persons {
+                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number+1)").setData(["name": bigModel.user.persons[number].name, "email": bigModel.user.persons[number].email])
+                        number = number+1
+                    }
+                }
+            
+            VStack {
+                
+                Spacer()
+                
+                Text("delete last lign")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count+1)").delete() { err in
+                            
+                            if let err = err {
+                                print("Error removing document: \(err)")
+                            } else {
+                                print("Document successfully removed!")
+                            }
+                        }
+                    }
+                
+                VStack {
+                    
+                    Spacer()
+                    
+                    Text("reupload data")
+                        .onTapGesture {
+                            print(bigModel.user.persons.count)
+                            
+                            var number = 1
+                            for _ in bigModel.user.persons {
+                                
+                            }
+                            
+                        }
+                    
+                    Spacer()
+                    
+                }
+                
+                Text("Cancel")
+                    .foregroundColor(.blue)
+                
+                Spacer()
+                
+            }
             
         }
         

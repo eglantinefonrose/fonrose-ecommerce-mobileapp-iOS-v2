@@ -136,6 +136,7 @@ struct LocationTextField: View {
             .onTapGesture {
                 
                 db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Location").setData(["civility": civilityText, "lastName" : lastNameText, "firstName": firstNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
+                bigModel.currentview = .Home_homeFeed
                 
             }
             

@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             if #available(iOS 14.0, *) {
-                window.rootViewController = UIHostingController(rootView: BigRootView()
+                window.rootViewController = UIHostingController(rootView: //LoopTest())
+                BigRootView()
                     .environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions

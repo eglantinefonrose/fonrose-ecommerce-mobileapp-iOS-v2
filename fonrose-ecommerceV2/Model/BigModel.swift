@@ -1,5 +1,5 @@
 //
-//  BigModel.swift
+//  self.swift
 //  fonrose-ecommerceV2
 //
 //  Created by Eglantine on 22/05/2020.
@@ -65,7 +65,6 @@ class BigModel : ObservableObject {
         var location: Location?
     }
 
-
     @Published var currentview = ViewEnum.Home_homeFeed
     @Published var currentPopUpView = ViewEnum.Auth_SignInView
     @Published var lastViews: [ViewEnum] = []
@@ -87,6 +86,9 @@ class BigModel : ObservableObject {
     @Published var currentPersonIndex: Int = 0
     @Published var isPersonChosen = false
     @Published var isSignInPopUpPresented = false
+    
+    //MARK: Persons
+    @Published var personNumber: String = ""
     
     func signIn(email: String, password: String) {
         
@@ -155,14 +157,17 @@ class BigModel : ObservableObject {
         
     }
     
-    func deletePerson(personNumber: String) {
+    func deletePerson() {
+        
         db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person\(personNumber)").delete() { err in
+            
             if let err = err {
                 print("Error removing document: \(err)")
             } else {
                 self.user.persons.removeAll()
                 print("Document successfully removed!")
-                if self.user.persons.count == 0 {
+                
+                /*if self.user.persons.count == 0 {
                     self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
                         guard error == nil else {
                             print(error!.localizedDescription)
@@ -170,6 +175,7 @@ class BigModel : ObservableObject {
                         }
                         
                         self.user.persons.removeAll()
+                        var number = 0
                         if let snapshot = snapshot {
                             for document in snapshot.documents {
                                 let dbName = document.data()["name"] as? String ?? ""
@@ -181,12 +187,36 @@ class BigModel : ObservableObject {
                                     self.authCurrentView = .Auth_PersonPickerView
                                 }
                                 
-                                print("doc added")
+                                print("the person index is \(number)")
+                                
+                                /*if self.user.persons.count < 9 {
+                                    
+                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number)").setData(["email": self.user.persons[number].email, "name": self.user.persons[number].name]) { _ in
+                                        
+                                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(number+1)-Mensurations").setData(["ArmpitsMeasurement": self.user.persons[number].measurements?.ArmpitsMeasurement ?? "", "ArmsLength": self.user.persons[number].measurements?.ArmsLength ?? "", "HeadMeasurement": self.user.persons[number].measurements?.HeadMeasurement ?? "", "PelvisMeasurement": self.user.persons[number].measurements?.PelvisMeasurement ?? "", "PelvisKnee": self.user.persons[number].measurements?.PelvisKnee ?? "", "ShouldersMeasurement": self.user.persons[number].measurements?.ShouldersMeasurement ?? "", "ShouldersPelvis": self.user.persons[number].measurements?.ShouldersPelvis ?? ""])
+                                        
+                                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(number+1)-Location").setData(["civility": self.user.persons[number].location?.civility ?? "", "lastName" : self.user.persons[number].location?.lastName ?? "", "firstName": self.user.persons[number].location?.firstName ?? "", "emailAdress": self.user.persons[number].location?.emailAdress ?? "", "phoneNumber": self.user.persons[number].location?.phoneNumber ?? "", "adressPostalCode": self.user.persons[number].location?.adressPostalCode ?? "", "adressCity": self.user.persons[number].location?.adressCity ?? "", "adressStreet": self.user.persons[number].location?.adressStreet ?? "", "adressMailBox": self.user.persons[number].location?.adressMailBox ?? "", "adressBasement": self.user.persons[number].location?.adressBasement ?? "", "adressStage": self.user.persons[number].location?.adressStage ?? "", "adressLat": self.user.persons[number].location?.adressLat ?? 0, "adressLong": self.user.persons[number].location?.adressLong ?? 0])
+                                        
+                                    }
+                                    
+                                }
+                                
+                                else {
+                                    
+                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").setData(["email": self.user.persons[number].email, "name": self.user.persons[number].name])
+                                    
+                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(number+1)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+                                    
+                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(number+1)-Location").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+                                    
+                                }*/
+                                
+                                number = number+1
                             }
                         }
-                        
                     }
-                }
+                }*/
+                
             }
         }
     }

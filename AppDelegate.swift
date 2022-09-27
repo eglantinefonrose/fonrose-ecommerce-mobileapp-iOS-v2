@@ -21,6 +21,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
         
+        // Connect to the Firebase emulator - BEGIN
+        /*print("WARNING - --------------------------------------- ")
+        print("WARNING - Connecting the Firebase/Firestore Emulator (not the real firebase)")
+        print("WARNING - --------------------------------------- ")
+        let settings = Firestore.firestore().settings
+        settings.host = "localhost:8080"
+        settings.isPersistenceEnabled = false
+        settings.isSSLEnabled = false
+        Firestore.firestore().settings = settings
+        print("WARNING - --------------------------------------- ")
+        print("WARNING - Connecting the Firebase/Auth Emulator (not the real firebase)")
+        print("WARNING - --------------------------------------- ")*/
+        Auth.auth()/*.useEmulator(withHost:"localhost", port:9099)*/
+        // Connect to the Firebase emulator - END
+
+        
         // Fonrose - Remove the footer in all List views (cf https://stackoverflow.com/a/58426517)
         UITableView.appearance().tableFooterView = UIView()
         

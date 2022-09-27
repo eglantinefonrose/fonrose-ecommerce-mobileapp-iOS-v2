@@ -98,6 +98,7 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .LivraisonViews_Livraison) {
+                    //si aucune personne n'est sélectionnée, on affiche la vue d'authenfication qui affichera l'écran de selection des personnes de l'utilisateur
                     if !bigModel.isPersonChosen {
                         AuthView()
                     } else {

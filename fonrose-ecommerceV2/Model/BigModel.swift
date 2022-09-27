@@ -15,7 +15,7 @@ import MapKit
 class BigModel : ObservableObject {
     
     public static var shared = BigModel()
-    var user = User(id: 0, userID: "", email: "", persons: [])
+    var user = User(id: "", email: "", persons: [])
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
     @Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
@@ -24,8 +24,7 @@ class BigModel : ObservableObject {
     
     //MARK: UserModel
     struct User: Identifiable {
-        var id: Int
-        var userID: String
+        var id: String = UUID().uuidString
         var email: String
         var persons: [Person]
     }
@@ -58,7 +57,7 @@ class BigModel : ObservableObject {
     }
 
     struct Person: Identifiable {
-        var id: Int
+        var id = UUID().uuidString
         var email: String
         var name: String
         var measurements: Measurements?
@@ -86,6 +85,7 @@ class BigModel : ObservableObject {
     @Published var currentPersonIndex: Int = 0
     @Published var isPersonChosen = false
     @Published var isSignInPopUpPresented = false
+    @Published var numberArray: [Int] = [0]
     
     //MARK: Persons
     @Published var personNumber: String = ""
@@ -102,14 +102,11 @@ class BigModel : ObservableObject {
                 self.signInErrorMessage = Error?.localizedDescription ?? ""
                 return
             }
-            //Success
-            print("groovy baby!")
-            print(self.auth.currentUser?.email ?? "nil")
-            self.user.userID = self.auth.currentUser?.uid ?? "nil"
+            self.user.id = self.auth.currentUser?.uid ?? "nil"
             self.user.email = self.auth.currentUser?.email ?? "nil"
             self.signedIn = true
             
-            self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
+            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     return
@@ -118,10 +115,11 @@ class BigModel : ObservableObject {
                 self.user.persons.removeAll()
                 if let snapshot = snapshot {
                     for document in snapshot.documents {
+                        let dbID = document.documentID
                         let dbName = document.data()["name"] as? String ?? ""
                         let dbEmail = document.data()["email"] as? String ?? ""
                         
-                        self.user.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                        self.user.persons.append(Person(id: dbID, email: dbEmail, name: dbName))
                         
                         DispatchQueue.main.async {
                             self.authCurrentView = .Auth_PersonPickerView
@@ -157,6 +155,8 @@ class BigModel : ObservableObject {
         
     }
     
+    @Published var deletedPersonIndex: Int = 0
+    
     func deletePerson() {
         
         db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person\(personNumber)").delete() { err in
@@ -166,56 +166,6 @@ class BigModel : ObservableObject {
             } else {
                 self.user.persons.removeAll()
                 print("Document successfully removed!")
-                
-                /*if self.user.persons.count == 0 {
-                    self.db.collection("user\(self.auth.currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
-                        guard error == nil else {
-                            print(error!.localizedDescription)
-                            return
-                        }
-                        
-                        self.user.persons.removeAll()
-                        var number = 0
-                        if let snapshot = snapshot {
-                            for document in snapshot.documents {
-                                let dbName = document.data()["name"] as? String ?? ""
-                                let dbEmail = document.data()["email"] as? String ?? ""
-                                
-                                self.user.persons.append(Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
-                                
-                                DispatchQueue.main.async {
-                                    self.authCurrentView = .Auth_PersonPickerView
-                                }
-                                
-                                print("the person index is \(number)")
-                                
-                                /*if self.user.persons.count < 9 {
-                                    
-                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number)").setData(["email": self.user.persons[number].email, "name": self.user.persons[number].name]) { _ in
-                                        
-                                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(number+1)-Mensurations").setData(["ArmpitsMeasurement": self.user.persons[number].measurements?.ArmpitsMeasurement ?? "", "ArmsLength": self.user.persons[number].measurements?.ArmsLength ?? "", "HeadMeasurement": self.user.persons[number].measurements?.HeadMeasurement ?? "", "PelvisMeasurement": self.user.persons[number].measurements?.PelvisMeasurement ?? "", "PelvisKnee": self.user.persons[number].measurements?.PelvisKnee ?? "", "ShouldersMeasurement": self.user.persons[number].measurements?.ShouldersMeasurement ?? "", "ShouldersPelvis": self.user.persons[number].measurements?.ShouldersPelvis ?? ""])
-                                        
-                                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(number+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(number+1)-Location").setData(["civility": self.user.persons[number].location?.civility ?? "", "lastName" : self.user.persons[number].location?.lastName ?? "", "firstName": self.user.persons[number].location?.firstName ?? "", "emailAdress": self.user.persons[number].location?.emailAdress ?? "", "phoneNumber": self.user.persons[number].location?.phoneNumber ?? "", "adressPostalCode": self.user.persons[number].location?.adressPostalCode ?? "", "adressCity": self.user.persons[number].location?.adressCity ?? "", "adressStreet": self.user.persons[number].location?.adressStreet ?? "", "adressMailBox": self.user.persons[number].location?.adressMailBox ?? "", "adressBasement": self.user.persons[number].location?.adressBasement ?? "", "adressStage": self.user.persons[number].location?.adressStage ?? "", "adressLat": self.user.persons[number].location?.adressLat ?? 0, "adressLong": self.user.persons[number].location?.adressLong ?? 0])
-                                        
-                                    }
-                                    
-                                }
-                                
-                                else {
-                                    
-                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").setData(["email": self.user.persons[number].email, "name": self.user.persons[number].name])
-                                    
-                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(number+1)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-                                    
-                                    self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(number+1)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(number+1)-Location").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
-                                    
-                                }*/
-                                
-                                number = number+1
-                            }
-                        }
-                    }
-                }*/
                 
             }
         }
@@ -236,11 +186,10 @@ class BigModel : ObservableObject {
                 self.signOutErrorMessage = Error?.localizedDescription ?? ""
                 return
             }
+
+            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").setData(["email": self.auth.currentUser?.email ?? "no email", "iban": ""])
+            self.authCurrentView = .Auth_PersonPickerView
             
-            DispatchQueue.main.async {
-                self.signedIn = true
-            }
-            self.authCurrentView = .Auth_LogInNewUserView
         }
     
     }
@@ -265,8 +214,7 @@ class BigModel : ObservableObject {
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
         
         self.isPersonChosen = false
-        self.user.id = 0
-        self.user.userID = ""
+        self.user.id = ""
         self.user.email = ""
         self.user.persons = []
         

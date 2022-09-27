@@ -245,7 +245,7 @@ struct HomeFeedView: View {
                             .onTapGesture {
                                 bigModel.lastViews.append(.Home_homeFeed)
                                 self.bigModel.currentview = .Auth_UserInfo
-                                print(bigModel.user.userID)
+                                print(bigModel.user.id)
                                 print(bigModel.user.email)
                                 //.standard ? "network" : "map"
                                 withAnimation {

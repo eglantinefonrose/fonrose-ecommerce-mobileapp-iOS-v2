@@ -37,49 +37,9 @@ struct NewPersonView: View {
             Text("Save")
                 .foregroundColor(.blue)
                 .onTapGesture {
-                    
-                if bigModel.user.persons.count < 9 {
-                    
-                    db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count+1)").setData(["email": email, "name": name]) { _ in
-                            self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                
-                                bigModel.user.persons.removeAll()
-                                
-                                if let snapshot = snapshot {
-                                    for document in snapshot.documents {
-                                        let dbName = document.data()["name"] as? String ?? ""
-                                        let dbEmail = document.data()["email"] as? String ?? ""
-                                        
-                                        bigModel.user.persons.append(BigModel.Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
-                                        print(bigModel.user.persons.count)
-                                        print("person added")
-                                        bigModel.authCurrentView = .Auth_PersonPickerView
-                                        
-                                    }
-                                }
-                                
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-                                
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Location").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
-                            
-                    email = ""
-                    name = ""
-                    print(bigModel.user.persons.count)
-                    print(Auth.auth().currentUser?.uid ?? "nil")
-                                
-                    }
-                }
-                    
-            }
                 
-            else {
-                
-                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.user.persons.count+1)").setData(["email": email, "name": name]) { _ in
-                        self.db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").getDocuments { snapshot, error in
+                    db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name]) { _ in
+                        self.db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
                             guard error == nil else {
                                 print(error!.localizedDescription)
                                 return
@@ -89,10 +49,11 @@ struct NewPersonView: View {
                                                                 
                             if let snapshot = snapshot {
                                 for document in snapshot.documents {
+                                    let dbID = document.documentID
                                     let dbName = document.data()["name"] as? String ?? ""
                                     let dbEmail = document.data()["email"] as? String ?? ""
                                     
-                                    bigModel.user.persons.append(BigModel.Person(id: Int.random(in: 1...999999), email: dbEmail, name: dbName))
+                                    bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
                                     print(bigModel.user.persons.count)
                                     print("person added")
                                     bigModel.authCurrentView = .Auth_PersonPickerView
@@ -105,15 +66,13 @@ struct NewPersonView: View {
                         print(bigModel.user.persons.count)
                         print(Auth.auth().currentUser?.uid ?? "nil")
                             
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.user.persons.count)").collection("Mensurations").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(bigModel.user.persons.count)-Mensurations").setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+                            db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons.last?.id ?? "no id").collection("measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
                             
-                            db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.user.persons.count)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person\(bigModel.user.persons.count)-Location").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+                            db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons.last?.id ?? "no id").collection("Location").document().setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                             
                     }
                 }
                 
-            }
-                    
             }
             
             Spacer()

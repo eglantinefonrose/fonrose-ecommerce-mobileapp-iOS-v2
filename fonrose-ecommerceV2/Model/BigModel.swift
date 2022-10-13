@@ -29,7 +29,8 @@ class BigModel : ObservableObject {
         var persons: [Person]
     }
 
-    struct Location {
+    struct Location: Identifiable {
+        var id: String = UUID().uuidString
         var civility: String
         var lastName: String
         var firstName: String
@@ -46,7 +47,8 @@ class BigModel : ObservableObject {
         
     }
 
-    struct Measurements {
+    struct Measurements: Identifiable {
+        var id: String = UUID().uuidString
         var ArmpitsMeasurement: String
         var ArmsLength: String
         var HeadMeasurement: String
@@ -83,6 +85,7 @@ class BigModel : ObservableObject {
     let db = Firestore.firestore()
     @Published var signedIn = false
     @Published var currentPersonIndex: Int = 0
+    @Published var currentPersonId: String = ""
     @Published var isPersonChosen = false
     @Published var isSignInPopUpPresented = false
     @Published var numberArray: [Int] = [0]

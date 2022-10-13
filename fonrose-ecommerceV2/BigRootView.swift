@@ -99,7 +99,7 @@ struct BigRootView: View {
                 
                 if (self.bigModel.currentview == .LivraisonViews_Livraison) {
                     //si aucune personne n'est sélectionnée, on affiche la vue d'authenfication qui affichera l'écran de selection des personnes de l'utilisateur
-                    if !bigModel.isPersonChosen {
+                    if bigModel.user.persons.isEmpty {
                         AuthView()
                     } else {
                         LocationHome()
@@ -118,22 +118,6 @@ struct BigRootView: View {
                 
                 if (self.bigModel.currentview == .Auth_AuthView) {
                     AuthView()
-                }
-            
-                if (self.bigModel.currentview == .Auth_PersonPickerView) {
-                    PersonPickerView()
-                }
-                
-                if (self.bigModel.currentview == .Auth_DeleteScreen) {
-                    DeleteScreen()
-                }
-            
-                if (self.bigModel.currentview == .Auth_UserInfo) {
-                    if !bigModel.isPersonChosen {
-                        AuthView()
-                    } else {
-                        UserInfo()
-                    }
                 }
                 
             }

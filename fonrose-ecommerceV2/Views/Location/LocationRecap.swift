@@ -18,7 +18,7 @@ struct LocationRecap: View {
     
     var body: some View {
         
-        LocationTextField(civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "", lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "", firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "", emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "", phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "", adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "", adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "", adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "", adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "", adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "", adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "")
+        LocationTextField(civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "civility", lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "", firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "", emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "", phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "", adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "", adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "", adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "", adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "", adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "", adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "")
         
     }
 }
@@ -27,6 +27,7 @@ struct LocationTextField: View {
     
     @EnvironmentObject var bigModel: BigModel
     var db = Firestore.firestore()
+    var auth = Auth.auth()
     @State var civilityText: String = ""
     @State var lastNameText: String = ""
     @State var firstNameText: String = ""
@@ -135,7 +136,7 @@ struct LocationTextField: View {
             .cornerRadius(15)
             .onTapGesture {
                 
-                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.user.persons.count)").collection("Location").document("user\(Auth.auth().currentUser?.uid ?? "nil")-person0\(bigModel.user.persons.count)-Location").setData(["civility": civilityText, "lastName" : lastNameText, "firstName": firstNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
+                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "lastName" : lastNameText, "firstName": firstNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
                 bigModel.currentview = .Home_homeFeed
                 
             }

@@ -56,19 +56,17 @@ struct NewPersonView: View {
                                     bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
                                     print(bigModel.user.persons.count)
                                     print("person added")
-                                    bigModel.authCurrentView = .Auth_PersonPickerView
                                     
                                 }
+                                
+                                bigModel.authCurrentView = .Auth_PersonPickerView
+                                
                             }
                         
                         email = ""
                         name = ""
                         print(bigModel.user.persons.count)
                         print(Auth.auth().currentUser?.uid ?? "nil")
-                            
-                            db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons.last?.id ?? "no id").collection("measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-                            
-                            db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons.last?.id ?? "no id").collection("Location").document().setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": "", "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                             
                     }
                 }

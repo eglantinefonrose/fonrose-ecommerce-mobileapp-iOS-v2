@@ -60,7 +60,8 @@ struct PersonPickerView: View {
                                             .onTapGesture {
                                                 
                                                 bigModel.currentPersonIndex = index
-                                                print(bigModel.currentPersonIndex)
+                                                bigModel.currentPersonId = bigModel.user.persons[index].id
+                                                print("current person id \(bigModel.currentPersonId)")
                                                 bigModel.authCurrentView = .Auth_UserInfo
                                                 bigModel.lastViews.append(.Auth_PersonPickerView)
                                                 

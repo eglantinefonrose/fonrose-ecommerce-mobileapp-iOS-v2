@@ -153,7 +153,7 @@ struct HomeView: View {
                             
                             print(self.bigModel.lastViews.count)
                             
-                            db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": self.measurementText1, "ArmsLength": self.measurementText2, "HeadMeasurement": self.measurementText3, "PelvisMeasurement": self.measurementText4, "PelvisKnee": self.measurementText5, "ShouldersMeasurement": self.measurementText6, "ShouldersPelvis": self.measurementText7]) { _ in
+                            db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex].measurements?.id ?? "").setData(["ArmpitsMeasurement": measurementText1, "ArmsLength": measurementText2, "HeadMeasurement": measurementText3, "PelvisMeasurement": measurementText4, "PelvisKnee": measurementText5, "ShouldersMeasurement": measurementText6, "ShouldersPelvis": measurementText7]) { _ in
                                 
                                 db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").getDocuments { snapshot, error in
                                        guard error == nil else {
@@ -177,14 +177,11 @@ struct HomeView: View {
                                            }
                                        }
                                        
-                                       bigModel.currentview = ViewEnum.Measurement_RecapMensurations
-                                       
+                                    bigModel.currentview = .Measurement_RecapMensurations
+                                    
                                    }
                                 
                             }
-                            
-                                
-                            print("recap")
                             
                         } else {
                             

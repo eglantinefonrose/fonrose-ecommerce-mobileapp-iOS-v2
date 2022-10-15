@@ -190,7 +190,10 @@ class BigModel : ObservableObject {
                 return
             }
 
-            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").setData(["email": self.auth.currentUser?.email ?? "no email", "iban": ""])
+            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").setData(["email": self.auth.currentUser?.email ?? "no email"])
+            self.user.id = self.auth.currentUser?.uid ?? "nil"
+            self.user.email = self.auth.currentUser?.email ?? "nil"
+            self.signedIn = true
             self.authCurrentView = .Auth_PersonPickerView
             
         }

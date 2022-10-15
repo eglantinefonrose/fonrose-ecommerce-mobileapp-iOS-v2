@@ -196,8 +196,8 @@ struct LocationHome: View {
                             self.bigModel.lastViews.append(.LivraisonViews_Livraison)
                             
                             if self.adressStreet != "No location selected" {
-                                
-                                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document().setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": bigModel.user.persons[bigModel.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
+                                    
+                                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "").setData(["civility": "", "lastName" : "", "firstName": "", "emailAdress": bigModel.user.persons[bigModel.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": adressPostalCode, "adressCity": "", "adressStreet": adressStreet, "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
                                     
                                     db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").getDocuments { snapshot, error in
                                            guard error == nil else {
@@ -261,7 +261,11 @@ struct LocationHome: View {
             locationManager.delegate = mapData
             //le delegate est le LocationViewModel
             locationManager.requestWhenInUseAuthorization()
-            isAlertPresented = true
+            if bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0 != 0 && bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0 != 0 {
+                isAlertPresented = true
+            } else {
+                
+            }
             
         })
         //if permission is denied
@@ -277,7 +281,7 @@ struct LocationHome: View {
             
             }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
-                mapData.pinSelectedPlace(pointSelectedPlaceLat: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: !bigModel.isPersonChosen ? 0 : bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
+                mapData.pinSelectedPlace(pointSelectedPlaceLat: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
                 adressStreet = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
                 adressPostalCode = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? ""
                 adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0)

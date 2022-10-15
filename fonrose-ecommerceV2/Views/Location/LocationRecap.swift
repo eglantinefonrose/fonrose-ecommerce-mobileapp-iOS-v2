@@ -153,5 +153,6 @@ struct LocationTextField: View {
 struct LocationRecap_Previews: PreviewProvider {
     static var previews: some View {
         LocationRecap()
+            .environmentObject(BigModel())
     }
 }

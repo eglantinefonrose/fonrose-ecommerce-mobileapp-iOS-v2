@@ -14,7 +14,6 @@ import MapKit
 
 class BigModel : ObservableObject {
     
-    public static var shared = BigModel()
     var user = User(id: "", email: "", persons: [])
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
@@ -32,10 +31,11 @@ class BigModel : ObservableObject {
     struct Location: Identifiable {
         var id: String = UUID().uuidString
         var civility: String
-        var lastName: String
         var firstName: String
+        var lastName: String
         var emailAdress: String
         var phoneNumber: String
+        var adressCountry: String
         var adressPostalCode: String
         var adressCity: String
         var adressStreet: String
@@ -92,6 +92,7 @@ class BigModel : ObservableObject {
     
     //MARK: Persons
     @Published var personNumber: String = ""
+    @Published var deletedPersonID: String = ""
     
     func signIn(email: String, password: String) {
         
@@ -229,5 +230,35 @@ class BigModel : ObservableObject {
         
         self.signedIn = false
     }
+
+    
+    
+    
+    //
+    //
+    // SINGLETON
+    //
+    //
+    
+    public static var shared = BigModel()  // BigModel(shouldInjectMockedData:true)
+
+    
+    
+    
+    //
+    //
+    // MOCK FOR TESTING
+    //
+    //
+    
+    init() {
+        print("Constructor BigModel - default")
+    }
+
+    init(shouldInjectMockedData: Bool) {
+        print("Constructor BigModel - shouldInjectMockedData==true")
+        //self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: [ Person(id: <#T##String#>, email: <#T##String#>, name: <#T##String#>, measurements: <#T##Measurements?#>, location: <#T##Location?#>), ])
+    }
+
     
 }

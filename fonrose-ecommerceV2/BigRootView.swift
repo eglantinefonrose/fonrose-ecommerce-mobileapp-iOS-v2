@@ -102,12 +102,12 @@ struct BigRootView: View {
                     if bigModel.user.persons.isEmpty {
                         AuthView()
                     } else {
-                        LocationHome()
+                        LocationView()
                     }
                 }
                 
                 if (self.bigModel.currentview == .LivraisonViews_RecapLivraison) {
-                    LocationRecap()
+                    LocationRecapView()
                 }
                 
             }

@@ -10,15 +10,14 @@ import SwiftUI
 
 struct test_binding: View {
     
-    @Binding var test1: Bool
-    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Text")
     }
 }
 
-/*struct test_binding_Previews: PreviewProvider {
+struct test_binding_Previews: PreviewProvider {
     static var previews: some View {
-        test_binding(test1: <#Binding<Bool>#>)
+        test_binding()
+            .environment(\.colorScheme, .dark)
     }
-}*/
+}

@@ -109,6 +109,7 @@ struct HomeFeedView: View {
                                                                 let dbLastName = document.data()["lastName"] as? String ?? ""
                                                                 let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
                                                                 let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
+                                                                let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
                                                                 let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
                                                                 let dbAdressCity = document.data()["adressCity"] as? String ?? ""
                                                                 let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
@@ -118,7 +119,7 @@ struct HomeFeedView: View {
                                                                 let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                                                 let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                                 
-                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(civility: dbCivility, lastName: dbLastName, firstName: dbFirstName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
                                                                 
                                                             }
                                                             
@@ -145,6 +146,7 @@ struct HomeFeedView: View {
                                                                 let dbLastName = document.data()["lastName"] as? String ?? ""
                                                                 let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
                                                                 let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
+                                                                let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
                                                                 let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
                                                                 let dbAdressCity = document.data()["adressCity"] as? String ?? ""
                                                                 let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
@@ -154,7 +156,7 @@ struct HomeFeedView: View {
                                                                 let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                                                 let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                                                 
-                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(civility: dbCivility, lastName: dbLastName, firstName: dbFirstName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                                                 
                                                             }
                                                             

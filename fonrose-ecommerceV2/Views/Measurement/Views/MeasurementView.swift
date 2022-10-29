@@ -27,6 +27,7 @@ struct MeasurementView: View {
                          measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
                          measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
                          measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+                .environment(\.colorScheme, .dark)
             
         } else {
             // Fallback on earlier versions
@@ -61,13 +62,13 @@ struct HomeView: View {
                     
                 VStack {
                     
-                    Text("Mensurations")
+                    /*Text("Mensurations")
                         .font(.system(size: 35, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                         .frame(width: UIScreen.main.bounds.width)
                         
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 10)*/
                         
                     Text("all values in millimeters")
                         .foregroundColor(Color.gray)
@@ -227,7 +228,6 @@ struct HomeView: View {
                 }
                             
             }.background(Color.black)
-            .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
@@ -251,6 +251,12 @@ struct HomeView: View {
                                 print("previous View = \(String(describing: self.bigModel.lastViews.last))")
                             } else { print("array empty") }
                         }
+                    
+                    Spacer()
+                    
+                    Text("Mensurations")
+                        .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
                     
                     Spacer()
                     

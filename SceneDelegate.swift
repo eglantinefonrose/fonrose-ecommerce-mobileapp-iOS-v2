@@ -22,9 +22,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             if #available(iOS 14.0, *) {
-                window.rootViewController = UIHostingController(rootView: //testFbDocumentUID())
-                BigRootView()
-                    .environmentObject(BigModel.shared))
+                
+//                let testBigModel: BigModel = BigModel()
+//                //testBigModel.user.persons
+//                window.rootViewController = UIHostingController(rootView: LocationRecap()
+//                                                                    .environmentObject(testBigModel))
+//
+                
+                
+                
+                window.rootViewController = UIHostingController(rootView: //test_binding()
+                                                                    //.environment(\.colorScheme, .dark))
+                                                                        BigRootView() //LocationRecapView()
+                                                                            .environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions
             }

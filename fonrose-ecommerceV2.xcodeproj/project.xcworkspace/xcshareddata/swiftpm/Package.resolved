@@ -74,6 +74,15 @@
         }
       },
       {
+        "package": "iPhoneNumberField",
+        "repositoryURL": "https://github.com/MojtabaHs/iPhoneNumberField",
+        "state": {
+          "branch": null,
+          "revision": "08140a73b6923f07df313fbc71034c70d431a5c9",
+          "version": "0.10.0"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
@@ -89,6 +98,15 @@
           "branch": null,
           "revision": "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
           "version": "2.30909.0"
+        }
+      },
+      {
+        "package": "PhoneNumberKit",
+        "repositoryURL": "https://github.com/marmelroy/PhoneNumberKit",
+        "state": {
+          "branch": null,
+          "revision": "2964493a52e64812833662a7bd19def82f35973c",
+          "version": "3.4.10"
         }
       },
       {

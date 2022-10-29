@@ -173,7 +173,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         
     }
     
-    func searchQuery() {
+    func searchQuery(searchTxt: String) {
         
         //on commence par supprimer tous les éléments actuellement présents dans places
         places.removeAll()

@@ -23,49 +23,86 @@ struct PagingView<Content>: View where Content: View {
         self.maxIndex = maxIndex
         self.content = content
     }
-
+    
     //var model: MeasurementInfos
     
     var body: some View {
-                    
+                 
         ZStack {
+            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
-                    
-                    ZStack {
+                
+                    HStack {
                         
-                        ZStack(alignment: .bottomTrailing) {
-                            GeometryReader { geometry in
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 0) {
-                                        self.content()
-                                            .frame(width: geometry.size.width, height: geometry.size.height)
-                                            .clipped()
+                        Spacer()
+                            .frame(width: 20)
+                        
+                        Text("Back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                            .onTapGesture {
+                                
+                            }
+                        
+                        Spacer()
+                        
+                        Text("The dress")
+                            .font(.headline)
+                            .foregroundColor(Color.white)
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                
+                            }
+                        
+                        Spacer()
+                            .frame(width: 20)
+                    
+                }.frame(width: UIScreen.main.bounds.width)
+                
+                ZStack {
+                    
+                    ZStack(alignment: .bottomTrailing) {
+                        GeometryReader { geometry in
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 0) {
+                                    self.content()
+                                        .frame(width: geometry.size.width, height: geometry.size.height)
+                                        .clipped()
+                                }
+                            }
+                            .content.offset(x: self.offset(in: geometry), y: 0)
+                            .frame(width: geometry.size.width, alignment: .leading)
+                            .gesture(
+                                DragGesture().onChanged { value in
+                                    self.dragging = true
+                                    self.offset = -CGFloat(self.index) * geometry.size.width + value.translation.width
+                                }
+                                .onEnded { value in
+                                    let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
+                                    let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
+                                    self.index = self.clampedIndex(from: predictedIndex)
+                                    withAnimation(.easeOut) {
+                                        self.dragging = false
                                     }
                                 }
-                                .content.offset(x: self.offset(in: geometry), y: 0)
-                                .frame(width: geometry.size.width, alignment: .leading)
-                                .gesture(
-                                    DragGesture().onChanged { value in
-                                        self.dragging = true
-                                        self.offset = -CGFloat(self.index) * geometry.size.width + value.translation.width
-                                    }
-                                    .onEnded { value in
-                                        let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
-                                        let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
-                                        self.index = self.clampedIndex(from: predictedIndex)
-                                        withAnimation(.easeOut) {
-                                            self.dragging = false
-                                        }
-                                    }
-                                )
-                            }
-                            .clipped()
+                            )
+                        }
+                        .clipped()
 
-                            PageControl(index: $index, maxIndex: maxIndex)
-                            
-                        }.frame(height: UIScreen.main.bounds.height-150)
+                        PageControl(index: $index, maxIndex: maxIndex)
                         
-                        VStack {
+                    }//.frame(height: UIScreen.main.bounds.height-150)
+                    
+                    VStack {
+                                                    
                         Text("La robe")
                             .font(.system(size: 35, weight: .bold, design: .default))
                             .foregroundColor(Color.white)
@@ -77,90 +114,41 @@ struct PagingView<Content>: View where Content: View {
                         Text("85€")
                             .foregroundColor(Color.gray)
                             .font(.system(size: 25, weight: .semibold, design: .default))
-                            
-                        }
-                        
+                                                    
                     }
-                                    
-                    VStack {
-                        
-                        Spacer()
-                        
-                        HStack {
-                            
-                            HStack {
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    //self.bigModel.currentview = bigModel.user.persons[bigModel.currentPersonIndex].id == "" ? ViewEnum.Measurement_Mensurations : ViewEnum.Auth_SignInView
-                                    self.bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                    self.bigModel.lastViews.append(.MeasurementCarouselView)
-                                }) {
-                                    Text("Acheter")
-                                        .foregroundColor(.blue)
-                                        .font(.system(size: 17, weight: .bold, design: .default))
-                                }
-                                
-                                Spacer()
-                                
-                            }
-                            
-                        }
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                self.bigModel.currentview = .AboutUsScreen
-                                self.bigModel.lastViews.append(.MeasurementCarouselView)
-                            }) {
-                                Text("About us")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 17, weight: .regular, design: .default))
-                            }
-                            
-                            Spacer()
-                            
-                        }
-                    
-                    Spacer()
                     
                 }
-                //.padding(.vertical, -16)
-                                
-                }.background(Color.black)
-            .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Spacer()
-                    .frame(height: 10)
-                HStack {
+                
+                VStack {
+                    
                     Spacer()
-                        .frame(width: 20)
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
+                        .frame(height: 20)
+                    
+                    Text("Acheter")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                        }
-                    Spacer()
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
+                            self.bigModel.currentview = ViewEnum.Measurement_Mensurations
+                            self.bigModel.lastViews.append(.MeasurementCarouselView)
                         }
                     
                     Spacer()
-                        .frame(width: 20)
+                        .frame(height: 20)
+                    
+                    Text("About us")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 17, weight: .bold, design: .default))
+                        .onTapGesture {
+                            self.bigModel.currentview = .AboutUsScreen
+                            self.bigModel.lastViews.append(.MeasurementCarouselView)
+                        }
+                                        
+                    Spacer()
+                        .frame(height: 20)
+                
                 }
-                .frame(width: UIScreen.main.bounds.width)
-                Spacer()
-            }
+                                
+            }//.edgesIgnoringSafeArea(.all)
             
         }
         
@@ -222,7 +210,7 @@ struct CarouselView: View {
                                 .frame(alignment: .top)
                         }
                     }
-                    .aspectRatio(4/3, contentMode: .fill)
+                    .aspectRatio(contentMode: .fill)
 
                 }
             
@@ -232,7 +220,7 @@ struct CarouselView: View {
     
 
 struct CarouselView_Previews: PreviewProvider {
-        
+     
     static var previews: some View {
         CarouselView()
     }

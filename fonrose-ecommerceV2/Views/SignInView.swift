@@ -12,6 +12,7 @@ import FirebaseAuth
 @available(iOS 14.0, *)
 struct SignInView: View {
     
+    @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
     @State var email = ""
     @State var password = ""
@@ -21,126 +22,37 @@ struct SignInView: View {
         
         ZStack {
             
-            VStack {
-                    
-                Spacer()
+            if theColorScheme == .light {
+                Color.gray
+                    .opacity(0.25)
+                    .edgesIgnoringSafeArea(.all)
+            } else {
+                Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            }
+            
+            ZStack {
                 
                 VStack {
                     
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                        
-                         TextField("Email", text: $email)
-                             .background(Color.white)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                     }
-                     
-                     Spacer()
-
-                    }.background(Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
+                    Spacer()
+                        .frame(height: UIScreen.main.bounds.height/7)
+                    
+                    
+                    Text("Sign In")
+                            .font(.system(size: 35, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .frame(width: UIScreen.main.bounds.width)
                     
                     Spacer()
-                        .frame(height: 30)
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                        
-                         SecureField("Password", text: $password)
-                             .background(Color.white)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                     }
-                     
-                     Spacer()
-
-                    }.background(Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
                     
                 }
                 
-                    Spacer()
-                
-                    Text(bigModel.signInErrorMessage)
-                        .foregroundColor(.red)
+                VStack {
                     
                     Spacer()
-                        .frame(height: 30)
                     
                     VStack {
-                        
-                            Button(action: {
-                                
-                                print("sign in")
-                                guard !email.isEmpty, !password.isEmpty else {
-                                    return
-                                }
-                                bigModel.signIn(email: email, password: password)
-                                self.bigModel.authLastViews.append(.Auth_SignInView)
-                                
-                            }) {
-                            //Spacer()
-                                
-                            HStack {
-                                    
-                                Spacer()
-                                    
-                                HStack {
-                                    
-                                    Spacer()
-                                    
-                                    if !email.isEmpty, !password.isEmpty {
-                                        Text("Sign in")
-                                            .foregroundColor(Color.white)
-                                            .fontWeight(.semibold)
-                                    } else {
-                                        Text("Sign in")
-                                            .foregroundColor(Color.black)
-                                            .fontWeight(.semibold)
-                                    }
-        
-                                    Spacer()
-                                
-                                }
-                                .frame(width: 150)
-                                .cornerRadius(5)
-                                
-                                Spacer()
-                                
-                            }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
-                            .background(Color.blue)
-                            .cornerRadius(15)
-                            
-                        //Spacer()
-                        }
-                        
-                        Spacer()
-                            .frame(height: 10)
-                        
-                    }
-                
-                    VStack {
-                    
-                        Button(action: {
-                            
-                            self.bigModel.authCurrentView = .Auth_SignUpView
-                            self.bigModel.authLastViews.append(.Auth_SignInView)
-                            
-                        }) {
-                        //Spacer()
                             
                         HStack {
                                 
@@ -149,8 +61,53 @@ struct SignInView: View {
                             HStack {
                                 
                                 Spacer()
+                                
+                                if !email.isEmpty, !password.isEmpty {
+                                    Text("Sign in")
+                                        .foregroundColor(Color.white)
+                                        .fontWeight(.semibold)
+                                } else {
+                                    Text("Sign in")
+                                        .foregroundColor(Color.black)
+                                        .fontWeight(.semibold)
+                                }
+
+                                Spacer()
+                            
+                            }
+                            .frame(width: 150)
+                            .cornerRadius(5)
+                            
+                            Spacer()
+                            
+                            }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
+                            .background(Color.blue)
+                            .cornerRadius(15)
+                            .onTapGesture {
+                                print("sign in")
+                                guard !email.isEmpty, !password.isEmpty else {
+                                    return
+                                }
+                                bigModel.signIn(email: email, password: password)
+                                self.bigModel.authLastViews.append(.Auth_SignInView)
+                            }
+                    
+                        Spacer()
+                            .frame(height: 10)
+                    
+                    }
+            
+                    VStack {
+                        
+                        HStack {
+                                
+                            Spacer()
+                                
+                            HStack {
+                                
+                                Spacer()
                                 Text("Sign up")
-                                    .foregroundColor(Color.black)
+                                    .foregroundColor(.white)
                                     .fontWeight(.medium)
                                 Spacer()
                             
@@ -163,17 +120,37 @@ struct SignInView: View {
                         }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
                         .background(Color(UIColor.lightGray))
                         .cornerRadius(15)
+                        .onTapGesture {
+                            self.bigModel.authCurrentView = .Auth_SignUpView
+                            self.bigModel.authLastViews.append(.Auth_SignInView)
+                        }
+                
+                }
+                    
+            }
+            
+                VStack {
                         
-                    //Spacer()
+                    Spacer()
+                    
+                    VStack {
+                        
+                        TextFieldModel()
+                        
+                        SecureFieldModel()
+                        
                     }
                     
                     Spacer()
-                        .frame(height: 25)
+                
+                    Text(bigModel.signOutErrorMessage)
+                        .foregroundColor(.red)
                     
+                    Spacer()
+                        .frame(height: 30)
+                                
                 }
-                            
-            }.background(Color.black)
-            .edgesIgnoringSafeArea(.all)
+            }
             
             VStack {
                 
@@ -211,22 +188,6 @@ struct SignInView: View {
                     
                 }.frame(width: UIScreen.main.bounds.width)
                 
-                
-                Spacer()
-                    .frame(height: UIScreen.main.bounds.height/10)
-                
-                if !email.isEmpty, !password.isEmpty {
-                    Text("Sign In")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
-                        .frame(width: UIScreen.main.bounds.width)
-                } else {
-                    Text("Sign In")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
-                        .frame(width: UIScreen.main.bounds.width)
-                }
-                
                 Spacer()
                 
             }
@@ -239,6 +200,7 @@ struct SignInView: View {
 struct TextFieldModel: View {
     
     @State var text: String = ""
+    @Environment(\.colorScheme) var theColorScheme
     
     var body: some View {
 
@@ -251,16 +213,16 @@ struct TextFieldModel: View {
              Spacer()
             
              TextField("Email", text: $text)
-                 .background(Color.white)
                  .disableAutocorrection(true)
                  .autocapitalization(.none)
          }
          
          Spacer()
 
-        }.background(Color.white)
+        }.background(theColorScheme == .dark ? Color.gray : Color.white)
         .cornerRadius(7)
         .frame(height: 30)
+        .padding(10)
         
     }
 }
@@ -268,6 +230,7 @@ struct TextFieldModel: View {
 struct SecureFieldModel: View {
     
     @State var text: String = ""
+    @Environment(\.colorScheme) var theColorScheme
     
     var body: some View {
 
@@ -280,16 +243,16 @@ struct SecureFieldModel: View {
              Spacer()
             
              SecureField("Password", text: $text)
-                 .background(Color.white)
                  .disableAutocorrection(true)
                  .autocapitalization(.none)
          }
          
          Spacer()
 
-        }.background(Color.white)
+        }.background(theColorScheme == .dark ? Color.gray : Color.white)
         .cornerRadius(7)
         .frame(height: 30)
+        .padding(10)
         
     }
 }
@@ -298,6 +261,7 @@ struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             SignInView()
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

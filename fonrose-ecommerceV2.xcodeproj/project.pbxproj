@@ -43,7 +43,6 @@
 		704D0A2928A0286100AACF36 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D0A2828A0286100AACF36 /* LocationView.swift */; };
 		704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D2197245B377500D0B13F /* SANDBOX_textField.swift */; };
 		70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */; };
-		7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7053C99C2464420300DF1E0C /* LogInScreen.swift */; };
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
 		705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF2243F988100D47D6C /* dataSuivi.swift */; };
 		708CF08728A4BB0300397DED /* LoopTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF08628A4BB0300397DED /* LoopTest.swift */; };
@@ -57,6 +56,7 @@
 		70B83181290D980800C0BF84 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 70B83180290D980800C0BF84 /* FirebaseCrashlytics */; };
 		70B83183290D980800C0BF84 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 70B83182290D980800C0BF84 /* FirebaseFirestore */; };
 		70B83185290D980800C0BF84 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 70B83184290D980800C0BF84 /* FirebaseFirestoreSwift */; };
+		70B83187290D9B9200C0BF84 /* BurgerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B83186290D9B9200C0BF84 /* BurgerMenu.swift */; };
 		70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */; };
 		70B9B1842566C64E00317086 /* test-binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9B1832566C64E00317086 /* test-binding.swift */; };
 		70BB78CC285E1D7A00A0A3B4 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB78CB285E1D7A00A0A3B4 /* TestList.swift */; };
@@ -108,7 +108,6 @@
 		704D0A2828A0286100AACF36 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		704D2197245B377500D0B13F /* SANDBOX_textField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANDBOX_textField.swift; sourceTree = "<group>"; };
 		70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFbDocumentUID.swift; sourceTree = "<group>"; };
-		7053C99C2464420300DF1E0C /* LogInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInScreen.swift; sourceTree = "<group>"; };
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
 		705ABCF2243F988100D47D6C /* dataSuivi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataSuivi.swift; sourceTree = "<group>"; };
 		708CF08628A4BB0300397DED /* LoopTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopTest.swift; sourceTree = "<group>"; };
@@ -117,6 +116,7 @@
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
 		70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
+		70B83186290D9B9200C0BF84 /* BurgerMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMenu.swift; sourceTree = "<group>"; };
 		70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapMensurations.swift; sourceTree = "<group>"; };
 		70B9B1832566C64E00317086 /* test-binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "test-binding.swift"; sourceTree = "<group>"; };
 		70BB78CB285E1D7A00A0A3B4 /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
@@ -216,7 +216,6 @@
 				7049ED24281E7B5300C16C3B /* HomeFeed */,
 				700F201D242A647B00382533 /* TrailerPlayer.swift */,
 				701FE112245722E600E91EFA /* CarouselView.swift */,
-				7053C99C2464420300DF1E0C /* LogInScreen.swift */,
 				7045357B24770D84001F20A8 /* AboutUs.swift */,
 			);
 			path = MainViews;
@@ -330,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */,
+				70B83186290D9B9200C0BF84 /* BurgerMenu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -466,6 +466,7 @@
 				70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */,
 				70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */,
 				704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */,
+				70B83187290D9B9200C0BF84 /* BurgerMenu.swift in Sources */,
 				708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */,
 				70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */,
 				701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */,
@@ -491,7 +492,6 @@
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,
 				704535822477BD85001F20A8 /* BigRootView.swift in Sources */,
 				708CF08728A4BB0300397DED /* LoopTest.swift in Sources */,
-				7053C99D2464420300DF1E0C /* LogInScreen.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,
 				7034755528623D450030C906 /* SwiftUIView.swift in Sources */,

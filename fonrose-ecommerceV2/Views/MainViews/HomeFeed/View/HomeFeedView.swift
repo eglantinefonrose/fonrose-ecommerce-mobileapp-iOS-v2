@@ -42,16 +42,17 @@ struct HomeFeedView: View {
                                         .onTapGesture {
                                         }
                                 } .buttonStyle(PlainButtonStyle())
-                                .frame(width: UIScreen.main.bounds.width)
-                                .edgesIgnoringSafeArea(.all)
+                                //.edgesIgnoringSafeArea(.all)
                                 .navigationBarTitle("")
                                 .navigationBarHidden(true)
                                 .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                            }.onAppear(perform: {
-                                UITableView.appearance().contentInset.top = -47
-                            })
+                            }.listStyle(PlainListStyle())
                             
                             VStack {
+                                
+                                Spacer()
+                                    .frame(height: 20)
+                                
                                 HStack {
                                     
                                     Spacer()
@@ -93,6 +94,10 @@ struct HomeFeedView: View {
                 })
                     
                 VStack {
+                    
+                    Spacer()
+                        .frame(height: 20)
+                    
                     HStack {
                         
                         Spacer()
@@ -143,7 +148,7 @@ struct HomeFeedView: View {
                 }
                     
             }
-        }
+        } .environment(\.colorScheme, .dark)
         
     }
             
@@ -155,7 +160,7 @@ struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             HomeFeedView()
-                .environmentObject(BigModel())
+                .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions
         }

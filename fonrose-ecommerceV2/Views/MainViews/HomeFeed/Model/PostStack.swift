@@ -19,10 +19,8 @@ struct PostStack: View {
             
             Image(picture.pictureName)
                 .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            //Rectangle()
-                //.foregroundColor(.blue)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             Text(picture.cellText)
                 .frame(alignment: .center)
                 .foregroundColor(.white)

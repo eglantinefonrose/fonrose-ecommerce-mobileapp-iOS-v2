@@ -31,27 +31,75 @@ struct SignInView: View {
                 .edgesIgnoringSafeArea(.all)
             }
             
-            ZStack {
+            VStack {
+                    
+                Spacer()
+                    .frame(height: 20)
                 
-                VStack {
+                HStack {
                     
                     Spacer()
-                        .frame(height: UIScreen.main.bounds.height/7)
+                        .frame(width: 20)
                     
                     
-                    Text("Sign In")
-                            .font(.system(size: 35, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                            .frame(width: UIScreen.main.bounds.width)
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
                     
                     Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = .Home_homeFeed
+                        }
+                    
+                    Spacer()
+                        .frame(width: 20)
                     
                 }
                 
+                Spacer()
+                    
+                if !email.isEmpty, !password.isEmpty {
+                    Text("Sign in")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
+                } else {
+                    Text("Sign in")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.black)
+                        .fontWeight(.semibold)
+                }
+            
+                Spacer()
+                
                 VStack {
                     
-                    Spacer()
+                    TextFieldModel()
                     
+                    SecureFieldModel()
+                    
+                }
+                
+                Spacer()
+                
+                Text(bigModel.signInErrorMessage)
+                    .foregroundColor(.red)
+                
+                Spacer()
+                
+                VStack {
+                                        
                     VStack {
                             
                         HStack {
@@ -125,70 +173,9 @@ struct SignInView: View {
                             self.bigModel.authLastViews.append(.Auth_SignInView)
                         }
                 
-                }
-                    
-            }
-            
-                VStack {
-                        
-                    Spacer()
-                    
-                    VStack {
-                        
-                        TextFieldModel()
-                        
-                        SecureFieldModel()
-                        
                     }
                     
-                    Spacer()
-                
-                    Text(bigModel.signOutErrorMessage)
-                        .foregroundColor(.red)
-                    
-                    Spacer()
-                        .frame(height: 30)
-                                
                 }
-            }
-            
-            VStack {
-                
-                Spacer()
-                    .frame(height: 20)
-                
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }.frame(width: UIScreen.main.bounds.width)
-                
-                Spacer()
                 
             }
             

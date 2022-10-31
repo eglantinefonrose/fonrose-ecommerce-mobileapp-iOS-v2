@@ -10,8 +10,28 @@ import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
 
+struct DeviceRotationViewModifier: ViewModifier {
+    let action: (UIDeviceOrientation) -> Void
+
+    func body(content: Content) -> some View {
+        content
+            .onAppear()
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)) { _ in
+                action(UIDevice.current.orientation)
+            }
+    }
+}
+
+// A View wrapper to make the modifier easier to use
+extension View {
+    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
+        self.modifier(DeviceRotationViewModifier(action: action))
+    }
+}
+
 struct MeasurementView: View {
     
+    @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
     @State var showPopup = !BigModel().isPersonChosen
     var user = BigModel.User.self
@@ -41,6 +61,8 @@ struct MeasurementView: View {
 struct HomeView: View {
     
     @EnvironmentObject var bigModel: BigModel
+    @State private var orientation = UIDeviceOrientation.portrait
+    
     @State var measurementText1: String
     @State var measurementText2: String
     @State var measurementText3: String
@@ -48,103 +70,140 @@ struct HomeView: View {
     @State var measurementText5: String
     @State var measurementText6: String
     @State var measurementText7: String
+    
     var db = Firestore.firestore()
     var user = BigModel.User.self
     var auth = Auth.auth()
     
     var body: some View {
-        
-        ZStack {
+                    
+    VStack {
+                
+        Spacer()
+         
+        HStack {
             
-            VStack {
-                    
-                Spacer()
-                    
-                VStack {
-                    
-                    /*Text("Mensurations")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
-                        .frame(width: UIScreen.main.bounds.width)
-                        
-                    Spacer()
-                        .frame(height: 10)*/
-                        
-                    Text("all values in millimeters")
-                        .foregroundColor(Color.gray)
-                        .font(.system(size: 15, weight: .semibold, design: .default))
-                        
-                    }
-                    
-                Spacer()
-                
-                VStack {
-                    
-                    VStack {
-                        
-                        MeasurementValue(MeasurementName: $measurementText1, textFieldText: "Armpits Measurement")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    
-                    
-                    //MARK: Arms Length
-                    VStack {
-                        
-                        MeasurementValue(MeasurementName: $measurementText2, textFieldText: "Arms Length")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    
-                    //MARK: Head Measurement
-                    VStack {
-                        MeasurementValue(MeasurementName: $measurementText3, textFieldText: "Head Measurement")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    
-                    //MARK: Pelvis knee
-                    VStack {
-                        MeasurementValue(MeasurementName: $measurementText4, textFieldText: "Pelvis Knee")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    
-                    //MARK: Pelvis Measurement
-                    VStack {
-                        MeasurementValue(MeasurementName: $measurementText5, textFieldText: "Pelvis Measurement")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                    
-                    //MARK: Shoulders Measurement
-                    VStack {
-                        MeasurementValue(MeasurementName: $measurementText6, textFieldText: "Shoulders Measurement")
-                        
-                        Spacer()
-                            .frame(height: 15)
-                    }
-                   
-                    //MARK: Shouders Pelvis
-                     VStack {
-                        MeasurementValue(MeasurementName: $measurementText7, textFieldText: "Shoulders Pelvis")
-                         
-                         Spacer()
-                             .frame(height: 15)
-                     }
-                    
+            Spacer()
+                .frame(width: 20)
+            
+            
+            Text("Back")
+                .foregroundColor(Color.blue)
+                .fontWeight(.semibold)
+                .onTapGesture {
+                    if !self.bigModel.lastViews.isEmpty {
+                        print("back")
+                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                        self.bigModel.lastViews.removeLast()
+                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                    } else { print("array empty") }
                 }
+            
+            Spacer()
+            
+            Image(systemName: "house")
+                .foregroundColor(Color.blue)
+                .onTapGesture {
+                    self.bigModel.currentview = .Home_homeFeed
+                }
+            
+            Spacer()
+                .frame(width: 20)
+            
+        }
+                   
+        VStack {
+            
+            Spacer()
+                                
+            Text("Mensurations")
+                .font(.system(size: 35, weight: .bold, design: .default))
+                .fontWeight(.semibold)
+            
+            Text("all values in millimeters")
+                .foregroundColor(Color.gray)
+                .font(.system(size: 15, weight: .semibold, design: .default))
+                
+            Spacer()
+            
+            }
+                
+            VStack {
+                
+                Spacer()
+                    
+                    if #available(iOS 15.0, *) {
+                        ScrollView {
+                            
+                            Group {
+                                LazyVStack {
+                                                                     
+                                    MeasurementValue(MeasurementName: measurementText1, textFieldText: "Armpits Measurement")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    
+                                    MeasurementValue(MeasurementName: measurementText2, textFieldText: "Arms Length")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    MeasurementValue(MeasurementName: measurementText3, textFieldText: "Head Measurement")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    
+                                    MeasurementValue(MeasurementName: measurementText4, textFieldText: "Pelvis Knee")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    MeasurementValue(MeasurementName: measurementText5, textFieldText: "Pelvis Measurement")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    MeasurementValue(MeasurementName: measurementText6, textFieldText: "Shoulders Measurement")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                    
+                                    MeasurementValue(MeasurementName: measurementText7, textFieldText: "Shoulders Pelvis")
+                                        .listRowBackground(Color.black)
+                                        .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
+                                        .listRowSeparator(.hidden)
+                                                                   
+                                }
+                            }
+                                                        
+                        }.frame(height: orientation.isPortrait ? 400 : 100)
+                        .onRotate { newOrientation in orientation = newOrientation }
+                        
+                    } else {
+                        
+                    }
+                
+                Spacer()
+                        
+                }
+                                            
+                VStack {
                     
                     Spacer()
-                
-                    VStack {
-                    
-                    Button(action: {
+                                        
+                    HStack {
+                        Spacer()
+                        Text("Save")
+                            .foregroundColor(Color.white)
+                            .fontWeight(.semibold)
+                            .padding(10)
+                        Spacer()
+                    }.background(Color.blue)
+                    .cornerRadius(15)
+                    .padding(20)
+                    .onTapGesture {
                         
                         if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
                             
@@ -191,98 +250,20 @@ struct HomeView: View {
                             }
                             
                         }
-                        
-                        /**/
-                        
-                        }) {
-                        //Spacer()
-                            
-                        HStack {
-                                
-                            Spacer()
-                                
-                            HStack {
-                                
-                                Spacer()
-                                Text("Save")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                Spacer()
-                            
-                            }.background(Color.blue)
-                            .frame(width: 150)
-                            .cornerRadius(5)
-                            
-                            Spacer()
-                            
-                        }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
-                        .background(Color.blue)
-                        .cornerRadius(15)
-                        
-                    //Spacer()
+                                                    
                     }
-                    
-                    Spacer()
-                        .frame(height: 25)
-                    
-                }
-                            
-            }.background(Color.black)
-            
-            VStack {
-                
-                Spacer()
-                    .frame(height: 20)
-                
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Text("Mensurations")
-                        .foregroundColor(Color.white)
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }.frame(width: UIScreen.main.bounds.width)
-                
-                Spacer()
                 
             }
-            
+                            
         }
+        
     }
     
 }
 
-/*struct MeasurementView_Previews: PreviewProvider {
+struct MeasurementView_Previews: PreviewProvider {
     static var previews: some View {
-        MeasurementView(, user: <#BigModel.User#>)
-            .environmentObject(BigModel())
+        MeasurementView()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
-}*/
+}

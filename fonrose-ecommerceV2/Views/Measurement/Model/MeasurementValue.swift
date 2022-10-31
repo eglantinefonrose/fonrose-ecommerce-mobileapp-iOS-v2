@@ -19,7 +19,7 @@ extension View {
 struct MeasurementValue: View {
     
     @State var textFieldColor: Bool = true
-    @Binding var MeasurementName: String
+    @State var MeasurementName: String
     @State var showingSecondView: Bool = false
     var MeasurementVideoName: String!
     @State var textFieldText: String
@@ -27,70 +27,30 @@ struct MeasurementValue: View {
     @available(iOS 14.0, *)
     var body: some View {
 
-        VStack {
-            HStack {
-                
-                Spacer()
-                    .frame(width: 30)
-                
-                HStack {
-                    
-                    Spacer()
-                    
-                    VStack {
+        TextFieldModel(title: textFieldText, text: MeasurementName)
+            .onChange(of: (MeasurementName), perform: { value in
+                perform: do {
+                    if MeasurementName.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                        alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
                             
-                            Spacer()
-                            
-                            HStack {
-                                                                
-                                Spacer()
-                                
-                                TextField(textFieldText, text: $MeasurementName)
-                                    .background(Color.white)
-                                    .onChange(of: (MeasurementName), perform: { value in
-                                        perform: do {
-                                            if MeasurementName.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
-                            }
-                            
-                            Spacer()
-                        
-                        }.background(Color.white)
-                        .cornerRadius(7)
-                        .frame(height: 30)
-                    
-                }.background(Color.white)
-                .cornerRadius(7)
-                .frame(width: UIScreen.main.bounds.width*(3/4))
-                
-                Spacer()
-                
-                 /*VStack {
-                   Button(action: {
-                        hideKeyboard()
-                   }){
-                    Image(systemName: "checkmark.circle")
-                        .resizable()
-                        .foregroundColor(.blue)
-                        .frame(width: 20, height: 20)
-                        .offset(x: self.buttonCurrentSize)
-                   }
-               }
-                
-                Spacer()
-                    .frame(width: 30)*/
-                
-            }.frame(width: UIScreen.main.bounds.width)
-            
-        }
+                        }
+                    } else {}
+                }
+            })
                 
     }
 }
+
+struct MeasurementValue_Previews: PreviewProvider {
+    static var previews: some View {
+        if #available(iOS 14.0, *) {
+            MeasurementValue(MeasurementName: "edef", textFieldText: "")
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+}
+
 
 extension View {
     func alertTF(title: String, message: String, primaryTitle: String, action: @escaping ()->()) {

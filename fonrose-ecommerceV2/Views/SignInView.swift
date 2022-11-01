@@ -92,82 +92,52 @@ struct SignInView: View {
                 Spacer()
                 
                 VStack {
-                                        
-                    VStack {
-                            
-                        HStack {
-                                
-                            Spacer()
-                                
-                            HStack {
-                                
-                                Spacer()
-                                
-                                if !email.isEmpty, !password.isEmpty {
-                                    Text("Sign in")
-                                        .foregroundColor(!email.isEmpty && !password.isEmpty ? Color.white : Color.black)
-                                        .fontWeight(.semibold)
-                                } else {
-                                    Text("Sign in")
-                                        .foregroundColor(Color.black)
-                                        .fontWeight(.semibold)
-                                }
-
-                                Spacer()
-                            
-                            }
-                            .frame(width: 150)
-                            .cornerRadius(5)
-                            
-                            Spacer()
-                            
-                            }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
-                            .background(Color.blue)
-                            .cornerRadius(15)
-                            .onTapGesture {
-                                print("sign in")
-                                guard !email.isEmpty, !password.isEmpty else {
-                                    return
-                                }
-                                bigModel.signIn(email: email, password: password)
-                                self.bigModel.authLastViews.append(.Auth_SignInView)
-                            }
                     
+                    HStack {
                         Spacer()
-                            .frame(height: 10)
-                    
-                    }
-            
-                    VStack {
-                        
-                        HStack {
-                                
-                            Spacer()
-                                
-                            HStack {
-                                
-                                Spacer()
-                                Text("Sign up")
-                                    .foregroundColor(.white)
-                                    .fontWeight(.medium)
-                                Spacer()
-                            
-                            }.background(Color(UIColor.lightGray))
-                            .frame(width: 150)
-                            .cornerRadius(5)
-                            
-                            Spacer()
-                            
-                        }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
-                        .background(Color(UIColor.lightGray))
-                        .cornerRadius(15)
-                        .onTapGesture {
-                            self.bigModel.authCurrentView = .Auth_SignUpView
-                            self.bigModel.authLastViews.append(.Auth_SignInView)
+                        if !email.isEmpty, !password.isEmpty {
+                            Text("Sign in")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
+                        } else {
+                            Text("Sign in")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
                         }
-                
+                        Spacer()
+                    }.background(Color.blue)
+                    .cornerRadius(15)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                    .onTapGesture {
+                        print("sign in")
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        bigModel.signIn(email: email, password: password)
+                        self.bigModel.authLastViews.append(.Auth_SignInView)
                     }
                     
+                    HStack {
+                        Spacer()
+                            Text("Sign up")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
+                        Spacer()
+                    }.background(Color(UIColor.lightGray))
+                    .cornerRadius(15)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                    .onTapGesture {
+                        print("sign in")
+                        guard !email.isEmpty, !password.isEmpty else {
+                            return
+                        }
+                        self.bigModel.authCurrentView = .Auth_SignUpView
+                        self.bigModel.authLastViews.append(.Auth_SignInView)
+                    }
+                                                                        
                     Spacer()
                         .frame(height: 10)
                     

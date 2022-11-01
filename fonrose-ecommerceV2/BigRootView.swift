@@ -36,8 +36,11 @@ struct BigRootView: View {
                 }
                 
                 if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    MeasurementView()
-                    
+                    if bigModel.user.persons.isEmpty {
+                        AuthView()
+                    } else {
+                        MeasurementView()
+                    }
                 }
                 
                 if (self.bigModel.currentview == .VideoPlayer_trailerPlayer) {

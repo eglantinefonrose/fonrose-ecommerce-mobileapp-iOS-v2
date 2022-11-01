@@ -193,7 +193,7 @@ struct LocationHome: View {
                                 .font(adressStreet == "No location selected" ? .footnote : .headline)
                         }
                         .onTapGesture {
-                            self.bigModel.lastViews.append(.LivraisonViews_Livraison)
+                            /*self.bigModel.lastViews.append(.LivraisonViews_Livraison)
                             
                             if self.adressStreet != "No location selected" {
                                     
@@ -242,7 +242,7 @@ struct LocationHome: View {
                                 
                             }
                             
-                            print("back")
+                            print("back")*/
                         }
                         
                         Spacer()
@@ -316,6 +316,6 @@ struct LocationHome_Previews: PreviewProvider {
     @available(iOS 14.0, *)
     static var previews: some View {
         LocationHome()
-            .environmentObject(BigModel())
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
 }

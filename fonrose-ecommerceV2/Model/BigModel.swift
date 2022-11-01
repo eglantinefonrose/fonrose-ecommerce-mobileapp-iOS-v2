@@ -257,7 +257,17 @@ class BigModel : ObservableObject {
 
     init(shouldInjectMockedData: Bool) {
         print("Constructor BigModel - shouldInjectMockedData==true")
-        //self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: [ Person(id: <#T##String#>, email: <#T##String#>, name: <#T##String#>, measurements: <#T##Measurements?#>, location: <#T##Location?#>), ])
+        
+        let theMeasurement = Measurements(id: "", ArmpitsMeasurement: "0", ArmsLength: "0", HeadMeasurement: "0", PelvisMeasurement: "0", PelvisKnee: "0", ShouldersMeasurement: "0", ShouldersPelvis: "0")
+        let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3", adressLat: 0, adressLong: 0)
+        
+        let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation)
+        let person002 : Person = Person(id: "idPerson002", email: "malo.fonrose@gmail.com", name: "Malo Fonrose", measurements: theMeasurement, location: theLocation)
+        let thePersons : [Person] = [ person001 , person002 ];
+
+        self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons )
+        
+        self.currentPersonIndex = 0; // Eglantine
     }
 
     

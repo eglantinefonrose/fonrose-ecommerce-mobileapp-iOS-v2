@@ -40,14 +40,19 @@ struct MeasurementView: View {
         
         if #available(iOS 14.0, *) {
 
-            HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
-                         measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
-                         measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
-                         measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
-                         measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
-                         measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
+            ZStack {
+                
+                Color("Background")
+                    .edgesIgnoringSafeArea(.all)
+                
+                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
+                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
+                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
+                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
+                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
+                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
                          measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
-                .environment(\.colorScheme, .dark)
+            }
             
         } else {
             // Fallback on earlier versions
@@ -119,6 +124,7 @@ struct HomeView: View {
             Text("Mensurations")
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .fontWeight(.semibold)
+                .foregroundColor(.white)
             
             Text("all values in millimeters")
                 .foregroundColor(Color.gray)
@@ -135,11 +141,9 @@ struct HomeView: View {
                     if #available(iOS 15.0, *) {
                         ScrollView {
                             
-                            Group {
                                 LazyVStack {
-                                                                     
+                                    
                                     MeasurementValue(MeasurementName: measurementText1, textFieldText: "Armpits Measurement")
-                                        .listRowBackground(Color.black)
                                         .listRowInsets(.init(top: 5, leading: 0, bottom: 5, trailing: 0))
                                         .listRowSeparator(.hidden)
                                     
@@ -176,9 +180,8 @@ struct HomeView: View {
                                         .listRowSeparator(.hidden)
                                                                    
                                 }
-                            }
                                                         
-                        }.frame(height: orientation.isPortrait ? 400 : 100)
+                        }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
                         .onRotate { newOrientation in orientation = newOrientation }
                         
                     } else {

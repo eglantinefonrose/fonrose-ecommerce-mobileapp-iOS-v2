@@ -26,10 +26,8 @@
 		7034753D285F67BD0030C906 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034753C285F67BD0030C906 /* SignInView.swift */; };
 		70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70347548285F6B910030C906 /* GoogleService-Info.plist */; };
 		7034754D285F7D000030C906 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754C285F7D000030C906 /* SignUpView.swift */; };
-		7034754F285F7D460030C906 /* LogInNewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754E285F7D460030C906 /* LogInNewUser.swift */; };
 		70347551285F8F170030C906 /* PersonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347550285F8F160030C906 /* PersonPickerView.swift */; };
 		70347553286090590030C906 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347552286090590030C906 /* MeasurementView.swift */; };
-		7034755528623D450030C906 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034755428623D450030C906 /* SwiftUIView.swift */; };
 		7034755728623E000030C906 /* SignInSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034755628623E000030C906 /* SignInSandbox.swift */; };
 		70347559286284220030C906 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347558286284220030C906 /* UserInfo.swift */; };
 		7034755B2864D0F70030C906 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034755A2864D0F70030C906 /* AuthView.swift */; };
@@ -91,10 +89,8 @@
 		7034753C285F67BD0030C906 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		70347548285F6B910030C906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7034754C285F7D000030C906 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		7034754E285F7D460030C906 /* LogInNewUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInNewUser.swift; sourceTree = "<group>"; };
 		70347550285F8F160030C906 /* PersonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPickerView.swift; sourceTree = "<group>"; };
 		70347552286090590030C906 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
-		7034755428623D450030C906 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		7034755628623E000030C906 /* SignInSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSandbox.swift; sourceTree = "<group>"; };
 		70347558286284220030C906 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		7034755A2864D0F70030C906 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -275,9 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				7034753C285F67BD0030C906 /* SignInView.swift */,
-				7034755428623D450030C906 /* SwiftUIView.swift */,
 				7034754C285F7D000030C906 /* SignUpView.swift */,
-				7034754E285F7D460030C906 /* LogInNewUser.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
 				70347558286284220030C906 /* UserInfo.swift */,
@@ -494,14 +488,12 @@
 				708CF08728A4BB0300397DED /* LoopTest.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,
-				7034755528623D450030C906 /* SwiftUIView.swift in Sources */,
 				70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */,
 				7045357C24770D84001F20A8 /* AboutUs.swift in Sources */,
 				703C28AF27E755BC00DE8B3B /* Binding-test1.swift in Sources */,
 				7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */,
 				70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */,
 				70347559286284220030C906 /* UserInfo.swift in Sources */,
-				7034754F285F7D460030C906 /* LogInNewUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

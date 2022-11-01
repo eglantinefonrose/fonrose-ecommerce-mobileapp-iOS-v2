@@ -42,7 +42,6 @@ struct HomeFeedView: View {
                                         .onTapGesture {
                                         }
                                 } .buttonStyle(PlainButtonStyle())
-                                //.edgesIgnoringSafeArea(.all)
                                 .navigationBarTitle("")
                                 .navigationBarHidden(true)
                                 .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))

@@ -26,10 +26,6 @@ struct AuthView: View {
                 SignUpView()
             }
                 
-            if (self.bigModel.authCurrentView == .Auth_LogInNewUserView) {
-                LogInNewUser()
-            }
-                
             if (self.bigModel.authCurrentView == .Auth_UserInfo) {
                 UserInfo()
             }

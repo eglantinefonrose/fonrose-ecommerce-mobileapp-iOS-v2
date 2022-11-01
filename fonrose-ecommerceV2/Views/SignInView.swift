@@ -69,25 +69,18 @@ struct SignInView: View {
                 
                 Spacer()
                     
-                if !email.isEmpty, !password.isEmpty {
-                    Text("Sign in")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.white)
-                        .fontWeight(.semibold)
-                } else {
-                    Text("Sign in")
-                        .font(.system(size: 35, weight: .bold, design: .default))
-                        .foregroundColor(Color.black)
-                        .fontWeight(.semibold)
-                }
+                Text("Sign in")
+                    .font(.system(size: 35, weight: .bold, design: .default))
+                    .foregroundColor(Color.white)
+                    .fontWeight(.semibold)
             
                 Spacer()
                 
                 VStack {
                     
-                    TextFieldModel()
+                    TextFieldModel(title: "Email", text: email)
                     
-                    SecureFieldModel()
+                    SecureFieldModel(title: "Password", text: password)
                     
                 }
                 
@@ -112,7 +105,7 @@ struct SignInView: View {
                                 
                                 if !email.isEmpty, !password.isEmpty {
                                     Text("Sign in")
-                                        .foregroundColor(Color.white)
+                                        .foregroundColor(!email.isEmpty && !password.isEmpty ? Color.white : Color.black)
                                         .fontWeight(.semibold)
                                 } else {
                                     Text("Sign in")
@@ -186,7 +179,8 @@ struct SignInView: View {
 
 struct TextFieldModel: View {
     
-    @State var text: String = ""
+    var title: String
+    @State var text: String
     @Environment(\.colorScheme) var theColorScheme
     
     var body: some View {
@@ -198,8 +192,8 @@ struct TextFieldModel: View {
          HStack {
                                              
              Spacer()
-            
-             TextField("Email", text: $text)
+             
+             TextField(title, text: $text)
                  .disableAutocorrection(true)
                  .autocapitalization(.none)
          }
@@ -216,7 +210,8 @@ struct TextFieldModel: View {
 
 struct SecureFieldModel: View {
     
-    @State var text: String = ""
+    var title: String
+    @State var text: String
     @Environment(\.colorScheme) var theColorScheme
     
     var body: some View {
@@ -229,7 +224,7 @@ struct SecureFieldModel: View {
                                              
              Spacer()
             
-             SecureField("Password", text: $text)
+             SecureField(title, text: $text)
                  .disableAutocorrection(true)
                  .autocapitalization(.none)
          }

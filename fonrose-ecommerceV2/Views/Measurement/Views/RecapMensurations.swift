@@ -19,7 +19,42 @@ struct RecapMensurations: View {
     var body: some View {
                                 
         ZStack {
+            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
+                
+                HStack {
+                    
+                    Spacer()
+                        .frame(width: 20)
+                    
+                    
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = .Home_homeFeed
+                        }
+                    
+                    Spacer()
+                        .frame(width: 20)
+                    
+                }.frame(width: UIScreen.main.bounds.width)
                 
                 Spacer()
                     
@@ -29,13 +64,11 @@ struct RecapMensurations: View {
                         
                         Text("Recap")
                             .font(.system(size: 45, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
                         
                         Spacer()
                     }
                     
                     Spacer()
-                        .frame(height: 50)
                     
                     VStack {
                                             
@@ -57,9 +90,19 @@ struct RecapMensurations: View {
                     
                         Spacer()
                     
-                        VStack {
+                    VStack {
                         
-                        Button(action: {
+                        HStack {
+                            Spacer()
+                            Text("Save")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(10)
+                            Spacer()
+                        }.background(Color.blue)
+                        .cornerRadius(15)
+                        .padding(20)
+                        .onTapGesture {
                             self.bigModel.lastViews.append(.Measurement_RecapMensurations)
                             self.bigModel.currentview = .LivraisonViews_Livraison
                             print("previous View = \(String(describing: self.bigModel.lastViews.last))")
@@ -105,91 +148,17 @@ struct RecapMensurations: View {
                                 
                             }
                             
-                            }) {
-                                //Spacer()
-                                    
-                                    HStack {
-                                        
-                                        Spacer()
-                                        
-                                        HStack {
-                                            
-                                            Spacer()
-                                            Text("Location")
-                                                .foregroundColor(Color.white)
-                                                .fontWeight(.semibold)
-                                            Spacer()
-                                        
-                                        }.background(Color.blue)
-                                        .frame(width: 150)
-                                        .cornerRadius(5)
-                                        
-                                        Spacer()
-                                        
-                                }.frame(width: 120, height: 35)
-                                .background(Color.blue)
-                                .cornerRadius(15)
-                                
-                            //Spacer()
                         }
-                        
-                        Spacer()
-                            .frame(height: 20)
                            
-                        Button(action: {
+                        
+                    Text("Edit measurements")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
                             self.bigModel.currentview = .Measurement_Mensurations
-                        }) {
-                            Text("Edit measurements")
-                                .foregroundColor(Color.blue)
                         }
-                        
-                        Spacer()
-                            .frame(height: 25)
-                        
                     }
                                 
-                }.background(Color.black)
-            .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                
-                Spacer()
-                    .frame(height: 20)
-                
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }.frame(width: UIScreen.main.bounds.width)
-                
-                Spacer()
-                
-            }
+                }
             
         }
     }
@@ -210,7 +179,6 @@ struct RecapMensurationsTextStruct: View {
                 .frame(width: 50)
                                
                 Text(recapMeasurementText)
-                    .foregroundColor(Color.white)
                     .font(.system(size: 20, design: .default))
                     .frame(height: 50, alignment: .leading)
                                
@@ -237,6 +205,6 @@ struct RecapMensurationsTextStruct: View {
 struct RecapMensurations_Previews: PreviewProvider {
     static var previews: some View {
         RecapMensurations()
-            .environmentObject(BigModel())
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
 }

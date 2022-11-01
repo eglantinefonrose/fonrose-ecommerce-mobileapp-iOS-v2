@@ -78,9 +78,45 @@ struct SignUpView: View {
                 
                 VStack {
                     
-                    TextFieldEmail(email: email)
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         TextField("Email", text: $email)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                     }
+                     
+                     Spacer()
+
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    .padding(10)
                     
-                    SecureFieldModel()
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         SecureField("Password", text: $password)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                     }
+                     
+                     Spacer()
+
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    .padding(10)
                     
                 }
                 
@@ -117,6 +153,7 @@ struct SignUpView: View {
                     .onTapGesture {
                         self.bigModel.authLastViews.append(.Auth_SignUpView)
                         guard !email.isEmpty, !password.isEmpty else {
+                            print("email or password empty")
                             return
                         }
                         bigModel.signUp(newUserEmail: email, newUserPassword: password)

@@ -83,7 +83,7 @@ struct LocationTextField: View {
                 HStack {
                     
                     Spacer()
-                        .frame(width: 20)
+                        .frame(width: 10)
                     
                     
                     Text("Back")
@@ -115,14 +115,10 @@ struct LocationTextField: View {
                     
                     Spacer()
                     
-                    Text("Mensurations")
+                    Text("Location")
                         .font(.system(size: 35, weight: .bold, design: .default))
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
-                    
-                    Text("all values in millimeters")
-                        .foregroundColor(Color.gray)
-                        .font(.system(size: 15, weight: .semibold, design: .default))
                     
                     Spacer()
                     

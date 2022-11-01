@@ -34,7 +34,7 @@ struct SignInView: View {
             VStack {
                     
                 Spacer()
-                    .frame(height: 20)
+                    .frame(height: 10)
                 
                 HStack {
                     
@@ -167,6 +167,9 @@ struct SignInView: View {
                         }
                 
                     }
+                    
+                    Spacer()
+                        .frame(height: 10)
                     
                 }
                 

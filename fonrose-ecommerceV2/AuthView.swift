@@ -31,11 +31,19 @@ struct AuthView: View {
             }
             
             if (self.bigModel.authCurrentView == .Auth_PersonPickerView) {
-                PersonPickerView()
+                if bigModel.deletedPersonID == "" {
+                    PersonPickerView()
+                } else {
+                    DeletePersonView()
+                }
             }
             
             if (self.bigModel.authCurrentView == .Auth_NewUserView) {
                 NewPersonView()
+            }
+            
+            if (self.bigModel.authCurrentView == .Auth_DeleteScreen) {
+                DeletePersonView()
             }
             
         }

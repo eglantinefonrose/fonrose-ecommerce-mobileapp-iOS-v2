@@ -182,9 +182,9 @@ struct PersonPickerViewHome: View {
                                 Image(systemName: "trash")
                                     .foregroundColor(.blue)
                                     .onTapGesture {
-                                        
                                         //affichage de l'alerte
                                         bigModel.deletedPersonID = bigModel.user.persons[index].id
+                                        bigModel.deletedPersonName = bigModel.user.persons[index].name
                                         showAlert = true
                                         
                                     }
@@ -240,9 +240,9 @@ struct DeletePersonView: View {
             Text("")
                 .alert(isPresented: $showAlert, content: {
                 
-                Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), primaryButton: .default(Text("Change")) {
-                
-                }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
+                    Alert(title: Text("Delete \(bigModel.deletedPersonName)"), message: Text("Are you sure you want to delete this person ?"), primaryButton: .default(Text("No")) {
+                        bigModel.deletedPersonID = ""
+                }, secondaryButton: .default(Text("Yes").font(.system(.caption))) {
                     
                     //suppression de la personne
                     db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.deletedPersonID).delete() { err in
@@ -266,6 +266,8 @@ struct DeletePersonView: View {
                                         let dbEmail = document.data()["email"] as? String ?? ""
                                         
                                         bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
+                                        
+                                        bigModel.deletedPersonID = ""
                                         
                                         print("doc added")
                                     }

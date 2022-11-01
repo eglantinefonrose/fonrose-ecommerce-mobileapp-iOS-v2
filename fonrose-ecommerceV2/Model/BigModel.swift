@@ -93,6 +93,7 @@ class BigModel : ObservableObject {
     //MARK: Persons
     @Published var personNumber: String = ""
     @Published var deletedPersonID: String = ""
+    @Published var deletedPersonName: String = ""
     
     func signIn(email: String, password: String) {
         

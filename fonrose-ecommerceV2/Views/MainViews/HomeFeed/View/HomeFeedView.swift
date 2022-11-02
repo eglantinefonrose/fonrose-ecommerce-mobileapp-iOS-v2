@@ -47,34 +47,31 @@ struct HomeFeedView: View {
                                 .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                             }.listStyle(PlainListStyle())
                             
-                            VStack {
-                                
-                                Spacer()
-                                    .frame(height: 20)
-                                
-                                HStack {
+                            if bigModel.showMenu {
+                                VStack {
                                     
-                                    Spacer()
-                                        .frame(width: 20)
-                                    
-                                    Image(systemName: "text.justify")
-                                        .foregroundColor(.white)
-                                        .font(.system(size: 20))
-                                        .onTapGesture {
-                                            withAnimation {
-                                                bigModel.showMenu.toggle()
-                                                if bigModel.showMenu {
-                                                    print("menu")
-                                                } else {
-                                                    print("no menu")
+                                    HStack {
+                                                                
+                                        Image(systemName: "text.justify")
+                                            .foregroundColor(.white)
+                                            .font(.system(size: 20))
+                                            .padding(20)
+                                            .onTapGesture {
+                                                withAnimation {
+                                                    bigModel.showMenu.toggle()
+                                                    if bigModel.showMenu {
+                                                        print("menu")
+                                                    } else {
+                                                        print("no menu")
+                                                    }
                                                 }
                                             }
-                                        }
-                                    
-                                    
+                                        
+                                        Spacer()
+                                        
+                                    }.frame(width: UIScreen.main.bounds.width)
                                     Spacer()
-                                }
-                                Spacer()
+                                }.padding(10)
                             }
                             
                         }
@@ -94,14 +91,38 @@ struct HomeFeedView: View {
                     
                 VStack {
                     
-                    Spacer()
-                        .frame(height: 20)
-                    
                     HStack {
+                        
+                        Image(systemName: "text.justify")
+                            .opacity(bigModel.showMenu ? 0 : 1)
+                            .font(.system(size: 20))
+                            .padding(20)
+                            .onTapGesture {
+                                bigModel.showMenu.toggle()
+                                if bigModel.showMenu {
+                                    print("menu")
+                                } else {
+                                    print("no menu")
+                                }
+                            }
+                            
+                        Spacer()
+                        
+                        if bigModel.user.id != "" {
+                            if bigModel.user.persons[bigModel.currentPersonIndex].id != "" {
+                                
+                                Text(bigModel.user.persons[bigModel.currentPersonIndex].name)
+                                    .opacity(bigModel.showMenu ? 0 : 1)
+                                    .foregroundColor(.white)
+                                    .font(.system(size: 17, weight: .bold, design: .default))
+                                
+                            }
+                        }
                         
                         Spacer()
                         
                         Image(systemName: "person.circle")
+                            .padding(20)
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .onTapGesture {
@@ -120,32 +141,9 @@ struct HomeFeedView: View {
                                 
                             }
                         
-                        Spacer()
-                            .frame(width: UIScreen.main.bounds.width/4 + 20)
-                        
-                    }
+                    }.frame(width: UIScreen.main.bounds.width)
                     Spacer()
-                }
-                    
-                VStack {
-                    HStack {
-                        
-                        Spacer()
-                        
-                        if bigModel.isPersonChosen && !bigModel.showMenu {
-                            
-                            Text(bigModel.user.persons[bigModel.currentPersonIndex].name)
-                                .foregroundColor(.white)
-                                .font(.system(size: 17, weight: .bold, design: .default))
-                            
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                    Spacer()
-                }
-                    
+                }.padding(10)
             }
         } .environment(\.colorScheme, .dark)
         

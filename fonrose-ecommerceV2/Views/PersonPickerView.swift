@@ -97,10 +97,18 @@ struct PersonPickerViewHome: View {
                                     
                                 HStack {
                                     
-                                    Text(bigModel.user.persons[index].name)
-                                        .foregroundColor(colorScheme == .dark ? .white : .black)
-                                    
-                                    Spacer()
+                                    HStack {
+                                        
+                                        Text(bigModel.user.persons[index].name)
+                                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                                        
+                                        Spacer()
+                                        
+                                    }.onTapGesture {
+                                        bigModel.currentPersonIndex = index
+                                        bigModel.currentPersonId = bigModel.user.persons[index].id
+                                        bigModel.authCurrentView = .Auth_UserInfo
+                                    }
                                     
                                     Image(systemName: "trash")
                                         .foregroundColor(.blue)

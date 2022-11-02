@@ -130,10 +130,6 @@ struct SignInView: View {
                     .cornerRadius(15)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                     .onTapGesture {
-                        print("sign in")
-                        guard !email.isEmpty, !password.isEmpty else {
-                            return
-                        }
                         self.bigModel.authCurrentView = .Auth_SignUpView
                         self.bigModel.authLastViews.append(.Auth_SignInView)
                     }

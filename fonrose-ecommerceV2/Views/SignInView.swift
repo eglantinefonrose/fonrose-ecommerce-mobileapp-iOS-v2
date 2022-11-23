@@ -14,6 +14,7 @@ struct SignInView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
+    var textContentType: UITextContentType!
     @State var email = ""
     @State var password = ""
     
@@ -78,9 +79,48 @@ struct SignInView: View {
                 
                 VStack {
                     
-                    TextFieldModel(title: "Email", text: email)
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                         
+                         TextField("Email", text: $email)
+                             .textContentType(.URL)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                             .keyboardType(UIKeyboardType.emailAddress)
+                     }
+                     
+                     Spacer()
+
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    .padding(10)
                     
-                    SecureFieldModel(title: "Password", text: password)
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                         
+                         SecureField("Password", text: $password)
+                             .textContentType(.password)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                     }
+                     
+                     Spacer()
+
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    .padding(10)
                     
                 }
                 
@@ -111,10 +151,7 @@ struct SignInView: View {
                     .cornerRadius(15)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                     .onTapGesture {
-                        print("sign in")
-                        guard !email.isEmpty, !password.isEmpty else {
-                            return
-                        }
+                        print("click")
                         bigModel.signIn(email: email, password: password)
                         self.bigModel.authLastViews.append(.Auth_SignInView)
                     }
@@ -149,11 +186,12 @@ struct SignInView: View {
 struct TextFieldModel: View {
     
     var title: String
-    @State var text: String
+    @State var text: String = ""
     @Environment(\.colorScheme) var theColorScheme
+    var textContentType: UITextContentType!
     
     var body: some View {
-
+        
         VStack {
          
          Spacer()

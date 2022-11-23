@@ -12,84 +12,73 @@ import AVKit
 struct TrailerPlayer: View {
     
     @EnvironmentObject var bigModel: BigModel
+    @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
+    let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!
     
     var body: some View {
 
         ZStack {
             
-            player()
-        
+            Rectangle()
+                .edgesIgnoringSafeArea(.all)
+                .foregroundColor(.black)
+            
             VStack {
                 
-                Spacer()
-                    .frame(height: 40)
+                HStack {
+                    
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
+                    
+                    Spacer()
+                    
+                    Text("The dress")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            bigModel.currentview = .Home_homeFeed
+                        }
                 
-                if #available(iOS 14.0, *) {
-                    HStack {
-                        
-                        Spacer()
-                            .frame(width: 20)
-                        
-                        Text("Back")
-                            .foregroundColor(Color.blue)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "house")
-                            .foregroundColor(Color.blue)
-                            .onTapGesture {
-                                self.bigModel.currentview = .Home_homeFeed
-                                self.bigModel.lastViews.removeAll()
-                            }
-                        
-                        Spacer()
-                            .frame(width: 20)
-                        
-                    }.onTapGesture {
-                        if !self.bigModel.lastViews.isEmpty {
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                            self.bigModel.lastViews.removeLast()
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                        } else { print("array empty") }
-                    }
-                } else {
-                    // Fallback on earlier versions
-                }
+                }//.frame(width: orientation == .portrait || orientation == .portraitUpsideDown ? UIScreen.main.bounds.width : 100)
+                //.frame(width: 400)
+                    .onRotate { newOrientation in orientation = newOrientation }
+                .padding(20)
                 
                 Spacer()
                 
             }
             
-        }.edgesIgnoringSafeArea(.all)
-        .background(Color.black)
-
-    }
-    
-}
-
-
-    // MARK: Controller pour video
-struct player : UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
-        
-    }
-    
-        func makeUIViewController(context: UIViewControllerRepresentableContext<player>) -> AVPlayerViewController {
-            let controller = AVPlayerViewController()
-            let url = "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4" // url non existante
-            let player1 = AVPlayer(url: URL(string: url)!)
-            controller.player = player1
-            return controller
+            if #available(iOS 14.0, *) {
+                VideoPlayer(player: AVPlayer(url: url))
+                    .scaledToFit()
+            } else {
+                // Fallback on earlier versions
+            }
+            
         }
+
+    }
+    
 }
-
-
-
 
 struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        player()
+        TrailerPlayer()
     }
 }

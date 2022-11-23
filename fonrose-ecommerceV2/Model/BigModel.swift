@@ -14,12 +14,32 @@ import MapKit
 
 class BigModel : ObservableObject {
     
-    var user = User(id: "", email: "", persons: [])
+    @Published var user: User = User(id: "", email: "", persons: [])
+    
+    func fetchPerson() {
+        
+        guard let userId = auth.currentUser?.uid else { return }
+        
+        db.collection("users").document("user\(userId)").collection("persons").addSnapshotListener { querySnapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            self.user.persons.removeAll()
+            querySnapshot?.documents.forEach({ queryDocumentSnapshot in
+                let data = queryDocumentSnapshot.data()
+                let person = Person(id: queryDocumentSnapshot.documentID, email: data["email"] as? String ?? "", name:  data["name"] as? String ?? "")
+                self.user.persons.append(person)
+            })
+        }
+        
+    }
+    
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
-    @Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
+    /*@Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
     @Published var userDBLat: CGFloat = 50.073658
-    @Published var userDBLong: CGFloat = 14.418540
+    @Published var userDBLong: CGFloat = 14.418540*/
     
     //MARK: UserModel
     struct User: Identifiable {
@@ -58,12 +78,18 @@ class BigModel : ObservableObject {
         var ShouldersPelvis: String
     }
 
+    struct PersonFirebaseConstants {
+        static let email = "email"
+        static let name = "name"
+    }
+    
     struct Person: Identifiable {
         var id = UUID().uuidString
         var email: String
         var name: String
         var measurements: Measurements?
         var location: Location?
+        
     }
 
     @Published var currentview = ViewEnum.Home_homeFeed
@@ -102,42 +128,18 @@ class BigModel : ObservableObject {
     
         auth.signIn(withEmail: email, password: password) { Result, Error in
             guard Result != nil, Error == nil else {
-                print("yeah")
-                //print((Error != nil) ? "error message = \(String(describing: Error?.localizedDescription))" : "no error")
+                print((Error != nil) ? "error message = \(String(describing: Error?.localizedDescription))" : "no error")
                 self.signInErrorMessage = Error?.localizedDescription ?? ""
                 return
             }
-            self.user.id = self.auth.currentUser?.uid ?? "nil"
-            self.user.email = self.auth.currentUser?.email ?? "nil"
-            self.signedIn = true
             
-            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-                guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-                
-                self.user.persons.removeAll()
-                if let snapshot = snapshot {
-                    for document in snapshot.documents {
-                        let dbID = document.documentID
-                        let dbName = document.data()["name"] as? String ?? ""
-                        let dbEmail = document.data()["email"] as? String ?? ""
-                        
-                        self.user.persons.append(Person(id: dbID, email: dbEmail, name: dbName))
-                        
-                        DispatchQueue.main.async {
-                            self.authCurrentView = .Auth_PersonPickerView
-                        }
-                        
-                        print("doc added")
-                    }
-                }
-                
-            }
+            print("sign in")
+            print(self.auth.currentUser?.uid ?? "fck")
             
+            self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
+            self.fetchPerson()
+            self.authCurrentView = .Auth_PersonPickerView
         }
-        
     }
     
     //MARK: Des modifications de l'appli à la db Firebase
@@ -232,7 +234,14 @@ class BigModel : ObservableObject {
         self.signedIn = false
     }
 
-    
+    func isThereAPersonWithTheSameName(name: String) -> Bool {
+        for i in 0..<self.user.persons.count {
+            if name == self.user.persons[i].name {
+                return true
+            }
+        }
+        return false
+    }
     
     
     //
@@ -264,11 +273,13 @@ class BigModel : ObservableObject {
         
         let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation)
         let person002 : Person = Person(id: "idPerson002", email: "malo.fonrose@gmail.com", name: "Malo Fonrose", measurements: theMeasurement, location: theLocation)
-        let thePersons : [Person] = [ person001 , person002 ];
+        //let person001: Person = Person(data: "data")
+        //let person002: Person = Person(data: "data")
+        let thePersons : [Person] = [ person001 , person002 ]
 
         self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons )
         
-        self.currentPersonIndex = 0; // Eglantine
+        self.currentPersonIndex = 0 // Eglantine
     }
 
     

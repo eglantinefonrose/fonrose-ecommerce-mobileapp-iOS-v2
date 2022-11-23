@@ -113,10 +113,12 @@ struct PersonPickerViewHome: View {
                                     Image(systemName: "trash")
                                         .foregroundColor(.blue)
                                         .onTapGesture {
+                                            print(index)
+                                            print(bigModel.user.persons[index].id)
+                                            print(bigModel.user.persons[index].name)
                                             //affichage de l'alerte
                                             bigModel.deletedPersonID = bigModel.user.persons[index].id
                                             bigModel.deletedPersonName = bigModel.user.persons[index].name
-                                            showAlert = true
                                     }
                                 }.padding(15)
                             }.listRowBackground(Color("Background"))
@@ -170,31 +172,33 @@ struct DeletePersonView: View {
                             print("Error removing document: \(err)")
                         } else {
                             print("Document successfully removed!")
+                            bigModel.deletedPersonID = ""
+                            bigModel.fetchPerson()
                         
                             //récupération des nouvelles données des personnes
-                            bigModel.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                
-                                bigModel.user.persons.removeAll()
-                                if let snapshot = snapshot {
-                                    for document in snapshot.documents {
-                                        let dbID = document.documentID
-                                        let dbName = document.data()["name"] as? String ?? ""
-                                        let dbEmail = document.data()["email"] as? String ?? ""
-                                        
-                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
-                                        
-                                        bigModel.deletedPersonID = ""
-                                        
-                                        print("doc added")
-                                    }
-                                }
-                                bigModel.deletedPersonID = ""
-                                
-                            }
+//                            bigModel.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
+//                                guard error == nil else {
+//                                    print(error!.localizedDescription)
+//                                    return
+//                                }
+//
+//                                bigModel.user.persons.removeAll()
+//                                if let snapshot = snapshot {
+//                                    for document in snapshot.documents {
+//                                        let dbID = document.documentID
+//                                        let dbName = document.data()["name"] as? String ?? ""
+//                                        let dbEmail = document.data()["email"] as? String ?? ""
+//
+//                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
+//
+//                                        bigModel.deletedPersonID = ""
+//
+//                                        print("doc added")
+//                                    }
+//                                }
+//                                bigModel.deletedPersonID = ""
+//
+//                            }
                         
                         }
                     }
@@ -210,7 +214,7 @@ struct PersonPickerView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             PersonPickerView()
-                .environmentObject(BigModel(shouldInjectMockedData: true))
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

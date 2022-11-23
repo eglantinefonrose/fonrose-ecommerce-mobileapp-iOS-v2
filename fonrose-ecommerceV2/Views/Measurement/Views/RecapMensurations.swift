@@ -205,6 +205,6 @@ struct RecapMensurationsTextStruct: View {
 struct RecapMensurations_Previews: PreviewProvider {
     static var previews: some View {
         RecapMensurations()
-            .environmentObject(BigModel(shouldInjectMockedData: true))
+            .environmentObject(BigModel())
     }
 }

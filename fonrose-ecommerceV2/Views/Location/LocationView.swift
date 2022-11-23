@@ -372,7 +372,7 @@ struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             LocationView()
-                .environmentObject(BigModel(shouldInjectMockedData: true))
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

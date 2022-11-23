@@ -632,7 +632,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
-				DEVELOPMENT_TEAM = 27DU3FB9N5;
+				DEVELOPMENT_TEAM = SFUKW3WJ6Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -643,8 +643,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fonrose.eglantine.sandbox.swiftui.firstappeg.fonrose-ecommerceV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -655,7 +656,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
-				DEVELOPMENT_TEAM = 27DU3FB9N5;
+				DEVELOPMENT_TEAM = SFUKW3WJ6Z;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -666,8 +667,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fonrose.eglantine.sandbox.swiftui.firstappeg.fonrose-ecommerceV2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

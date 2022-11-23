@@ -31,9 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 
-                window.rootViewController = UIHostingController(rootView: //test_binding()
+                window.rootViewController = UIHostingController(rootView: BigRootView()//test_binding()
                                                                     //.environment(\.colorScheme, .dark))
-                                                                        BigRootView() //LocationRecapView()
                     .environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions

@@ -316,6 +316,6 @@ struct LocationHome_Previews: PreviewProvider {
     @available(iOS 14.0, *)
     static var previews: some View {
         LocationHome()
-            .environmentObject(BigModel(shouldInjectMockedData: true))
+            .environmentObject(BigModel())
     }
 }

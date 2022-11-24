@@ -17,12 +17,13 @@ struct SignInView: View {
     var textContentType: UITextContentType!
     @State var email = ""
     @State var password = ""
+    var passwordTextField: UITextField = UITextField()
     
     @available(iOS 14.0, *)
     var body: some View {
         
         ZStack {
-            
+                        
             if theColorScheme == .light {
                 Color.gray
                     .opacity(0.25)
@@ -88,10 +89,11 @@ struct SignInView: View {
                          Spacer()
                          
                          TextField("Email", text: $email)
-                             .textContentType(.URL)
+                             .textContentType(.emailAddress)
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
                              .keyboardType(UIKeyboardType.emailAddress)
+                         
                      }
                      
                      Spacer()
@@ -110,9 +112,11 @@ struct SignInView: View {
                          Spacer()
                          
                          SecureField("Password", text: $password)
-                             .textContentType(.password)
+                             .keyboardType(.asciiCapable)
+                            .textContentType(.password)
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
+                         
                      }
                      
                      Spacer()

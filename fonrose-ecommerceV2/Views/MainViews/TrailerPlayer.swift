@@ -24,6 +24,16 @@ struct TrailerPlayer: View {
                 .edgesIgnoringSafeArea(.all)
                 .foregroundColor(.black)
             
+            if #available(iOS 14.0, *) {
+                
+                VideoPlayer(player: AVPlayer(url: url))
+                    .scaledToFill()
+                    //.frame(height: UIScreen.main.bounds.height)
+               
+            } else {
+                // Fallback on earlier versions
+            }
+            
             VStack {
                 
                 HStack {
@@ -55,20 +65,18 @@ struct TrailerPlayer: View {
                             bigModel.currentview = .Home_homeFeed
                         }
                 
-                }//.frame(width: orientation == .portrait || orientation == .portraitUpsideDown ? UIScreen.main.bounds.width : 100)
-                //.frame(width: 400)
-                    .onRotate { newOrientation in orientation = newOrientation }
+                }.onRotate { newOrientation in orientation = newOrientation }
                 .padding(20)
+                .frame(width: UIScreen.main.bounds.width)
                 
                 Spacer()
                 
-            }
-            
-            if #available(iOS 14.0, *) {
-                VideoPlayer(player: AVPlayer(url: url))
-                    .scaledToFit()
-            } else {
-                // Fallback on earlier versions
+                Text("Buy")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        bigModel.currentview = .MeasurementCarouselView
+                    }
+                
             }
             
         }

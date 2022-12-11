@@ -11,8 +11,12 @@ import Foundation
 enum ViewEnum {
     
     //MARK: Main views
-    case Home_homeFeed
-    case MeasurementCarouselView
+    case Home_homeFeed0
+    case Home_homeFeed1
+    case Home_homeFeed2
+    case Home_homeFeed3
+    case MeasurementCarouselViewTheDress
+    case MeasurementCarouselViewLeSerpent
     case VideoPlayer_trailerPlayer
     case AboutUsScreen
     

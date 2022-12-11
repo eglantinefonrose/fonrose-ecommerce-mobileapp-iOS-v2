@@ -40,7 +40,18 @@ struct HomeFeedView: View {
                                     PostStack(picture: picture)
                                         .id(picture.id)
                                         .onTapGesture {
+                                            
+                                            self.bigModel.currentview = picture.navigationViewName
+                                            self.bigModel.lastViews.append(picture.viewName)
+                                            print(picture.viewName)
+                                            print("append")
+                                            
+                                            if !bigModel.showMenu {
+                                            } else {
+                                                bigModel.showMenu.toggle()
+                                            }
                                         }
+                                        
                                 } .buttonStyle(PlainButtonStyle())
                                 .navigationBarTitle("")
                                 .navigationBarHidden(true)
@@ -126,7 +137,7 @@ struct HomeFeedView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 20))
                             .onTapGesture {
-                                bigModel.lastViews.append(.Home_homeFeed)
+                                bigModel.lastViews.append(.Home_homeFeed0)
                                 self.bigModel.currentview = .Auth_AuthView
                                 print(bigModel.user.id)
                                 print(bigModel.user.email)

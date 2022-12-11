@@ -26,17 +26,6 @@ struct PostStack: View {
                 .foregroundColor(.white)
                 .font(.largeTitle)
             
-        } .onTapGesture {
-            
-            self.bigModel.currentview = picture.navigationViewName
-            self.bigModel.lastViews.append(.Home_homeFeed)
-            print("append")
-            
-            if !bigModel.showMenu {
-            } else {
-                bigModel.showMenu.toggle()
-            }
         }
-        
     }
 }

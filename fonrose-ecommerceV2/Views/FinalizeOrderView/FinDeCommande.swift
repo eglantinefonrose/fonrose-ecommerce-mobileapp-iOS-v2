@@ -64,7 +64,7 @@ struct FinDeCommande : View {
                         Image(systemName: "house")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                self.bigModel.currentview = .Home_homeFeed
+                                self.bigModel.currentview = .Home_homeFeed0
                                 self.bigModel.lastViews.removeAll()
                             }
                         

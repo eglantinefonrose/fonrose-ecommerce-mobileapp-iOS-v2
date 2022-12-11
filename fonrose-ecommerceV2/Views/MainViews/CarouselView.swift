@@ -44,12 +44,17 @@ struct PagingView<Content>: View where Content: View {
                             .foregroundColor(Color.blue)
                             .fontWeight(.semibold)
                             .onTapGesture {
-                                
+                                if !self.bigModel.lastViews.isEmpty {
+                                    print("back")
+                                    self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                    self.bigModel.lastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                } else { print("array empty") }
                             }
                         
                         Spacer()
                         
-                        Text("The dress")
+                        Text(bigModel.currentview == .MeasurementCarouselViewTheDress ? "The dress" : "Le serpent")
                             .font(.headline)
                             .foregroundColor(Color.white)
                             .fontWeight(.semibold)
@@ -59,7 +64,7 @@ struct PagingView<Content>: View where Content: View {
                         Image(systemName: "house")
                             .foregroundColor(Color.blue)
                             .onTapGesture {
-                                
+                                bigModel.currentview = .Home_homeFeed0
                             }
                         
                         Spacer()
@@ -101,20 +106,44 @@ struct PagingView<Content>: View where Content: View {
                         
                     }//.frame(height: UIScreen.main.bounds.height-150)
                     
-                    VStack {
-                                                    
-                        Text("La robe")
-                            .font(.system(size: 35, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                            .frame(width: 200)
-                            
-                        Spacer()
-                            .frame(height: 30)
+                    if bigModel.currentview == .MeasurementCarouselViewTheDress {
                         
-                        Text("85€")
-                            .foregroundColor(Color.gray)
-                            .font(.system(size: 25, weight: .semibold, design: .default))
-                                                    
+                        VStack {
+                                                        
+                            Text("La robe")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(width: 200)
+                                
+                            Spacer()
+                                .frame(height: 30)
+                            
+                            Text("85€")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default))
+                                                        
+                        }
+                        
+                    }
+                    
+                    if bigModel.currentview == .MeasurementCarouselViewLeSerpent {
+                        
+                        VStack {
+                                                        
+                            Text("Le serpent")
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(width: 200)
+                                
+                            Spacer()
+                                .frame(height: 30)
+                            
+                            Text("???")
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default))
+                                                        
+                        }
+                        
                     }
                     
                 }
@@ -129,7 +158,7 @@ struct PagingView<Content>: View where Content: View {
                         .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
                             self.bigModel.currentview = ViewEnum.Measurement_Mensurations
-                            self.bigModel.lastViews.append(.MeasurementCarouselView)
+                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
                         }
                     
                     Spacer()
@@ -140,7 +169,7 @@ struct PagingView<Content>: View where Content: View {
                         .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
                             self.bigModel.currentview = .AboutUsScreen
-                            self.bigModel.lastViews.append(.MeasurementCarouselView)
+                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
                         }
                                         
                     Spacer()
@@ -195,28 +224,50 @@ struct PageControl: View {
 
 struct CarouselView: View {
     
+    @EnvironmentObject var bigModel: BigModel
     @State var index = 0
 
-        var images = ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]
+    var imagesTheDress = ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]
+    var imagesLeSerpent = ["1oRLkhqgOg8PQaFux2UZlu4lrfY", "Batricia", "Itumblr_inline_os040rQzAr1qzi27c_540", "5ed687a5e9e79d0004912341"]
 
-        var body: some View {
+    var body: some View {
+        
+        if bigModel.currentview == .MeasurementCarouselViewTheDress {
             
-                VStack(spacing: 20) {
-                    PagingView(index: $index.animation(), maxIndex: images.count - 1) {
-                        ForEach(self.images, id: \.self) { imageName in
-                            Image(imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(alignment: .top)
-                        }
+            VStack(spacing: 20) {
+                PagingView(index: $index.animation(), maxIndex: imagesTheDress.count - 1) {
+                    ForEach(imagesTheDress, id: \.self) { imageName in
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(alignment: .top)
                     }
-                    .aspectRatio(contentMode: .fill)
-
                 }
-            
+                .aspectRatio(contentMode: .fill)
+
+            }
             
         }
+        
+        if bigModel.currentview == .MeasurementCarouselViewLeSerpent {
+            
+            VStack(spacing: 20) {
+                PagingView(index: $index.animation(), maxIndex: imagesTheDress.count - 1) {
+                    ForEach(imagesLeSerpent, id: \.self) { imageName in
+                        Image(imageName)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(alignment: .top)
+                    }
+                }
+                .aspectRatio(contentMode: .fill)
+
+            }
+            
+        }
+            
     }
+}
     
 
 struct CarouselView_Previews: PreviewProvider {

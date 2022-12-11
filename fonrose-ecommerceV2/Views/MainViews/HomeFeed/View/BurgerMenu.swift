@@ -71,7 +71,7 @@ struct BurgerMenu: View {
                     .font(.headline)
                     .onTapGesture {
                         bigModel.currentview = ViewEnum.Measurement_Mensurations
-                        bigModel.lastViews.append(.Home_homeFeed)
+                        bigModel.lastViews.append(.Home_homeFeed0)
                         self.bigModel.showMenu = false
                     }
                 
@@ -80,7 +80,7 @@ struct BurgerMenu: View {
                     .font(.headline)
                     .onTapGesture {
                         bigModel.currentview = ViewEnum.LivraisonViews_Livraison
-                        bigModel.lastViews.append(.Home_homeFeed)
+                        bigModel.lastViews.append(.Home_homeFeed0)
                         self.bigModel.showMenu = false
                         
                         if bigModel.signedIn {

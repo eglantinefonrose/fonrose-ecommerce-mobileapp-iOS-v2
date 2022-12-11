@@ -26,9 +26,13 @@ struct TrailerPlayer: View {
             
             if #available(iOS 14.0, *) {
                 
-                VideoPlayer(player: AVPlayer(url: url))
-                    .scaledToFill()
-                    //.frame(height: UIScreen.main.bounds.height)
+                if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed0 {
+                    VideoPlayer(player: AVPlayer(url: url))
+                }
+                if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed1 {
+                    VideoPlayer(player: AVPlayer(url: url))
+                }
+                
                
             } else {
                 // Fallback on earlier versions
@@ -62,7 +66,7 @@ struct TrailerPlayer: View {
                     Image(systemName: "house")
                         .foregroundColor(Color.blue)
                         .onTapGesture {
-                            bigModel.currentview = .Home_homeFeed
+                            bigModel.currentview = .Home_homeFeed0
                         }
                 
                 }.onRotate { newOrientation in orientation = newOrientation }
@@ -74,12 +78,19 @@ struct TrailerPlayer: View {
                 Text("Buy")
                     .foregroundColor(.blue)
                     .onTapGesture {
-                        bigModel.currentview = .MeasurementCarouselView
+                        if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed0 {
+                            bigModel.currentview = .MeasurementCarouselViewTheDress
+                            print(bigModel.currentview)
+                        }
+                        if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed1 {
+                            bigModel.currentview = .MeasurementCarouselViewLeSerpent
+                            print(bigModel.currentview)
+                        }
                     }
                 
             }
             
-        }
+        }//.frame(width: orientation == .portrait || orientation == .portraitUpsideDown ? UIScreen.main.bounds.width : UIScreen.main.bounds.height)
 
     }
     

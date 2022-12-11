@@ -92,7 +92,7 @@ class BigModel : ObservableObject {
         
     }
 
-    @Published var currentview = ViewEnum.Home_homeFeed
+    @Published var currentview = ViewEnum.Home_homeFeed0
     @Published var currentPopUpView = ViewEnum.Auth_SignInView
     @Published var lastViews: [ViewEnum] = []
     @Published var previousView: ViewEnum? = nil
@@ -228,7 +228,7 @@ class BigModel : ObservableObject {
         self.user.email = ""
         self.user.persons = []
         
-        self.currentview = .Home_homeFeed
+        self.currentview = .Home_homeFeed0
         self.authCurrentView = .Auth_SignInView
         
         self.signedIn = false

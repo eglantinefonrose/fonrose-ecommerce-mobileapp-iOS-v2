@@ -103,7 +103,7 @@ struct LocationTextField: View {
                     Image(systemName: "house")
                         .foregroundColor(Color.blue)
                         .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
+                            self.bigModel.currentview = .Home_homeFeed0
                         }
                     
                     Spacer()

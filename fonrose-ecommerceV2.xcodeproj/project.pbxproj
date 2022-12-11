@@ -47,6 +47,7 @@
 		708CF08728A4BB0300397DED /* LoopTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF08628A4BB0300397DED /* LoopTest.swift */; };
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
+		709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */; };
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */; };
 		70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */; };
@@ -111,6 +112,7 @@
 		708CF08628A4BB0300397DED /* LoopTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopTest.swift; sourceTree = "<group>"; };
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
+		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
 		70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		7025B19024699EED00F43171 /* SandboxViews */ = {
 			isa = PBXGroup;
 			children = (
+				709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */,
 				70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */,
 				70B9B1832566C64E00317086 /* test-binding.swift */,
 				703CE0EB28A96D300073712E /* ArrayTest.swift */,
@@ -477,6 +480,7 @@
 				70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */,
 				7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */,
 				70887906292F70FC00391A41 /* ShopView.swift in Sources */,
+				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
 				70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,

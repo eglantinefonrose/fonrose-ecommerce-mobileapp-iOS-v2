@@ -78,7 +78,7 @@ struct PersonPickerViewHome: View {
                             .foregroundColor(Color.blue)
                             .onTapGesture {
                                 if bigModel.currentPersonId != "" {
-                                    self.bigModel.currentview = .Home_homeFeed
+                                    self.bigModel.currentview = .Home_homeFeed0
                                 } else {
                                     alertTF(title: "No person chosen", message: "Please click on the person you want to select", primaryTitle: "Ok") {
                                         

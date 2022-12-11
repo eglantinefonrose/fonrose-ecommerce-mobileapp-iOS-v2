@@ -27,11 +27,32 @@ struct BigRootView: View {
             
             VStack {
                 
-                if (self.bigModel.currentview == .Home_homeFeed) {
-                    HomeFeedView()
+                //MARK: Home Feed
+                VStack {
+                    
+                    if (self.bigModel.currentview == .Home_homeFeed0) {
+                        HomeFeedView()
+                    }
+                    
+                    if (self.bigModel.currentview == .Home_homeFeed1) {
+                        HomeFeedView()
+                    }
+                    
+                    if (self.bigModel.currentview == .Home_homeFeed2) {
+                        HomeFeedView()
+                    }
+                    
+                    if (self.bigModel.currentview == .Home_homeFeed3) {
+                        HomeFeedView()
+                    }
+                    
                 }
                 
-                if (self.bigModel.currentview == .MeasurementCarouselView) {
+                if (self.bigModel.currentview == .MeasurementCarouselViewTheDress) {
+                    CarouselView()
+                }
+                
+                if (self.bigModel.currentview == .MeasurementCarouselViewLeSerpent) {
                     CarouselView()
                 }
                 

@@ -1,3 +1,4 @@
+
 //
 //  SignInView.swift
 //  fonrose-ecommerceV2
@@ -10,11 +11,14 @@ import SwiftUI
 import FirebaseAuth
 
 @available(iOS 14.0, *)
-struct SignInView: View {
+struct LogInPhoneView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
-    @StateObject var loginModel: LoginViewModel = .init()
+    var textContentType: UITextContentType!
+    @State var email = ""
+    @State var password = ""
+    var passwordTextField: UITextField = UITextField()
     
     @available(iOS 14.0, *)
     var body: some View {
@@ -31,8 +35,15 @@ struct SignInView: View {
             }
             
             VStack {
+                    
+                Spacer()
+                    .frame(height: 10)
                 
                 HStack {
+                    
+                    Spacer()
+                        .frame(width: 20)
+                    
                     
                     Text("Back")
                         .foregroundColor(Color.blue)
@@ -54,17 +65,21 @@ struct SignInView: View {
                             self.bigModel.currentview = .Home_homeFeed0
                         }
                     
+                    Spacer()
+                        .frame(width: 20)
+                    
                 }
                 
                 Spacer()
-                
+                    
                 Text("Sign in")
-                    .font(.largeTitle)
+                    .font(.system(size: 35, weight: .bold, design: .default))
+                    .foregroundColor(Color.white)
                     .fontWeight(.semibold)
-                
+            
                 Spacer()
                 
-               /* VStack {
+                VStack {
                     
                     VStack {
                      
@@ -112,121 +127,68 @@ struct SignInView: View {
                     .frame(height: 30)
                     .padding(10)
                     
-                    VStack() {
-                            
-                        HStack {
-                            Spacer()
-                            if !email.isEmpty, !password.isEmpty {
-                                Text("Sign in")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                    .padding(10)
-                            } else {
-                                Text("Sign in")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                    .padding(10)
-                            }
-                            Spacer()
-                        }.background(Color.blue)
-                        .cornerRadius(12)
-                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                        .onTapGesture {
-                            print("click")
-                            bigModel.signIn(email: email, password: password)
-                            self.bigModel.authLastViews.append(.Auth_SignInView)
-                        }
-                        
-                    }
-                    
-                }*/
-                
-                //Spacer()
-                
-                VStack(spacing: 10) {
-                    
-                    HStack {
-                        TextField("Phone number", text: $loginModel.mobileNo)
-                            .keyboardType(.numberPad)
-                            .textContentType(.telephoneNumber)
-                            .padding(5)
-                        
-                        Text("Get code")
-                            .foregroundColor(.blue)
-                            .padding(10)
-                            .font(.caption)
-                            .onTapGesture {
-                                loginModel.getOTPCode()
-                            }
-                        
-                    }.background(Color.white)
-                    .cornerRadius(10)
-                    
-                    VStack {
-                        TextField("OTP code", text: $loginModel.otpCode)
-                            .padding(5)
-                    }.background(Color.white)
-                    .cornerRadius(10)
-                    
-                    Text("Sign in")
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            loginModel.verifyOTPCode()
-                        }
-                    
                 }
                 
                 Spacer()
                 
-                HStack {
-                    
-                    Spacer()
-                    Image("GoogleLogo.svg")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .padding(5)
-                    Spacer()
-                    
-                }.background(Color.white)
-               .cornerRadius(7)
+                Text(bigModel.signInErrorMessage)
+                    .foregroundColor(.red)
                 
                 Spacer()
                 
-                Text("No account ? Sign up here")
-                    .fontWeight(.medium)
-                    .underline()
+                VStack {
+                    
+                    HStack {
+                        Spacer()
+                        if !email.isEmpty, !password.isEmpty {
+                            Text("Sign in")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
+                        } else {
+                            Text("Sign in")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
+                        }
+                        Spacer()
+                    }.background(Color.blue)
+                    .cornerRadius(15)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                    .onTapGesture {
+                        print("click")
+                        bigModel.signIn(email: email, password: password)
+                        self.bigModel.authLastViews.append(.Auth_SignInView)
+                    }
+                    
+                    HStack {
+                        Spacer()
+                            Text("Sign up")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(7)
+                        Spacer()
+                    }.background(Color(UIColor.lightGray))
+                    .cornerRadius(15)
+                    .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
+                    .onTapGesture {
+                        self.bigModel.authCurrentView = .Auth_SignUpView
+                        self.bigModel.authLastViews.append(.Auth_SignInView)
+                    }
+                                                                        
+                    Spacer()
+                        .frame(height: 10)
+                    
+                }
                 
-            }.padding(20)
-                
+            }
+            
         }
         
     }
-    
 }
 
-struct LogInView: View {
-    
-    @State var phoneNumber = ""
-    @State var confirmationNumber = ""
-    
-    var body: some View {
-        
-        VStack {
-            TextField("Phone number", text: $phoneNumber)
-                .padding(5)
-        }.background(Color.white)
-        .cornerRadius(10)
-        
-        VStack {
-            TextField("Confirmation number", text: $confirmationNumber)
-                .padding(5)
-        }.background(Color.white)
-        .cornerRadius(10)
-        
-    }
-}
-
-struct TextFieldModel: View {
+/*struct TextFieldModel: View {
     
     var title: String
     @State var text: String = ""
@@ -287,14 +249,16 @@ struct SecureFieldModel: View {
         .padding(10)
         
     }
-}
+}*/
 
-struct SignInView_Previews: PreviewProvider {
+struct LogInGoogleView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            SignInView()
+            LogInPhoneView()
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }
     }
 }
+

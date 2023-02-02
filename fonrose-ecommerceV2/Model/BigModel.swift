@@ -76,28 +76,6 @@ class BigModel : ObservableObject {
     }
     
     
-    
-    private func fetchMeasurements(documentID: String) {
-        
-        guard let userId = auth.currentUser?.uid else { return }
-        
-        db.collection("users").document("user\(userId)").getDocument(as: Measurements.self) { result in
-            switch result {
-            case .success(let measurements):
-                // A Book value was successfully initialized from the DocumentSnapshot.
-                self.user.persons[0].measurements = measurements
-                //self.errorMessage = nil
-            case .failure(let error):
-                // A Book value could not be initialized from the DocumentSnapshot.
-                self.errorMessage = "Error decoding document: \(error.localizedDescription)"
-            }
-        }
-        
-    }
-    
-    
-    
-    
     func fetchPerson() {
         
         guard let userId = auth.currentUser?.uid else { return }
@@ -204,6 +182,22 @@ class BigModel : ObservableObject {
             
         }
         
+    }
+    
+    func initializeMeasurements() {
+        
+        guard let userId = auth.currentUser?.uid else { return }
+        
+        db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[self.currentPersonIndex].id).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+        
+    }
+    
+    func initializeLocation() {
+        
+        guard let userId = auth.currentUser?.uid else { return }
+        
+        db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[self.currentPersonIndex].id).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+                
     }
     
     

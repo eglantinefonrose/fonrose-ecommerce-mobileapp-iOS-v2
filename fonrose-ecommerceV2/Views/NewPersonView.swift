@@ -143,14 +143,6 @@ struct NewPersonView: View {
                                 db.collection("users").document("user\(userId)").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
                                 
                                 bigModel.fetchPerson()
-                                
-                                //print(bigModel.user.persons[bigModel.user.persons.count-1].id)
-                                
-                                //db.collection("users").document("user\(userId)").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": newPersonEmail, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
-                                
-                                //db.collection("users").document("user\(userId)").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-                                
-                                bigModel.fetchPerson()
                                 bigModel.authCurrentView = .Auth_PersonPickerView
                             }
                             

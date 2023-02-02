@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70002929298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift */; };
 		700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */; };
 		700D82992444D8C4001CFDDB /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D82982444D8C4001CFDDB /* IconButton.swift */; };
 		700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */; };
@@ -75,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		70002929298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandbox-GetInstanceWithID.swift"; sourceTree = "<group>"; };
 		700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewTesf.swift; sourceTree = "<group>"; };
 		700D82982444D8C4001CFDDB /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetectorTest.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */,
 				702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */,
 				702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */,
+				70002929298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift */,
 			);
 			path = SandboxViews;
 			sourceTree = "<group>";
@@ -502,6 +505,7 @@
 				70887906292F70FC00391A41 /* ShopView.swift in Sources */,
 				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
+				7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */,
 				70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,
 				700D82992444D8C4001CFDDB /* IconButton.swift in Sources */,

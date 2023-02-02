@@ -14,8 +14,8 @@ struct NewPersonView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     let db = Firestore.firestore()
-    @State var email: String = ""
-    @State var name: String = ""
+    @State var newPersonEmail: String = ""
+    @State var newPersonName: String = ""
     @EnvironmentObject var bigModel: BigModel
     var auth = Auth.auth()
 
@@ -78,7 +78,7 @@ struct NewPersonView: View {
                                                      
                      Spacer()
                     
-                     TextField("name", text: $name)
+                     TextField("name", text: $newPersonName)
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
                  }
@@ -98,7 +98,7 @@ struct NewPersonView: View {
                                                      
                      Spacer()
                     
-                     TextField("email", text: $email)
+                     TextField("email", text: $newPersonEmail)
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
                  }
@@ -119,7 +119,7 @@ struct NewPersonView: View {
                         Spacer()
             
                         Text("Save")
-                            .foregroundColor(name != "" && email != "" ? Color.white: Color.black)
+                            .foregroundColor(newPersonName != "" && newPersonEmail != "" ? Color.white: Color.black)
                             .fontWeight(.semibold)
 
                         Spacer()
@@ -130,14 +130,26 @@ struct NewPersonView: View {
                     .cornerRadius(15)
                     .onTapGesture {
                             
-                        if email != "" && name != "" {
+                        if newPersonEmail != "" && newPersonName != "" {
                             
-                            if bigModel.isThereAPersonWithTheSameName(name: name) == true {
+                            if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
                                 alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
                                     
                                 }
                             } else {
-                                db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name])
+                                
+                                guard let userId = auth.currentUser?.uid else { return }
+                                
+                                db.collection("users").document("user\(userId)").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
+                                
+                                bigModel.fetchPerson()
+                                
+                                //print(bigModel.user.persons[bigModel.user.persons.count-1].id)
+                                
+                                //db.collection("users").document("user\(userId)").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": newPersonEmail, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+                                
+                                //db.collection("users").document("user\(userId)").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+                                
                                 bigModel.fetchPerson()
                                 bigModel.authCurrentView = .Auth_PersonPickerView
                             }

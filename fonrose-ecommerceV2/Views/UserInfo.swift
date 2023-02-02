@@ -15,7 +15,6 @@ struct UserInfo: View {
     var auth = Auth.auth()
     @EnvironmentObject var bigModel: BigModel
     @State var isChangeViewShowed: Bool = false
-    @State var newPersonName: String = ""
     
     var body: some View {
         

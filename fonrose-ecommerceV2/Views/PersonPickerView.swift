@@ -108,6 +108,7 @@ struct PersonPickerViewHome: View {
                                         bigModel.currentPersonIndex = index
                                         bigModel.currentPersonId = bigModel.user.persons[index].id
                                         bigModel.authCurrentView = .Auth_UserInfo
+                                        
                                     }
                                     
                                     Image(systemName: "trash")

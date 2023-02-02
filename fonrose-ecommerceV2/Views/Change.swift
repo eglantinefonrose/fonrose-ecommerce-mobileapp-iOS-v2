@@ -22,7 +22,7 @@ struct Change: View {
             
             if bigModel.signedIn {
                 
-                ChangeHome(newPersonName: bigModel.user.persons[bigModel.currentPersonIndex].name, newPersonEmail: bigModel.user.persons[bigModel.currentPersonIndex].email)
+                ChangeHome(newCurrentPersonName: bigModel.user.persons[bigModel.currentPersonIndex].name, newPersonEmail: bigModel.user.persons[bigModel.currentPersonIndex].email)
                 
             }
             
@@ -37,7 +37,7 @@ struct ChangeHome: View {
     @EnvironmentObject var bigModel: BigModel
     let db = Firestore.firestore()
     @Environment(\.colorScheme) var theColorScheme
-    @State var newPersonName: String
+    @State var newCurrentPersonName: String
     @State var newPersonEmail: String
     var isShowing: Bool = true
     
@@ -60,7 +60,7 @@ struct ChangeHome: View {
                                                          
                          Spacer()
                          
-                         TextField("New name", text: $newPersonName)
+                         TextField("New name", text: $newCurrentPersonName)
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
                      }
@@ -122,7 +122,7 @@ struct ChangeHome: View {
                 .padding(20)
                 .onTapGesture {
                     
-                    db.collection("users").document("user\(bigModel.user.id)").collection("persons").document(bigModel.currentPersonId).setData(["name": newPersonName, "email": newPersonEmail])
+                    db.collection("users").document("user\(bigModel.user.id)").collection("persons").document(bigModel.currentPersonId).setData(["name": newCurrentPersonName, "email": newPersonEmail])
                     
                     db.collection("users").document("user\(bigModel.user.id)").collection("persons").document(bigModel.currentPersonId).getDocument { (document, error) in
                         

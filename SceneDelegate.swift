@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 
-                window.rootViewController = UIHostingController(rootView: BigRootView()//VideoPlayer_test())
+                window.rootViewController = UIHostingController(rootView: BigRootView()//Sandbox_GetInstanceWithID())
                                                                     //.environment(\.colorScheme, .dark))
                     .environmentObject(BigModel.shared))
             } else {

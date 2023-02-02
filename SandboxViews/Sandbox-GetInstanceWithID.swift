@@ -8,9 +8,19 @@
 
 import SwiftUI
 
+
+struct Cat: Identifiable {
+    var id: Int
+    var name: String
+}
+
 struct Sandbox_GetInstanceWithID: View {
+    let cats: [Cat] = [Cat(id: 1, name: "Felix"), Cat(id: 2, name: "Lion"), Cat(id: 3, name: "Nabilon")]
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("e")
+            .onTapGesture {
+                print(cats.first(where: { $0.id == 2 })?.name ?? "")
+            }
     }
 }
 

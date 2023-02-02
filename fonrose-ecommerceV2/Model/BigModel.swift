@@ -43,21 +43,6 @@ class BigModel : ObservableObject {
                 if let snapshot = snapshot {
                     for document in snapshot.documents {
                         
-                        /*guard let documentId = document.documentID else { return }
-                        
-                        db.collection("users").document("user\(userId)").collection("persons").document(document.documentID).collection("Measurement").addSnapshotListener { querySnapshot, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                                return
-                            }
-                            self.user.persons.removeAll()
-                            querySnapshot?.documents.forEach({ queryDocumentSnapshot in
-                                let data = queryDocumentSnapshot.data()
-                                let person = Person(id: queryDocumentSnapshot.documentID, email: data["email"] as? String ?? "", name:  data["name"] as? String ?? "")
-                                self.user.persons.append(person)
-                            })
-                        }*/
-                        
                         let dbID = document.documentID
                         let dbName = document.data()["name"] as? String ?? ""
                         let dbEmail = document.data()["email"] as? String ?? ""
@@ -67,7 +52,70 @@ class BigModel : ObservableObject {
 
                         self.user.persons.append(person)
                         
-                        /*db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex].measurements?.id ?? "").setData(["ArmpitsMeasurement": measurementText1, "ArmsLength": measurementText2, "HeadMeasurement": measurementText3, "PelvisMeasurement": measurementText4, "PelvisKnee": measurementText5, "ShouldersMeasurement": measurementText6, "ShouldersPelvis": measurementText7])*/
+                        self.db.collection("users").document("user\(userId)").collection("persons").document(dbID).collection("Measurements").getDocuments { snapshot, error in
+                            
+                            guard error == nil else {
+                                print(error!.localizedDescription)
+                               return
+                            }
+                                  
+                            if let snapshot = snapshot {
+                                for document in snapshot.documents {
+                                    let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
+                                    let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
+                                    let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
+                                    let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
+                                    let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
+                                    let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
+                                    let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                                    
+                                    for i in 0..<self.user.persons.count {
+                                        
+                                        self.user.persons[i].measurements = BigModel.Measurements(id: document.documentID, ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
+                                         
+                                    }
+                                    
+                                }
+                                    
+                            }
+                            
+                        }
+                        
+                        self.db.collection("users").document("user\(userId)").collection("persons").document(dbID).collection("Location").getDocuments { snapshot, error in
+                        
+                            guard error == nil else {
+                                print(error!.localizedDescription)
+                                return
+                            }
+
+                            if let snapshot = snapshot {
+                                for document in snapshot.documents {
+
+                                    let dbCivility = document.data()["civility"] as? String ?? ""
+                                    let dbFirstName = document.data()["firstName"] as? String ?? ""
+                                    let dbLastName = document.data()["lastName"] as? String ?? ""
+                                    let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
+                                    let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
+                                    let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
+                                    let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                    let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                    let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                    let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                    let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                    let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+
+                                    for i in 0..<self.user.persons.count {
+                                        
+                                        self.user.persons[i].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                                         
+                                    }
+
+                                }
+                            }
+
+                        }
 
                         print("doc added")
                     }

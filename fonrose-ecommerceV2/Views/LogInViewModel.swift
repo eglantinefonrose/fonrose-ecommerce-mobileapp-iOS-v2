@@ -10,6 +10,7 @@ import SwiftUI
 import Firebase
 
 class LoginViewModel: ObservableObject {
+    
     @Published var mobileNo: String = ""
     @Published var otpCode: String = ""
     @Published var CLIENT_CODE: String = ""
@@ -36,11 +37,14 @@ class LoginViewModel: ObservableObject {
     func verifyOTPCode() {
         UIApplication.shared.closeKeyboard()
         Task {
+            // do : si il n'y a pas d'erreur lors de l'appel de la fonction Auth.auth().signIn(with: credential)
             do {
                 let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
+                // try await dit au programme d'attendre la réponse de la fonction Auth.auth().signIn avant d'éxecuter la suite (print("Success !"))
                 try await Auth.auth().signIn(with: credential)
                 print("Success !")
             } catch {
+                // catch : si il y a une erreur, les lignes suivantes sont executées
                 await handleError(error: error)
                 print(error.localizedDescription)
             }

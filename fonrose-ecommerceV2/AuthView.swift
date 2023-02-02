@@ -46,6 +46,10 @@ struct AuthView: View {
                 DeletePersonView()
             }
             
+            if (self.bigModel.authCurrentView == .Auth_EditPerson) {
+                Change()
+            }
+            
         }
         
     }

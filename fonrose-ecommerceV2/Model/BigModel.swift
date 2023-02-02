@@ -20,7 +20,7 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").addSnapshotListener { querySnapshot, error in
+        /*db.collection("users").document("user\(userId)").collection("persons").addSnapshotListener { querySnapshot, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -31,7 +31,49 @@ class BigModel : ObservableObject {
                 let person = Person(id: queryDocumentSnapshot.documentID, email: data["email"] as? String ?? "", name:  data["name"] as? String ?? "")
                 self.user.persons.append(person)
             })
-        }
+        }*/
+        
+        db.collection("users").document("user\(userId)").collection("persons").getDocuments { snapshot, error in
+               guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+
+                self.user.persons.removeAll()
+                if let snapshot = snapshot {
+                    for document in snapshot.documents {
+                        
+                        /*guard let documentId = document.documentID else { return }
+                        
+                        db.collection("users").document("user\(userId)").collection("persons").document(document.documentID).collection("Measurement").addSnapshotListener { querySnapshot, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                                return
+                            }
+                            self.user.persons.removeAll()
+                            querySnapshot?.documents.forEach({ queryDocumentSnapshot in
+                                let data = queryDocumentSnapshot.data()
+                                let person = Person(id: queryDocumentSnapshot.documentID, email: data["email"] as? String ?? "", name:  data["name"] as? String ?? "")
+                                self.user.persons.append(person)
+                            })
+                        }*/
+                        
+                        let dbID = document.documentID
+                        let dbName = document.data()["name"] as? String ?? ""
+                        let dbEmail = document.data()["email"] as? String ?? ""
+                        
+                        let data = document.data()
+                        let person = Person(id: document.documentID, email: data["email"] as? String ?? "", name: data["name"] as? String ?? "")
+
+                        self.user.persons.append(person)
+                        
+                        /*db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex].measurements?.id ?? "").setData(["ArmpitsMeasurement": measurementText1, "ArmsLength": measurementText2, "HeadMeasurement": measurementText3, "PelvisMeasurement": measurementText4, "PelvisKnee": measurementText5, "ShouldersMeasurement": measurementText6, "ShouldersPelvis": measurementText7])*/
+
+                        print("doc added")
+                    }
+                }
+
+            }
         
     }
     
@@ -233,7 +275,83 @@ class BigModel : ObservableObject {
         
         self.signedIn = false
     }
+    
+    
+    //
+    //
+    //
+    //
+    // SIGN IN WITH PHONE NUMBER
+    //
+    //
+    //
+    //
+    
+    
+    @Published var mobileNo: String = ""
+    @Published var otpCode: String = ""
+    @Published var CLIENT_CODE: String = ""
+    @Published var showError: Bool = false
+    @Published var errorMessage: String = ""
+    
+    func getOTPCode() {
+        UIApplication.shared.closeKeyboard()
+        Task {
+            do {
+                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(mobileNo)", uiDelegate: nil)
+                
+                await MainActor.run(body: {
+                    CLIENT_CODE = code
+                })
+                
+            } catch {
+                await handleError(error: error)
+            }
+        }
+    }
+    
+    func verifyOTPCode() {
+        UIApplication.shared.closeKeyboard()
+        Task {
+            // do : si il n'y a pas d'erreur lors de l'appel de la fonction Auth.auth().signIn(with: credential)
+            do {
+                let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
+                // try await dit au programme d'attendre la réponse de la fonction Auth.auth().signIn avant d'éxecuter la suite (print("Success !"))
+                try await Auth.auth().signIn(with: credential)
+                print("Success !")
+                
+                DispatchQueue.main.async {
+                    self.signedIn = true
+                    self.fetchPerson()
+                    self.authCurrentView = .Auth_PersonPickerView
+                    self.user.id = self.auth.currentUser?.uid ?? "nil"
+                }
+                
+            } catch {
+                // catch : si il y a une erreur, les lignes suivantes sont executées
+                await handleError(error: error)
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func handleError(error: Error) async {
+        await MainActor.run(body: {
+            errorMessage = error.localizedDescription
+            print(errorMessage)
+            showError.toggle()
+        })
+    }
+    
+    
+    //
+    //
+    //
+    //
+    //
 
+    
     func isThereAPersonWithTheSameName(name: String) -> Bool {
         for i in 0..<self.user.persons.count {
             if name == self.user.persons[i].name {

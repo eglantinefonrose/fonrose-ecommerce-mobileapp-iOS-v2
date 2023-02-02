@@ -146,9 +146,9 @@ struct SignInView: View {
                 VStack(spacing: 10) {
                     
                     HStack {
-                        TextField("Phone number", text: $loginModel.mobileNo)
-                            .keyboardType(.numberPad)
-                            .textContentType(.telephoneNumber)
+                        TextField("Phone number", text: $bigModel.mobileNo)
+                            //.keyboardType(.numberPad)
+                            //.textContentType(.telephoneNumber)
                             .padding(5)
                         
                         Text("Get code")
@@ -156,14 +156,14 @@ struct SignInView: View {
                             .padding(10)
                             .font(.caption)
                             .onTapGesture {
-                                loginModel.getOTPCode()
+                                bigModel.getOTPCode()
                             }
                         
                     }.background(Color.white)
                     .cornerRadius(10)
                     
                     VStack {
-                        TextField("OTP code", text: $loginModel.otpCode)
+                        TextField("OTP code", text: $bigModel.otpCode)
                             .padding(5)
                     }.background(Color.white)
                     .cornerRadius(10)
@@ -171,7 +171,7 @@ struct SignInView: View {
                     Text("Sign in")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            loginModel.verifyOTPCode()
+                            bigModel.verifyOTPCode()
                         }
                     
                 }

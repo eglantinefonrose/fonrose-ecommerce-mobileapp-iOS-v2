@@ -18,16 +18,49 @@ extension View {
 @available(iOS 14.0, *)
 struct MeasurementValue: View {
     
-    @State var textFieldColor: Bool = true
     @State var MeasurementName: String
-    @State var showingSecondView: Bool = false
+    @State var text: String = ""
+    @Environment(\.colorScheme) var theColorScheme
+    var textContentType: UITextContentType!
+    //@State var textFieldColor: Bool = true
+    //@State var MeasurementName: String
+    //@State var showingSecondView: Bool = false
     var MeasurementVideoName: String!
     @State var textFieldText: String
     
     @available(iOS 14.0, *)
     var body: some View {
 
-        TextFieldModel(title: textFieldText, text: MeasurementName)
+        VStack {
+         
+         Spacer()
+         
+         HStack {
+                                             
+             Spacer()
+             
+             TextField(textFieldText, text: $MeasurementName)
+                 .disableAutocorrection(true)
+                 .autocapitalization(.none)
+         }
+         
+         Spacer()
+
+        }.background(theColorScheme == .dark ? Color.gray : Color.white)
+        .cornerRadius(7)
+        .frame(height: 30)
+        .padding(10)
+        .onChange(of: (MeasurementName), perform: { value in
+            perform: do {
+                if MeasurementName.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                        
+                    }
+                } else {}
+            }
+        })
+        
+        /*TextFieldModel(title: textFieldText, text: $MeasurementName)
             .onChange(of: (MeasurementName), perform: { value in
                 perform: do {
                     if MeasurementName.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -36,12 +69,12 @@ struct MeasurementValue: View {
                         }
                     } else {}
                 }
-            })
+            })*/
                 
     }
 }
 
-struct MeasurementValue_Previews: PreviewProvider {
+/*struct MeasurementValue_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             MeasurementValue(MeasurementName: "edef", textFieldText: "")
@@ -49,7 +82,7 @@ struct MeasurementValue_Previews: PreviewProvider {
             // Fallback on earlier versions
         }
     }
-}
+}*/
 
 
 extension View {

@@ -50,8 +50,8 @@ class BigModel : ObservableObject {
         
     }
 
-    struct Measurements: Codable {
-        @DocumentID var id : String? = UUID().uuidString
+    struct Measurements: Identifiable {
+        var id = UUID().uuidString
         var ArmpitsMeasurement: String
         var ArmsLength: String
         var HeadMeasurement: String
@@ -109,39 +109,55 @@ class BigModel : ObservableObject {
         
     }
     
-    
+        
+        //fetch measurements
     func fetchMeasurements() {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        //fetch measurements
-        self.db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[currentPersonIndex].id).collection("Measurements").getDocuments { snapshot, error in
+        self.db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments { [self] snapshot, error in
             
             guard error == nil else {
-                print(error!.localizedDescription)
-               return
+                print("ERROR WHEN FETCHING MEASUREMENTS \(error!.localizedDescription)")
+                return
             }
                   
             if let snapshot = snapshot {
                 for document in snapshot.documents {
-                    let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                    let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                    let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                    let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                    let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                    let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                    let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
+                    let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? "nil"
+                    let dbArmsLength = document.data()["ArmsLength"] as? String ?? "nil"
+                    let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? "nil"
+                    let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? "nil"
+                    let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? "nil"
+                    let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? "nil"
+                    let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? "nil"
                     
-                    //ajout des données de mensurations à la dernière personne du tableau personne, donc à la personne venant d'être crée
+                    //ajout des données de mensurations à la personne sélectionnée du tableau personne, donc à la personne venant d'être crée
                     self.user.persons[self.currentPersonIndex].measurements = BigModel.Measurements(id: document.documentID, ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
                     
                 }
-                    
+                print("measurements fetched \(self.currentPersonId)")
             }
             
         }
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     func fetchLocation() {
@@ -152,7 +168,7 @@ class BigModel : ObservableObject {
         self.db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[currentPersonIndex].id).collection("Location").getDocuments { snapshot, error in
             
             guard error == nil else {
-                print(error!.localizedDescription)
+                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
                return
             }
                   
@@ -188,7 +204,7 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[self.currentPersonIndex].id).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
         
     }
     
@@ -196,11 +212,9 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[self.currentPersonIndex].id).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                 
     }
-    
-    
 
     @Published var currentview = ViewEnum.Home_homeFeed0
     @Published var currentPopUpView = ViewEnum.Auth_SignInView

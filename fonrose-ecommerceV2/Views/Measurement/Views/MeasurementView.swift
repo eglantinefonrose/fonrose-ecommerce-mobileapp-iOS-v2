@@ -45,13 +45,16 @@ struct MeasurementView: View {
                 Color("Background")
                     .edgesIgnoringSafeArea(.all)
                 
-                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil",
-                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil",
-                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil",
-                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil",
-                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil",
-                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil",
-                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")
+                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "",
+                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "",
+                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "",
+                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "",
+                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "",
+                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "",
+                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")
+                
+                    //HomeView()
+                
             }
             
         } else {

@@ -138,9 +138,7 @@ struct NewPersonView: View {
                                 }
                             } else {
                                 
-                                guard let userId = auth.currentUser?.uid else { return }
-                                
-                                db.collection("users").document("user\(userId)").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
+                                db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
                                 
                                 bigModel.fetchPerson()
                                 bigModel.authCurrentView = .Auth_PersonPickerView

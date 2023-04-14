@@ -102,15 +102,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            if bigModel.user.persons[bigModel.currentPersonIndex].measurements == nil {
-                                
-                                Firestore.firestore().collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-                                
-                                bigModel.fetchMeasurements()
-                                bigModel.currentview = .Measurement_Mensurations
-                            } else {
-                                bigModel.currentview = .Measurement_Mensurations
-                            }
+                            bigModel.currentview = .Measurement_Mensurations
                             
                         }
                         

@@ -31,7 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 
-                window.rootViewController = UIHostingController(rootView: BigRootView()//Sandbox_TextFields())
+                window.rootViewController = UIHostingController(rootView: BigRootView()
+                                                                //Sandbox_TextFields())
                                                                     //.environment(\.colorScheme, .dark))
                     .environmentObject(BigModel.shared))
             } else {

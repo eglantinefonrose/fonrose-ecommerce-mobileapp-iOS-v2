@@ -96,6 +96,8 @@ struct LocationRecapView: View {
                             LocationText(locationName: "adressStreet", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "")
                             
                             LocationText(locationName: "adressMailBox", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "")
+                        
+                            LocationText(locationName: "Adress Basement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "")
                             
                         }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 450 : 100)
                         .onRotate { newOrientation in orientation = newOrientation }

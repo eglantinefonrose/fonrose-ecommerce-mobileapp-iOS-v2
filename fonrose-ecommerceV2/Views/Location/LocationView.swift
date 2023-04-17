@@ -22,9 +22,19 @@ struct LocationView: View {
     
     var body: some View {
         
-        LocationTextField(firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "nil", lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "nil", emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "nil", phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "nil",
-                          adressStreet: " \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil"), \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil") ",
-                          adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "nil", adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "nil")
+        LocationTextField(
+            firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "nil",
+            lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "nil",
+            emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "nil",
+            phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "nil",
+            adressCountryText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil",
+            adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil",
+            adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil",
+            adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil",
+            adressStreet: " \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil"), \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil") ",
+            adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "nil",
+            adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "nil",
+            adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "nil")
         
         //TextField("r", text: $test)
         
@@ -50,14 +60,14 @@ struct LocationTextField: View {
     @State var lastNameText: String
     @State var emailAdressText: String
     @State var phoneNumberText: String
-    @State var adressCountryText: String = ""
-    @State var adressPostalCodeText: String = ""
-    @State var adressCityText: String = ""
+    @State var adressCountryText: String
+    @State var adressPostalCodeText: String
+    @State var adressCityText: String
+    @State var adressStreetText: String
     @State var adressStreet: String
-    @State var adressStreetText: String = ""
     @State var adressMailBoxText: String
     @State var adressBasementText: String
-    @State var adressStageText: String = ""
+    @State var adressStageText: String
     @State var showStreetCompletion: Bool = false
     
     var body: some View {
@@ -510,7 +520,7 @@ struct LocationTextField: View {
                                                 //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
                                                 // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
                                                 // place est de type "Place"
-                                                if showStreetCompletion {
+                                                /*if showStreetCompletion {
                                                     ScrollView {
                                                         VStack(spacing: 15) {
                                                             ForEach(mapData.places) { place in
@@ -528,7 +538,7 @@ struct LocationTextField: View {
                                                             }
                                                         }.frame(height: 100)
                                                     }.background(Color.white)
-                                                }
+                                                }*/
                                             }.onChange(of: adressStreet, perform: { value in
                                                 
                                                 let delay = 0.3

@@ -18,43 +18,16 @@ struct LocationView: View {
     @available(iOS 14.0, *)
     @StateObject var mapData = LocationViewModel()
     var db = Firestore.firestore()
-    var test: String = ""
+    @State var test: String = "k"
     
     var body: some View {
         
-        /*LocationTextField(civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "",
-                          firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "",
-                          lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "",
-                          emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "",
-                          phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "",
-                          adressCountryText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "",
-                          adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "",
-                          adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "",
-                          adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "",
-                          adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "",
-                          adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "",
-                          adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "",
-                          showPostalCodeCompletion: false,
-                          showCountryCompletion: false,
-                          showCityCompletion: false,
-                          showStreetCompletion: false)*/
+        LocationTextField(firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "nil", lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "nil", emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "nil", phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "nil",
+                          adressStreet: " \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil"), \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil") ",
+                          adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "nil", adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "nil")
         
-        LocationTextField(civilityText: "",
-                          firstNameText: "",
-                          lastNameText: "",
-                          emailAdressText: "",
-                          phoneNumberText: "",
-                          adressCountryText: "",
-                          adressPostalCodeText: "",
-                          adressCityText: "",
-                          adressStreet: "",
-                          adressMailBoxText: "",
-                          adressBasementText: "",
-                          adressStageText: "",
-                          showPostalCodeCompletion: false,
-                          showCountryCompletion: false,
-                          showCityCompletion: false,
-                          showStreetCompletion: false)
+        //TextField("r", text: $test)
+        
         
     }
 }
@@ -73,21 +46,18 @@ struct LocationTextField: View {
     @State var isAMan = false
     @State var isAWoman = false
     var civilityText: String = ""
-    @State var firstNameText: String = ""
-    @State var lastNameText: String = ""
-    @State var emailAdressText: String = ""
-    @State var phoneNumberText: String = ""
+    @State var firstNameText: String
+    @State var lastNameText: String
+    @State var emailAdressText: String
+    @State var phoneNumberText: String
     @State var adressCountryText: String = ""
     @State var adressPostalCodeText: String = ""
     @State var adressCityText: String = ""
-    @State var adressStreet: String = ""
+    @State var adressStreet: String
     @State var adressStreetText: String = ""
-    @State var adressMailBoxText: String = ""
-    @State var adressBasementText: String = ""
+    @State var adressMailBoxText: String
+    @State var adressBasementText: String
     @State var adressStageText: String = ""
-    @State var showPostalCodeCompletion: Bool = false
-    @State var showCountryCompletion: Bool = false
-    @State var showCityCompletion: Bool = false
     @State var showStreetCompletion: Bool = false
     
     var body: some View {
@@ -211,7 +181,7 @@ struct LocationTextField: View {
                                 }
                             }
                             
-                    })
+                        })
                     }
                     
                     
@@ -674,8 +644,9 @@ struct LocationTextField: View {
                                     .padding(20)
                                     .onTapGesture {
                                         
-                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreet, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
+                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressCountry": adressCountryText,"adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
                                         bigModel.currentview = .LivraisonViews_RecapLivraison
+                                        bigModel.fetchLocation()
                                         bigModel.lastViews.append(.LivraisonViews_Livraison)
                                         
                                     }

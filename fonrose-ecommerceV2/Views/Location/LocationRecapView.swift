@@ -110,6 +110,8 @@ struct LocationRecapView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 bigModel.currentview = .LivraisonViews_Livraison
+                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil")
+                                print(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil")
                             }
                         
                         HStack {
@@ -144,7 +146,6 @@ struct LocationText: View {
             HStack {
                 Text(locationName)
                     .fontWeight(.medium)
-                    .foregroundColor(.white)
                 Spacer()
                 Text(locationNameValue)
                     .fontWeight(.medium)

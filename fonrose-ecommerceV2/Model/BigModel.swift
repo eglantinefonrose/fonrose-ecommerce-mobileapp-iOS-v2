@@ -30,9 +30,9 @@ class BigModel : ObservableObject {
         var persons: [Person]
     }
 
-    struct Location: Codable {
+    struct Location: Identifiable {
         
-        @DocumentID var id : String? = UUID().uuidString
+        var id = UUID().uuidString
         var civility: String
         var firstName: String
         var lastName: String
@@ -165,7 +165,7 @@ class BigModel : ObservableObject {
         //fetch location
         guard let userId = auth.currentUser?.uid else { return }
         
-        self.db.collection("users").document("user\(userId)").collection("persons").document(self.user.persons[currentPersonIndex].id).collection("Location").getDocuments { snapshot, error in
+        self.db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").getDocuments { snapshot, error in
             
             guard error == nil else {
                 print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
@@ -194,6 +194,9 @@ class BigModel : ObservableObject {
                     self.user.persons[self.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
 
                 }
+                
+                print("location infos fetched \(self.currentPersonId)")
+                
             }
             
         }

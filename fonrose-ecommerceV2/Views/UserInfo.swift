@@ -102,8 +102,35 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            bigModel.currentview = .Measurement_Mensurations
-                            
+                            if bigModel.user.persons[bigModel.currentPersonIndex].measurements == nil {
+                                
+                                bigModel.initializeMeasurements()
+                                
+                                guard let userId = auth.currentUser?.uid else { return }
+                                    
+                                let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements")
+                                
+                                collectionRef.getDocuments { snapshot, error in
+                                    guard error == nil else {
+                                        print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+                                       return
+                                    }
+
+                                    if let snapshot = snapshot {
+                                        for document in snapshot.documents {
+                                            do {
+                                                bigModel.user.persons[bigModel.currentPersonIndex].measurements = try document.data(as: BigModel.Measurements.self)
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
+                                        bigModel.currentview = .Measurement_Mensurations
+                                    }
+                                }
+                                
+                            } else {
+                                bigModel.currentview = .Measurement_Mensurations
+                            }
                         }
                         
                         HStack {

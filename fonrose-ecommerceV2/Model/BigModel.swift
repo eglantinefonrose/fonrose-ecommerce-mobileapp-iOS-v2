@@ -50,8 +50,8 @@ class BigModel : ObservableObject {
         
     }
 
-    struct Measurements: Identifiable {
-        var id = UUID().uuidString
+    struct Measurements: Codable {
+        @DocumentID var id: String?
         var ArmpitsMeasurement: String
         var ArmsLength: String
         var HeadMeasurement: String
@@ -113,7 +113,7 @@ class BigModel : ObservableObject {
         //fetch measurements
     func fetchMeasurements() {
         
-        guard let userId = auth.currentUser?.uid else { return }
+        /*guard let userId = auth.currentUser?.uid else { return }
         
         self.db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments { [self] snapshot, error in
             
@@ -139,8 +139,28 @@ class BigModel : ObservableObject {
                 print("measurements fetched \(self.currentPersonId)")
             }
             
-        }
+        }*/
         
+        guard let userId = auth.currentUser?.uid else { return }
+            
+        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements")
+        
+        collectionRef.getDocuments { snapshot, error in
+            guard error == nil else {
+                print("ERROR WHEN FETCHING MEASUREMENTS \(error!.localizedDescription)")
+                return
+            }
+            
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    do {
+                        self.user.persons[self.currentPersonIndex].measurements = try document.data(as: Measurements.self)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
     }
     
     

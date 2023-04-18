@@ -679,7 +679,7 @@ struct LocationTextField: View {
                                                return
                                             }
 
-                                            /*if let snapshot = snapshot {
+                                            if let snapshot = snapshot {
                                                 for document in snapshot.documents {
                                                     do {
                                                         bigModel.user.persons[bigModel.currentPersonIndex].location = try document.data(as: BigModel.Location.self)
@@ -688,12 +688,7 @@ struct LocationTextField: View {
                                                     }
                                                 }
                                                 
-                                            }*/
-                                            
-                                            bigModel.fetchLocation()
-                                            
-                                            bigModel.lastViews.append(.LivraisonViews_Livraison)
-                                            bigModel.currentview = .LivraisonViews_RecapLivraison
+                                            }
                                             
                                         }
                                         

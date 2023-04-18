@@ -30,9 +30,9 @@ class BigModel : ObservableObject {
         var persons: [Person]
     }
 
-    struct Location: Identifiable {
+    struct Location: Codable {
         
-        var id = UUID().uuidString
+        @DocumentID var id: String?
         var civility: String
         var firstName: String
         var lastName: String
@@ -153,7 +153,7 @@ class BigModel : ObservableObject {
     
     
     
-    
+    /*collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).*/
     
     
     
@@ -164,8 +164,27 @@ class BigModel : ObservableObject {
         
         //fetch location
         guard let userId = auth.currentUser?.uid else { return }
+            
+        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location")
         
-        self.db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").getDocuments { snapshot, error in
+        collectionRef.getDocuments { snapshot, error in
+            guard error == nil else {
+                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+               return
+            }
+
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    do {
+                        self.user.persons[self.currentPersonIndex].location = try document.data(as: Location.self)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+        
+        /*{ snapshot, error in
             
             guard error == nil else {
                 print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
@@ -199,7 +218,7 @@ class BigModel : ObservableObject {
                 
             }
             
-        }
+        }*/
         
     }
     
@@ -215,7 +234,7 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                 
     }
 

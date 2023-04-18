@@ -23,6 +23,7 @@ struct LocationView: View {
     var body: some View {
         
         LocationTextField(
+            civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "nil",
             firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "nil",
             lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "nil",
             emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "nil",
@@ -36,7 +37,20 @@ struct LocationView: View {
             adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "nil",
             adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "nil")
         
-        //TextField("r", text: $test)
+        /*LocationTextField(
+            civilityText: "woman",
+            firstNameText: "nil",
+            lastNameText: "nil",
+            emailAdressText: "nil",
+            phoneNumberText: "nil",
+            adressCountryText: "nil",
+            adressPostalCodeText: "nil",
+            adressCityText: "nil",
+            adressStreetText: "nil",
+            adressStreet: "nil",
+            adressMailBoxText: "nil",
+            adressBasementText: "nil",
+            adressStageText: "nil")*/
         
         
     }
@@ -55,7 +69,7 @@ struct LocationTextField: View {
     
     @State var isAMan = false
     @State var isAWoman = false
-    var civilityText: String = ""
+    @State var civilityText: String
     @State var firstNameText: String
     @State var lastNameText: String
     @State var emailAdressText: String
@@ -226,11 +240,10 @@ struct LocationTextField: View {
                                                  
                                                 HStack {
                                                     
-                                                    Image(systemName: isAMan ? "circle.circle.fill" : "circle")
+                                                    Image(systemName: civilityText == "man" ? "circle.circle.fill" : "circle")
                                                         .foregroundColor(.blue)
                                                         .onTapGesture {
-                                                            isAMan = true
-                                                            isAWoman = false
+                                                            self.civilityText = "man"
                                                         }
                                                     
                                                     Text("Mr")
@@ -238,11 +251,10 @@ struct LocationTextField: View {
                                                     
                                                     Spacer()
                                                     
-                                                    Image(systemName: isAWoman ? "circle.circle.fill" : "circle")
+                                                    Image(systemName: civilityText == "woman" ? "circle.circle.fill" : "circle")
                                                         .foregroundColor(.blue)
                                                         .onTapGesture {
-                                                            isAMan = false
-                                                            isAWoman = true
+                                                            self.civilityText = "woman"
                                                         }
                                                     
                                                     Text("Mme")
@@ -656,8 +668,35 @@ struct LocationTextField: View {
                                         
                                         db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressCountry": adressCountryText,"adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
                                         bigModel.currentview = .LivraisonViews_RecapLivraison
-                                        bigModel.fetchLocation()
-                                        bigModel.lastViews.append(.LivraisonViews_Livraison)
+                                        
+                                        guard let userId = auth.currentUser?.uid else { return }
+                                            
+                                        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Location")
+                                        
+                                        collectionRef.getDocuments { snapshot, error in
+                                            guard error == nil else {
+                                                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+                                               return
+                                            }
+
+                                            /*if let snapshot = snapshot {
+                                                for document in snapshot.documents {
+                                                    do {
+                                                        bigModel.user.persons[bigModel.currentPersonIndex].location = try document.data(as: BigModel.Location.self)
+                                                    } catch {
+                                                        print(error)
+                                                    }
+                                                }
+                                                
+                                            }*/
+                                            
+                                            bigModel.fetchLocation()
+                                            
+                                            bigModel.lastViews.append(.LivraisonViews_Livraison)
+                                            bigModel.currentview = .LivraisonViews_RecapLivraison
+                                            
+                                        }
+                                        
                                         
                                     }
                             }

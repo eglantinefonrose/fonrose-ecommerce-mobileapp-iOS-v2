@@ -83,19 +83,19 @@ struct LocationRecapView: View {
                                 
                                 LocationText(locationName: "Email Adress", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "")
                                 
-                                LocationText(locationName: "phoneNumber", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "")
+                                LocationText(locationName: "Phone Number", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "")
                                 
                             }
                                 
-                            LocationText(locationName: "adressCountry", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "")
+                            LocationText(locationName: "Adress Country", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "")
                             
-                            LocationText(locationName: "adressPostalCode", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "")
+                            LocationText(locationName: "Adress Postal Code", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "")
                             
-                            LocationText(locationName: "adressCity", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "")
+                            LocationText(locationName: "Adress City", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "")
                             
-                            LocationText(locationName: "adressStreet", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "")
+                            LocationText(locationName: "Adress Street", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "")
                             
-                            LocationText(locationName: "adressMailBox", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "")
+                            LocationText(locationName: "Adress Mail Box", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "")
                         
                             LocationText(locationName: "Adress Basement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "")
                             

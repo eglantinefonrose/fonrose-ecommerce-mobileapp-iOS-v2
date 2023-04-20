@@ -56,14 +56,6 @@ struct BigRootView: View {
                     CarouselView()
                 }
                 
-                if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    if bigModel.user.persons.isEmpty {
-                        AuthView()
-                    } else {
-                        MeasurementView()
-                    }
-                }
-                
                 if (self.bigModel.currentview == .VideoPlayer_trailerPlayer) {
                     TrailerPlayer()
                 }
@@ -99,16 +91,34 @@ struct BigRootView: View {
                 }
             }
             
+            //MARK: Measurements
+            
+            VStack {
+                
+                if (self.bigModel.currentview == .Measurement_Mensurations) {
+                    if bigModel.user.persons.isEmpty {
+                        AuthView()
+                    } else {
+                        MeasurementView()
+                    }
+                }
+                
+                if (self.bigModel.currentview == .Measurement_RecapMensurations) {
+                    RecapMensurations()
+                }
+                
+                if (self.bigModel.currentview == .Measurement_MeasurementsTut) {
+                    MeasurementsTut()
+                }
+                
+            }
+            
             //MARK: Finalize order
             
             VStack {
                 
                 if (self.bigModel.currentview == .FinalizeOrderViews_PaymentScreen) {
                     PaymentScreen()
-                }
-                
-                if (self.bigModel.currentview == .Measurement_RecapMensurations) {
-                    RecapMensurations()
                 }
             
                 if (self.bigModel.currentview == .FinalizeOrderViews_FinDeCommande) {

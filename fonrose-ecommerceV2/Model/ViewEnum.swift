@@ -23,6 +23,7 @@ enum ViewEnum {
     //MARK: Measurement
     case Measurement_Mensurations
     case Measurement_RecapMensurations
+    case Measurement_MeasurementsTut
     
     //MARK: Delivery
     case LivraisonViews_Livraison

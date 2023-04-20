@@ -374,6 +374,18 @@ struct HomeView: View {
                 VStack {
                     
                     Spacer()
+                    
+                    HStack {
+                        Image(systemName: "questionmark.video")
+                            .foregroundColor(.blue)
+                        Text("Comment prendre ses mensurations ?")
+                            .foregroundColor(.blue)
+                            .font(.body)
+                            .underline()
+                            .onTapGesture {
+                                bigModel.currentview = .Measurement_MeasurementsTut
+                            }
+                    }
                                         
                     HStack {
                         Spacer()

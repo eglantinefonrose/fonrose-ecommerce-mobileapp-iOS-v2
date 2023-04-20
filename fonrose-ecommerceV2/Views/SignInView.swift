@@ -31,7 +31,6 @@ struct SignInView: View {
             }
             
             VStack {
-                
                 HStack {
                     
                     Text("Back")
@@ -54,7 +53,11 @@ struct SignInView: View {
                             self.bigModel.currentview = .Home_homeFeed0
                         }
                     
-                }
+                }.padding(20)
+                Spacer()
+            }
+            
+            VStack {
                 
                 Spacer()
                 
@@ -63,85 +66,6 @@ struct SignInView: View {
                     .fontWeight(.semibold)
                 
                 Spacer()
-                
-               /* VStack {
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                         
-                         TextField("Email", text: $email)
-                             .textContentType(.emailAddress)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                             .keyboardType(UIKeyboardType.emailAddress)
-                         
-                     }
-                     
-                     Spacer()
-
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                         
-                         SecureField("Password", text: $password)
-                             .keyboardType(.asciiCapable)
-                            .textContentType(.password)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                         
-                     }
-                     
-                     Spacer()
-
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
-                    
-                    VStack() {
-                            
-                        HStack {
-                            Spacer()
-                            if !email.isEmpty, !password.isEmpty {
-                                Text("Sign in")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                    .padding(10)
-                            } else {
-                                Text("Sign in")
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                    .padding(10)
-                            }
-                            Spacer()
-                        }.background(Color.blue)
-                        .cornerRadius(12)
-                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
-                        .onTapGesture {
-                            print("click")
-                            bigModel.signIn(email: email, password: password)
-                            self.bigModel.authLastViews.append(.Auth_SignInView)
-                        }
-                        
-                    }
-                    
-                }*/
-                
-                //Spacer()
                 
                 VStack(spacing: 10) {
                     
@@ -175,20 +99,6 @@ struct SignInView: View {
                         }
                     
                 }
-                
-                Spacer()
-                
-                HStack {
-                    
-                    Spacer()
-                    Image("GoogleLogo.svg")
-                        .resizable()
-                        .frame(width: 25, height: 25)
-                        .padding(5)
-                    Spacer()
-                    
-                }.background(Color.white)
-               .cornerRadius(7)
                 
                 Spacer()
                 
@@ -293,6 +203,7 @@ struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             SignInView()
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

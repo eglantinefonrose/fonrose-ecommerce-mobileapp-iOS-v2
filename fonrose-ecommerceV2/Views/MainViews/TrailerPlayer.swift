@@ -96,8 +96,9 @@ struct TrailerPlayer: View {
     
 }
 
-struct DetailedView_Previews: PreviewProvider {
+/*struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
         TrailerPlayer()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
-}
+}*/

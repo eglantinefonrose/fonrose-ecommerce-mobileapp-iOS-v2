@@ -31,10 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 
-                window.rootViewController = UIHostingController(rootView: //BigRootView()
-                                                                MeasurementsTut()
-                                                                    .environment(\.colorScheme, .dark))
-                    //.environmentObject(BigModel.shared))
+                window.rootViewController = UIHostingController(rootView: BigRootView()
+                                                                //MeasurementsTut()
+                                                                    //.environment(\.colorScheme, .dark))
+                    .environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions
             }

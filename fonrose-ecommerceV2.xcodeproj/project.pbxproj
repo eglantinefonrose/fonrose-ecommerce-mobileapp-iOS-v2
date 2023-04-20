@@ -72,6 +72,8 @@
 		70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CBE5C428FDFE8400F2C4B1 /* LocationRecapView.swift */; };
 		70CCEC5E29E8587500EFABA5 /* Sandbox-TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */; };
 		70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */; };
+		70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */; };
+		70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */ = {isa = PBXBuildFile; fileRef = 70CFDBC729F1FC1200F19D41 /* simpson.gif */; };
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
 		70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E599342472C6B600F84295 /* MeasurementValue.swift */; };
 		70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */; };
@@ -141,6 +143,8 @@
 		70CBE5C428FDFE8400F2C4B1 /* LocationRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecapView.swift; sourceTree = "<group>"; };
 		70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandbox-TextFields.swift"; sourceTree = "<group>"; };
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
+		70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Splash-screen.swift"; sourceTree = "<group>"; };
+		70CFDBC729F1FC1200F19D41 /* simpson.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = simpson.gif; path = ../../../../../Desktop/simpson.gif; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
 		70E599342472C6B600F84295 /* MeasurementValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementValue.swift; sourceTree = "<group>"; };
 		70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTest.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 		7019ABEE2347E73F00F5EF15 = {
 			isa = PBXGroup;
 			children = (
+				70CFDBC729F1FC1200F19D41 /* simpson.gif */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				70BB8199246D7EC500695F19 /* About_us.swift */,
@@ -208,6 +213,7 @@
 				704535812477BD85001F20A8 /* BigRootView.swift */,
 				7034755A2864D0F70030C906 /* AuthView.swift */,
 				701B9E1D2876DF90004DE780 /* Test-coordinate.swift */,
+				70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */,
 				704535832477BF03001F20A8 /* Model */,
 				7049ED23281E7B3F00C16C3B /* Views */,
 				70512A9D28AE9EFC00D7E05E /* Services */,
@@ -475,6 +481,7 @@
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
+				70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +542,7 @@
 				702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */,
 				708CF08728A4BB0300397DED /* LoopTest.swift in Sources */,
 				700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */,
+				70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,
 				70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */,

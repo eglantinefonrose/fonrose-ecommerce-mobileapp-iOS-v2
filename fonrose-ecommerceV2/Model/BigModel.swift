@@ -79,7 +79,7 @@ class BigModel : ObservableObject {
         
     }
     
-    
+    @Published var videoURL: String = ""
     
     func fetchPerson() {
         

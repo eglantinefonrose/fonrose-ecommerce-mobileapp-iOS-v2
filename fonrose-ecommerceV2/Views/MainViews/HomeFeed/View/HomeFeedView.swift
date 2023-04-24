@@ -41,12 +41,13 @@ struct HomeFeedView: View {
                             
                             List {
                                 ForEach(dressPictures) { picture in
-                                    PostStack(picture: picture)
+                                    PostStack(imageName: picture.pictureName, cellText: picture.cellText)
                                         .id(picture.id)
                                         .onTapGesture {
                                             
-                                            self.bigModel.currentview = picture.navigationViewName
-                                            self.bigModel.lastViews.append(picture.viewName)
+                                            self.bigModel.currentview = .VideoPlayer_trailerPlayer
+                                            bigModel.videoURL = picture.videoURL
+                                            self.bigModel.lastViews.append(.Home_homeFeed0)
                                             print(picture.viewName)
                                             print("append")
                                             
@@ -60,6 +61,19 @@ struct HomeFeedView: View {
                                     .navigationBarTitle("")
                                     .navigationBarHidden(true)
                                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                
+                                PostStack(imageName: "60511853694__59B14B15-472E-4D34-A312-FB963FEDA4D8", cellText: "About us")
+                                    .buttonStyle(PlainButtonStyle())
+                                        .navigationBarTitle("")
+                                        .navigationBarHidden(true)
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                
+                                PostStack(imageName: "IMG_1033 copy", cellText: "Service client")
+                                    .buttonStyle(PlainButtonStyle())
+                                        .navigationBarTitle("")
+                                        .navigationBarHidden(true)
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                
                             }.listStyle(PlainListStyle())
                             
                             if bigModel.showMenu {

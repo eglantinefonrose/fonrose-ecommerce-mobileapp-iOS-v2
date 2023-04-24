@@ -10,18 +10,19 @@ import SwiftUI
 
 struct PostStack: View {
     
-    var picture: DressPictures
     @EnvironmentObject var bigModel: BigModel
+    var imageName: String
+    var cellText: String
     
     var body: some View {
         
         ZStack {
             
-            Image(picture.pictureName)
+            Image(imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-            Text(picture.cellText)
+            Text(cellText)
                 .frame(alignment: .center)
                 .foregroundColor(.white)
                 .font(.largeTitle)

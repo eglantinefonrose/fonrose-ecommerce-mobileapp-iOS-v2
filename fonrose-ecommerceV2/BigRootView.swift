@@ -57,7 +57,7 @@ struct BigRootView: View {
                 }
                 
                 if (self.bigModel.currentview == .VideoPlayer_trailerPlayer) {
-                    TrailerPlayer()
+                    TrailerPlayer(url: URL(string: bigModel.videoURL)!)
                 }
                 
                 if (self.bigModel.currentview == .AboutUsScreen) {

@@ -15,7 +15,7 @@ struct Binding_test1: View {
     var body: some View {
         Image(systemName: "paperplane")
             .sheet(isPresented: $showModal) {
-                TrailerPlayer()
+                TrailerPlayer(url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!)
             }
             .onTapGesture {
                 showModal = true

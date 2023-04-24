@@ -14,7 +14,7 @@ struct TrailerPlayer: View {
     @EnvironmentObject var bigModel: BigModel
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
-    let url = URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!
+    let url : URL
     
     var body: some View {
 
@@ -26,13 +26,7 @@ struct TrailerPlayer: View {
             
             if #available(iOS 14.0, *) {
                 
-                if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed0 {
-                    VideoPlayer(player: AVPlayer(url: url))
-                }
-                if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed1 {
-                    VideoPlayer(player: AVPlayer(url: url))
-                }
-                
+                VideoPlayer(player: AVPlayer(url: url))
                
             } else {
                 // Fallback on earlier versions

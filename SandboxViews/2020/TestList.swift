@@ -21,7 +21,7 @@ struct TestList: View {
                     
                     List {
                         ForEach(dressPictures) { picture in
-                            PostStack(picture: picture)
+                            PostStack(imageName: picture.pictureName, cellText: picture.cellText)
                                 .id(picture.id)
                         }
                     }

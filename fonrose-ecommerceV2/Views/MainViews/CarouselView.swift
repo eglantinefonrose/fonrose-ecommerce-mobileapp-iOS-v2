@@ -75,7 +75,7 @@ struct PagingView<Content>: View where Content: View {
                             
                             VStack {
                                                             
-                                Text("La robe")
+                                Text(bigModel.dressPictures[bigModel.selectedProductId].productName)
                                     .font(.system(size: 35, weight: .bold, design: .default))
                                     .foregroundColor(Color.white)
                                     .frame(width: 200)
@@ -83,7 +83,7 @@ struct PagingView<Content>: View where Content: View {
                                 Spacer()
                                     .frame(height: 30)
                                 
-                                Text("85€")
+                                Text(bigModel.dressPictures[bigModel.selectedProductId].price)
                                     .foregroundColor(Color.gray)
                                     .font(.system(size: 25, weight: .semibold, design: .default))
                                                             
@@ -134,7 +134,7 @@ struct PagingView<Content>: View where Content: View {
                                 
                                 Spacer()
                                 
-                                Text(bigModel.currentview == .MeasurementCarouselViewTheDress ? "The dress" : "Le serpent")
+                                Text(bigModel.dressPictures[bigModel.selectedProductId].productName)
                                     .font(.headline)
                                     .foregroundColor(Color.white)
                                     .fontWeight(.semibold)
@@ -245,38 +245,17 @@ struct CarouselView: View {
 
     var body: some View {
         
-        if bigModel.currentview == .MeasurementCarouselViewTheDress {
-            
-            VStack(spacing: 20) {
-                PagingView(index: $index.animation(), maxIndex: imagesTheDress.count - 1) {
-                    ForEach(imagesTheDress, id: \.self) { imageName in
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(alignment: .top)
-                    }
+        VStack(spacing: 20) {
+            PagingView(index: $index.animation(), maxIndex: bigModel.dressPictures[bigModel.selectedProductId].carouselProductPictures.count - 1) {
+                ForEach(bigModel.dressPictures[bigModel.selectedProductId].carouselProductPictures, id: \.self) { imageName in
+                    Image(imageName)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(alignment: .top)
                 }
-                .aspectRatio(contentMode: .fill)
-
             }
-            
-        }
-        
-        if bigModel.currentview == .MeasurementCarouselViewLeSerpent {
-            
-            VStack(spacing: 20) {
-                PagingView(index: $index.animation(), maxIndex: imagesTheDress.count - 1) {
-                    ForEach(imagesLeSerpent, id: \.self) { imageName in
-                        Image(imageName)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(alignment: .top)
-                    }
-                }
-                .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fill)
 
-            }
-            
         }
             
     }

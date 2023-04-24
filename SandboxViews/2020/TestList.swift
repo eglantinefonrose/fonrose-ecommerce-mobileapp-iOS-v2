@@ -19,12 +19,12 @@ struct TestList: View {
                         proxy.scrollTo(3)
                     }
                     
-                    List {
+                    /*List {
                         ForEach(dressPictures) { picture in
-                            PostStack(imageName: picture.pictureName, cellText: picture.cellText)
+                     PostStack(imageName: picture.pictureName, cellvText: picture.cellText)
                                 .id(picture.id)
                         }
-                    }
+                    }*/
                 }
             }
         } else {

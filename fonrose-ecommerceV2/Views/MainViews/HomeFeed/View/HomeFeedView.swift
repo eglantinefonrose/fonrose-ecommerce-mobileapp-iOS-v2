@@ -40,15 +40,14 @@ struct HomeFeedView: View {
                         ZStack {
                             
                             List {
-                                ForEach(dressPictures) { picture in
-                                    PostStack(imageName: picture.pictureName, cellText: picture.cellText)
+                                ForEach(bigModel.dressPictures) { picture in
+                                    PostStack(imageName: picture.pictureName, cellText: picture.productName)
                                         .id(picture.id)
                                         .onTapGesture {
                                             
                                             self.bigModel.currentview = .VideoPlayer_trailerPlayer
-                                            bigModel.videoURL = picture.videoURL
+                                            bigModel.selectedProductId = picture.id
                                             self.bigModel.lastViews.append(.Home_homeFeed0)
-                                            print(picture.viewName)
                                             print("append")
                                             
                                             if !bigModel.showMenu {
@@ -64,15 +63,15 @@ struct HomeFeedView: View {
                                 
                                 PostStack(imageName: "60511853694__59B14B15-472E-4D34-A312-FB963FEDA4D8", cellText: "About us")
                                     .buttonStyle(PlainButtonStyle())
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    .navigationBarTitle("")
+                                    .navigationBarHidden(true)
+                                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                 
                                 PostStack(imageName: "IMG_1033 copy", cellText: "Service client")
                                     .buttonStyle(PlainButtonStyle())
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    .navigationBarTitle("")
+                                    .navigationBarHidden(true)
+                                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                 
                             }.listStyle(PlainListStyle())
                             

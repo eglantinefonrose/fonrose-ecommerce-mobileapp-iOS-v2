@@ -91,41 +91,47 @@ struct PersonPickerViewHome: View {
                     
                     if #available(iOS 15.0, *) {
                                                                                     
-                        ScrollView {
-                            
-                            ForEach(bigModel.user.persons.indices, id: \.self) { index in
-                                    
-                                HStack {
+                        if #available(iOS 16.0, *) {
+                            List {
+                                
+                                ForEach(bigModel.user.persons.indices, id: \.self) { index in
                                     
                                     HStack {
                                         
-                                        Text(bigModel.user.persons[index].name)
-                                            .foregroundColor(colorScheme == .dark ? .white : .black)
+                                        HStack {
+                                            
+                                            Text(bigModel.user.persons[index].name)
+                                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                            
+                                            Spacer()
+                                            
+                                        }.onTapGesture {
+                                            
+                                            bigModel.currentPersonIndex = index
+                                            bigModel.currentPersonId = bigModel.user.persons[index].id
+                                            bigModel.fetchMeasurements()
+                                            bigModel.fetchLocation()
+                                            bigModel.authCurrentView = .Auth_UserInfo
+                                            
+                                        }
                                         
-                                        Spacer()
-                                        
-                                    }.onTapGesture {
-                                        
-                                        bigModel.currentPersonIndex = index
-                                        bigModel.currentPersonId = bigModel.user.persons[index].id
-                                        bigModel.fetchMeasurements()
-                                        bigModel.fetchLocation()
-                                        bigModel.authCurrentView = .Auth_UserInfo
-                                        
-                                    }
-                                    
-                                    Image(systemName: "trash")
-                                        .foregroundColor(.blue)
-                                        .onTapGesture {
-                                            print(index)
-                                            print(bigModel.user.persons[index].id)
-                                            print(bigModel.user.persons[index].name)
-                                            //affichage de l'alerte
-                                            bigModel.deletedPersonID = bigModel.user.persons[index].id
-                                            bigModel.deletedPersonName = bigModel.user.persons[index].name
-                                    }
-                                }.padding(15)
-                            }.listRowBackground(Color("Background"))
+                                        Image(systemName: "trash")
+                                            .foregroundColor(.blue)
+                                            .onTapGesture {
+                                                print(index)
+                                                print(bigModel.user.persons[index].id)
+                                                print(bigModel.user.persons[index].name)
+                                                //affichage de l'alerte
+                                                bigModel.deletedPersonID = bigModel.user.persons[index].id
+                                                bigModel.deletedPersonName = bigModel.user.persons[index].name
+                                            }
+                                    }.padding(10)
+                                }.listRowBackground(Color("Background"))
+                            }.listStyle(PlainListStyle())
+                            .background(Color("Background"))
+                            .scrollContentBackground(.hidden)
+                        } else {
+                            // Fallback on earlier versions
                         }
                     
                     } else {
@@ -218,7 +224,7 @@ struct PersonPickerView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             PersonPickerView()
-                .environmentObject(BigModel())
+                .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions
         }

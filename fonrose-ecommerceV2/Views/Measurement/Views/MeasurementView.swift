@@ -12,7 +12,7 @@ import FirebaseAuth
 
 struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
-
+    
     func body(content: Content) -> some View {
         content
             .onAppear()
@@ -90,36 +90,7 @@ struct HomeView: View {
                 
         Spacer()
          
-        HStack {
-            
-            Spacer()
-                .frame(width: 20)
-            
-            
-            Text("Back")
-                .foregroundColor(Color.blue)
-                .fontWeight(.semibold)
-                .onTapGesture {
-                    if !self.bigModel.lastViews.isEmpty {
-                        print("back")
-                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                        self.bigModel.lastViews.removeLast()
-                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                    } else { print("array empty") }
-                }
-            
-            Spacer()
-            
-            Image(systemName: "house")
-                .foregroundColor(Color.blue)
-                .onTapGesture {
-                    self.bigModel.currentview = .Home_homeFeed0
-                }
-            
-            Spacer()
-                .frame(width: 20)
-            
-        }
+        BackButtonModel()
                    
         VStack {
             
@@ -143,10 +114,13 @@ struct HomeView: View {
                 Spacer()
                     
                     if #available(iOS 15.0, *) {
+                        
                         ScrollView {
                             
-                                LazyVStack {
+                            VStack(spacing: 20) {
                                     
+                                Spacer()
+                                
                                     //MARK: Measurement1
                                     VStack {
                                      
@@ -166,7 +140,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -176,7 +149,6 @@ struct HomeView: View {
                                             } else {}
                                         }
                                     })
-                                    
                                     
                                     //MARK: Measurement2
                                     VStack {
@@ -197,7 +169,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -227,7 +198,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -257,7 +227,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -287,7 +256,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -317,7 +285,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -347,7 +314,6 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
-                                    .padding(10)
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -357,6 +323,8 @@ struct HomeView: View {
                                             } else {}
                                         }
                                     })
+                                
+                                Spacer()
                                                                    
                                 }
                                                         
@@ -396,7 +364,6 @@ struct HomeView: View {
                         Spacer()
                     }.background(Color.blue)
                     .cornerRadius(15)
-                    .padding(20)
                     .onTapGesture {
                         
                         print(measurementText1)
@@ -454,7 +421,7 @@ struct HomeView: View {
                 
             }
                             
-        }
+    }.padding(20)
         
     }
     

@@ -25,42 +25,11 @@ struct RecapMensurations: View {
             
             VStack {
                 
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }.frame(width: UIScreen.main.bounds.width)
+                BackButtonModel()
                 
                 Spacer()
                     
                     HStack {
-                        Spacer()
-                            .frame(width: 50)
                         
                         Text("Recap")
                             .font(.system(size: 45, weight: .bold, design: .default))
@@ -101,7 +70,6 @@ struct RecapMensurations: View {
                             Spacer()
                         }.background(Color.blue)
                         .cornerRadius(15)
-                        .padding(20)
                         .onTapGesture {
                             self.bigModel.lastViews.append(.Measurement_RecapMensurations)
                             self.bigModel.currentview = .LivraisonViews_Livraison
@@ -158,7 +126,7 @@ struct RecapMensurations: View {
                         }
                     }
                                 
-                }
+            }.padding(20)
             
         }
     }
@@ -174,10 +142,6 @@ struct RecapMensurationsTextStruct: View {
         
         VStack {
             HStack {
-                
-            Spacer()
-                .frame(width: 50)
-                               
                 Text(recapMeasurementText)
                     .font(.system(size: 20, design: .default))
                     .frame(height: 50, alignment: .leading)
@@ -188,10 +152,6 @@ struct RecapMensurationsTextStruct: View {
                     .foregroundColor(Color.gray)
                     .font(.system(size: 20, design: .default))
                     .frame(height: 50, alignment: .leading)
-                               
-                Spacer()
-                    .frame(width: 50)
-            
             }
             
             Spacer()

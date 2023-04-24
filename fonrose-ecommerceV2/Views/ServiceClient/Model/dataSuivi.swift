@@ -14,18 +14,8 @@ struct ParcelInfos {
     let status: SuiviStatusEnum
 }
 
-
-
-
-let parcelStatus = statusParcel()
-
-func statusParcel() -> [ParcelInfos] {
-    let parcels: [ParcelInfos] = [
+let parcels: [ParcelInfos] = [
         ParcelInfos(status: .EnCoursDExpedition),
         ParcelInfos(status: .Livré),
         ParcelInfos(status: .PrisEnCharge),
         ParcelInfos(status: .PretsAEtreExpédié)]
-    
-    return parcels
-    
-}

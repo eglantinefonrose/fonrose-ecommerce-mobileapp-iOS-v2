@@ -18,11 +18,41 @@ struct PaymentScreen: View {
     @available(iOS 14.0, *)
     var body: some View {
         
-        Text("")
+        ZStack {
             
+            
+            
+            VStack {
+                HStack {
+                    
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
+                    
+                    Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = .Home_homeFeed0
+                        }
+                    
+                }
+                Spacer()
+            }.padding(20)
         }
-        
+            
     }
+        
+}
 
 @available(iOS 14.0, *)
 struct PaymentScreen_Previews: PreviewProvider {

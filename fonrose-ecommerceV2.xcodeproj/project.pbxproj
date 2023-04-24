@@ -74,6 +74,8 @@
 		70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */; };
 		70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */; };
 		70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */ = {isa = PBXBuildFile; fileRef = 70CFDBC729F1FC1200F19D41 /* simpson.gif */; };
+		70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBC929F5A39400F19D41 /* ListeCommande.swift */; };
+		70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */; };
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
 		70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E599342472C6B600F84295 /* MeasurementValue.swift */; };
 		70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */; };
@@ -145,6 +147,8 @@
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
 		70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Splash-screen.swift"; sourceTree = "<group>"; };
 		70CFDBC729F1FC1200F19D41 /* simpson.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = simpson.gif; path = ../../../../../Desktop/simpson.gif; sourceTree = "<group>"; };
+		70CFDBC929F5A39400F19D41 /* ListeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeCommande.swift; sourceTree = "<group>"; };
+		70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModel.swift; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
 		70E599342472C6B600F84295 /* MeasurementValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementValue.swift; sourceTree = "<group>"; };
 		70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTest.swift; sourceTree = "<group>"; };
@@ -305,6 +309,7 @@
 			children = (
 				7045357F2477BB8F001F20A8 /* ViewEnum.swift */,
 				7045357D2477BB29001F20A8 /* BigModel.swift */,
+				70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			children = (
 				705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */,
 				70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */,
+				70CFDBC929F5A39400F19D41 /* ListeCommande.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				704D0A2928A0286100AACF36 /* LocationView.swift in Sources */,
 				70BB819A246D7EC500695F19 /* About_us.swift in Sources */,
 				702A7D6A2953C222006338C0 /* LogInPhoneView.swift in Sources */,
+				70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */,
 				70347553286090590030C906 /* MeasurementView.swift in Sources */,
 				7045357E2477BB29001F20A8 /* BigModel.swift in Sources */,
 				700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */,
@@ -525,6 +532,7 @@
 				70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */,
 				7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */,
 				70887906292F70FC00391A41 /* ShopView.swift in Sources */,
+				70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */,
 				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
 				7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */,

@@ -8,8 +8,19 @@
 
 import SwiftUI
 
+struct ServiceClientModel: Identifiable, Hashable {
+    var id: Int
+    var text: String
+    var nextView: ViewEnum
+}
+
+@available(iOS 14.0, *)
 struct ServiceClientInfos: View {
     
+    let serviceClient = [ServiceClientModel(id: 0, text: "Livraison", nextView: .ServiceClient_showDelivery), ServiceClientModel(id: 1, text: "Suivi en temps réel", nextView: .ServiceClient_showSuiviDeCommande), ServiceClientModel(id: 2, text: "Renvoi de colis", nextView: .ServiceClient_showReturn), ServiceClientModel(id: 3, text: "Fiche de livraison", nextView: .ServiceClient_showCard), ServiceClientModel(id: 4, text: "Service client", nextView: .ServiceClient_showServices)]
+    let columns = [ GridItem(.flexible()), GridItem(.flexible()) ]
+    
+    @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
     @State var showReturn = false
     @State var showCard = false
@@ -17,218 +28,174 @@ struct ServiceClientInfos: View {
     
     var body: some View {
                 
-        VStack { //VStack globale
+        ZStack {
             
-            Spacer()
-                .frame(height: 40)
-                
-            HStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-                Spacer()
-                    .frame(width: 30)
+            VStack { //VStack globale
+                  
+                HStack {
                 
-                Text("Back")
-                    .foregroundColor(.blue)
-                    .onTapGesture {
-                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                        print("back")
-                    }
-                
-                Spacer()
-                
-            }
-            
-            Spacer()
-                
-             VStack {//élement 1
-                       
-                   Text("Informations client")
-                       .font(.system(size: 35, weight: .bold, design: .default))
-                       .foregroundColor(Color.white)
-                       .frame(alignment: .center)
-                       
-                   Text("Questions fréquentes")
-                       .foregroundColor(Color.gray)
-                       .font(.system(size: 25, weight: .semibold, design: .default))
-                       
-             }
-                   
-            Spacer()
-                .frame(height: 150)//élement 2
-            
-            //MARK: Livraison
-            
-            VStack {//élément 3
-                        ZStack {
-                            
-                            Button(action: {
-                                self.bigModel.currentview = .ServiceClient_showDelivery
-                                self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                                }) {
-                                    HStack {
-                                        Text("Livraison")
-                                        .foregroundColor(Color.white)
-                                        .font(.system(size: 28, weight: .medium, design: .default))
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "info.circle")
-                                            .resizable()
-                                            .frame(width: 25, height: 25)
-                                            .foregroundColor(.blue)
-                                        
-                                        Spacer()
-                                            .frame(width: 70)
-                                    }.frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                                .padding(.leading, 80)
+                    Text("Back")
+                        .bold()
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                            print("back")
                         }
-                }
-                
-                Spacer()
-                    .frame(height: 20)
-            
-                ZStack {
-                            
-                    Button(action: {
-                        self.bigModel.currentview = .ServiceClient_showSuiviDeCommande
-                        self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                        }) {
-                            HStack {
-                                Text("Suivi en temps réel")
-                                .foregroundColor(Color.white)
-                                .font(.system(size: 28, weight: .medium, design: .default))
-                                
-                                Spacer()
-                                
-                                Image(systemName: "info.circle")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.blue)
-                                
-                                Spacer()
-                                    .frame(width: 70)
-                                
-                        }.frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                        .padding(.leading, 80)
-                    }
-                }
-                                
-                Spacer()
-                    .frame(height: 20)
-
-                //MARK: Renvoi de colis
-                
-                VStack {//élement 3.3
-                    
-                    ZStack {
                                     
-                        Button(action: {
+                    Spacer()
+                    
+                    Text("Informations client")
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            self.bigModel.currentview = .Home_homeFeed0
+                        }
+                    
+                }.padding(20)
+                
+                Spacer()
+                    
+                 VStack {//élement 1
+                           
+                       Text("Informations client")
+                           .font(.system(size: 35, weight: .bold, design: .default))
+                           .frame(alignment: .center)
+                           
+                       Text("Questions fréquentes")
+                           .foregroundColor(Color.gray)
+                           .font(.system(size: 25, weight: .semibold, design: .default))
+                           
+                 }
+                       
+                Spacer()
+                    //.frame(height: 150)//élement 2
+                
+                //MARK: Livraison
+                
+                LazyVGrid(columns: columns) {
+                    
+                    ForEach(serviceClient, id: \.self) { serviceClient in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(height: 150)
+                                .foregroundColor(.blue)
+                            VStack(alignment: .leading) {
+                                Image(systemName: "shippingbox")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .foregroundColor(.white)
+                                    .frame(width: 40, height: 40)
+                                Text(serviceClient.text)
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                            }
+                        }.onTapGesture {
+                            self.bigModel.currentview = serviceClient.nextView
+                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                        }
+                    }
+                }.padding(.horizontal, 20)
+                
+                /*VStack(spacing: 40) {//élément 3
+                                
+                    HStack {
+                        Text("Livraison")
+                            .font(.system(size: 28, weight: .medium, design: .default))
+                            
+                        Spacer()
+                            
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.blue)
+                        
+                    }.padding(.horizontal, 20)
+                    .onTapGesture {
+                        self.bigModel.currentview = .ServiceClient_showDelivery
+                        self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                    }
+                    
+                    HStack {
+                        Text("Suivi en temps réel")
+                        .font(.system(size: 28, weight: .medium, design: .default))
+                        
+                        Spacer()
+                        
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.blue)
+                        
+                    }.padding(.horizontal, 20)
+                    .onTapGesture {
+                            self.bigModel.currentview = .ServiceClient_showSuiviDeCommande
+                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos) }
+                    //MARK: Renvoi de colis
+                    
+                        
+                    HStack {
+                        Text("Renvoi de colis")
+                        .font(.system(size: 28, weight: .medium, design: .default))
+                            
+                        Spacer()
+                        
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.blue)
+                            
+                        }.padding(.horizontal, 20)
+                        .onTapGesture {
                             self.bigModel.currentview = .ServiceClient_showReturn
                             self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                            }) {
-                                
-                            HStack {
-                                Text("Renvoi de colis")
-                                .foregroundColor(Color.white)
-                                .font(.system(size: 28, weight: .medium, design: .default))
-                                
-                                Spacer()
-                                
-                                Image(systemName: "info.circle")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.blue)
-                                
-                                Spacer()
-                                    .frame(width: 70)
-                            }
-                        } } .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                                .padding(.leading, 80)
-        }
-        
-            Spacer()//élement 4
-                .frame(height: 20)
-                    
-            
-            
-            VStack {//élement 5
-                //vstack avec fiche de livraison & service
-                
-                //VStack {//élement 5.1
-                    //MARK: Fiche de livraison
-                    
-                    ZStack {
-                    
-                    Button(action: {
+                    }
+                    HStack {
+                        Text("Fiche de livraison")
+                        .font(.system(size: 28, weight: .medium, design: .default))
+                        
+                        Spacer()
+                        
+                        Image(systemName: "info.circle")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.blue)
+                        
+                    }.padding(.horizontal, 20)
+                    .onTapGesture {
                         self.bigModel.currentview = .ServiceClient_showCard
                         self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                        }) {
-                            
-                            HStack {
-                                Text("Fiche de livraison")
-                                .foregroundColor(Color.white)
-                                .font(.system(size: 28, weight: .medium, design: .default))
-                                
-                                Spacer()
-                                
-                                Image(systemName: "info.circle")
-                                    .resizable()
-                                    .frame(width: 25, height: 25)
-                                    .foregroundColor(.blue)
-                                
-                                Spacer()
-                                    .frame(width: 70)
-                            }
-                        } }.frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                        .padding(.leading, 80)
-                
-                    
-                }
-                
-                //MARK: Service
-                
-                Spacer()
-                .frame(height: 20)//élement 5.2
-                
-                VStack {
-                    
-                    ZStack {//élement 5.3
-                    
-                        VStack {
-                        
-                            Button(action: {
-                                self.bigModel.currentview = .ServiceClient_showServices
-                                self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                                }) {
-                                    HStack {
-                                        Text("Service client")
-                                        .foregroundColor(Color.white)
-                                        .font(.system(size: 28, weight: .medium, design: .default))
-                                        
-                                        Spacer()
-                                        
-                                        Image(systemName: "info.circle")
-                                            .resizable()
-                                            .frame(width: 25, height: 25)
-                                            .foregroundColor(.blue)
-                                        
-                                        Spacer()
-                                            .frame(width: 70)
-                                    }
-                                }
-                            } .frame(width: UIScreen.main.bounds.width, height: 40, alignment: .leading)
-                            .padding(.leading, 80)
                         }
                     
-                        
-                }//fin VStack
+                    //MARK: Service
+                        HStack {
+                            Text("Service client")
+                            .font(.system(size: 28, weight: .medium, design: .default))
+                            
+                            Spacer()
+                            
+                            Image(systemName: "info.circle")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.blue)
+                        }.padding(.horizontal, 20)
+                        .onTapGesture {
+                            self.bigModel.currentview = .ServiceClient_showServices
+                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                        }
+                }*/
+            
+            Spacer()
+            
             }
-        
-        Spacer()
-        
-            }.frame(width: UIScreen.main.bounds.width)
-            .background(Color.black)
-            .edgesIgnoringSafeArea(.all)
+        }
         }
     }
 
@@ -463,6 +430,10 @@ struct ShowServicesView: View {
         
 struct DetailedViewTest2_Previews: PreviewProvider {
     static var previews: some View {
-        ServiceClientInfos()
+        if #available(iOS 14.0, *) {
+            ServiceClientInfos()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

@@ -13,6 +13,7 @@ struct MeasurementTut: Identifiable, Hashable {
     var id: Int
     var measurement: String
     var url: URL
+    var explanations: String?
 }
 
 struct MeasurementsTut: View {
@@ -22,8 +23,8 @@ struct MeasurementsTut: View {
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
     
-    let measurementsTut = [MeasurementTut(id: 0, measurement: "Every measurements", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 1, measurement: "Armpits", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
+    let measurementsTut = [MeasurementTut(id: 0, measurement: "All measurements", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
+       MeasurementTut(id: 1, measurement: "Armpits", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!, explanations: "Levez légèrement votre bras et repérez le creux à coté de la bosse de l’os de l’épaule, puis enroulez le mètre ruban autour de ce point en passant sous l’aisselle"),
        MeasurementTut(id: 2, measurement: "Arms", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
        MeasurementTut(id: 3, measurement: "Head", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
        MeasurementTut(id: 4, measurement: "Pelvis", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
@@ -83,6 +84,25 @@ struct MeasurementsTut: View {
                             .padding(20)
                         .frame(width: UIScreen.main.bounds.width)
                         Spacer()
+                        Text(measurementsTut[currentTutId].explanations ?? "")
+                        Spacer()
+                        
+                        HStack {
+                            Spacer()
+                            if #available(iOS 14.0, *) {
+                                Image(systemName: "text.bubble")
+                                    .font(.title3)
+                                    .foregroundColor(Color.blue)
+                                    .onTapGesture {
+                                        //bigModel.currentview = .Home_homeFeed0
+                                    }
+                            } else {
+                                // Fallback on earlier versions
+                            }
+                        }.onRotate { newOrientation in orientation = newOrientation }
+                            .padding(20)
+                        .frame(width: UIScreen.main.bounds.width)
+                        
                     }.padding(20)
                 }
             }
@@ -204,6 +224,8 @@ struct MeasurementPlayerView: View {
     @EnvironmentObject var bigModel: BigModel
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
+    @State var showExplanations = false
+    var explanations: String
     var url: URL
     var measurementText: String
     @State var show: Bool = true
@@ -249,7 +271,35 @@ struct MeasurementPlayerView: View {
                 }.onRotate { newOrientation in orientation = newOrientation }
                     .padding(20)
                 .frame(width: UIScreen.main.bounds.width)
+                
                 Spacer()
+                
+                //ZStack(alignment: .leading) {
+                    //RoundedRectangle(cornerRadius: 20)
+                        //.foregroundColor(.black)
+                        //.opacity(0.7)
+                    Text(explanations)
+                //}
+                
+                HStack {
+                    
+                    Spacer()
+                    
+                    if #available(iOS 14.0, *) {
+                        Image(systemName: "text.bubble")
+                            .font(.title3)
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                //bigModel.currentview = .Home_homeFeed0
+                            }
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    
+                }.onRotate { newOrientation in orientation = newOrientation }
+                    .padding(20)
+                .frame(width: UIScreen.main.bounds.width)
+                
             }.padding(20)
         }
         
@@ -258,6 +308,7 @@ struct MeasurementPlayerView: View {
 
 struct MeasurementsTut_Previews: PreviewProvider {
     static var previews: some View {
+        MeasurementPlayerView(explanations: "Repérez votre taille (l’endroit le moins large verticalement entre votre poitrine et vos hanches) et entourez le mètre ruban autour de votre corps à cet endroit, en faisant attention à garder le mètre au même niveau sur l’ensemble de votre corps", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!, measurementText: "")
         MeasurementsTut()
     }
 }

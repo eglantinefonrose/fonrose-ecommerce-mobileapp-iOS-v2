@@ -10,14 +10,14 @@ import SwiftUI
 
 struct SuiviDeCommande: View {
     
-    var model: ParcelInfos
+    //var model: ParcelInfos
     @EnvironmentObject var bigModel: BigModel
     
     var body: some View {
             
         // MARK: Livré
-                    
-        VStack {
+        Text("")
+        /*VStack {
             
             if model.status == .Livré {
             
@@ -367,7 +367,7 @@ struct SuiviDeCommande: View {
                     .edgesIgnoringSafeArea(.all)
                 }//acolade fermante du if "Pris en charge"
         }
-    }
+    }*/
 }
 
 
@@ -458,10 +458,10 @@ struct Header: View {
     }
 }
 
-/*struct SuiviDeCommande_Previews: PreviewProvider {
+struct SuiviDeCommande_Previews: PreviewProvider {
     static var previews: some View {
-        SuiviDeCommande(mamamia: true)
+        SuiviDeCommande()
     }
-}*/
+}
 
 }

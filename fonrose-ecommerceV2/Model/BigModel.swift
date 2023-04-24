@@ -60,6 +60,10 @@ class BigModel : ObservableObject {
         var ShouldersMeasurement: String
         var ShouldersPelvis: String
     }
+    
+    struct ParcelInfos {
+        let status: SuiviStatusEnum
+    }
 
     struct PersonFirebaseConstants {
         static let email = "email"
@@ -74,6 +78,7 @@ class BigModel : ObservableObject {
         var location: Location?
         
     }
+    
     
     
     func fetchPerson() {

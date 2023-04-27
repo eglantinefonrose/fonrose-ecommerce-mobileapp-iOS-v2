@@ -256,36 +256,6 @@ struct UserInfo: View {
     }
 }
 
-struct TextFieldChangeModel: View {
-    
-    var title: String
-    @State var text: String
-    @Environment(\.colorScheme) var theColorScheme
-    
-    var body: some View {
-        
-        VStack {
-         
-         Spacer()
-         
-         HStack {
-                                             
-             Spacer()
-             
-             TextField(title, text: $text)
-                 .disableAutocorrection(true)
-                 .autocapitalization(.none)
-         }
-         
-         Spacer()
-
-        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-        .cornerRadius(7)
-        .frame(height: 30)
-        .padding(10)
-    }
-}
-
 struct UserInfo_Previews: PreviewProvider {
     static var previews: some View {
         UserInfo()

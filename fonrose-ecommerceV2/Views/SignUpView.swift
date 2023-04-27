@@ -33,90 +33,71 @@ struct SignUpView: View {
             }
             
             VStack {
-                    
-                Spacer()
-                    .frame(height: 20)
-                
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.authLastViews.isEmpty {
-                                print("back")
-                                self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                self.bigModel.authLastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }
+                 
+                BackButtonModel()
                 
                 Spacer()
                     
-                Text("Sign Up")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
-            
-                Spacer()
-                
-                VStack {
+                VStack(spacing: 50) {
                     
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
+                    Text("Sign Up")
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                
+                    
+                    VStack(spacing: 20) {
                         
-                         TextField("Email", text: $email)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                     }
-                     
-                     Spacer()
-
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
+                        VStack {
+                         
                          Spacer()
-                        
-                         SecureField("Password", text: $password)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                     }
-                     
-                     Spacer()
+                         
+                         HStack {
+                                                             
+                             Spacer()
+                            
+                             TextField("", text: $email)
+                                 .disableAutocorrection(true)
+                                 .autocapitalization(.none)
+                                 .placeholder(when: email.isEmpty) {
+                                     Text("Email")
+                                         .foregroundColor(.gray)
+                                         .opacity(0.6)
+                                         .padding(.horizontal, 5)
+                                 }
+                         }
+                         
+                         Spacer()
 
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
+                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                        .cornerRadius(7)
+                        .frame(height: 30)
+                        
+                        VStack() {
+                         
+                         Spacer()
+                         
+                         HStack {
+                                                             
+                             Spacer()
+                            
+                             SecureField("", text: $password)
+                                 .disableAutocorrection(true)
+                                 .autocapitalization(.none)
+                                 .placeholder(when: password.isEmpty) {
+                                     Text("Password")
+                                         .foregroundColor(.gray)
+                                         .opacity(0.6)
+                                         .padding(.horizontal, 5)
+                                 }
+                         }
+                         
+                         Spacer()
+
+                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                        .cornerRadius(7)
+                        .frame(height: 30)
+                        
+                    }
                     
                 }
                 
@@ -147,7 +128,7 @@ struct SignUpView: View {
                         
                         Spacer()
                         
-                    }.frame(width: UIScreen.main.bounds.width - 50, height: 35)
+                    }.frame(height: 35)
                     .background(Color.blue)
                     .cornerRadius(15)
                     .onTapGesture {
@@ -163,81 +144,13 @@ struct SignUpView: View {
                     
                 }
                 
-            }
+            }.padding(20)
             
         }
         
     }
 }
 
-struct TextFieldEmail: View {
-    
-    @Environment(\.colorScheme) var theColorScheme
-    @State var email: String
-    @EnvironmentObject var bigModel: BigModel
-    
-    var body: some View {
-        
-        VStack {
-         Spacer()
-         HStack {
-            Spacer()
-             if #available(iOS 14.0, *) {
-                 TextField("Email", text: $email)
-                     .disableAutocorrection(true)
-                     .autocapitalization(.none)
-                     .onChange(of: email) { newValue in
-                         bigModel.changeEmailAdress(newValue)
-                     }
-             } else {
-                 // Fallback on earlier versions
-             }
-         }
-         Spacer()
-        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-        .cornerRadius(7)
-        .frame(height: 30)
-        .padding(10)
-    }
-}
-
-struct SecureFieldPassword: View {
-    
-    @Environment(\.colorScheme) var theColorScheme
-    @State var password: String
-    @EnvironmentObject var bigModel: BigModel
-    
-    var body: some View {
-        
-        VStack {
-         
-         Spacer()
-         
-         HStack {
-                                             
-             Spacer()
-            
-             if #available(iOS 14.0, *) {
-                 SecureField("Password", text: $password)
-                     .disableAutocorrection(true)
-                     .autocapitalization(.none)
-                     .onChange(of: password) { newValue in
-                         bigModel.changePassword(newValue)
-                     }
-             } else {
-                 // Fallback on earlier versions
-             }
-         }
-         
-         Spacer()
-
-        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-        .cornerRadius(7)
-        .frame(height: 30)
-        .padding(10)
-        
-    }
-}
 
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {

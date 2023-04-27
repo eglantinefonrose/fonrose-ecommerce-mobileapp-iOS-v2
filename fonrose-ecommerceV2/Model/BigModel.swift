@@ -100,6 +100,7 @@ class BigModel : ObservableObject {
     //MARK: Fetch Products Informations
     
     var infoFetched = false
+    @Published var isItFirstTime = true
     
     func fetchProductInfo() {
         

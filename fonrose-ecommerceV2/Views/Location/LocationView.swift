@@ -93,47 +93,7 @@ struct LocationTextField: View {
             
             VStack {
                 
-                //Spacer()
-                
-                VStack {
-                    
-                    HStack {
-                        
-                        Spacer()
-                            .frame(width: 10)
-                        
-                        
-                        Text("Back")
-                            .foregroundColor(Color.blue)
-                            .fontWeight(.semibold)
-                            .onTapGesture {
-                                if !self.bigModel.lastViews.isEmpty {
-                                    print("back")
-                                    self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                    self.bigModel.lastViews.removeLast()
-                                    print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                                } else { print("array empty") }
-                            }
-                        
-                        Spacer()
-                        
-                        Image(systemName: "house")
-                            .foregroundColor(Color.blue)
-                            .onTapGesture {
-                                self.bigModel.currentview = .Home_homeFeed0
-                            }
-                        
-                        Spacer()
-                            .frame(width: 20)
-                        
-                    }
-                    
-                    //Spacer()
-                        //.frame(height: 20)
-                    
-                    
-                }
-                
+                BackButtonModel()
                 
                 ZStack {
                     
@@ -152,9 +112,15 @@ struct LocationTextField: View {
                                                                  
                                  Spacer()
                                  
-                                 TextField("Street", text: $adressStreet)
+                                 TextField("", text: $adressStreet)
                                      .disableAutocorrection(true)
                                      .autocapitalization(.none)
+                                     .placeholder(when: adressStreet.isEmpty) {
+                                         Text("Street")
+                                             .foregroundColor(.gray)
+                                             .opacity(0.6)
+                                             .padding(.horizontal, 5)
+                                     }
                              }
                              
                              Spacer()
@@ -274,9 +240,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("First name", text: $firstNameText)
+                                                     TextField("", text: $firstNameText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: firstNameText.isEmpty) {
+                                                             Text("First name")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -297,6 +269,12 @@ struct LocationTextField: View {
                                                      TextField("Last name", text: $lastNameText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: lastNameText.isEmpty) {
+                                                             Text("Last name")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -314,9 +292,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Email adress", text: $emailAdressText)
+                                                     TextField("", text: $emailAdressText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: emailAdressText.isEmpty) {
+                                                             Text("Email adress")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -334,9 +318,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Phone", text: $phoneNumberText)
+                                                     TextField("", text: $phoneNumberText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: phoneNumberText.isEmpty) {
+                                                             Text("Phone")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -517,9 +507,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Street", text: $adressStreet)
+                                                     TextField("", text: $adressStreet)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: adressStreet.isEmpty) {
+                                                             Text("Street")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -577,9 +573,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Mail box", text: $adressMailBoxText)
+                                                     TextField("", text: $adressMailBoxText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: adressMailBoxText.isEmpty) {
+                                                             Text("Mail box")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -599,9 +601,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Basement", text: $adressBasementText)
+                                                     TextField("", text: $adressBasementText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: adressBasementText.isEmpty) {
+                                                             Text("Basement")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()
@@ -621,9 +629,15 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Stage", text: $adressStageText)
+                                                     TextField("", text: $adressStageText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
+                                                         .placeholder(when: adressStageText.isEmpty) {
+                                                             Text("Stage")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
                                                  }
                                                  
                                                  Spacer()

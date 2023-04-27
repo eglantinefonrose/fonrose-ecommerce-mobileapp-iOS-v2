@@ -21,7 +21,6 @@
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
 		701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B9E1D2876DF90004DE780 /* Test-coordinate.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
-		70232655298A68BF00A42AEE /* Change.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70232654298A68BF00A42AEE /* Change.swift */; };
 		702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */; };
 		702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */; };
 		702A7D6A2953C222006338C0 /* LogInPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInPhoneView.swift */; };
@@ -53,6 +52,7 @@
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
 		709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */; };
+		70A19AC629FB05DB0047D2E9 /* EditPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */; };
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90C829FA739D00FB9212 /* FirebaseAnalytics */; };
 		70AF90CB29FA739D00FB9212 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90CA29FA739D00FB9212 /* FirebaseAuth */; };
@@ -103,7 +103,6 @@
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		701B9E1D2876DF90004DE780 /* Test-coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test-coordinate.swift"; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		70232654298A68BF00A42AEE /* Change.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Change.swift; sourceTree = "<group>"; };
 		702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton_sandbox.swift; sourceTree = "<group>"; };
 		702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen_sandbox.swift; sourceTree = "<group>"; };
 		702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fonrose-ecommerceV2.entitlements"; sourceTree = "<group>"; };
@@ -136,6 +135,7 @@
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
+		70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditPersonView.swift; path = ../../../../../../../.Trash/EditPersonView.swift; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70AF90DA29FAAEFC00FB9212 /* testJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testJSON.json; path = ../../../../../../Desktop/testJSON.json; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
@@ -180,6 +180,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7001F3A829FB022B00AC8791 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				702A7D692953C222006338C0 /* LogInPhoneView.swift */,
+				7031EF9627F04C27009CA3A2 /* LocationHome.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		700EA7E028201DFB007E8002 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +215,7 @@
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				70BB8199246D7EC500695F19 /* About_us.swift */,
+				7001F3A829FB022B00AC8791 /* New Group */,
 				7025B19024699EED00F43171 /* SandboxViews */,
 				7019ABF92347E73F00F5EF15 /* fonrose-ecommerceV2 */,
 				7019ABF82347E73F00F5EF15 /* Products */,
@@ -291,7 +301,6 @@
 		7031EF9827F04C34009CA3A2 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				7031EF9627F04C27009CA3A2 /* LocationHome.swift */,
 				7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */,
 				7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */,
 				704D0A2828A0286100AACF36 /* LocationView.swift */,
@@ -305,12 +314,11 @@
 			children = (
 				7034753C285F67BD0030C906 /* SignInView.swift */,
 				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
-				702A7D692953C222006338C0 /* LogInPhoneView.swift */,
 				7034754C285F7D000030C906 /* SignUpView.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
 				70347558286284220030C906 /* UserInfo.swift */,
-				70232654298A68BF00A42AEE /* Change.swift */,
+				70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -528,7 +536,6 @@
 				700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */,
 				7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */,
 				7034755728623E000030C906 /* SignInSandbox.swift in Sources */,
-				70232655298A68BF00A42AEE /* Change.swift in Sources */,
 				70347551285F8F170030C906 /* PersonPickerView.swift in Sources */,
 				70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */,
 				70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */,
@@ -550,6 +557,7 @@
 				70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */,
 				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
+				70A19AC629FB05DB0047D2E9 /* EditPersonView.swift in Sources */,
 				7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */,
 				70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,

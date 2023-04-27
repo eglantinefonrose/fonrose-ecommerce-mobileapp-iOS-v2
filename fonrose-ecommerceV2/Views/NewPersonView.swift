@@ -78,9 +78,16 @@ struct NewPersonView: View {
                                                      
                      Spacer()
                     
-                     TextField("name", text: $newPersonName)
+                     TextField("", text: $newPersonName)
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
+                         .placeholder(when: newPersonName.isEmpty) {
+                             Text("Name")
+                                 .foregroundColor(.gray)
+                                 .opacity(0.6)
+                                 .padding(.horizontal, 5)
+                         }
+                     
                  }
                  
                  Spacer()
@@ -98,9 +105,15 @@ struct NewPersonView: View {
                                                      
                      Spacer()
                     
-                     TextField("email", text: $newPersonEmail)
+                     TextField("", text: $newPersonEmail)
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
+                         .placeholder(when: newPersonEmail.isEmpty) {
+                             Text("Email")
+                                 .foregroundColor(.gray)
+                                 .opacity(0.6)
+                                 .padding(.horizontal, 5)
+                         }
                  }
                  
                  Spacer()
@@ -234,36 +247,6 @@ struct NewPersonView: View {
     }
 }
 
-struct NewPersonTextFieldModel: View {
-    
-    var title: String
-    @State var text: String = ""
-    @Environment(\.colorScheme) var theColorScheme
-    
-    var body: some View {
-
-        VStack {
-         
-         Spacer()
-         
-         HStack {
-                                             
-             Spacer()
-            
-             TextField(title, text: $text)
-                 .disableAutocorrection(true)
-                 .autocapitalization(.none)
-         }
-         
-         Spacer()
-
-        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-        .cornerRadius(7)
-        .frame(height: 30)
-        .padding(10)
-        
-    }
-}
 
 struct NewUserView_Previews: PreviewProvider {
     static var previews: some View {

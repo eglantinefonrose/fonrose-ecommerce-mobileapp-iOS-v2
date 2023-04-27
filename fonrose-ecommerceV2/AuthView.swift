@@ -47,7 +47,7 @@ struct AuthView: View {
             }
             
             if (self.bigModel.authCurrentView == .Auth_EditPerson) {
-                Change()
+                EditPersonView()
             }
             
         }

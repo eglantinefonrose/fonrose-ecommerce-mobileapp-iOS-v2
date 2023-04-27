@@ -42,6 +42,7 @@ struct MeasurementValue: View {
              TextField(textFieldText, text: $MeasurementName)
                  .disableAutocorrection(true)
                  .autocapitalization(.none)
+             
          }
          
          Spacer()

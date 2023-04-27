@@ -19,96 +19,98 @@ struct SignInView: View {
     @available(iOS 14.0, *)
     var body: some View {
         
-        ZStack {
-                        
-            if theColorScheme == .light {
-                Color.gray
-                    .opacity(0.25)
+        
+            ZStack {
+                
+                if theColorScheme == .light {
+                    Color.gray
+                        .opacity(0.25)
+                        .edgesIgnoringSafeArea(.all)
+                } else {
+                    Color("Background")
                     .edgesIgnoringSafeArea(.all)
-            } else {
-                Color("Background")
-                .edgesIgnoringSafeArea(.all)
-            }
-            
-            VStack {
-                HStack {
+                }
+                
+                VStack {
                     
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
+                    BackButtonModel()
+                        
                     Spacer()
                     
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                }.padding(20)
-                Spacer()
-            }
-            
-            VStack {
-                
-                Spacer()
-                
-                Text("Sign in")
-                    .font(.largeTitle)
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                VStack(spacing: 10) {
-                    
-                    HStack {
-                        TextField("Phone number", text: $bigModel.mobileNo)
-                            //.keyboardType(.numberPad)
-                            //.textContentType(.telephoneNumber)
-                            .padding(5)
-                        
-                        Text("Get code")
-                            .foregroundColor(.blue)
-                            .padding(10)
-                            .font(.caption)
-                            .onTapGesture {
-                                bigModel.getOTPCode()
-                            }
-                        
-                    }.background(Color.white)
-                    .cornerRadius(10)
-                    
                     VStack {
-                        TextField("OTP code", text: $bigModel.otpCode)
-                            .padding(5)
-                    }.background(Color.white)
-                    .cornerRadius(10)
-                    
-                    Text("Sign in")
-                        .foregroundColor(.blue)
+                        
+                        Spacer()
+                        
+                        VStack(spacing: 50) {
+                            
+                            Text("Sign in")
+                                .font(.largeTitle)
+                                .fontWeight(.semibold)
+                            
+                            VStack(spacing: 10) {
+                                
+                                HStack {
+                                            
+                                    TextField("", text: $bigModel.mobileNo)
+                                        .padding(5)
+                                        .placeholder(when: bigModel.mobileNo.isEmpty) {
+                                            Text("Phone number").foregroundColor(.gray)
+                                                .opacity(0.6)
+                                                .padding(.horizontal, 5)
+                                        }
+                                        
+                                    
+                                    Text("Get code")
+                                        .foregroundColor(.blue)
+                                        .padding(10)
+                                        .font(.caption)
+                                        .onTapGesture {
+                                            bigModel.getOTPCode()
+                                        }
+                                    
+                                }.background(Color.white)
+                                .cornerRadius(10)
+                                
+                                VStack {
+                                    TextField("", text: $bigModel.otpCode)
+                                        .padding(5)
+                                        .placeholder(when: bigModel.mobileNo.isEmpty) {
+                                            Text("OTP Code")
+                                                .foregroundColor(.gray)
+                                                .opacity(0.6)
+                                                .padding(.horizontal, 5)
+                                        }
+                                }.background(Color.white)
+                                .cornerRadius(10)
+                                
+                            }
+                            
+                        }
+                        
+                        Spacer()
+                        
+                        HStack {
+                            Spacer()
+                            Text("Save")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(10)
+                            Spacer()
+                        }.background(Color.blue)
+                        .cornerRadius(15)
                         .onTapGesture {
                             bigModel.verifyOTPCode()
                         }
+                        
+                        Text("No account ? Sign up here")
+                            .fontWeight(.medium)
+                            .underline()
+                        
+                    }
                     
-                }
-                
-                Spacer()
-                
-                Text("No account ? Sign up here")
-                    .fontWeight(.medium)
-                    .underline()
-                
-            }.padding(20)
-                
-        }
+                }.padding(20)
+                    
+            }
         
     }
     
@@ -196,6 +198,19 @@ struct SecureFieldModel: View {
         .frame(height: 30)
         .padding(10)
         
+    }
+}
+
+extension View {
+    func placeholder<Content: View>(
+        when shouldShow: Bool,
+        alignment: Alignment = .leading,
+        @ViewBuilder placeholder: () -> Content) -> some View {
+
+        ZStack(alignment: alignment) {
+            placeholder().opacity(shouldShow ? 1 : 0)
+            self
+        }
     }
 }
 

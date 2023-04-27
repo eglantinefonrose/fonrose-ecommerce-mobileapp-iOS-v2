@@ -9,42 +9,33 @@
 import SwiftUI
 
 struct Sandbox_TextFields: View {
-    @State var basement: String = ""
-    @State var show = false
+    
+    @Environment(\.presentationMode) var presentationMode
+    @State private var isFirstTime = true
 
     var body: some View {
             
-            ZStack {
-                
-                if #available(iOS 14.0, *) {
-                    TextField("Basement", text: $basement)
-                        .onChange(of: basement) { newValue in
-                            show = true
-                            print("chage")
-                        }
-                } else {
-                    // Fallback on earlier versions
-                }
-                
-                if show {
-                    VStack {
-                        
-                        TextField("Basement", text: $basement)
-                        List {
-                            Text("5")
-                                .onTapGesture {
-                                    show.toggle()
-                                }
-                            }
-                            
-                        }
-                        
+        if isFirstTime {
+            Text("Bienvenue!")
+                .onAppear {
+                    // Vérifiez si la clé isFirstTime existe dans UserDefaults
+                    if UserDefaults.standard.bool(forKey: "isFirstTime") {
+                        isFirstTime = false
+                    } else {
+                        UserDefaults.standard.set(true, forKey: "isFirstTime")
                     }
                 }
-                
-            }
-            
+                .onDisappear {
+                    // Réinitialisez la valeur isFirstTime lorsque la vue disparaît
+                    isFirstTime = false
+                }
+        } else {
+            Text("Bonjour!")
         }
+        
+    }
+    
+}
 
 struct Sandbox_TextFields_Previews: PreviewProvider {
     static var previews: some View {

@@ -154,6 +154,7 @@ struct HomeFeedView: View {
                                 .foregroundColor(.white)
                                 .font(.system(size: 20))
                                 .onTapGesture {
+                                    bigModel.fetchProductInfo()
                                     bigModel.lastViews.append(.Home_homeFeed0)
                                     self.bigModel.currentview = .Auth_AuthView
                                     print(bigModel.user.id)

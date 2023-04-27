@@ -99,8 +99,11 @@ class BigModel : ObservableObject {
     
     //MARK: Fetch Products Informations
     
+    var infoFetched = false
+    
     func fetchProductInfo() {
         
+        dressPictures = []
         let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
         let task = URLSession.shared.dataTask(with: storageURL) { data, response, error in
             guard let data = data, error == nil else {
@@ -114,6 +117,7 @@ class BigModel : ObservableObject {
                     print(dressPicture.price)
                     self.dressPictures.append(DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures))
                 }
+                self.infoFetched = true
                 
             } catch {
                 print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
@@ -122,7 +126,6 @@ class BigModel : ObservableObject {
         task.resume()
         
     }
-    
     
     
     

@@ -185,17 +185,17 @@ struct HomeFeedView: View {
                 }
                 .opacity(opacity)
                 .onAppear {
+                    bigModel.fetchProductInfo()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        withAnimation {
+                            self.isActive = true
+                        }
+                    }
                     withAnimation(.easeIn(duration: 1.2)) {
                         self.opacity = 1.0
                     }
                 }
                 
-            }.onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    withAnimation {
-                        self.isActive = true
-                    }
-                }
             }
         }
         

@@ -30,7 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //
                 
                 
-                
                 window.rootViewController = UIHostingController(rootView: BigRootView()
                                                                 //MeasurementsTut()
                                                                     //.environment(\.colorScheme, .dark))

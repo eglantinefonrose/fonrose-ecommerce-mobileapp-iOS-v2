@@ -266,5 +266,6 @@ struct CarouselView_Previews: PreviewProvider {
      
     static var previews: some View {
         CarouselView()
+            .environmentObject(BigModel())
     }
 }

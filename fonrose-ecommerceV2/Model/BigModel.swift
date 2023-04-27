@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 import CoreLocation
 import FirebaseAuth
 import FirebaseFirestore
@@ -70,7 +71,7 @@ class BigModel : ObservableObject {
         static let name = "name"
     }
     
-    struct Person: Identifiable {
+    struct Person: Identifiable, Codable {
         var id = UUID().uuidString
         var email: String
         var name: String
@@ -79,12 +80,10 @@ class BigModel : ObservableObject {
         
     }
     
-    struct DressPictures: Identifiable {
+    struct DressPictures: Codable, Identifiable {
         var id: Int
         let pictureName: String
         let productName: String
-        var navigationViewName: ViewEnum
-        var viewName: ViewEnum
         var videoURL: String
         var price: String
         var carouselProductPictures: [String]
@@ -92,15 +91,29 @@ class BigModel : ObservableObject {
 
     var dressPictures: [DressPictures] {
         
-        [DressPictures(id: 0, pictureName: "IMG_5195", productName: "The dress", navigationViewName: .VideoPlayer_trailerPlayer, viewName: .Home_homeFeed0, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", price: "85€", carouselProductPictures: ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]),
+        [DressPictures(id: 0, pictureName: "IMG_5195", productName: "The dress", videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", price: "85€", carouselProductPictures: ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]),
         
-         DressPictures(id: 1, pictureName: "pic_detail4f0deb99f2574", productName: "Le serpent", navigationViewName: .VideoPlayer_trailerPlayer, viewName: .Home_homeFeed0, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", price: "???", carouselProductPictures: ["1oRLkhqgOg8PQaFux2UZlu4lrfY", "Batricia", "Itumblr_inline_os040rQzAr1qzi27c_540", "5ed687a5e9e79d0004912341"])/*,
+         DressPictures(id: 1, pictureName: "pic_detail4f0deb99f2574", productName: "Le serpent", videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4", price: "???", carouselProductPictures: ["1oRLkhqgOg8PQaFux2UZlu4lrfY", "Batricia", "Itumblr_inline_os040rQzAr1qzi27c_540", "5ed687a5e9e79d0004912341"])/*,
         
          DressPictures(id: 2, pictureName: "60511853694__59B14B15-472E-4D34-A312-FB963FEDA4D8", cellText: "About us🍑", navigationViewName: .AboutUsScreen, viewName: .Home_homeFeed2, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"),
         
          DressPictures(id: 3, pictureName: "IMG_1033 copy", cellText: "Service client", navigationViewName: .ServiceClient_ServiceClientInfos, viewName: .Home_homeFeed3, videoURL: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")*/]
         
     }
+    
+    //MARK: Fetch Products Informations
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     @Published var selectedProductId: Int = 0
     

@@ -45,13 +45,15 @@ struct MeasurementView: View {
                 Color("Background")
                     .edgesIgnoringSafeArea(.all)
                 
-                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "",
+                Text("Measurements")
+                
+                /*HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "",
                              measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "",
                              measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "",
                              measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "",
                              measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "",
                              measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "",
-                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")
+                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")*/
                 
                     //HomeView()
                 
@@ -373,7 +375,7 @@ struct HomeView: View {
                         
                         if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
                             
-                            self.bigModel.lastViews.append(.Measurement_Mensurations)
+                            /*self.bigModel.lastViews.append(.Measurement_Mensurations)
                             
                             print("previous View = \(String(describing: self.bigModel.lastViews.last))")
                             
@@ -407,7 +409,7 @@ struct HomeView: View {
                                     
                                    }
                                 
-                            }
+                            }*/
                             
                         } else {
                             

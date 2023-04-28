@@ -262,7 +262,7 @@ struct LocationHome: View {
             locationManager.delegate = mapData
             //le delegate est le LocationViewModel
             locationManager.requestWhenInUseAuthorization()
-            if bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0 != 0 && bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0 != 0 {
+            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLat ?? 0 != 0 && bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLat ?? 0 != 0 {
                 isAlertPresented = true
             } else {
                 
@@ -282,11 +282,11 @@ struct LocationHome: View {
             
             }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
                 
-                mapData.pinSelectedPlace(pointSelectedPlaceLat: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, pointSelectedPlaceLong: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
-                adressStreet = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? ""
-                adressPostalCode = bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? ""
-                adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0)
-                adressLong = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0)
+                mapData.pinSelectedPlace(pointSelectedPlaceLat: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLat ?? 0, pointSelectedPlaceLong: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLong ?? 0)
+                adressStreet = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? ""
+                adressPostalCode = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? ""
+                adressLat = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLat ?? 0)
+                adressLong = CGFloat(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLong ?? 0)
             
             })
             

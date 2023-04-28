@@ -50,7 +50,7 @@ struct TrailerPlayer: View {
                     
                     Spacer()
                     
-                    Text(bigModel.dressPictures[bigModel.selectedProductId].productName)
+                    Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
                         .font(.headline)
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)

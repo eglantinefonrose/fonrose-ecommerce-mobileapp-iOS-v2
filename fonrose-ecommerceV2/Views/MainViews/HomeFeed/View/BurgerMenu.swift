@@ -87,9 +87,9 @@ struct BurgerMenu: View {
                             
                             print("signed in")
                             
-                            if bigModel.currentPersonIndex+1 < 10 {
+                            if (bigModel.currentPersonIndex ?? 0)+1 < 10 {
                                 
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex ?? 0+1)").collection("Location").getDocuments { snapshot, error in
                                     guard error == nil else {
                                         print(error!.localizedDescription)
                                         return
@@ -113,7 +113,7 @@ struct BurgerMenu: View {
                                             let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                             let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                             
-                                            bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
                                             
                                         }
                                         
@@ -126,7 +126,7 @@ struct BurgerMenu: View {
                             
                             else {
                                 
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
+                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\((bigModel.currentPersonIndex ?? 0)+1)").collection("Location").getDocuments { snapshot, error in
                                     guard error == nil else {
                                         print(error!.localizedDescription)
                                         return
@@ -150,7 +150,7 @@ struct BurgerMenu: View {
                                             let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                             let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                             
-                                            bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
                                             
                                         }
                                         

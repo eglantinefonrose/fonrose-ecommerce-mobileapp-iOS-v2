@@ -47,8 +47,9 @@ struct HomeFeedView: View {
                                             .id(picture.id)
                                             .onTapGesture {
                                                 
-                                                self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 bigModel.selectedProductId = picture.id
+                                                bigModel.fetchAllMeasurementInfo()
+                                                self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
                                                 print("append")
                                                 
@@ -140,9 +141,9 @@ struct HomeFeedView: View {
                                 Spacer()
                                 
                                 if bigModel.user.id != "" {
-                                    if bigModel.user.persons[bigModel.currentPersonIndex].id != "" {
+                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].id != "" {
                                         
-                                        Text(bigModel.user.persons[bigModel.currentPersonIndex].name)
+                                        Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].name)
                                             .opacity(bigModel.showMenu ? 0 : 1)
                                             .foregroundColor(.white)
                                             .font(.system(size: 17, weight: .bold, design: .default))
@@ -187,6 +188,7 @@ struct HomeFeedView: View {
                     }
                     .opacity(opacity)
                     .onAppear {
+                        
                         bigModel.fetchProductInfo()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                             withAnimation {

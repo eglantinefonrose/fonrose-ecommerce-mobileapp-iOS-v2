@@ -23,19 +23,19 @@ struct LocationView: View {
     var body: some View {
         
         LocationTextField(
-            civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "nil",
-            firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "nil",
-            lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "nil",
-            emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "nil",
-            phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "nil",
-            adressCountryText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil",
-            adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil",
-            adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil",
-            adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil",
-            adressStreet: " \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "nil"), \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "nil") ",
-            adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "nil",
-            adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "nil",
-            adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "nil")
+            civilityText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "nil",
+            firstNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "nil",
+            lastNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "nil",
+            emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "nil",
+            phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "nil",
+            adressCountryText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "nil",
+            adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "nil",
+            adressCityText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "nil",
+            adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "nil",
+            adressStreet: " \(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "nil"), \(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "nil"),  \(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "nil") ",
+            adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "nil",
+            adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "nil",
+            adressStageText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStage ?? "nil")
         
         /*LocationTextField(
             civilityText: "woman",
@@ -680,7 +680,7 @@ struct LocationTextField: View {
                                     .padding(20)
                                     .onTapGesture {
                                         
-                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressCountry": adressCountryText,"adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
+                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressCountry": adressCountryText,"adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressLong ?? 0])
                                         bigModel.currentview = .LivraisonViews_RecapLivraison
                                         
                                         guard let userId = auth.currentUser?.uid else { return }
@@ -696,7 +696,7 @@ struct LocationTextField: View {
                                             if let snapshot = snapshot {
                                                 for document in snapshot.documents {
                                                     do {
-                                                        bigModel.user.persons[bigModel.currentPersonIndex].location = try document.data(as: BigModel.Location.self)
+                                                        bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = try document.data(as: BigModel.Location.self)
                                                     } catch {
                                                         print(error)
                                                     }

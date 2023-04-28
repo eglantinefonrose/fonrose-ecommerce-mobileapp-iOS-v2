@@ -57,7 +57,7 @@ struct BigRootView: View {
                 }
                 
                 if (self.bigModel.currentview == .VideoPlayer_trailerPlayer) {
-                    TrailerPlayer(url: URL(string: bigModel.dressPictures[bigModel.selectedProductId].videoURL)!)
+                    TrailerPlayer(url: URL(string: bigModel.dressPictures[bigModel.selectedProductId ?? 0].videoURL)!)
                 }
                 
                 if (self.bigModel.currentview == .AboutUsScreen) {
@@ -96,7 +96,7 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    if bigModel.user.persons.isEmpty {
+                    if bigModel.currentPersonIndex == nil {
                         AuthView()
                     } else {
                         MeasurementView()

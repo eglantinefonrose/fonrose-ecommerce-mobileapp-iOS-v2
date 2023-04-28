@@ -66,7 +66,7 @@ struct UserInfo: View {
                     if #available(iOS 14.0, *) {
                         if #available(iOS 16.0, *) {
                             if bigModel.user.id != "" {
-                                Text(bigModel.user.persons[bigModel.currentPersonIndex].name)
+                                Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].name)
                                     .font(.title2)
                                     .padding(5)
                                     .fontWeight(.semibold)
@@ -102,7 +102,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            if bigModel.user.persons[bigModel.currentPersonIndex].measurements == nil {
+                            /*if bigModel.user.persons[bigModel.currentPersonIndex].measurements == nil {
                                 
                                 bigModel.initializeMeasurements()
                                 
@@ -130,7 +130,7 @@ struct UserInfo: View {
                                 
                             } else {
                                 bigModel.currentview = .Measurement_Mensurations
-                            }
+                            }*/
                         }
                         
                         HStack {
@@ -141,7 +141,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            if bigModel.user.persons[bigModel.currentPersonIndex].location == nil {
+                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
                                 
                                 bigModel.initializeLocation()
                             
@@ -197,7 +197,7 @@ struct UserInfo: View {
                                     if let snapshot = snapshot {
                                         for document in snapshot.documents {
                                             do {
-                                                bigModel.user.persons[bigModel.currentPersonIndex].location = try document.data(as: BigModel.Location.self)
+                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = try document.data(as: BigModel.Location.self)
                                             } catch {
                                                 print(error)
                                             }

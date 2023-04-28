@@ -63,6 +63,12 @@ class BigModel : ObservableObject {
         var ShouldersPelvis: String
     }
     
+    struct MeasurementModel: Codable {
+        var id: Int
+        var measurementName: String
+        var measurementValue: String
+    }
+    
     struct TstJSON: Codable {
         let id: String
         let name: String
@@ -81,7 +87,7 @@ class BigModel : ObservableObject {
         var id = UUID().uuidString
         var email: String
         var name: String
-        var measurements: Measurements?
+        var measurements: [MeasurementModel]?
         var location: Location?
         
     }
@@ -93,6 +99,12 @@ class BigModel : ObservableObject {
         var videoURL: String
         var price: String
         var carouselProductPictures: [String]
+    }
+    
+    struct NeededMeasurementsModel: Codable {
+        var id: Int
+        var productName: String
+        var neededMeasurements: [Int]
     }
 
     var dressPictures: [DressPictures] = []
@@ -131,12 +143,95 @@ class BigModel : ObservableObject {
     
     
     
+    var allMeasurements: [MeasurementModel] = []
+    
+    func fetchAllMeasurementInfo() {
+        
+        let storageURL = URL(string:   "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/MeasurementData.json?alt=media&token=f48b83af-ea18-4f35-9d55-bb817ac4bfbf")!
+        let task = URLSession.shared.dataTask(with: storageURL) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Une erreur est survenue : \(String(describing: error))")
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let measurInfo = try decoder.decode([MeasurementModel].self, from: data)
+                
+                for measurement in measurInfo {
+                    self.allMeasurements.append(MeasurementModel(id: measurement.id, measurementName: measurement.measurementName, measurementValue: measurement.measurementValue))
+                }
+                
+            } catch {
+                print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+            }
+            
+        }
+        
+        task.resume()
+        
+    }
+    
+    var neededMeasurement: [NeededMeasurementsModel] = []
+    
+    func fetchNeededMeasurement(selectedProductId: Int) {
+        
+        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
+        let task = URLSession.shared.dataTask(with: storageURL) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Une erreur est survenue : \(String(describing: error))")
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let measurInfo = try decoder.decode([BigModel.NeededMeasurementsModel].self, from: data)
+                //print("ff")
+                for neededMeasurementInfo in measurInfo {
+                    
+                    self.neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
+                    
+                }
+                
+            } catch {
+                print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+            }
+            
+            for i in 0..<self.neededMeasurement[selectedProductId].neededMeasurements.count {
+                print(self.allMeasurements[self.neededMeasurement[selectedProductId].neededMeasurements[i]].measurementName)
+            }
+            
+        }
+        
+        task.resume()
+        
+    }
+    
+    
+    
+
     
     
     
     
     
-    @Published var selectedProductId: Int = 0
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @Published var selectedProductId: Int? = nil
     
     func fetchPerson() {
         
@@ -203,7 +298,7 @@ class BigModel : ObservableObject {
             
         }*/
         
-        guard let userId = auth.currentUser?.uid else { return }
+        /*guard let userId = auth.currentUser?.uid else { return }
             
         let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements")
         
@@ -222,7 +317,7 @@ class BigModel : ObservableObject {
                     }
                 }
             }
-        }
+        }*/
     }
     
     
@@ -258,7 +353,7 @@ class BigModel : ObservableObject {
             if let snapshot = snapshot {
                 for document in snapshot.documents {
                     do {
-                        self.user.persons[self.currentPersonIndex].location = try document.data(as: Location.self)
+                        self.user.persons[self.currentPersonIndex ?? 0].location = try document.data(as: Location.self)
                     } catch {
                         print(error)
                     }
@@ -316,7 +411,7 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex ?? 0].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
                 
     }
 
@@ -338,7 +433,7 @@ class BigModel : ObservableObject {
     let auth = Auth.auth()
     let db = Firestore.firestore()
     @Published var signedIn = false
-    @Published var currentPersonIndex: Int = 0
+    @Published var currentPersonIndex: Int? = nil
     @Published var currentPersonId: String = ""
     @Published var isPersonChosen = false
     @Published var isSignInPopUpPresented = false
@@ -425,6 +520,7 @@ class BigModel : ObservableObject {
             self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").setData(["email": self.auth.currentUser?.email ?? "no email"])
             self.user.id = self.auth.currentUser?.uid ?? "nil"
             self.user.email = self.auth.currentUser?.email ?? "nil"
+            self.currentPersonIndex = nil
             self.signedIn = true
             self.authCurrentView = .Auth_PersonPickerView
             
@@ -572,7 +668,7 @@ class BigModel : ObservableObject {
     init(shouldInjectMockedData: Bool) {
         print("Constructor BigModel - shouldInjectMockedData==true")
         
-        let theMeasurement = Measurements(id: "", ArmpitsMeasurement: "0", ArmsLength: "0", HeadMeasurement: "0", PelvisMeasurement: "0", PelvisKnee: "0", ShouldersMeasurement: "0", ShouldersPelvis: "0")
+        let theMeasurement = [MeasurementModel(id: 1, measurementName: "armpits", measurementValue: ""), MeasurementModel(id: 0, measurementName: "shoulders", measurementValue: ""), MeasurementModel(id: 2, measurementName: "legs", measurementValue: "")]
         let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3", adressLat: 0, adressLong: 0)
         
         let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation)

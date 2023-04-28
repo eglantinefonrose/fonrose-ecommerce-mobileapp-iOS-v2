@@ -31,8 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 window.rootViewController = UIHostingController(rootView: BigRootView()
-                                                                //MeasurementsTut()
-                                                                    //.environment(\.colorScheme, .dark))
+                                                                //FetchData_Sandbox()
+                    //.environmentObject(BigModel(shouldInjectMockedData: true)))
+                
+                
                     .environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions

@@ -75,7 +75,7 @@ struct PagingView<Content>: View where Content: View {
                             
                             VStack {
                                                             
-                                Text(bigModel.dressPictures[bigModel.selectedProductId].productName)
+                                Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
                                     .font(.system(size: 35, weight: .bold, design: .default))
                                     .foregroundColor(Color.white)
                                     .frame(width: 200)
@@ -83,7 +83,7 @@ struct PagingView<Content>: View where Content: View {
                                 Spacer()
                                     .frame(height: 30)
                                 
-                                Text(bigModel.dressPictures[bigModel.selectedProductId].price)
+                                Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].price)
                                     .foregroundColor(Color.gray)
                                     .font(.system(size: 25, weight: .semibold, design: .default))
                                                             
@@ -115,47 +115,7 @@ struct PagingView<Content>: View where Content: View {
                     
                     VStack {
                         
-                        HStack {
-                                
-                            Spacer()
-                                .frame(width: 20)
-                                
-                            Text("Back")
-                                .foregroundColor(Color.blue)
-                                .fontWeight(.semibold)
-                                .onTapGesture {
-                                    if !self.bigModel.lastViews.isEmpty {
-                                        print("back")
-                                        self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                        self.bigModel.lastViews.removeLast()
-                                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                                    } else { print("array empty") }
-                                }
-                                
-                                Spacer()
-                                
-                                Text(bigModel.dressPictures[bigModel.selectedProductId].productName)
-                                    .font(.headline)
-                                    .foregroundColor(Color.white)
-                                    .fontWeight(.semibold)
-                                
-                                Spacer()
-                                
-                                Image(systemName: "house")
-                                    .foregroundColor(Color.blue)
-                                    .onTapGesture {
-                                        bigModel.currentview = .Home_homeFeed0
-                                        print("maisonette")
-                                    }
-                                
-                                Spacer()
-                                    .frame(width: 20)
-                            
-                        }.frame(width: UIScreen.main.bounds.width)
-                        //.background(Color.white)
-                        .padding(20)
-                        
-                        Spacer()
+                        BackButtonModel()
                         
                     }
                     
@@ -172,6 +132,13 @@ struct PagingView<Content>: View where Content: View {
                         .onTapGesture {
                             self.bigModel.currentview = ViewEnum.Measurement_Mensurations
                             self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
+                            
+                            if bigModel.currentPersonIndex != nil {
+                                bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                            } else {
+                                
+                            }
+                            
                         }
                     
                     Spacer()
@@ -240,14 +207,11 @@ struct CarouselView: View {
     @EnvironmentObject var bigModel: BigModel
     @State var index = 0
 
-    var imagesTheDress = ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]
-    var imagesLeSerpent = ["1oRLkhqgOg8PQaFux2UZlu4lrfY", "Batricia", "Itumblr_inline_os040rQzAr1qzi27c_540", "5ed687a5e9e79d0004912341"]
-
     var body: some View {
         
         VStack(spacing: 20) {
-            PagingView(index: $index.animation(), maxIndex: bigModel.dressPictures[bigModel.selectedProductId].carouselProductPictures.count - 1) {
-                ForEach(bigModel.dressPictures[bigModel.selectedProductId].carouselProductPictures, id: \.self) { imageName in
+            PagingView(index: $index.animation(), maxIndex: bigModel.dressPictures[bigModel.selectedProductId ?? 0].carouselProductPictures.count - 1) {
+                ForEach(bigModel.dressPictures[bigModel.selectedProductId ?? 0].carouselProductPictures, id: \.self) { imageName in
                     Image(imageName)
                         .resizable()
                         .aspectRatio(contentMode: .fill)

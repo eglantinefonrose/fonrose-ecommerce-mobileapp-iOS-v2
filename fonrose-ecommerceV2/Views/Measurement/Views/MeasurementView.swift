@@ -45,7 +45,7 @@ struct MeasurementView: View {
                 Color("Background")
                     .edgesIgnoringSafeArea(.all)
                 
-                Text("Measurements")
+                //Text("Measurements")
                 
                 /*HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "",
                              measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "",
@@ -55,7 +55,16 @@ struct MeasurementView: View {
                              measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "",
                          measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")*/
                 
-                    //HomeView()
+                /*HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil",
+                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[1].measurementName ?? "nil",
+                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[2].measurementName ?? "nil",
+                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[3].measurementName ?? "nil",
+                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[4].measurementName ?? "nil",
+                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[5].measurementName ?? "nil",
+                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementName ?? "nil")*/
+                
+                Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil")
+                //Text("m")
                 
             }
             
@@ -123,7 +132,9 @@ struct HomeView: View {
                                     
                                 Spacer()
                                 
-                                    //MARK: Measurement1
+                                    
+                                ForEach(0..<(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.count ?? 0)) { index in
+                                    
                                     VStack {
                                      
                                      Spacer()
@@ -132,7 +143,7 @@ struct HomeView: View {
                                                                          
                                          Spacer()
                                          
-                                         TextField("Armpits Measurement", text: $measurementText1)
+                                         TextField(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[index].measurementName ?? "", text: $measurementText1)
                                              .disableAutocorrection(true)
                                              .autocapitalization(.none)
                                      }
@@ -152,179 +163,8 @@ struct HomeView: View {
                                         }
                                     })
                                     
-                                    //MARK: Measurement2
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Arms Length", text: $measurementText2)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
+                                }
                                     
-                                    //MARK: Measurement3
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Head Measurement", text: $measurementText3)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
-                                    
-                                    //MARK: Measurement4
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Pelvis Knee", text: $measurementText4)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
-                                    
-                                    //MARK: Measurement5
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Pelvis Measurement", text: $measurementText5)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
-                                    
-                                    //MARK: Measurement6
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Shoulders Measurement", text: $measurementText6)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
-                                    
-                                    //MARK: Measurement7
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Shoulders Pelvis", text: $measurementText7)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                        }
-                                    })
                                 
                                 Spacer()
                                                                    

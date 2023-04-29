@@ -130,11 +130,12 @@ struct PagingView<Content>: View where Content: View {
                         .foregroundColor(.blue)
                         .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
-                            self.bigModel.currentview = ViewEnum.Measurement_Mensurations
+                            
                             self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
                             
                             if bigModel.currentPersonIndex != nil {
                                 bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                                
                             } else {
                                 
                             }

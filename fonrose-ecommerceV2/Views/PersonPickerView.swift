@@ -110,9 +110,9 @@ struct PersonPickerViewHome: View {
                                             bigModel.currentPersonIndex = index
                                             bigModel.currentPersonId = bigModel.user.persons[index].id
                                             
-                                            if bigModel.selectedProductId != nil {
-                                                bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
-                                            }
+                                            //if bigModel.selectedProductId != nil {
+                                                //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                                            //}
                                             
                                             bigModel.fetchMeasurements()
                                             bigModel.fetchLocation()

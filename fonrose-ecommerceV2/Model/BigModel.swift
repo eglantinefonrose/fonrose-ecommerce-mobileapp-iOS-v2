@@ -175,6 +175,8 @@ class BigModel : ObservableObject {
     
     func fetchNeededMeasurement(selectedProductId: Int) {
         
+        self.user.persons[self.currentPersonIndex ?? 0].measurements = []
+        
         let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
         let task = URLSession.shared.dataTask(with: storageURL) { data, response, error in
             guard let data = data, error == nil else {
@@ -183,10 +185,11 @@ class BigModel : ObservableObject {
             }
             do {
                 let decoder = JSONDecoder()
-                let measurInfo = try decoder.decode([BigModel.NeededMeasurementsModel].self, from: data)
-                //print("ff")
+                let measurInfo = try decoder.decode([NeededMeasurementsModel].self, from: data)
+
                 for neededMeasurementInfo in measurInfo {
                     
+                    print("d")
                     self.neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
                     
                 }
@@ -195,8 +198,16 @@ class BigModel : ObservableObject {
                 print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
             }
             
-            for i in 0..<self.neededMeasurement[selectedProductId].neededMeasurements.count {
-                print(self.allMeasurements[self.neededMeasurement[selectedProductId].neededMeasurements[i]].measurementName)
+            for i in 0..<self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements.count {
+                DispatchQueue.main.async {
+                    self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])
+                    print("tableau\(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])")
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.currentview = ViewEnum.Measurement_Mensurations
+                print("measurements screen")
             }
             
         }

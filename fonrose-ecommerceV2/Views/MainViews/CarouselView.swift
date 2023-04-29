@@ -24,6 +24,8 @@ struct PagingView<Content>: View where Content: View {
         self.content = content
     }
     
+    @State var isFetchingNeededMeasurementsInfo = false
+    
     //var model: MeasurementInfos
     
     var body: some View {
@@ -131,16 +133,21 @@ struct PagingView<Content>: View where Content: View {
                         .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
                             
-                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
+                            isFetchingNeededMeasurementsInfo = true
                             
-                            if bigModel.currentPersonIndex != nil {
-                                bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
-                                
+                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)    // On gère le back à la main (car on n'utilise pas de NavigationView)
+                            
+                            if bigModel.selectedProductId != nil {
+                                Task {
+                                    await bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                                    bigModel.currentview = .Measurement_Mensurations
+                                    isFetchingNeededMeasurementsInfo = false
+                                }
                             } else {
                                 
                             }
                             
-                        }
+                        }.disabled(isFetchingNeededMeasurementsInfo)
                     
                     Spacer()
                         .frame(height: 20)

@@ -55,16 +55,14 @@ struct MeasurementView: View {
                              measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "",
                          measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")*/
                 
-                /*HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil",
+                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil",
                              measurementText2: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[1].measurementName ?? "nil",
                              measurementText3: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[2].measurementName ?? "nil",
                              measurementText4: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[3].measurementName ?? "nil",
                              measurementText5: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[4].measurementName ?? "nil",
                              measurementText6: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[5].measurementName ?? "nil",
-                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementName ?? "nil")*/
+                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementName ?? "nil")
                 
-                Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil")
-                //Text("m")
                 
             }
             

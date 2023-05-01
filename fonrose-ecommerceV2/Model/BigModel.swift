@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 import Firebase
 import FirebaseStorage
 import CoreLocation
@@ -16,6 +17,15 @@ import FirebaseFirestoreSwift
 import MapKit
 
 class BigModel : ObservableObject {
+    
+    //fonction qui crée un textfield
+    
+    func creerTextField(placeholder: String, text: String) -> UITextField {
+        let textField = UITextField()
+        textField.placeholder = placeholder
+        textField.text = text
+        return textField
+    }
     
     @Published var user: User = User(id: "", email: "", persons: [])
     
@@ -109,16 +119,51 @@ class BigModel : ObservableObject {
 
     var dressPictures: [DressPictures] = []
     
+    
+    //MARK: FetchImage
+    func fetchImage(url: String) async throws -> Image {
+        
+        let storage = Storage.storage()
+        let gsReference = storage.reference(forURL: url)
+
+        let imageData = try await gsReference.data(maxSize: 10 * 1024 * 1024)
+
+        guard let uiImage = UIImage(data: imageData) else {
+            throw NSError(domain: "MyApp", code: 1, userInfo: [NSLocalizedDescriptionKey: "Error converting image data to UIImage."])
+        }
+
+        return Image(uiImage: uiImage)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: Fetch Products Informations
     
     var infoFetched = false
     @Published var isItFirstTime = true
     
+    var imageRef = ""
+    
     func fetchProductInfo() {
         
         dressPictures = []
-        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
-        let task = URLSession.shared.dataTask(with: storageURL) { data, response, error in
+        let textStorageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
+        let task = URLSession.shared.dataTask(with: textStorageURL) { data, response, error in
             guard let data = data, error == nil else {
                 print("Une erreur est survenue : \(String(describing: error))")
                 return
@@ -126,6 +171,7 @@ class BigModel : ObservableObject {
             do {
                 let decoder = JSONDecoder()
                 let dressPic = try decoder.decode([DressPictures].self, from: data)
+                
                 for dressPicture in dressPic {
                     print(dressPicture.price)
                     self.dressPictures.append(DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures))
@@ -137,6 +183,34 @@ class BigModel : ObservableObject {
             }
         }
         task.resume()
+        
+    }
+    
+    struct MainViewArrayElements: Codable, Identifiable {
+        var id: String
+        var imageName: String
+        var text: String
+    }
+    
+    func fetchMainViewArrayInfos() async -> [MainViewArrayElements] {
+        
+        var mainViewArrayElements: [MainViewArrayElements] = []
+        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
+        
+        do {
+            
+            let (data, _) = try await URLSession.shared.data(from: storageURL)
+            let arrayElements = try  JSONDecoder().decode([MainViewArrayElements].self, from: data)
+            
+            for ArrayElements in arrayElements {
+                mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text))
+            }
+            
+        } catch {
+            print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+        }
+        
+        return mainViewArrayElements
         
     }
     
@@ -198,7 +272,7 @@ class BigModel : ObservableObject {
             self.user.persons[self.currentPersonIndex ?? 0].measurements = []
             for i in 0..<self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements.count {
                 self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])
-                print(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])
+                print(self.user.persons[self.currentPersonIndex ?? 0].measurements?[i].measurementName)
             }
         }
         
@@ -237,7 +311,9 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").getDocuments { snapshot, error in
+        let collectionRef = db.collection("users").document("user\(userId)").collection("persons")
+        
+        collectionRef.getDocuments { snapshot, error in
                guard error == nil else {
                     print(error!.localizedDescription)
                     return
@@ -460,7 +536,7 @@ class BigModel : ObservableObject {
             print(self.auth.currentUser?.uid ?? "fck")
             
             self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
-            self.fetchPerson()
+            //self.fetchPerson()
             self.authCurrentView = .Auth_PersonPickerView
         }
     }
@@ -605,7 +681,7 @@ class BigModel : ObservableObject {
                 
                 DispatchQueue.main.async {
                     self.signedIn = true
-                    self.fetchPerson()
+                    //self.fetchPerson()
                     self.authCurrentView = .Auth_PersonPickerView
                     self.user.id = self.auth.currentUser?.uid ?? "nil"
                 }

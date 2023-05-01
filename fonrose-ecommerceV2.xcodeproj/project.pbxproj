@@ -21,6 +21,8 @@
 		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
 		701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B9E1D2876DF90004DE780 /* Test-coordinate.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
+		7029451D29FDA9AF00C421AA /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451C29FDA9AF00C421AA /* SwiftUIView.swift */; };
+		7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451E29FDAD0A00C421AA /* TextField-002.swift */; };
 		702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */; };
 		702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */; };
 		702A7D6A2953C222006338C0 /* LogInPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInPhoneView.swift */; };
@@ -104,6 +106,8 @@
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		701B9E1D2876DF90004DE780 /* Test-coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test-coordinate.swift"; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
+		7029451C29FDA9AF00C421AA /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		7029451E29FDAD0A00C421AA /* TextField-002.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField-002.swift"; sourceTree = "<group>"; };
 		702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton_sandbox.swift; sourceTree = "<group>"; };
 		702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen_sandbox.swift; sourceTree = "<group>"; };
 		702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fonrose-ecommerceV2.entitlements"; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 		7019ABEE2347E73F00F5EF15 = {
 			isa = PBXGroup;
 			children = (
+				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
 				70CFDBC729F1FC1200F19D41 /* simpson.gif */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
@@ -287,6 +292,7 @@
 			children = (
 				70CCEC5C29E8586000EFABA5 /* 2020 */,
 				70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */,
+				7029451E29FDAD0A00C421AA /* TextField-002.swift */,
 				7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */,
 			);
 			path = SandboxViews;
@@ -554,6 +560,7 @@
 				700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */,
 				7034755B2864D0F70030C906 /* AuthView.swift in Sources */,
 				7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */,
+				7029451D29FDA9AF00C421AA /* SwiftUIView.swift in Sources */,
 				70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */,
 				7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */,
 				70887906292F70FC00391A41 /* ShopView.swift in Sources */,
@@ -578,6 +585,7 @@
 				700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */,
 				70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
+				7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,
 				70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */,
 				7045357C24770D84001F20A8 /* AboutUs.swift in Sources */,

@@ -45,24 +45,7 @@ struct MeasurementView: View {
                 Color("Background")
                     .edgesIgnoringSafeArea(.all)
                 
-                //Text("Measurements")
-                
-                /*HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "",
-                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "",
-                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "",
-                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "",
-                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "",
-                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "",
-                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "")*/
-                
-                HomeView(measurementText1: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil",
-                             measurementText2: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[1].measurementName ?? "nil",
-                             measurementText3: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[2].measurementName ?? "nil",
-                             measurementText4: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[3].measurementName ?? "nil",
-                             measurementText5: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[4].measurementName ?? "nil",
-                             measurementText6: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[5].measurementName ?? "nil",
-                         measurementText7: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementName ?? "nil")
-                
+                HomeView()
                 
             }
             
@@ -81,13 +64,15 @@ struct HomeView: View {
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.colorScheme) var theColorScheme
     
-    @State var measurementText1: String
-    @State var measurementText2: String
-    @State var measurementText3: String
-    @State var measurementText4: String
-    @State var measurementText5: String
-    @State var measurementText6: String
-    @State var measurementText7: String
+    @State var measurementText1: String = "f"
+    @State var measurementText2: String = "f"
+    @State var measurementText3: String = "f"
+    @State var measurementText4: String = "f"
+    @State var measurementText5: String = "f"
+    @State var measurementText6: String = "f"
+    @State var measurementText7: String = "f"
+    
+    @State var measurementsTexts: [String] = []
     
     var db = Firestore.firestore()
     var user = BigModel.User.self
@@ -141,7 +126,8 @@ struct HomeView: View {
                                                                          
                                          Spacer()
                                          
-                                         TextField(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[index].measurementName ?? "", text: $measurementText1)
+                                         TextField(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[index].measurementName ?? "",
+                                                   text: .constant(""))
                                              .disableAutocorrection(true)
                                              .autocapitalization(.none)
                                      }
@@ -262,6 +248,16 @@ struct HomeView: View {
             }
                             
     }.padding(20)
+            .onAppear {
+                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementValue ?? "nil"
+                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[1].measurementValue ?? "nil"
+                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[2].measurementValue ?? "nil"
+                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[3].measurementValue ?? "nil"
+                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[4].measurementValue ?? "nil"
+                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[5].measurementValue ?? "nil"
+                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementValue ?? "nil"
+                self.measurementsTexts = [measurementText1, measurementText2, measurementText3, measurementText4, measurementText5, measurementText6, measurementText7]
+            }
         
     }
     

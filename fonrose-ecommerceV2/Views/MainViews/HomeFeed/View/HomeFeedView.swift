@@ -42,8 +42,8 @@ struct HomeFeedView: View {
                             ZStack {
                                 
                                 List {
-                                    ForEach(bigModel.dressPictures) { picture in
-                                        PostStack(imageName: picture.pictureName, cellText: picture.productName)
+                                    /*ForEach(bigModel.dressPictures) { picture in
+                                        PostStack(url: picture.pictureName, cellText: picture.productName)
                                             .id(picture.id)
                                             .onTapGesture {
                                                 
@@ -62,15 +62,15 @@ struct HomeFeedView: View {
                                     } .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))*/
                                     
-                                    PostStack(imageName: "60511853694__59B14B15-472E-4D34-A312-FB963FEDA4D8", cellText: "About us")
+                                    PostStack(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80", cellText: "About us")
                                         .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     
-                                    PostStack(imageName: "IMG_1033 copy", cellText: "Service client")
+                                    PostStack(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80", cellText: "Service client")
                                         .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)

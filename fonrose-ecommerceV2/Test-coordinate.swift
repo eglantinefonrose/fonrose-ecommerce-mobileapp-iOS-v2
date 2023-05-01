@@ -9,16 +9,25 @@
 import CoreLocation
 import SwiftUI
 
+@available(iOS 14.0, *)
 struct Test_coordinate: View {
+    
+    @State private var text: String = ""
+    
+    @available(iOS 14.0, *)
     var body: some View {
         
-        Text("")
+        Text("à")
         
     }
 }
 
 struct Test_coordinate_Previews: PreviewProvider {
     static var previews: some View {
-        Test_coordinate()
+        if #available(iOS 14.0, *) {
+            Test_coordinate()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

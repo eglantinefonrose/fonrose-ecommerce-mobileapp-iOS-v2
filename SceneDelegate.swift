@@ -25,17 +25,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
 //                let testBigModel: BigModel = BigModel()
 //                //testBigModel.user.persons
-//                window.rootViewController = UIHostingController(rootView: LocationRecap()
-//                                                                    .environmentObject(testBigModel))
+               //window.rootViewController = UIHostingController(rootView: //TextField_002())
+//                                                                   .environmentObject(testBigModel))
 //
                 
                 
                 window.rootViewController = UIHostingController(rootView: BigRootView()
                                                                 //FetchData_Sandbox()
-                    //.environmentObject(BigModel(shouldInjectMockedData: true)))
+                    .environmentObject(BigModel(shouldInjectMockedData: true)))
                 
                 
-                    .environmentObject(BigModel.shared))
+                    //.environmentObject(BigModel.shared))
             } else {
                 // Fallback on earlier versions
             }

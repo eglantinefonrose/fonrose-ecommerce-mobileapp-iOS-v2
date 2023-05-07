@@ -22,6 +22,7 @@ struct HomeFeedView: View {
     @StateObject var mapData = LocationViewModel()
     @State private var opacity = 1.0
     var db = Firestore.firestore()
+    @State var image = Image("")
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -64,13 +65,13 @@ struct HomeFeedView: View {
                                         .navigationBarHidden(true)
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))*/
                                     
-                                    PostStack(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80", cellText: "About us")
+                                    PostStack(image: image, cellText: "About us")
                                         .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     
-                                    PostStack(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80", cellText: "Service client")
+                                    PostStack(image: image, cellText: "Service client")
                                         .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
@@ -180,26 +181,38 @@ struct HomeFeedView: View {
                 }.environment(\.colorScheme, .dark)
             } else {
                 VStack {
-                    VStack {
-                        GifImage(name: "simpson")
-                            .frame(height: 300)
-                        Text("ecommerce")
-                            .font(.title)
-                    }
-                    .opacity(opacity)
-                    .onAppear {
-                        
-                        bigModel.fetchProductInfo()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                            withAnimation {
-                                bigModel.isItFirstTime = false
+                    if #available(iOS 15.0, *) {
+                        VStack {
+                            //GifImage(name: "simpson")
+                                //.frame(height: 300)
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(Color.blue)
+                                Text("ecommerce")
+                                    .font(.title)
                             }
                         }
-                        withAnimation(.easeIn(duration: 1.2)) {
-                            self.opacity = 1.0
+                        .opacity(opacity)
+                        .task {
+                            do {
+                                self.image = try await bigModel.fetchImage(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80")
+                                
+                            } catch {
+                                print("Error fetching image: \(error.localizedDescription)")
+                            }
+                            await bigModel.fetchProductInfo()
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    bigModel.isItFirstTime = false
+                                }
+                            }
+                            withAnimation(.easeIn(duration: 1.2)) {
+                                self.opacity = 1.0
+                            }
                         }
+                    } else {
+                        // Fallback on earlier versions
                     }
-                    
                 }
             }
         }

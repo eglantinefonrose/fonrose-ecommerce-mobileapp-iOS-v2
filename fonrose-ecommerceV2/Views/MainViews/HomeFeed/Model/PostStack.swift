@@ -12,8 +12,8 @@ import FirebaseStorage
 struct PostStack: View {
     
     @EnvironmentObject var bigModel: BigModel
-    @State var image: Image = Image("")
-    var url: String
+    @State var image: Image
+    //var url: String
     var cellText: String
     
     
@@ -31,14 +31,14 @@ struct PostStack: View {
                     .foregroundColor(.white)
                     .font(.largeTitle)
                 
-            }.task {
+            }/*.task {
                 do {
-                    let fetchedImage = try await bigModel.fetchImage(url: url)
-                    self.image = fetchedImage
+                    self.image = try await bigModel.fetchImage(url: url)
+                    
                 } catch {
                     print("Error fetching image: \(error.localizedDescription)")
                 }
-            }
+            }*/
         } else {
             // Fallback on earlier versions
         }

@@ -159,10 +159,35 @@ class BigModel : ObservableObject {
     
     var imageRef = ""
     
-    func fetchProductInfo() {
+    func fetchProductInfo() async {
         
         dressPictures = []
-        let textStorageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
+        
+        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=9cf4529d-e8cf-4d39-b856-12163e5295c3")!
+         
+         do {
+             
+             let (data, _) = try await URLSession.shared.data(from: storageURL)
+             let dressPic = try JSONDecoder().decode([DressPictures].self, from: data)
+
+             for dressPicture in dressPic {
+                 
+                 print("d")
+                 
+                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                         // Code à exécuter après une attente de 5 secondes
+                     self.dressPictures.append(DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures))
+                     }
+                 
+             }
+             
+             print("product fetched")
+             
+         } catch {
+             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+         }
+        
+        /*let textStorageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
         let task = URLSession.shared.dataTask(with: textStorageURL) { data, response, error in
             guard let data = data, error == nil else {
                 print("Une erreur est survenue : \(String(describing: error))")
@@ -182,16 +207,17 @@ class BigModel : ObservableObject {
                 print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
             }
         }
-        task.resume()
+        task.resume()*/
         
     }
     
-    struct MainViewArrayElements: Codable, Identifiable {
+    struct MainViewArrayElements: Identifiable, Codable {
         var id: String
         var imageName: String
         var text: String
     }
     
+    //MARK: Fetch Main View Array Infos
     func fetchMainViewArrayInfos() async -> [MainViewArrayElements] {
         
         var mainViewArrayElements: [MainViewArrayElements] = []
@@ -234,6 +260,7 @@ class BigModel : ObservableObject {
                 for measurement in measurInfo {
                     self.allMeasurements.append(MeasurementModel(id: measurement.id, measurementName: measurement.measurementName, measurementValue: measurement.measurementValue))
                 }
+                print("all measurements : \(self.allMeasurements.count)")
                 
             } catch {
                 print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
@@ -244,40 +271,91 @@ class BigModel : ObservableObject {
         task.resume()
         
     }
-    
-    var neededMeasurement: [NeededMeasurementsModel] = []
-    
-    func fetchNeededMeasurement(selectedProductId: Int) async {
-        
-        
-        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
-        
-            do {
-                
-                let (data, _) = try await URLSession.shared.data(from: storageURL)
-                let measurInfo = try  JSONDecoder().decode([NeededMeasurementsModel].self, from: data)
 
-                for neededMeasurementInfo in measurInfo {
-                    
-                    print("d")
-                    self.neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
-                    
-                }
-                
-            } catch {
-                print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+    // cette fonction récupère les infos de type NeededMeasurementsModel depuis le fichier Json stocké dans GCS puis renvoie un tableau rempli de NeededMeasurementsModel avec les infos correspondantes
+    func fetchNeededMeasurement() async throws -> [NeededMeasurementsModel] {
+        
+        /*{
+         
+         var mainViewArrayElements: [MainViewArrayElements] = []
+         let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
+         
+         do {
+             
+             let (data, _) = try await URLSession.shared.data(from: storageURL)
+             let arrayElements = try  JSONDecoder().decode([MainViewArrayElements].self, from: data)
+             
+             for ArrayElements in arrayElements {
+                 mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text))
+             }
+             
+         } catch {
+             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+         }
+         
+         return mainViewArrayElements
+         
+     }*/
+        
+        var neededMeasurement: [NeededMeasurementsModel] = []
+        //let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
+        
+        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54") else {
+                throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
             }
             
-        DispatchQueue.main.async {
-            self.user.persons[self.currentPersonIndex ?? 0].measurements = []
-            for i in 0..<self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements.count {
-                self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])
-                print(self.user.persons[self.currentPersonIndex ?? 0].measurements?[i].measurementName)
+        let (_, response) = try await URLSession.shared.data(from: storageURL)
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                throw NSError(domain: "Invalid HTTP Response", code: 0, userInfo: nil)
             }
+        
+         do {
+             let (data, _) = try await URLSession.shared.data(from: storageURL)
+             let neededmeasurInfo = try  JSONDecoder().decode([NeededMeasurementsModel].self, from: data)
+             
+             for neededMeasurementInfo in neededmeasurInfo {
+                 neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
+             }
+             print("done")
+             
+         } catch {
+             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+         }
+        
+        return neededMeasurement
+        
+    }
+    
+    //MARK: updateMeasurementModel
+    func updateMeasurementModel() async {
+        
+        self.user.persons[self.currentPersonIndex ?? 0].measurements = []
+        
+        do {
+            let fetchedNeededMeasurement = try await fetchNeededMeasurement()[0].neededMeasurements
+            
+            for i in 0..<fetchedNeededMeasurement.count {
+                
+                DispatchQueue.main.async {
+                    self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[fetchedNeededMeasurement[i]])
+                    print(self.user.persons[self.currentPersonIndex ?? 0].measurements?[i].measurementName ?? "")
+                }
+                
+            }
+        } catch {
+            print("error")
         }
         
     }
     
+    /*DispatchQueue.main.async {
+     self.user.persons[self.currentPersonIndex ?? 0].measurements = []
+     for i in 0..<self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements.count {
+         self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[self.neededMeasurement[self.selectedProductId ?? 0].neededMeasurements[i]])
+         print(self.user.persons[self.currentPersonIndex ?? 0].measurements?[i].measurementName)
+        }
+    }*/
+    
     
     
     
@@ -304,7 +382,7 @@ class BigModel : ObservableObject {
     
     
     
-    
+    //MARK: Fetch Person
     @Published var selectedProductId: Int? = nil
     
     func fetchPerson() {
@@ -343,7 +421,7 @@ class BigModel : ObservableObject {
     }
     
         
-        //fetch measurements
+    //MARK: Fetch Person
     func fetchMeasurements() {
         
         /*guard let userId = auth.currentUser?.uid else { return }
@@ -412,7 +490,7 @@ class BigModel : ObservableObject {
     
     
     
-    
+    //MARK: Fetch Person
     func fetchLocation() {
         
         //fetch location

@@ -22,7 +22,8 @@ struct HomeFeedView: View {
     @StateObject var mapData = LocationViewModel()
     @State private var opacity = 1.0
     var db = Firestore.firestore()
-    @State var image = Image("")
+    @State var images: [Image] = []
+    @State var mainArrayInfos: [BigModel.MainViewArrayElements] = []
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -63,7 +64,7 @@ struct HomeFeedView: View {
                                     } .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))*/
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     
                                     PostStack(image: image, cellText: "About us")
                                         .buttonStyle(PlainButtonStyle())
@@ -75,7 +76,15 @@ struct HomeFeedView: View {
                                         .buttonStyle(PlainButtonStyle())
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))*/
+                                    
+                                    ForEach(mainArrayInfos.indices, id: \.self) { index in
+                                        PostStack(image: images[index], cellText: mainArrayInfos[index].text)
+                                            .buttonStyle(PlainButtonStyle())
+                                            .navigationBarTitle("")
+                                            .navigationBarHidden(true)
+                                            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    }
                                     
                                 }.listStyle(PlainListStyle())
                                 
@@ -195,7 +204,14 @@ struct HomeFeedView: View {
                         .opacity(opacity)
                         .task {
                             do {
-                                self.image = try await bigModel.fetchImage(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80")
+                                
+                                mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()
+                                for i in try await 0..<bigModel.fetchMainViewArrayInfos().count {
+                                    let image = try await bigModel.fetchImage(url: bigModel.fetchMainViewArrayInfos()[i].imageName)
+                                    images.append(image)
+                                }
+                                
+                                //self.image = try await bigModel.fetchImage(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80")
                                 
                             } catch {
                                 print("Error fetching image: \(error.localizedDescription)")

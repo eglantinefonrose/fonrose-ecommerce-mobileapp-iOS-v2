@@ -218,10 +218,12 @@ class BigModel : ObservableObject {
     }
     
     //MARK: Fetch Main View Array Infos
-    func fetchMainViewArrayInfos() async -> [MainViewArrayElements] {
+    func fetchMainViewArrayInfos() async throws -> [MainViewArrayElements] {
         
         var mainViewArrayElements: [MainViewArrayElements] = []
-        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
+        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/MainViewTextImages.json?alt=media&token=b461478e-7076-46c1-87f2-d578f3262c3b") else {
+            throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+        }
         
         do {
             
@@ -421,7 +423,7 @@ class BigModel : ObservableObject {
     }
     
         
-    //MARK: Fetch Person
+    //MARK: Fetch Measurements
     func fetchMeasurements() {
         
         /*guard let userId = auth.currentUser?.uid else { return }
@@ -490,7 +492,7 @@ class BigModel : ObservableObject {
     
     
     
-    //MARK: Fetch Person
+    //MARK: Fetch Location
     func fetchLocation() {
         
         //fetch location

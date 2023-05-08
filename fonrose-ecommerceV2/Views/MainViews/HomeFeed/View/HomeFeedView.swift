@@ -22,8 +22,10 @@ struct HomeFeedView: View {
     @StateObject var mapData = LocationViewModel()
     @State private var opacity = 1.0
     var db = Firestore.firestore()
+    @State var productImages: [Image] = []
     @State var images: [Image] = []
     @State var mainArrayInfos: [BigModel.MainViewArrayElements] = []
+    @State var productMainArrayInfos: [BigModel.DressPictures] = []
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -44,12 +46,12 @@ struct HomeFeedView: View {
                             ZStack {
                                 
                                 List {
-                                    /*ForEach(bigModel.dressPictures) { picture in
-                                        PostStack(url: picture.pictureName, cellText: picture.productName)
-                                            .id(picture.id)
+                                    ForEach(productMainArrayInfos.indices, id: \.self) { index in
+                                        PostStack(image: productImages[index], cellText: productMainArrayInfos[index].productName)
+                                            .id(productMainArrayInfos[index].id)
                                             .onTapGesture {
                                                 
-                                                bigModel.selectedProductId = picture.id
+                                                bigModel.selectedProductId = productMainArrayInfos[index].id
                                                 bigModel.fetchAllMeasurementInfo()
                                                 self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
@@ -65,18 +67,6 @@ struct HomeFeedView: View {
                                         .navigationBarTitle("")
                                         .navigationBarHidden(true)
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                    
-                                    PostStack(image: image, cellText: "About us")
-                                        .buttonStyle(PlainButtonStyle())
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                    
-                                    PostStack(image: image, cellText: "Service client")
-                                        .buttonStyle(PlainButtonStyle())
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))*/
                                     
                                     ForEach(mainArrayInfos.indices, id: \.self) { index in
                                         PostStack(image: images[index], cellText: mainArrayInfos[index].text)
@@ -211,12 +201,23 @@ struct HomeFeedView: View {
                                     images.append(image)
                                 }
                                 
-                                //self.image = try await bigModel.fetchImage(url: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/0c360da29244a461b701a97d17cb2e37.jpg?alt=media&token=5e51800b-a901-4a80-96bc-b70bf2e1fb80")
+                            } catch {
+                                print("Error fetching image: \(error.localizedDescription)")
+                            }
+                            
+                            do {
+                                
+                                productMainArrayInfos = try await bigModel.fetchProductInfo()
+                                for i in try await 0..<bigModel.fetchProductInfo().count {
+                                    let image = try await bigModel.fetchImage(url: bigModel.fetchProductInfo()[i].pictureName)
+                                    productImages.append(image)
+                                }
                                 
                             } catch {
                                 print("Error fetching image: \(error.localizedDescription)")
                             }
-                            await bigModel.fetchProductInfo()
+                            
+                            
                             DispatchQueue.main.async {
                                 withAnimation {
                                     bigModel.isItFirstTime = false

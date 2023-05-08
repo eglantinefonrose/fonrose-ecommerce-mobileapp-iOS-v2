@@ -102,7 +102,7 @@ class BigModel : ObservableObject {
         
     }
     
-    struct DressPictures: Codable, Identifiable {
+    struct DressPictures: Codable, Identifiable, Hashable {
         var id: Int
         let pictureName: String
         let productName: String
@@ -159,11 +159,13 @@ class BigModel : ObservableObject {
     
     var imageRef = ""
     
-    func fetchProductInfo() async {
+    func fetchProductInfo() async throws -> [DressPictures] {
         
-        dressPictures = []
+        var internDressPictures: [DressPictures] = []
         
-        let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=9cf4529d-e8cf-4d39-b856-12163e5295c3")!
+        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a") else {
+            throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+        }
          
          do {
              
@@ -172,20 +174,17 @@ class BigModel : ObservableObject {
 
              for dressPicture in dressPic {
                  
-                 print("d")
-                 
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                         // Code à exécuter après une attente de 5 secondes
-                     self.dressPictures.append(DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures))
-                     }
-                 
+                 internDressPictures.append((DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures)))
+                     
              }
              
              print("product fetched")
              
          } catch {
-             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+             print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
          }
+        
+        return internDressPictures
         
         /*let textStorageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
         let task = URLSession.shared.dataTask(with: textStorageURL) { data, response, error in
@@ -235,7 +234,7 @@ class BigModel : ObservableObject {
             }
             
         } catch {
-            print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+            print("(mainViewArrayElements) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
         }
         
         return mainViewArrayElements

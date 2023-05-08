@@ -149,6 +149,12 @@ class BigModel : ObservableObject {
     
     
     
+    @Published var productImages: [Image] = []
+    @Published var images: [Image] = []
+    @Published var mainArrayInfos: [BigModel.MainViewArrayElements] = []
+    @Published var productMainArrayInfos: [BigModel.DressPictures] = []
+    
+    
     
     
     

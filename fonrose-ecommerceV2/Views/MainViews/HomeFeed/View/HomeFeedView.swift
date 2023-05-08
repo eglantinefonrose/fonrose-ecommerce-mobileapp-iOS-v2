@@ -22,10 +22,7 @@ struct HomeFeedView: View {
     @StateObject var mapData = LocationViewModel()
     @State private var opacity = 1.0
     var db = Firestore.firestore()
-    @State var productImages: [Image] = []
-    @State var images: [Image] = []
-    @State var mainArrayInfos: [BigModel.MainViewArrayElements] = []
-    @State var productMainArrayInfos: [BigModel.DressPictures] = []
+    
 
     @available(iOS 14.0, *)
     var body: some View {
@@ -46,12 +43,12 @@ struct HomeFeedView: View {
                             ZStack {
                                 
                                 List {
-                                    ForEach(productMainArrayInfos.indices, id: \.self) { index in
-                                        PostStack(image: productImages[index], cellText: productMainArrayInfos[index].productName)
-                                            .id(productMainArrayInfos[index].id)
+                                    ForEach(bigModel.productMainArrayInfos.indices, id: \.self) { index in
+                                        PostStack(image: bigModel.productImages[index], cellText: bigModel.productMainArrayInfos[index].productName)
+                                            .id(bigModel.productMainArrayInfos[index].id)
                                             .onTapGesture {
                                                 
-                                                bigModel.selectedProductId = productMainArrayInfos[index].id
+                                                bigModel.selectedProductId = bigModel.productMainArrayInfos[index].id
                                                 bigModel.fetchAllMeasurementInfo()
                                                 self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
@@ -68,8 +65,8 @@ struct HomeFeedView: View {
                                         .navigationBarHidden(true)
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     
-                                    ForEach(mainArrayInfos.indices, id: \.self) { index in
-                                        PostStack(image: images[index], cellText: mainArrayInfos[index].text)
+                                    ForEach(bigModel.mainArrayInfos.indices, id: \.self) { index in
+                                        PostStack(image: bigModel.images[index], cellText: bigModel.mainArrayInfos[index].text)
                                             .buttonStyle(PlainButtonStyle())
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
@@ -195,10 +192,10 @@ struct HomeFeedView: View {
                         .task {
                             do {
                                 
-                                mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()
+                                bigModel.mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()
                                 for i in try await 0..<bigModel.fetchMainViewArrayInfos().count {
                                     let image = try await bigModel.fetchImage(url: bigModel.fetchMainViewArrayInfos()[i].imageName)
-                                    images.append(image)
+                                    bigModel.images.append(image)
                                 }
                                 
                             } catch {
@@ -207,10 +204,10 @@ struct HomeFeedView: View {
                             
                             do {
                                 
-                                productMainArrayInfos = try await bigModel.fetchProductInfo()
+                                bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()
                                 for i in try await 0..<bigModel.fetchProductInfo().count {
                                     let image = try await bigModel.fetchImage(url: bigModel.fetchProductInfo()[i].pictureName)
-                                    productImages.append(image)
+                                    bigModel.productImages.append(image)
                                 }
                                 
                             } catch {
@@ -240,7 +237,7 @@ struct HomeFeedView: View {
 
 
 #if DEBUG
-struct homeFeed_Previews: PreviewProvider {
+/*struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             HomeFeedView()
@@ -250,7 +247,7 @@ struct homeFeed_Previews: PreviewProvider {
         }
     }
         
-}
+}*/
 #endif
 
 struct GifImage: UIViewRepresentable {

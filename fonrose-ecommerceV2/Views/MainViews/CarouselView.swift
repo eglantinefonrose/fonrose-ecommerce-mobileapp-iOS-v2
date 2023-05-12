@@ -35,6 +35,8 @@ struct PagingView<Content>: View where Content: View {
             Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
+            BackButtonModel()
+            
             VStack {
                 
                 ZStack {
@@ -73,44 +75,20 @@ struct PagingView<Content>: View where Content: View {
                             
                         }//.frame(height: UIScreen.main.bounds.height-150)
                         
-                        if bigModel.currentview == .MeasurementCarouselViewTheDress {
-                            
-                            VStack {
-                                                            
-                                Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
-                                    .font(.system(size: 35, weight: .bold, design: .default))
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 200)
-                                    
-                                Spacer()
-                                    .frame(height: 30)
+                        VStack {
+                                                        
+                            Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
+                                .font(.system(size: 35, weight: .bold, design: .default))
+                                .foregroundColor(Color.white)
+                                .frame(width: 200)
                                 
-                                Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].price)
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 25, weight: .semibold, design: .default))
-                                                            
-                            }
+                            Spacer()
+                                .frame(height: 30)
                             
-                        }
-                        
-                        if bigModel.currentview == .MeasurementCarouselViewLeSerpent {
-                            
-                            VStack {
-                                                            
-                                Text("Le serpent")
-                                    .font(.system(size: 35, weight: .bold, design: .default))
-                                    .foregroundColor(Color.white)
-                                    .frame(width: 200)
-                                    
-                                Spacer()
-                                    .frame(height: 30)
-                                
-                                Text("???")
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 25, weight: .semibold, design: .default))
-                                                            
-                            }
-                            
+                            Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].price)
+                                .foregroundColor(Color.gray)
+                                .font(.system(size: 25, weight: .semibold, design: .default))
+                                                        
                         }
                         
                     }
@@ -135,11 +113,15 @@ struct PagingView<Content>: View where Content: View {
                             
                             isFetchingNeededMeasurementsInfo = true
                             
-                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)    // On gère le back à la main (car on n'utilise pas de NavigationView)
+                            self.bigModel.lastViews.append(.MeasurementCarouselView)    // On gère le back à la main (car on n'utilise pas de NavigationView)
                             
                             if bigModel.selectedProductId != nil {
                                 Task {
-                                    //await bigModel.fetchNeededMeasurement()
+                                    
+                                    if bigModel.currentPersonIndex != nil {
+                                        await bigModel.updateMeasurementModel()
+                                    }
+                                    
                                     bigModel.currentview = .Measurement_Mensurations
                                     isFetchingNeededMeasurementsInfo = false
                                 }
@@ -157,7 +139,7 @@ struct PagingView<Content>: View where Content: View {
                         .font(.system(size: 17, weight: .bold, design: .default))
                         .onTapGesture {
                             self.bigModel.currentview = .AboutUsScreen
-                            self.bigModel.lastViews.append(.MeasurementCarouselViewTheDress)
+                            self.bigModel.lastViews.append(.MeasurementCarouselView)
                         }
                                         
                     Spacer()

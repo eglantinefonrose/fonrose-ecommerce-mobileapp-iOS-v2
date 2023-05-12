@@ -8,15 +8,14 @@
 
 import Foundation
 
-enum ViewEnum {
+enum ViewEnum: String, Codable {
     
     //MARK: Main views
     case Home_homeFeed0
     case Home_homeFeed1
     case Home_homeFeed2
     case Home_homeFeed3
-    case MeasurementCarouselViewTheDress
-    case MeasurementCarouselViewLeSerpent
+    case MeasurementCarouselView
     case VideoPlayer_trailerPlayer
     case AboutUsScreen
     

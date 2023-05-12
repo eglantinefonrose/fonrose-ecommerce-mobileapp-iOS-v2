@@ -48,13 +48,10 @@ struct BigRootView: View {
                     
                 }
                 
-                if (self.bigModel.currentview == .MeasurementCarouselViewTheDress) {
+                if (self.bigModel.currentview == .MeasurementCarouselView) {
                     CarouselView()
                 }
                 
-                if (self.bigModel.currentview == .MeasurementCarouselViewLeSerpent) {
-                    CarouselView()
-                }
                 
                 if (self.bigModel.currentview == .VideoPlayer_trailerPlayer) {
                     TrailerPlayer(url: URL(string: bigModel.dressPictures[bigModel.selectedProductId ?? 0].videoURL)!)
@@ -96,9 +93,16 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    if bigModel.currentPersonIndex == nil {
+                    if bigModel.selectedProductId == nil && bigModel.currentPersonIndex == nil {
+                        ProductsScreen()
+                    }
+                    if bigModel.selectedProductId == nil && bigModel.currentPersonIndex != nil {
+                        ProductsScreen()
+                    }
+                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex == nil {
                         AuthView()
-                    } else {
+                    }
+                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex != nil && bigModel.isMeasurementModelUpdated == true {
                         MeasurementView()
                     }
                 }
@@ -133,7 +137,9 @@ struct BigRootView: View {
                 
                 if (self.bigModel.currentview == .LivraisonViews_Livraison) {
                     //si aucune personne n'est sélectionnée, on affiche la vue d'authenfication qui affichera l'écran de selection des personnes de l'utilisateur
-                    if bigModel.user.persons.isEmpty {
+                    //if bigModel.user.persons.isEmpty {
+                    
+                    if bigModel.currentPersonIndex == nil {
                         AuthView()
                     } else {
                         LocationView()

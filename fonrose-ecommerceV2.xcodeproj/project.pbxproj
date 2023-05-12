@@ -66,7 +66,6 @@
 		70AF90D529FA739D00FB9212 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D429FA739D00FB9212 /* FirebaseFirestoreSwift */; };
 		70AF90D729FA739D00FB9212 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D629FA739D00FB9212 /* FirebaseStorage */; };
 		70AF90D929FA739D00FB9212 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D829FA739D00FB9212 /* FirebaseStorageCombine-Community */; };
-		70AF90DB29FAAEFD00FB9212 /* testJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 70AF90DA29FAAEFC00FB9212 /* testJSON.json */; };
 		70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */; };
 		70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */; };
 		70B7146829EFBD9D00C05CAC /* MeasurementsTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */; };
@@ -76,6 +75,7 @@
 		70B9B1842566C64E00317086 /* test-binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9B1832566C64E00317086 /* test-binding.swift */; };
 		70BB78CC285E1D7A00A0A3B4 /* TestList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB78CB285E1D7A00A0A3B4 /* TestList.swift */; };
 		70BB819A246D7EC500695F19 /* About_us.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB8199246D7EC500695F19 /* About_us.swift */; };
+		70BF3CAC2A0D3BE8007CCBE3 /* ProductsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BF3CAB2A0D3BE8007CCBE3 /* ProductsScreen.swift */; };
 		70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */; };
 		70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CBE5C428FDFE8400F2C4B1 /* LocationRecapView.swift */; };
 		70CCEC5E29E8587500EFABA5 /* Sandbox-TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */; };
@@ -143,7 +143,6 @@
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
 		70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditPersonView.swift; path = ../../../../../../../.Trash/EditPersonView.swift; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
-		70AF90DA29FAAEFC00FB9212 /* testJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testJSON.json; path = ../../../../../../Desktop/testJSON.json; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
 		70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsTut.swift; sourceTree = "<group>"; };
@@ -152,6 +151,7 @@
 		70B9B1832566C64E00317086 /* test-binding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "test-binding.swift"; sourceTree = "<group>"; };
 		70BB78CB285E1D7A00A0A3B4 /* TestList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestList.swift; sourceTree = "<group>"; };
 		70BB8199246D7EC500695F19 /* About_us.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About_us.swift; sourceTree = "<group>"; };
+		70BF3CAB2A0D3BE8007CCBE3 /* ProductsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsScreen.swift; sourceTree = "<group>"; };
 		70C410BF247C6CD90059E0CF /* SuiviStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviStatusEnum.swift; sourceTree = "<group>"; };
 		70CBE5C428FDFE8400F2C4B1 /* LocationRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRecapView.swift; sourceTree = "<group>"; };
 		70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandbox-TextFields.swift"; sourceTree = "<group>"; };
@@ -242,7 +242,6 @@
 			children = (
 				702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */,
 				704535812477BD85001F20A8 /* BigRootView.swift */,
-				70AF90DA29FAAEFC00FB9212 /* testJSON.json */,
 				7034755A2864D0F70030C906 /* AuthView.swift */,
 				701B9E1D2876DF90004DE780 /* Test-coordinate.swift */,
 				70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */,
@@ -378,6 +377,7 @@
 				70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */,
 				70B83186290D9B9200C0BF84 /* BurgerMenu.swift */,
 				70887905292F70FC00391A41 /* ShopView.swift */,
+				70BF3CAB2A0D3BE8007CCBE3 /* ProductsScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -520,7 +520,6 @@
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
 				70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */,
-				70AF90DB29FAAEFD00FB9212 /* testJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -585,6 +584,7 @@
 				700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */,
 				70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */,
 				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
+				70BF3CAC2A0D3BE8007CCBE3 /* ProductsScreen.swift in Sources */,
 				7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,
 				70CBE5C528FDFE8400F2C4B1 /* LocationRecapView.swift in Sources */,

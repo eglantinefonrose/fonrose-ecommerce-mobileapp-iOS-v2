@@ -29,42 +29,25 @@ struct BurgerMenu: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                Spacer()
-                    .frame(height: 0)
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Watch the clip")
+                ForEach(bigModel.productMainArrayInfos.indices, id: \.self) { index in
+                    Text(bigModel.productMainArrayInfos[index].productName)
                         .foregroundColor(.white)
                         .font(.headline)
                         .onTapGesture {
-                            proxy.scrollTo(0)
-                            self.bigModel.showMenu = false
-                        }
-                    
-                    Text("The dress")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .onTapGesture {
-                            proxy.scrollTo(1)
-                            self.bigModel.showMenu = false
-                        }
-                    
-                    Text("About us")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .onTapGesture {
-                            proxy.scrollTo(2)
+                            proxy.scrollTo(index)
                             self.bigModel.showMenu = false
                         }
                 }
                 
-                Text("Customer service")
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .onTapGesture {
-                        proxy.scrollTo(3)
-                        self.bigModel.showMenu = false
-                    }
+                ForEach(bigModel.mainArrayInfos.indices, id: \.self) { index in
+                    Text(bigModel.mainArrayInfos[index].text)
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .onTapGesture {
+                            proxy.scrollTo(index + bigModel.productMainArrayInfos.count)
+                            self.bigModel.showMenu = false
+                        }
+                }
                 
                 Text("Measurement")
                     .foregroundColor(.white)
@@ -113,7 +96,7 @@ struct BurgerMenu: View {
                                             let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
                                             let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                             
-                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
+                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage)
                                             
                                         }
                                         
@@ -147,10 +130,8 @@ struct BurgerMenu: View {
                                             let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
                                             let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
                                             let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
                                             
-                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
+                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage)
                                             
                                         }
                                         

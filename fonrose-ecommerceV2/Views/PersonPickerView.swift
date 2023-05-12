@@ -107,16 +107,20 @@ struct PersonPickerViewHome: View {
                                             
                                         }.onTapGesture {
                                             
-                                            bigModel.currentPersonIndex = index
-                                            bigModel.currentPersonId = bigModel.user.persons[index].id
-                                            
-                                            //if bigModel.selectedProductId != nil {
-                                                //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
-                                            //}
-                                            
-                                            bigModel.fetchMeasurements()
-                                            bigModel.fetchLocation()
-                                            bigModel.authCurrentView = .Auth_UserInfo
+                                            Task {
+                                                
+                                                bigModel.currentPersonIndex = index
+                                                bigModel.currentPersonId = bigModel.user.persons[index].id
+                                                
+                                                await bigModel.updateMeasurementModel()
+                                                
+                                                //if bigModel.selectedProductId != nil {
+                                                    //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                                                //}
+                                                
+                                                //bigModel.fetchLocation()
+                                                bigModel.authCurrentView = .Auth_UserInfo
+                                            }
                                             
                                         }
                                         

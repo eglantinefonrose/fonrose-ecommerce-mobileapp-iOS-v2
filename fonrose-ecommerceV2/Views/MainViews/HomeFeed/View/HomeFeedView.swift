@@ -42,14 +42,46 @@ struct HomeFeedView: View {
                             
                             ZStack {
                                 
+                                /*List {
+                                    
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(Color.blue)
+                                            .frame(height: UIScreen.main.bounds.height)
+                                        Text("0")
+                                    }.id(0)
+                                    
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(Color.red)
+                                            .frame(height: UIScreen.main.bounds.height)
+                                        Text("1")
+                                    }.id(1)
+                                    
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(Color.gray)
+                                            .frame(height: UIScreen.main.bounds.height)
+                                        Text("2")
+                                    }.id(2)
+                                    
+                                    ZStack {
+                                        Rectangle()
+                                            .foregroundColor(Color.yellow)
+                                            .frame(height: UIScreen.main.bounds.height)
+                                        Text("3")
+                                    }.id(3)
+                                    
+                                }*/
+                                
                                 List {
+                                    
                                     ForEach(bigModel.productMainArrayInfos.indices, id: \.self) { index in
                                         PostStack(image: bigModel.productImages[index], cellText: bigModel.productMainArrayInfos[index].productName)
                                             .id(bigModel.productMainArrayInfos[index].id)
                                             .onTapGesture {
                                                 
                                                 bigModel.selectedProductId = bigModel.productMainArrayInfos[index].id
-                                                bigModel.fetchAllMeasurementInfo()
                                                 self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
                                                 print("append")
@@ -67,11 +99,19 @@ struct HomeFeedView: View {
                                     
                                     ForEach(bigModel.mainArrayInfos.indices, id: \.self) { index in
                                         PostStack(image: bigModel.images[index], cellText: bigModel.mainArrayInfos[index].text)
+                                            .id(bigModel.mainArrayInfos[index].id + 2)
                                             .buttonStyle(PlainButtonStyle())
                                             .navigationBarTitle("")
                                             .navigationBarHidden(true)
                                             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                            .onTapGesture {
+                                                bigModel.currentview = bigModel.mainArrayInfos[index].nextScreen
+                                            }
                                     }
+                                    .buttonStyle(PlainButtonStyle())
+                                        .navigationBarTitle("")
+                                        .navigationBarHidden(true)
+                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     
                                 }.listStyle(PlainListStyle())
                                 
@@ -190,6 +230,7 @@ struct HomeFeedView: View {
                         }
                         .opacity(opacity)
                         .task {
+                            bigModel.fetchAllMeasurementInfo()
                             do {
                                 
                                 bigModel.mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()

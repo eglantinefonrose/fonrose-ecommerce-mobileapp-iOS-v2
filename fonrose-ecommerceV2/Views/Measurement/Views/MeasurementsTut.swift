@@ -188,6 +188,10 @@ struct MeasurementsTut: View {
             
             if !show {
                 VStack {
+                    BackButtonModel()
+                    Spacer()
+                }.padding(20)
+                /*VStack {
                     HStack {
                         
                         Text("Back")
@@ -212,7 +216,7 @@ struct MeasurementsTut: View {
                         
                     }
                     Spacer()
-                }.padding(20)
+                }.padding(20)*/
             }
             
         }

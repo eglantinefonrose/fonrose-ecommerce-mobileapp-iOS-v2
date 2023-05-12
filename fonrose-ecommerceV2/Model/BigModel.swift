@@ -57,8 +57,6 @@ class BigModel : ObservableObject {
         var adressMailBox: String
         var adressBasement: String
         var adressStage: String
-        var adressLat: CGFloat
-        var adressLong: CGFloat
         
     }
 
@@ -169,7 +167,7 @@ class BigModel : ObservableObject {
         
         var internDressPictures: [DressPictures] = []
         
-        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a") else {
+        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=164c9c3d-a153-4b6d-b1c6-0d401a43722e") else {
             throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
         }
          
@@ -190,6 +188,7 @@ class BigModel : ObservableObject {
              print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
          }
         
+        self.dressPictures = internDressPictures
         return internDressPictures
         
         /*let textStorageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/DressPictureData.json?alt=media&token=0bf1a35a-0ad0-44e5-b0a9-7d1053e0648a")!
@@ -217,9 +216,10 @@ class BigModel : ObservableObject {
     }
     
     struct MainViewArrayElements: Identifiable, Codable {
-        var id: String
+        var id: Int
         var imageName: String
         var text: String
+        var nextScreen: ViewEnum
     }
     
     //MARK: Fetch Main View Array Infos
@@ -236,7 +236,7 @@ class BigModel : ObservableObject {
             let arrayElements = try  JSONDecoder().decode([MainViewArrayElements].self, from: data)
             
             for ArrayElements in arrayElements {
-                mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text))
+                mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text, nextScreen: ArrayElements.nextScreen))
             }
             
         } catch {
@@ -334,6 +334,7 @@ class BigModel : ObservableObject {
     }
     
     //MARK: updateMeasurementModel
+    var isMeasurementModelUpdated:Bool = false
     func updateMeasurementModel() async {
         
         self.user.persons[self.currentPersonIndex ?? 0].measurements = []
@@ -349,6 +350,9 @@ class BigModel : ObservableObject {
                 }
                 
             }
+            
+            isMeasurementModelUpdated = true
+            
         } catch {
             print("error")
         }
@@ -572,7 +576,7 @@ class BigModel : ObservableObject {
         
         guard let userId = auth.currentUser?.uid else { return }
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex ?? 0].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0])
+        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex ?? 0].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": ""])
                 
     }
 
@@ -830,7 +834,7 @@ class BigModel : ObservableObject {
         print("Constructor BigModel - shouldInjectMockedData==true")
         
         let theMeasurement = [MeasurementModel(id: 1, measurementName: "armpits", measurementValue: ""), MeasurementModel(id: 0, measurementName: "shoulders", measurementValue: ""), MeasurementModel(id: 2, measurementName: "legs", measurementValue: "")]
-        let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3", adressLat: 0, adressLong: 0)
+        let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3")
         
         let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation)
         let person002 : Person = Person(id: "idPerson002", email: "malo.fonrose@gmail.com", name: "Malo Fonrose", measurements: theMeasurement, location: theLocation)

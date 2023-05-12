@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 window.rootViewController = UIHostingController(rootView: BigRootView()
                                                                 //FetchData_Sandbox()
-                    .environmentObject(BigModel(shouldInjectMockedData: true)))
+                    .environmentObject(BigModel()))
                 
                 
                     //.environmentObject(BigModel.shared))

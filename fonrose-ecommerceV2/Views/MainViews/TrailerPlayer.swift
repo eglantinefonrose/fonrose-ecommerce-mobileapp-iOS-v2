@@ -72,14 +72,7 @@ struct TrailerPlayer: View {
                 Text("Buy")
                     .foregroundColor(.blue)
                     .onTapGesture {
-                        if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed0 {
-                            bigModel.currentview = .MeasurementCarouselViewTheDress
-                            print(bigModel.currentview)
-                        }
-                        if bigModel.lastViews[bigModel.lastViews.count-1] == .Home_homeFeed1 {
-                            bigModel.currentview = .MeasurementCarouselViewLeSerpent
-                            print(bigModel.currentview)
-                        }
+                        bigModel.currentview = .MeasurementCarouselView
                     }
                 
             }

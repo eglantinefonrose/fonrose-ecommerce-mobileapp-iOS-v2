@@ -53,7 +53,13 @@ struct PersonPickerViewHome: View {
                 
                 VStack {
                     
-                    HStack {
+                    ZStack {
+                        BackButtonModel()
+                        Text("Persons")
+                            .fontWeight(.semibold)
+                    }
+                    
+                    /*HStack {
                         
                         Text("Back")
                             .foregroundColor(Color.blue)
@@ -69,8 +75,7 @@ struct PersonPickerViewHome: View {
                         
                         Spacer()
                         
-                        Text("Persons")
-                            .fontWeight(.semibold)
+                        
                         
                         Spacer()
                         
@@ -87,7 +92,7 @@ struct PersonPickerViewHome: View {
                                 
                             }
                         
-                    }.padding(20)
+                    }.padding(20)*/
                     
                     if #available(iOS 15.0, *) {
                                                                                     
@@ -134,7 +139,7 @@ struct PersonPickerViewHome: View {
                                                 bigModel.deletedPersonID = bigModel.user.persons[index].id
                                                 bigModel.deletedPersonName = bigModel.user.persons[index].name
                                             }
-                                    }.padding(10)
+                                    }.padding(.vertical, 10)
                                 }.listRowBackground(Color("Background"))
                             }.listStyle(PlainListStyle())
                             .background(Color("Background"))
@@ -160,9 +165,8 @@ struct PersonPickerViewHome: View {
                             print()
                             bigModel.authCurrentView = .Auth_NewUserView
                         }
-                    Spacer()
                     
-                }
+                }.padding(20)
             }
         }
     }
@@ -186,40 +190,12 @@ struct DeletePersonView: View {
                 }, secondaryButton: .default(Text("Yes").font(.system(.caption))) {
                     
                     //suppression de la personne
-                    db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.deletedPersonID).delete() { err in
-                        if let err = err {
-                            print("Error removing document: \(err)")
-                        } else {
-                            print("Document successfully removed!")
-                            bigModel.deletedPersonID = ""
-                            bigModel.fetchPerson()
+                    
+                    Task {
                         
-                            //récupération des nouvelles données des personnes
-//                            bigModel.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-//                                guard error == nil else {
-//                                    print(error!.localizedDescription)
-//                                    return
-//                                }
-//
-//                                bigModel.user.persons.removeAll()
-//                                if let snapshot = snapshot {
-//                                    for document in snapshot.documents {
-//                                        let dbID = document.documentID
-//                                        let dbName = document.data()["name"] as? String ?? ""
-//                                        let dbEmail = document.data()["email"] as? String ?? ""
-//
-//                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
-//
-//                                        bigModel.deletedPersonID = ""
-//
-//                                        print("doc added")
-//                                    }
-//                                }
-//                                bigModel.deletedPersonID = ""
-//
-//                            }
+                        bigModel.deleteSelectedPerson()
+                        await bigModel.fetchPerson()
                         
-                        }
                     }
                 
                 })

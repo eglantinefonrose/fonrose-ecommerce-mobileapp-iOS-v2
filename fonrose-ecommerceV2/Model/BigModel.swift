@@ -28,7 +28,7 @@ class BigModel : ObservableObject {
     }
     
     @Published var user: User = User(id: "", email: "", persons: [])
-    
+        
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
     /*@Published var defaultLocationCoordinate = CLLocationCoordinate2D(latitude: 55, longitude: 25)
@@ -173,14 +173,22 @@ class BigModel : ObservableObject {
          
          do {
              
-             let (data, _) = try await URLSession.shared.data(from: storageURL)
-             let dressPic = try JSONDecoder().decode([DressPictures].self, from: data)
+            let (data, _) = try await URLSession.shared.data(from: storageURL)
+            let tasks = try JSONDecoder().decode([DressPictures].self, from: data)
+            var results = [DressPictures]()
+             
+            let tasks = try dressPics.map { _ in try URLSession.shared.data(from: storageURL) }
+            for try await task in tasks {
+                results.append(task.0)
+            }
+             
+            return results
 
-             for dressPicture in dressPic {
+             /*for dressPicture in dressPic {
                  
                  internDressPictures.append((DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures)))
                      
-             }
+             }*/
              
              print("product fetched")
              
@@ -396,40 +404,29 @@ class BigModel : ObservableObject {
     //MARK: Fetch Person
     @Published var selectedProductId: Int? = nil
     
-    func fetchPerson() {
-        
-        guard let userId = auth.currentUser?.uid else { return }
-        
-        let collectionRef = db.collection("users").document("user\(userId)").collection("persons")
-        
-        collectionRef.getDocuments { snapshot, error in
-               guard error == nil else {
-                    print(error!.localizedDescription)
-                    return
-                }
-
-                self.user.persons.removeAll()
-                if let snapshot = snapshot {
-                    for document in snapshot.documents {
-                        
-                        let dbID = document.documentID
-                        let dbName = document.data()["name"] as? String ?? ""
-                        let dbEmail = document.data()["email"] as? String ?? ""
-                        
-                        let data = document.data()
-                        let person = Person(id: document.documentID, email: data["email"] as? String ?? "", name: data["name"] as? String ?? "")
-
-                        self.user.persons.append(person)
-                        
-                    }
-                    
-                    print("il y a \(self.user.persons.count) personnes")
-                    
-                }
-
+    func fetchPerson() async {
+        do {
+            guard let userId = auth.currentUser?.uid else { return }
+            let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
+            
+            self.user.persons.removeAll()
+            for document in collectionRef.documents {
+                let dbID = document.documentID
+                let dbName = document.data()["name"] as? String ?? ""
+                let dbEmail = document.data()["email"] as? String ?? ""
+                
+                let data = document.data()
+                let person = Person(id: document.documentID, email: data["email"] as? String ?? "", name: data["name"] as? String ?? "")
+                self.user.persons.append(person)
             }
-        
+            
+            print("Il y a \(self.user.persons.count) personnes")
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
+
     
         
     //MARK: Fetch Measurements
@@ -652,9 +649,11 @@ class BigModel : ObservableObject {
     
     @Published var deletedPersonIndex: Int = 0
     
-    func deletePerson() {
+    func deleteAllPersons() {
         
-        db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person\(personNumber)").delete() { err in
+        let docRef = db.collection("user\(self.auth.currentUser?.uid ?? "nil")").document("person\(personNumber)")
+        
+        docRef.delete() { err in
             
             if let err = err {
                 print("Error removing document: \(err)")
@@ -664,6 +663,19 @@ class BigModel : ObservableObject {
                 
             }
         }
+    }
+    
+    func deleteSelectedPerson() {
+        
+        db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(self.deletedPersonID).delete() { err in
+             if let err = err {
+                 print("Error removing document: \(err)")
+             } else {
+                 print("Document successfully removed!")
+                 self.deletedPersonID = ""
+             }
+         }
+        
     }
     
     //MARK: Sign up
@@ -769,10 +781,12 @@ class BigModel : ObservableObject {
                 print("Success !")
                 
                 DispatchQueue.main.async {
-                    self.signedIn = true
-                    //self.fetchPerson()
-                    self.authCurrentView = .Auth_PersonPickerView
-                    self.user.id = self.auth.currentUser?.uid ?? "nil"
+                    Task {
+                        self.signedIn = true
+                        await self.fetchPerson()
+                        self.authCurrentView = .Auth_PersonPickerView
+                        self.user.id = self.auth.currentUser?.uid ?? "nil"
+                    }
                 }
                 
             } catch {

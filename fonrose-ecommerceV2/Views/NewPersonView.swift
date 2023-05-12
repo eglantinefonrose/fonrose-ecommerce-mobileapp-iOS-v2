@@ -143,52 +143,56 @@ struct NewPersonView: View {
                     .cornerRadius(15)
                     .onTapGesture {
                             
-                        if newPersonEmail != "" && newPersonName != "" {
+                        Task {
                             
-                            if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
-                                alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
+                            if newPersonEmail != "" && newPersonName != "" {
+                                
+                                if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
+                                    alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
+                                        
+                                    }
+                                } else {
                                     
+                                    try await db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
+                                    
+                                    await bigModel.fetchPerson()
+                                    bigModel.authCurrentView = .Auth_PersonPickerView
                                 }
-                            } else {
                                 
-                                db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(["email": newPersonEmail, "name": newPersonName])
+                                //db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name])
                                 
-                                bigModel.fetchPerson()
-                                bigModel.authCurrentView = .Auth_PersonPickerView
+    //                            self.db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
+    //                                guard error == nil else {
+    //                                    print(error!.localizedDescription)
+    //                                    return
+    //                                }
+    //
+    //                                bigModel.user.persons.removeAll()
+    //
+    //                                if let snapshot = snapshot {
+    //                                    for document in snapshot.documents {
+    //                                        let dbID = document.documentID
+    //                                        let dbName = document.data()["name"] as? String ?? ""
+    //                                        let dbEmail = document.data()["email"] as? String ?? ""
+    //
+    //                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
+    //                                        print(bigModel.user.persons.count)
+    //                                        print("person added")
+    //
+    //                                    }
+    //
+    //                                    bigModel.authCurrentView = .Auth_PersonPickerView
+    //
+    //                                }
+    //
+    //                                email = ""
+    //                                name = ""
+    //                                print(bigModel.user.persons.count)
+    //                                print(Auth.auth().currentUser?.uid ?? "nil")
+    //
+    //                            }
+                                
                             }
-                            
-                            //db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name])
-                            
-//                            self.db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-//                                guard error == nil else {
-//                                    print(error!.localizedDescription)
-//                                    return
-//                                }
-//
-//                                bigModel.user.persons.removeAll()
-//
-//                                if let snapshot = snapshot {
-//                                    for document in snapshot.documents {
-//                                        let dbID = document.documentID
-//                                        let dbName = document.data()["name"] as? String ?? ""
-//                                        let dbEmail = document.data()["email"] as? String ?? ""
-//
-//                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
-//                                        print(bigModel.user.persons.count)
-//                                        print("person added")
-//
-//                                    }
-//
-//                                    bigModel.authCurrentView = .Auth_PersonPickerView
-//
-//                                }
-//
-//                                email = ""
-//                                name = ""
-//                                print(bigModel.user.persons.count)
-//                                print(Auth.auth().currentUser?.uid ?? "nil")
-//
-//                            }
                             
                         }
                         

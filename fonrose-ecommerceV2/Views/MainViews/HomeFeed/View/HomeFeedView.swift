@@ -230,40 +230,50 @@ struct HomeFeedView: View {
                         }
                         .opacity(opacity)
                         .task {
-                            bigModel.fetchAllMeasurementInfo()
-                            do {
-                                
-                                bigModel.mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()
-                                for i in try await 0..<bigModel.fetchMainViewArrayInfos().count {
-                                    let image = try await bigModel.fetchImage(url: bigModel.fetchMainViewArrayInfos()[i].imageName)
-                                    bigModel.images.append(image)
+                                                            
+                                bigModel.fetchAllMeasurementInfo()
+                            
+                                do {
+                                    bigModel.dressPictures = try await bigModel.fetchProductInfo()
+                                }
+                                catch {
+                                    print("Error fetching image: \(error.localizedDescription)")
                                 }
                                 
-                            } catch {
-                                print("Error fetching image: \(error.localizedDescription)")
-                            }
-                            
-                            do {
-                                
-                                bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()
-                                for i in try await 0..<bigModel.fetchProductInfo().count {
-                                    let image = try await bigModel.fetchImage(url: bigModel.fetchProductInfo()[i].pictureName)
-                                    bigModel.productImages.append(image)
+                                do {
+                                    try await bigModel.fetchArrayOfImages()
+                                } catch {
+                                    print("Error fetching image: \(error.localizedDescription)")
                                 }
                                 
-                            } catch {
-                                print("Error fetching image: \(error.localizedDescription)")
-                            }
-                            
-                            
+                            /*do {
+                                    
+                                    bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()
+                                    for i in try await 0..<bigModel.fetchProductInfo().count {
+                                        let image = try await bigModel.fetchImage(url: bigModel.fetchProductInfo()[i].pictureName)
+                                        
+                                        DispatchQueue.main.async {
+                                            bigModel.productImages.append(image)
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                } catch {
+                                    print("Error fetching image: \(error.localizedDescription)")
+                                }*/
+                                
+                                
                             DispatchQueue.main.async {
-                                withAnimation {
-                                    bigModel.isItFirstTime = false
-                                }
+
+                                    //withAnimation {
+                                        bigModel.isItFirstTime = false
+                                    //}
+                                //withAnimation(.easeIn(duration: 1.2)) {
+                                    //self.opacity = 1.0
+                                //}
                             }
-                            withAnimation(.easeIn(duration: 1.2)) {
-                                self.opacity = 1.0
-                            }
+                            
                         }
                     } else {
                         // Fallback on earlier versions

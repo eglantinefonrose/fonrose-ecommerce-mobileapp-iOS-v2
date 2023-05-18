@@ -122,9 +122,9 @@ class BigModel : ObservableObject {
     func fetchImage(url: String) async throws -> Image {
         
         let storage = Storage.storage()
-        let gsReference = storage.reference(forURL: url)
+        let gcsReference = storage.reference(forURL: url)
 
-        let imageData = try await gsReference.data(maxSize: 10 * 1024 * 1024)
+        let imageData = try await gcsReference.data(maxSize: 10 * 1024 * 1024)
 
         guard let uiImage = UIImage(data: imageData) else {
             throw NSError(domain: "MyApp", code: 1, userInfo: [NSLocalizedDescriptionKey: "Error converting image data to UIImage."])
@@ -156,6 +156,60 @@ class BigModel : ObservableObject {
     
     
     
+    
+    
+    
+    
+    
+    func fetchArrayOfImages() async throws -> Void {
+        
+        //DispatchQueue.main.async {
+            
+            Task {
+                do {
+                    
+                    let localMainArrayInfos = try await self.fetchMainViewArrayInfos()
+                    var localImages: [Image] = []
+                    
+                    print("💡")
+                    for i in 0..<localMainArrayInfos.count {
+                        print("a\(i)")
+                        let image = try await self.fetchImage(url: localMainArrayInfos[i].imageName)
+                        print("z\(i)")
+                        localImages.append(image)
+                        print("💋 \(i)")
+                    }
+                    print("💡 fin")
+                    
+                    let localImagesCaptured = localImages
+                    
+                    DispatchQueue.main.async {
+                        print("🥸")
+                        self.images = localImagesCaptured
+                        self.mainArrayInfos = localMainArrayInfos
+                    }
+                    
+                    print("👹")
+                    
+                }
+                catch {
+                    print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+                }
+                
+            }
+            
+        //}
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: Fetch Products Informations
     
     var infoFetched = false
@@ -164,6 +218,26 @@ class BigModel : ObservableObject {
     var imageRef = ""
     
     func fetchProductInfo() async throws -> [DressPictures] {
+        
+        /*var mainViewArrayElements: [MainViewArrayElements] = []
+         guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/MainViewTextImages.json?alt=media&token=b461478e-7076-46c1-87f2-d578f3262c3b") else {
+             throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+         }
+         
+         do {
+             
+             let (data, _) = try await URLSession.shared.data(from: storageURL)
+             let arrayElements = try  JSONDecoder().decode([MainViewArrayElements].self, from: data)
+             
+             for ArrayElements in arrayElements {
+                 mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text, nextScreen: ArrayElements.nextScreen))
+             }
+             
+         } catch {
+             print("(mainViewArrayElements) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+         }
+         
+         return mainViewArrayElements*/
         
         var internDressPictures: [DressPictures] = []
         
@@ -174,21 +248,11 @@ class BigModel : ObservableObject {
          do {
              
             let (data, _) = try await URLSession.shared.data(from: storageURL)
-            let tasks = try JSONDecoder().decode([DressPictures].self, from: data)
-            var results = [DressPictures]()
+            let dressPic = try JSONDecoder().decode([DressPictures].self, from: data)
              
-            let tasks = try dressPics.map { _ in try URLSession.shared.data(from: storageURL) }
-            for try await task in tasks {
-                results.append(task.0)
-            }
-             
-            return results
-
-             /*for dressPicture in dressPic {
-                 
-                 internDressPictures.append((DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures)))
-                     
-             }*/
+             for dressPicture in dressPic {
+                 internDressPictures.append(DressPictures(id: dressPicture.id, pictureName: dressPicture.pictureName, productName: dressPicture.productName, videoURL: dressPicture.videoURL, price: dressPicture.price, carouselProductPictures: dressPicture.carouselProductPictures))
+             }
              
              print("product fetched")
              

@@ -160,45 +160,60 @@ class BigModel : ObservableObject {
     
     
     
+    //MARK: Fetch Main Array Images
     
-    func fetchArrayOfImages() async throws -> Void {
+    func fetchArrayOfImages() async throws -> [Image] {
         
-        //DispatchQueue.main.async {
+        let localMainArrayInfos = try await self.fetchMainViewArrayInfos()
+        var localImages: [Image] = []
+        
+        do {
             
-            Task {
-                do {
-                    
-                    let localMainArrayInfos = try await self.fetchMainViewArrayInfos()
-                    var localImages: [Image] = []
-                    
-                    print("💡")
-                    for i in 0..<localMainArrayInfos.count {
-                        print("a\(i)")
-                        let image = try await self.fetchImage(url: localMainArrayInfos[i].imageName)
-                        print("z\(i)")
-                        localImages.append(image)
-                        print("💋 \(i)")
-                    }
-                    print("💡 fin")
-                    
-                    let localImagesCaptured = localImages
-                    
-                    DispatchQueue.main.async {
-                        print("🥸")
-                        self.images = localImagesCaptured
-                        self.mainArrayInfos = localMainArrayInfos
-                    }
-                    
-                    print("👹")
-                    
-                }
-                catch {
-                    print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
-                }
-                
+            print("💡")
+            for i in 0..<localMainArrayInfos.count {
+                print("a\(i)")
+                let image = try await self.fetchImage(url: localMainArrayInfos[i].imageName)
+                print("z\(i)")
+                localImages.append(image)
+                print("💋 \(i)")
             }
+            print("💡 fin")
             
-        //}
+        }
+        catch {
+            print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+        }
+        
+        return localImages
+        
+    }
+    
+    
+    //MARK: Fetch Product Array Images
+    
+    func fetchArrayOfProductImages() async throws -> [Image] {
+        
+        let localMainArrayInfos = try await self.fetchProductInfo()
+        var localImages: [Image] = []
+        
+        do {
+            
+            print("💡")
+            for i in 0..<localMainArrayInfos.count {
+                print("a\(i)")
+                let image = try await self.fetchImage(url: localMainArrayInfos[i].pictureName)
+                print("z\(i)")
+                localImages.append(image)
+                print("💋 \(i)")
+            }
+            print("💡 fin")
+            
+        }
+        catch {
+            print("(fetchProductInfo) Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+        }
+        
+        return localImages
         
     }
     

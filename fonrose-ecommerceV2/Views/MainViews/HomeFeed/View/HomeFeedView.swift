@@ -234,14 +234,27 @@ struct HomeFeedView: View {
                                 bigModel.fetchAllMeasurementInfo()
                             
                                 do {
-                                    bigModel.dressPictures = try await bigModel.fetchProductInfo()
+                                    bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()
+                                }
+                                catch {
+                                    print("Error fetching image: \(error.localizedDescription)")
+                                }
+                            
+                                do {
+                                    bigModel.productImages = try await bigModel.fetchArrayOfProductImages()
                                 }
                                 catch {
                                     print("Error fetching image: \(error.localizedDescription)")
                                 }
                                 
                                 do {
-                                    try await bigModel.fetchArrayOfImages()
+                                    bigModel.images = try await bigModel.fetchArrayOfImages()
+                                } catch {
+                                    print("Error fetching image: \(error.localizedDescription)")
+                                }
+                            
+                                do {
+                                    bigModel.mainArrayInfos = try await bigModel.fetchMainViewArrayInfos()
                                 } catch {
                                     print("Error fetching image: \(error.localizedDescription)")
                                 }
@@ -266,12 +279,12 @@ struct HomeFeedView: View {
                                 
                             DispatchQueue.main.async {
 
-                                    //withAnimation {
+                                    withAnimation {
                                         bigModel.isItFirstTime = false
-                                    //}
-                                //withAnimation(.easeIn(duration: 1.2)) {
-                                    //self.opacity = 1.0
-                                //}
+                                    }
+                                withAnimation(.easeIn(duration: 1.2)) {
+                                    self.opacity = 1.0
+                                }
                             }
                             
                         }

@@ -70,7 +70,7 @@ class BigModel : ObservableObject {
     }
     
     struct MeasurementModel: Codable {
-        @DocumentID var id: String?
+        var id: Int?
         var measurementName: String
         var measurementValue: String
     }
@@ -451,7 +451,8 @@ class BigModel : ObservableObject {
             for i in 0..<fetchedNeededMeasurement.count {
                 
                 DispatchQueue.main.async {
-                    print(i)
+                    print("fetch needed measurements count \(self.allMeasurements.count)")
+                    print(fetchedNeededMeasurement[i])
                     self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[fetchedNeededMeasurement[i]])
                 }
                 

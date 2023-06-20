@@ -18,6 +18,7 @@ enum ViewEnum: String, Codable {
     case MeasurementCarouselView
     case VideoPlayer_trailerPlayer
     case AboutUsScreen
+    case HelpView
     
     //MARK: Measurement
     case Measurement_Mensurations

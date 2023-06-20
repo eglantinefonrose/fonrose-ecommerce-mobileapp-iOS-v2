@@ -117,7 +117,6 @@ struct MeasurementsTut: View {
                         Text("Tutoriels")
                             .font(.system(size: 35, weight: .bold, design: .default))
                             .fontWeight(.semibold)
-                            .foregroundColor(.white)
                         
                         Text("Comment prendre ses mensurations")
                             .foregroundColor(Color.gray)
@@ -188,7 +187,7 @@ struct MeasurementsTut: View {
             
             if !show {
                 VStack {
-                    BackButtonModel()
+                    BackButtonModel(text: "Measurements Tutorials")
                     Spacer()
                 }.padding(20)
                 /*VStack {

@@ -11,6 +11,7 @@ import SwiftUI
 struct BackButtonModel: View {
     
     @EnvironmentObject var bigModel: BigModel
+    var text: String
     
     var body: some View {
         HStack {
@@ -29,6 +30,11 @@ struct BackButtonModel: View {
             
             Spacer()
             
+            Text(text)
+                .bold()
+            
+            Spacer()
+            
             Image(systemName: "house")
                 .foregroundColor(Color.blue)
                 .onTapGesture {
@@ -36,12 +42,11 @@ struct BackButtonModel: View {
                 }
             
         }
-        Spacer()
     }
 }
 
 struct BackButtonModel_Previews: PreviewProvider {
     static var previews: some View {
-        BackButtonModel()
+        BackButtonModel(text: "test")
     }
 }

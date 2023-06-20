@@ -35,7 +35,7 @@ struct PagingView<Content>: View where Content: View {
             Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
-            BackButtonModel()
+            BackButtonModel(text: "")
             
             VStack {
                 
@@ -95,7 +95,7 @@ struct PagingView<Content>: View where Content: View {
                     
                     VStack {
                         
-                        BackButtonModel()
+                        BackButtonModel(text: "")
                         
                     }
                     

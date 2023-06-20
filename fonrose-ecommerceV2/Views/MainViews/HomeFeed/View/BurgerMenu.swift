@@ -145,6 +145,13 @@ struct BurgerMenu: View {
                         
                     }
                 
+                Image(systemName: "questionmark.circle")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .onTapGesture {
+                        bigModel.currentview = .HelpView
+                    }
+                
                 Spacer()
                 
             }

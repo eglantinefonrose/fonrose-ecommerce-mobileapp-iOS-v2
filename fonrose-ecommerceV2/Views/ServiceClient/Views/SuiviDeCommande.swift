@@ -8,15 +8,48 @@
 
 import SwiftUI
 
+struct OrdersExample: Identifiable {
+    var id: Int
+    var name: String
+}
+
+@available(iOS 16.0, *)
 struct SuiviDeCommande: View {
     
     //var model: ParcelInfos
     @EnvironmentObject var bigModel: BigModel
+    let ordersProductNames = [OrdersExample(id: 0, name: "RobeRouge"), OrdersExample(id: 1, name: "Robe2"), OrdersExample(id: 2, name: "Robe3")]
+    
     
     var body: some View {
             
+        ZStack {
+            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack {
+                
+                BackButtonModel(text: "Service Client")
+                
+                VStack {
+                    List(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders) { order in
+                        Text(order.productName)
+                            .listRowBackground(Color("Background"))
+                    }
+                    /*List(ordersProductNames) { order in
+                        Text(order.name)
+                            .listRowBackground(Color("Background"))
+                    }*/
+                     .listStyle(PlainListStyle())
+                    .background(Color("Background"))
+                    .scrollContentBackground(.hidden)
+                }
+                
+            }.padding(20)
+        }
+        
         // MARK: Livré
-        Text("")
         /*VStack {
             
             if model.status == .Livré {
@@ -461,6 +494,7 @@ struct Header: View {
 struct SuiviDeCommande_Previews: PreviewProvider {
     static var previews: some View {
         SuiviDeCommande()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
 }
 

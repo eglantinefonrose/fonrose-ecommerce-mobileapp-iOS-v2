@@ -93,7 +93,7 @@ struct LocationTextField: View {
             
             VStack {
                 
-                BackButtonModel()
+                BackButtonModel(text: "Location")
                 
                 ZStack {
                     
@@ -680,10 +680,21 @@ struct LocationTextField: View {
                                     .padding(20)
                                     .onTapGesture {
                                         
-                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressCountry": adressCountryText,"adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText])
+                                        let docRef = db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "prout")
+                                        
+                                        do {
+                                            try docRef.setData(from: BigModel.Location(civility: civilityText, firstName: firstNameText, lastName: lastNameText, emailAdress: emailAdressText, phoneNumber: phoneNumberText, adressCountry: adressCountryText, adressPostalCode: adressPostalCodeText, adressCity: adressCityText, adressStreet: adressStreetText, adressMailBox: adressMailBoxText, adressBasement: adressBasementText, adressStage: adressStageText))
+                                            
+                                            
+                                            
+                                          }
+                                          catch {
+                                            print(error)
+                                          }
+                                        
                                         bigModel.currentview = .LivraisonViews_RecapLivraison
                                         
-                                        guard let userId = auth.currentUser?.uid else { return }
+                                        /*guard let userId = auth.currentUser?.uid else { return }
                                             
                                         let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Location")
                                         
@@ -704,7 +715,7 @@ struct LocationTextField: View {
                                                 
                                             }
                                             
-                                        }
+                                        }*/
                                         
                                         
                                     }

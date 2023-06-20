@@ -128,6 +128,7 @@ struct LocationRecapView: View {
                         .padding(10)
                         .onTapGesture {
                             bigModel.lastViews.append(.LivraisonViews_RecapLivraison)
+                            bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                         }
                     }
                                     

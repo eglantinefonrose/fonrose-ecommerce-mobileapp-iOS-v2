@@ -36,14 +36,13 @@ class BigModel : ObservableObject {
     @Published var userDBLong: CGFloat = 14.418540*/
     
     //MARK: UserModel
-    struct User: Identifiable {
+    struct User: Identifiable, Codable {
         var id: String = UUID().uuidString
         var email: String
         var persons: [Person]
     }
 
     struct Location: Codable {
-        
         @DocumentID var id: String?
         var civility: String
         var firstName: String
@@ -57,7 +56,6 @@ class BigModel : ObservableObject {
         var adressMailBox: String
         var adressBasement: String
         var adressStage: String
-        
     }
 
     struct Measurements: Codable {
@@ -72,7 +70,7 @@ class BigModel : ObservableObject {
     }
     
     struct MeasurementModel: Codable {
-        var id: Int
+        @DocumentID var id: String?
         var measurementName: String
         var measurementValue: String
     }
@@ -97,6 +95,7 @@ class BigModel : ObservableObject {
         var name: String
         var measurements: [MeasurementModel]?
         var location: Location?
+        var orders: [Order]
         
     }
     
@@ -114,6 +113,18 @@ class BigModel : ObservableObject {
         var productName: String
         var neededMeasurements: [Int]
     }
+    
+    struct Order: Codable, Identifiable {
+        @DocumentID var id: String?
+        var productName: String
+        var status: OrderStatusEnum
+        var location: Location
+        var measurements: [MeasurementModel]
+        var orderDate: Date
+    }
+    
+    
+    
 
     var dressPictures: [DressPictures] = []
     
@@ -135,6 +146,13 @@ class BigModel : ObservableObject {
     }
     
     
+    
+    
+    
+    
+    
+    
+
     
     
     
@@ -421,30 +439,32 @@ class BigModel : ObservableObject {
     }
     
     //MARK: updateMeasurementModel
-    var isMeasurementModelUpdated:Bool = false
+    var isMeasurementModelUpdated: Bool = false
     func updateMeasurementModel() async {
         
         self.user.persons[self.currentPersonIndex ?? 0].measurements = []
         
         do {
-            let fetchedNeededMeasurement = try await fetchNeededMeasurement()[0].neededMeasurements
+            
+            let fetchedNeededMeasurement = try await fetchNeededMeasurement()[self.dressPictures[self.selectedProductId ?? 0].id ?? 0].neededMeasurements
             
             for i in 0..<fetchedNeededMeasurement.count {
                 
                 DispatchQueue.main.async {
+                    print(i)
                     self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[fetchedNeededMeasurement[i]])
-                    print(self.user.persons[self.currentPersonIndex ?? 0].measurements?[i].measurementName ?? "")
                 }
                 
             }
-            
-            isMeasurementModelUpdated = true
             
         } catch {
             print("error")
         }
         
     }
+    
+    
+    
     
     /*DispatchQueue.main.async {
      self.user.persons[self.currentPersonIndex ?? 0].measurements = []
@@ -490,13 +510,16 @@ class BigModel : ObservableObject {
             
             self.user.persons.removeAll()
             for document in collectionRef.documents {
-                let dbID = document.documentID
-                let dbName = document.data()["name"] as? String ?? ""
-                let dbEmail = document.data()["email"] as? String ?? ""
+                var person: Person = Person(email: "", name: "tt", orders: [])
+                do {
+                  person = try document.data(as: Person.self)
+                    self.user.persons.append(person)
+                    print(person.id)
+                }
+                catch {
+                  print(error)
+                }
                 
-                let data = document.data()
-                let person = Person(id: document.documentID, email: data["email"] as? String ?? "", name: data["name"] as? String ?? "")
-                self.user.persons.append(person)
             }
             
             print("Il y a \(self.user.persons.count) personnes")
@@ -640,19 +663,77 @@ class BigModel : ObservableObject {
         
     }
     
+    
+    func fetchOrders() {
+        
+        guard let userId = auth.currentUser?.uid else { return }
+            
+        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Orders")
+        
+        collectionRef.getDocuments { snapshot, error in
+            guard error == nil else {
+                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+               return
+            }
+
+            if let snapshot = snapshot {
+                for document in snapshot.documents {
+                    do {
+                        self.user.persons[self.currentPersonIndex ?? 0].orders = try document.data(as: [Order].self)
+                    } catch {
+                        print(error)
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func initializeMeasurements() {
         
         guard let userId = auth.currentUser?.uid else { return }
+        let docRef = db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document()
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+        do {
+            try docRef.setData(from: BigModel.MeasurementModel(measurementName: "", measurementValue: ""))
+        }
+        catch {
+            print(error)
+        }
+        //db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
         
     }
     
     func initializeLocation() {
         
+        print(self.currentPersonId)
         guard let userId = auth.currentUser?.uid else { return }
+        let docRef = db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document()
         
-        db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").document().setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": self.user.persons[self.currentPersonIndex ?? 0].email, "phoneNumber": "", "adressCountry": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": ""])
+        do {
+            try docRef.setData(from: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""))
+        }
+        catch {
+            print(error)
+        }
                 
     }
 
@@ -890,6 +971,48 @@ class BigModel : ObservableObject {
     //
     //
     //
+    
+    
+    //MARK: Finalize Order
+    
+    func addAnOrder(location: Location, measurements: [MeasurementModel], productName: String) {
+                
+        let newOrder =
+        Order(
+            productName: dressPictures[selectedProductId ?? 0].productName,
+            status: .CommandeEnregistree,
+            location: user.persons[currentPersonIndex ?? 0].location ?? Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""),
+            measurements: user.persons[currentPersonIndex ?? 0].measurements ?? [], orderDate: Date(timeIntervalSinceNow: 0))
+        
+        let collectionRef = self.db.collection("Orders")
+        
+        guard let userId = auth.currentUser?.uid else { return }
+            
+        let collectionUserRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Orders")
+        
+        do {
+            try collectionRef.document().setData(from: newOrder)
+            try collectionUserRef.document().setData(from: newOrder)
+          }
+          catch {
+            print(error)
+          }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     
     func isThereAPersonWithTheSameName(name: String) -> Bool {
@@ -926,16 +1049,16 @@ class BigModel : ObservableObject {
     init(shouldInjectMockedData: Bool) {
         print("Constructor BigModel - shouldInjectMockedData==true")
         
-        let theMeasurement = [MeasurementModel(id: 1, measurementName: "armpits", measurementValue: ""), MeasurementModel(id: 0, measurementName: "shoulders", measurementValue: ""), MeasurementModel(id: 2, measurementName: "legs", measurementValue: "")]
+        let theMeasurement = [MeasurementModel(measurementName: "armpits", measurementValue: ""), MeasurementModel(measurementName: "shoulders", measurementValue: ""), MeasurementModel(measurementName: "legs", measurementValue: "")]
         let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3")
         
-        let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation)
-        let person002 : Person = Person(id: "idPerson002", email: "malo.fonrose@gmail.com", name: "Malo Fonrose", measurements: theMeasurement, location: theLocation)
+        let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation, orders: [])
+        let person002 : Person = Person(id: "idPerson002", email: "malo.fonrose@gmail.com", name: "Malo Fonrose", measurements: theMeasurement, location: theLocation, orders: [Order(productName: "Robe", status: .CommandeEnregistree, location: theLocation, measurements: theMeasurement, orderDate: Date(timeIntervalSinceNow: 0))])
         //let person001: Person = Person(data: "data")
         //let person002: Person = Person(data: "data")
         let thePersons : [Person] = [ person001 , person002 ]
 
-        self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons )
+        self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons)
         
         self.currentPersonIndex = 0 // Eglantine
     }

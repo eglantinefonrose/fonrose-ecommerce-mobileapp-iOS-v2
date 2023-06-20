@@ -54,45 +54,45 @@ struct PersonPickerViewHome: View {
                 VStack {
                     
                     ZStack {
-                        BackButtonModel()
+                        //BackButtonModel()
                         Text("Persons")
                             .fontWeight(.semibold)
-                    }
-                    
-                    /*HStack {
                         
-                        Text("Back")
-                            .foregroundColor(Color.blue)
-                            .fontWeight(.semibold)
-                            .onTapGesture {
-                                if !self.bigModel.authLastViews.isEmpty {
-                                    print("back")
-                                    self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                    self.bigModel.authLastViews.removeLast()
-                                    print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                                } else { print("array empty") }
-                            }
-                        
-                        Spacer()
-                        
-                        
-                        
-                        Spacer()
-                        
-                        Image(systemName: "house")
-                            .foregroundColor(Color.blue)
-                            .onTapGesture {
-                                if bigModel.currentPersonId != "" {
-                                    self.bigModel.currentview = .Home_homeFeed0
-                                } else {
-                                    alertTF(title: "No person chosen", message: "Please click on the person you want to select", primaryTitle: "Ok") {
-                                        
-                                    }
+                        HStack {
+                            
+                            Text("Back")
+                                .foregroundColor(Color.blue)
+                                .fontWeight(.semibold)
+                                .onTapGesture {
+                                    if !self.bigModel.authLastViews.isEmpty {
+                                        print("back")
+                                        self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
+                                        self.bigModel.authLastViews.removeLast()
+                                        print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
+                                    } else { print("array empty") }
                                 }
-                                
-                            }
-                        
-                    }.padding(20)*/
+                            
+                            Spacer()
+                            
+                            
+                            
+                            Spacer()
+                            
+                            Image(systemName: "house")
+                                .foregroundColor(Color.blue)
+                                .onTapGesture {
+                                    if bigModel.currentPersonId != "" {
+                                        self.bigModel.currentview = .Home_homeFeed0
+                                    } else {
+                                        alertTF(title: "No person chosen", message: "Please click on the person you want to select", primaryTitle: "Ok") {
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                            
+                        }.padding(20)
+                    }
                     
                     if #available(iOS 15.0, *) {
                                                                                     
@@ -106,7 +106,8 @@ struct PersonPickerViewHome: View {
                                         HStack {
                                             
                                             Text(bigModel.user.persons[index].name)
-                                                .foregroundColor(colorScheme == .dark ? .white : .black)
+                                                //.foregroundColor(colorScheme == .dark ? .white : .black)
+                                                .foregroundColor(.black)
                                             
                                             Spacer()
                                             
@@ -117,7 +118,12 @@ struct PersonPickerViewHome: View {
                                                 bigModel.currentPersonIndex = index
                                                 bigModel.currentPersonId = bigModel.user.persons[index].id
                                                 
-                                                await bigModel.updateMeasurementModel()
+                                                if bigModel.selectedProductId != nil {
+                                                    await bigModel.updateMeasurementModel()
+                                                }
+                                                
+                                                print("true")
+                                                bigModel.isMeasurementModelUpdated = true
                                                 
                                                 //if bigModel.selectedProductId != nil {
                                                     //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
@@ -125,6 +131,7 @@ struct PersonPickerViewHome: View {
                                                 
                                                 //bigModel.fetchLocation()
                                                 bigModel.authCurrentView = .Auth_UserInfo
+                                                bigModel.fetchOrders()
                                             }
                                             
                                         }

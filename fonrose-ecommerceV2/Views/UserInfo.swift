@@ -102,7 +102,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            /*if bigModel.user.persons[bigModel.currentPersonIndex].measurements == nil {
+                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements == nil {
                                 
                                 bigModel.initializeMeasurements()
                                 
@@ -119,7 +119,7 @@ struct UserInfo: View {
                                     if let snapshot = snapshot {
                                         for document in snapshot.documents {
                                             do {
-                                                bigModel.user.persons[bigModel.currentPersonIndex].measurements = try document.data(as: BigModel.Measurements.self)
+                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements = try document.data(as: [BigModel.MeasurementModel].self)
                                             } catch {
                                                 print(error)
                                             }
@@ -130,7 +130,7 @@ struct UserInfo: View {
                                 
                             } else {
                                 bigModel.currentview = .Measurement_Mensurations
-                            }*/
+                            }
                         }
                         
                         HStack {

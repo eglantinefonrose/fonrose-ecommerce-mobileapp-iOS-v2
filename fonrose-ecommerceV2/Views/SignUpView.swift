@@ -34,7 +34,7 @@ struct SignUpView: View {
             
             VStack {
                  
-                BackButtonModel()
+                BackButtonModel(text: "Sign up")
                 
                 Spacer()
                     

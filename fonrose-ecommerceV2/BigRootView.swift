@@ -61,6 +61,10 @@ struct BigRootView: View {
                     AboutUs()
                 }
                 
+                if (self.bigModel.currentview == .HelpView) {
+                    HelpView()
+                }
+                
             }
             
             //MARK: Service client
@@ -85,6 +89,13 @@ struct BigRootView: View {
                 
                 if (self.bigModel.currentview == .ServiceClient_showServices) {
                     ShowServicesView()
+                }
+                if (self.bigModel.currentview == .ServiceClient_showSuiviDeCommande) {
+                    if #available(iOS 16.0, *) {
+                        SuiviDeCommande()
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
             }
             

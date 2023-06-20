@@ -25,7 +25,7 @@ struct RecapMensurations: View {
             
             VStack {
                 
-                BackButtonModel()
+                BackButtonModel(text: "Recap")
                 
                 Spacer()
                     
@@ -72,7 +72,74 @@ struct RecapMensurations: View {
                         .cornerRadius(15)
                         .onTapGesture {
                             self.bigModel.lastViews.append(.Measurement_RecapMensurations)
-                            self.bigModel.currentview = .LivraisonViews_Livraison
+                            
+                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                
+                                bigModel.initializeLocation()
+                            
+                                /*let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Location")
+                                
+                                collectionRef.getDocuments { snapshot, error in
+                                    
+                                    guard error == nil else {
+                                        print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+                                       return
+                                    }
+                                          
+                                    if let snapshot = snapshot {
+                                        
+                                        for document in snapshot.documents {
+
+                                            let dbCivility = document.data()["civility"] as? String ?? ""
+                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
+                                            let dbLastName = document.data()["lastName"] as? String ?? ""
+                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
+                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
+                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
+                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
+                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
+                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
+                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
+                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
+                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
+                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
+                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
+
+                                            bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
+
+                                        }
+                                        
+                                        print("location infos fetched \(bigModel.currentPersonId)")
+                                        bigModel.currentview = .LivraisonViews_Livraison
+                                        
+                                    }
+                                    
+                                }*/
+                                
+                                guard let userId = auth.currentUser?.uid else { return }
+                                    
+                                let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Location")
+                                
+                                collectionRef.getDocuments { snapshot, error in
+                                    guard error == nil else {
+                                        print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
+                                       return
+                                    }
+
+                                    if let snapshot = snapshot {
+                                        for document in snapshot.documents {
+                                            do {
+                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = try document.data(as: BigModel.Location.self)
+                                            } catch {
+                                                print(error)
+                                            }
+                                        }
+                                        bigModel.currentview = .LivraisonViews_Livraison
+                                    }
+                                }
+                                
+                            } else {bigModel.currentview = .LivraisonViews_Livraison}
+                            
                             print("previous View = \(String(describing: self.bigModel.lastViews.last))")
                             print(self.bigModel.lastViews.count)
                             print("location")

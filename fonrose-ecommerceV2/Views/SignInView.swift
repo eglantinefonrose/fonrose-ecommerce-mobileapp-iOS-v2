@@ -33,7 +33,7 @@ struct SignInView: View {
                 
                 VStack {
                     
-                    BackButtonModel()
+                    BackButtonModel(text: "Sign in")
                         
                     Spacer()
                     
@@ -74,7 +74,7 @@ struct SignInView: View {
                                 VStack {
                                     TextField("", text: $bigModel.otpCode)
                                         .padding(5)
-                                        .placeholder(when: bigModel.mobileNo.isEmpty) {
+                                        .placeholder(when: bigModel.otpCode.isEmpty) {
                                             Text("OTP Code")
                                                 .foregroundColor(.gray)
                                                 .opacity(0.6)

@@ -84,7 +84,7 @@ struct HomeView: View {
                 
         Spacer()
          
-        BackButtonModel()
+        BackButtonModel(text: "Measurements")
                    
         VStack {
             
@@ -93,7 +93,6 @@ struct HomeView: View {
             Text("Mensurations")
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .fontWeight(.semibold)
-                .foregroundColor(.white)
             
             Text("all values in millimeters")
                 .foregroundColor(Color.gray)
@@ -197,7 +196,9 @@ struct HomeView: View {
                         print(measurementText3)
                         print(measurementText4)
                         
-                        if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
+                        bigModel.currentview = .Measurement_RecapMensurations
+                        
+                        /*if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
                             
                             /*self.bigModel.lastViews.append(.Measurement_Mensurations)
                             
@@ -241,7 +242,7 @@ struct HomeView: View {
                                 
                             }
                             
-                        }
+                        }*/
                                                     
                     }
                 

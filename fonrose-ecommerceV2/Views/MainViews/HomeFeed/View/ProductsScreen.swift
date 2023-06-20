@@ -22,7 +22,7 @@ struct ProductsScreen: View {
             
             VStack() {
                 
-                BackButtonModel()
+                BackButtonModel(text: "Products")
                                                
                 Text("Products")
                     .font(.system(size: 35, weight: .bold, design: .default))

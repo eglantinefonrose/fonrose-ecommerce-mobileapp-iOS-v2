@@ -13,6 +13,7 @@
 		700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */; };
 		700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F201D242A647B00382533 /* TrailerPlayer.swift */; };
 		700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F4B18295738DE00D0167C /* LogInViewModel.swift */; };
+		701030AF2A196BBA002CA693 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701030AE2A196BBA002CA693 /* HelpView.swift */; };
 		7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */; };
 		7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */; };
 		7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFE2347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld */; };
@@ -50,6 +51,7 @@
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
 		705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF2243F988100D47D6C /* dataSuivi.swift */; };
 		7067C75B29FC01C2003F5A1D /* FetchData_Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */; };
+		708698392A25228C00E393E9 /* OrderStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708698382A25228C00E393E9 /* OrderStatusEnum.swift */; };
 		70887906292F70FC00391A41 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70887905292F70FC00391A41 /* ShopView.swift */; };
 		708CF08728A4BB0300397DED /* LoopTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF08628A4BB0300397DED /* LoopTest.swift */; };
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
@@ -96,6 +98,7 @@
 		700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetectorTest.swift; sourceTree = "<group>"; };
 		700F201D242A647B00382533 /* TrailerPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerPlayer.swift; sourceTree = "<group>"; };
 		700F4B18295738DE00D0167C /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		701030AE2A196BBA002CA693 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		7019ABF72347E73F00F5EF15 /* fonrose-ecommerceV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fonrose-ecommerceV2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -136,6 +139,7 @@
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
 		705ABCF2243F988100D47D6C /* dataSuivi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataSuivi.swift; sourceTree = "<group>"; };
 		7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData_Sandbox.swift; sourceTree = "<group>"; };
+		708698382A25228C00E393E9 /* OrderStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusEnum.swift; sourceTree = "<group>"; };
 		70887905292F70FC00391A41 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
 		708CF08628A4BB0300397DED /* LoopTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopTest.swift; sourceTree = "<group>"; };
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
@@ -335,6 +339,7 @@
 			isa = PBXGroup;
 			children = (
 				7045357F2477BB8F001F20A8 /* ViewEnum.swift */,
+				708698382A25228C00E393E9 /* OrderStatusEnum.swift */,
 				7045357D2477BB29001F20A8 /* BigModel.swift */,
 				70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */,
 			);
@@ -350,6 +355,7 @@
 				7025B18F24699EB400F43171 /* FinalizeOrderView */,
 				70295CB924604E3A00BE8D33 /* ServiceClient */,
 				70BB608A245B2D1800F4CCDF /* Measurement */,
+				701030AE2A196BBA002CA693 /* HelpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -544,6 +550,7 @@
 				700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */,
 				7019ABFB2347E73F00F5EF15 /* AppDelegate.swift in Sources */,
 				7034755728623E000030C906 /* SignInSandbox.swift in Sources */,
+				708698392A25228C00E393E9 /* OrderStatusEnum.swift in Sources */,
 				70347551285F8F170030C906 /* PersonPickerView.swift in Sources */,
 				70C410C0247C6CD90059E0CF /* SuiviStatusEnum.swift in Sources */,
 				70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */,
@@ -579,6 +586,7 @@
 				70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */,
 				7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */,
 				704535822477BD85001F20A8 /* BigRootView.swift in Sources */,
+				701030AF2A196BBA002CA693 /* HelpView.swift in Sources */,
 				702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */,
 				708CF08728A4BB0300397DED /* LoopTest.swift in Sources */,
 				700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */,

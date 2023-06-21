@@ -36,6 +36,7 @@ enum ViewEnum: String, Codable {
     //MARK: Service Client
     case ServiceClient_showDelivery
     case ServiceClient_showSuiviDeCommande
+    case ServiceClient_showOrdersList
     case ServiceClient_showReturn
     case ServiceClient_showCard
     case ServiceClient_showServices

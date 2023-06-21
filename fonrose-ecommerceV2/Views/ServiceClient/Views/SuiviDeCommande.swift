@@ -16,9 +16,9 @@ struct OrdersExample: Identifiable {
 @available(iOS 16.0, *)
 struct SuiviDeCommande: View {
     
-    //var model: ParcelInfos
     @EnvironmentObject var bigModel: BigModel
-    let ordersProductNames = [OrdersExample(id: 0, name: "RobeRouge"), OrdersExample(id: 1, name: "Robe2"), OrdersExample(id: 2, name: "Robe3")]
+    @Environment(\.colorScheme) var colorScheme
+    var order: BigModel.Order
     
     
     var body: some View {
@@ -30,377 +30,125 @@ struct SuiviDeCommande: View {
             
             VStack {
                 
-                BackButtonModel(text: "Service Client")
+                BackButtonModel(text: "Suivi de commande")
+                    .padding(20)
                 
-                VStack {
-                    List(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders) { order in
-                        Text(order.productName)
-                            .listRowBackground(Color("Background"))
+                VStack(spacing: 0) {
+                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .foregroundColor(.gray)
+                        HStack {
+                            Text("Commande Enregistrée")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            Image(systemName: "checkmark.circle")
+                        }
+                        .padding(.horizontal, 15)
                     }
-                    /*List(ordersProductNames) { order in
-                        Text(order.name)
-                            .listRowBackground(Color("Background"))
-                    }*/
-                     .listStyle(PlainListStyle())
-                    .background(Color("Background"))
-                    .scrollContentBackground(.hidden)
+                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .foregroundColor(order.status != .CommandeEnregistree ? .gray : Color("Background"))
+                        HStack {
+                            Text("En cours de preparation")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            if order.status != .CommandeEnregistree {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }.padding(.horizontal, 15)
+                    }
+                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .foregroundColor(order.status == .Arrived || order.status == .Recieved || order.status == .Expedie ? .gray : Color("Background"))
+                        HStack {
+                            Text("En cours d'expedition")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            if order.status == .Recieved || order.status == .Expedie {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }.padding(.horizontal, 15)
+                    }
+                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .foregroundColor(order.status == .Arrived || order.status == .Recieved ? .gray : Color("Background"))
+                        HStack {
+                            Text("Arrivée")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            if order.status == .Arrived || order.status == .Recieved {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }.padding(.horizontal, 15)
+                    }
+                    
+                    ZStack(alignment: .leading) {
+                        Rectangle()
+                            .foregroundColor(order.status == .Recieved ? .gray : Color("Background"))
+                        HStack {
+                            Text("Reçue")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                            Spacer()
+                            if order.status == .Recieved {
+                                Image(systemName: "checkmark.circle")
+                            }
+                        }.padding(.horizontal, 15)
+                    }
+                    
                 }
                 
-            }.padding(20)
+                VStack(spacing: 10) {
+                    if order.status == .CommandeEnregistree {
+                        Text("Status : Commande enregistrée")
+                            .font(.title3)
+                    }
+                    if order.status == .Expedie {
+                        Text("Status : Expédiée")
+                            .font(.title3)
+                    }
+                    if order.status == .Recieved {
+                        Text("Status : Reçue")
+                            .font(.title3)
+                    }
+                    if order.status == .EnCoursDePrep {
+                        Text("Status : En cours de préparation")
+                            .font(.title3)
+                    }
+                    if order.status == .Arrived {
+                        Text("Status : Arrivée")
+                            .font(.title3)
+                    }
+                    
+                    Text("En savoir plus sur la livraison")
+                        .foregroundColor(.blue)
+                    
+                    HStack {
+                        Spacer()
+                        Text("Save")
+                            .foregroundColor(Color.white)
+                            .fontWeight(.semibold)
+                            .padding(10)
+                        Spacer()
+                    }.background(Color.blue)
+                    .cornerRadius(15)
+                    .padding(20)
+                    
+                }
+                
+            }
+            
         }
         
-        // MARK: Livré
-        /*VStack {
-            
-            if model.status == .Livré {
-            
-            VStack {
-                    
-                    Spacer()
-                        .frame(height: 40)
-                        
-                    HStack {
-                    
-                        Spacer()
-                            .frame(width: 30)
-                        
-                        Button(action: {
-                            self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                            bigModel.lastViews.removeLast()
-                        }) {
-                            Text("Back")
-                                .foregroundColor(.blue)
-                        }
-                        
-                        Spacer()
-                        
-                    }
-                        
-                    
-                        Spacer()
-                            .frame(height: 100)
-                    
-                    VStack {
-                    
-                        VStack {
-                            Text("Suivi")
-                                .font(.system(size: 40, weight: .bold, design: .default))
-                                .foregroundColor(Color.white)
-                                    
-                            Text("de colis en temps réel")
-                                .foregroundColor(Color.gray)
-                                .font(.system(size: 25, weight: .semibold, design: .default))
-                        }
-                        
-                        Spacer()
-                            .frame(height: 150)
-                        
-                        VStack {
-                            
-                            PrisEnCharge()
-                            
-                            Spacer()
-                                .frame(height: 45)
-                            
-                            PretsAEtreExpedie()
-                            
-                            Spacer()
-                                .frame(height: 45)
-                            
-                            EnCoursDExpedition()
-                            
-                        }.frame(width: UIScreen.main.bounds.width)
-                        
-                        Spacer()
-                            .frame(height:  22.5)
-                        
-                        ZStack {
-                            
-                            
-                            Rectangle()
-                                .foregroundColor(.gray)
-                                .frame(width: UIScreen.main.bounds.width)
-                            
-                            VStack {
-                                
-                                Spacer()
-                                    .frame(height: 22.5)
-                                
-                                Livre()
-                                                                
-                                Spacer()
-                                
-                            }
-                        
-                        }
-                    
-                    }
-                
-                }
-                .background(Color.black)
-                .edgesIgnoringSafeArea(.all)
-                
-                }//acolade fermante du 1er if
-                
-                // MARK: En cours d'expedition
-            
-                if model.status == .EnCoursDExpedition {
-                
-                    VStack {
-                               
-                        Spacer()
-                            .frame(height: 40)
-                            
-                        HStack {
-                        
-                            Spacer()
-                                .frame(width: 30)
-                            
-                            Button(action: {
-                                self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                                bigModel.lastViews.removeLast()
-                            }) {
-                                Text("Back")
-                                    .foregroundColor(.blue)
-                            }
-                            
-                            Spacer()
-                            
-                        }
-                            
-                        
-                            Spacer()
-                                .frame(height: 100)
-                        
-                        VStack {
-                        
-                            VStack {
-                                Text("Suivi")
-                                    .font(.system(size: 40, weight: .bold, design: .default))
-                                    .foregroundColor(Color.white)
-                                        
-                                Text("de colis en temps réel")
-                                    .foregroundColor(Color.gray)
-                                    .font(.system(size: 25, weight: .semibold, design: .default))
-                            }
-                            
-                            Spacer()
-                            .frame(height: 150)
-                            
-                            VStack {
-                                
-                                PrisEnCharge()
-                                
-                                Spacer()
-                                    .frame(height: 45)
-                                
-                                PretsAEtreExpedie()
-                                
-                                
-                                
-                            }.frame(width: UIScreen.main.bounds.width)
-                            
-                            Spacer()
-                                .frame(height:  22.5)
-                            
-                            ZStack {
-                                
-                                
-                                Rectangle()
-                                    .foregroundColor(.gray)
-                                    .frame(width: UIScreen.main.bounds.width)
-                                
-                                VStack {
-                                    
-                                    Spacer()
-                                        .frame(height: 22.5)
-                                    
-                                    EnCoursDExpedition()
-                                    
-                                    Spacer()
-                                        .frame(height: 45)
-                                    
-                                    Livre()
-                                                                    
-                                    Spacer()
-                                    
-                                }
-                            
-                            }
-                        
-                        }
-                    
-                        
-                    
-                    }
-                    .background(Color.black)
-                    .edgesIgnoringSafeArea(.all)
-                
-                }//acolade fermante du 1er if
-                
-                        
-                    if model.status == .PretsAEtreExpédié {
-                    
-                        VStack {
-                        
-                            Spacer()
-                                    .frame(height: 30)
-                                
-                                ZStack {
-                                   Button(action: {
-                                        self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                                        bigModel.lastViews.removeLast()
-                                    }) {
-                                        Text("Back")
-                                    }
-                                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                                .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-                            
-                                Spacer()
-                                    .frame(height: 100)
-                                
-                                VStack {
-                                    
-                                    
-                                   VStack {
-                                       Text("Suivi")
-                                           .font(.system(size: 40, weight: .bold, design: .default))
-                                           .foregroundColor(Color.white)
-                                               
-                                       Text("de colis en temps réel")
-                                           .foregroundColor(Color.gray)
-                                           .font(.system(size: 25, weight: .semibold, design: .default))
-                                   }
-                                    
-                                    Spacer()
-                                    .frame(height: 150)
-                                
-                                VStack {
-                                    
-                                    PrisEnCharge()
-                                    
-                                }.frame(width: UIScreen.main.bounds.width)
-                                
-                                Spacer()
-                                    .frame(height: 45)
-                                                
-                                ZStack {
-                                    
-                                    Spacer()
-                                        .frame(height: 45)
-                                    
-                                    Rectangle()
-                                        .foregroundColor(.gray)
-                                        .frame(width: UIScreen.main.bounds.width)
-                                    
-                                    VStack {
-                                        
-                                        Spacer()
-                                            .frame(height: 30)
-                                        
-                                        PretsAEtreExpedie()
-                                        
-                                        Spacer()
-                                            .frame(height: 45)
-                                        
-                                        EnCoursDExpedition()
-                                        
-                                        Spacer()
-                                            .frame(height: 45)
-                                        
-                                        Livre()
-                                        
-                                        Spacer()
-                                        
-                                    }
-                                
-                                }
-                            }
-                    
-                        }.background(Color.black)
-                        .edgesIgnoringSafeArea(.all)
-                
-                    
-             
-                if model.status == .PrisEnCharge {
-                            
-                            VStack {
-                
-                        Spacer()
-                                .frame(height: 30)
-                            
-                            ZStack {
-                               Button(action: {
-                                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                                    bigModel.lastViews.removeLast()
-                                }) {
-                                    Text("Back")
-                                }
-                            }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                            .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-                        
-                            Spacer()
-                                .frame(height: 100)
-                            
-                            VStack {
-                                
-                                
-                               VStack {
-                                   Text("Suivax")
-                                       .font(.system(size: 40, weight: .bold, design: .default))
-                                       .foregroundColor(Color.white)
-                                           
-                                   Text("de colis en temps réel")
-                                       .foregroundColor(Color.gray)
-                                       .font(.system(size: 25, weight: .semibold, design: .default))
-                               }
-                                
-                                Spacer()
-                                .frame(height: 150)
-                                            
-                            ZStack {
-                                
-                                Spacer()
-                                    .frame(height: 45)
-                                
-                                Rectangle()
-                                    .foregroundColor(.gray)
-                                    .frame(width: UIScreen.main.bounds.width)
-                                
-                                VStack {
-                                    
-                                    Spacer()
-                                        .frame(height: 30)
-                                    
-                                    PrisEnCharge()
-                                    
-                                    Spacer()
-                                        .frame(height: 45)
-                                    
-                                    PretsAEtreExpedie()
-                                    
-                                    Spacer()
-                                        .frame(height: 45)
-                                    
-                                    EnCoursDExpedition()
-                                    
-                                    Spacer()
-                                        .frame(height: 45)
-                                    
-                                    Livre()
-                                    
-                                    Spacer()
-                                    
-                                }
-                            
-                            }
-                        }
-                
-                    }.background(Color.black)
-                    .edgesIgnoringSafeArea(.all)
-                }//acolade fermante du if "Pris en charge"
-        }
-    }*/
+    }
 }
 
 
@@ -493,9 +241,12 @@ struct Header: View {
 
 struct SuiviDeCommande_Previews: PreviewProvider {
     static var previews: some View {
-        SuiviDeCommande()
-            .environmentObject(BigModel(shouldInjectMockedData: true))
+        if #available(iOS 16.0, *) {
+            SuiviDeCommande( order: BigModel.Order(productName: "Robe", status: .EnCoursDePrep, location: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""), measurements: [], orderDate: .now))
+                .environmentObject(BigModel(shouldInjectMockedData: true))
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
-}

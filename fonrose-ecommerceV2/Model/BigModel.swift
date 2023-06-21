@@ -1001,6 +1001,41 @@ class BigModel : ObservableObject {
         
     }
     
+    func fetchOrders() async throws {
+        user.persons[currentPersonIndex ?? 0].orders.removeAll()
+        
+        guard let userId = auth.currentUser?.uid else { return }
+        let collectionRef = try await Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Orders").getDocuments()
+        
+        for document in collectionRef.documents {
+            var order: Order
+            do {
+                order = try document.data(as: Order.self)
+                self.user.persons[currentPersonIndex ?? 0].orders.append(order)
+            }
+            catch {
+                print(error)
+            }
+            
+        }
+    }
+    
+    /*let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
+     
+     self.user.persons.removeAll()
+     for document in collectionRef.documents {
+         var person: Person = Person(email: "", name: "tt", orders: [])
+         do {
+           person = try document.data(as: Person.self)
+             self.user.persons.append(person)
+             print(person.id)
+         }
+         catch {
+           print(error)
+         }
+         
+     }*/
+    
     
     
     

@@ -20,43 +20,26 @@ struct ListeCommande: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                HStack {
-                    
-                    Text("Back")
-                        .bold()
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                            self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
-                            print("back")
-                        }
-                                    
-                    Spacer()
-                    
-                    Text("Suvi de commande")
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                }
                 
-                if #available(iOS 16.0, *) {
-                    List(/*@START_MENU_TOKEN@*/0 ..< 5/*@END_MENU_TOKEN@*/) { item in
-                        Text("f")
-                    }.listStyle(PlainListStyle())
+                BackButtonModel(text: "Suivi de Commande")
+                
+                
+                VStack {
+                    if #available(iOS 16.0, *) {
+                        List(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders) { order in
+                            Text(order.productName)
+                                .listRowBackground(Color("Background"))
+                                .onTapGesture {
+                                    SuiviDeCommande(order: order)
+                                }
+                        }
+                        .listStyle(PlainListStyle())
                         .background(Color("Background"))
                         .scrollContentBackground(.hidden)
-                } else {
-                    // Fallback on earlier versions
+                    } else {
+                        // Fallback on earlier versions
+                    }
                 }
-                 
-                Spacer()
                 
             }.padding(20)
         }
@@ -66,5 +49,6 @@ struct ListeCommande: View {
 struct ListeCommande_Previews: PreviewProvider {
     static var previews: some View {
         ListeCommande()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
 }

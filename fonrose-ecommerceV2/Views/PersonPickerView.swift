@@ -121,6 +121,7 @@ struct PersonPickerViewHome: View {
                                                 if bigModel.selectedProductId != nil {
                                                     await bigModel.updateMeasurementModel()
                                                 }
+                                                try await bigModel.fetchOrders()
                                                 
                                                 print("true")
                                                 bigModel.isMeasurementModelUpdated = true
@@ -131,7 +132,6 @@ struct PersonPickerViewHome: View {
                                                 
                                                 //bigModel.fetchLocation()
                                                 bigModel.authCurrentView = .Auth_UserInfo
-                                                bigModel.fetchOrders()
                                             }
                                             
                                         }

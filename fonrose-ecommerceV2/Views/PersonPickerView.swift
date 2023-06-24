@@ -119,19 +119,20 @@ struct PersonPickerViewHome: View {
                                                 bigModel.currentPersonId = bigModel.user.persons[index].id
                                                 
                                                 if bigModel.selectedProductId != nil {
-                                                    await bigModel.updateMeasurementModel()
+                                                    bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements = await bigModel.updatedMeasurementModel()
                                                 }
-                                                try await bigModel.fetchOrders()
+                                                bigModel.authCurrentView = .Auth_UserInfo
+                                                
+                                                //try await bigModel.fetchOrders()
                                                 
                                                 print("true")
-                                                bigModel.isMeasurementModelUpdated = true
                                                 
                                                 //if bigModel.selectedProductId != nil {
-                                                    //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId ?? 0)
+                                                    //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId)
                                                 //}
                                                 
                                                 //bigModel.fetchLocation()
-                                                bigModel.authCurrentView = .Auth_UserInfo
+                                                
                                             }
                                             
                                         }

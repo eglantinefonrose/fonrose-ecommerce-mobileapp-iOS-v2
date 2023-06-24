@@ -60,13 +60,7 @@ class BigModel : ObservableObject {
 
     struct Measurements: Codable {
         @DocumentID var id: String?
-        var ArmpitsMeasurement: String
-        var ArmsLength: String
-        var HeadMeasurement: String
-        var PelvisMeasurement: String
-        var PelvisKnee: String
-        var ShouldersMeasurement: String
-        var ShouldersPelvis: String
+        var measurements: [MeasurementModel]
     }
     
     struct MeasurementModel: Codable {
@@ -93,7 +87,7 @@ class BigModel : ObservableObject {
         var id = UUID().uuidString
         var email: String
         var name: String
-        var measurements: [MeasurementModel]?
+        var measurements: Measurements?
         var location: Location?
         var orders: [Order]
         
@@ -119,7 +113,7 @@ class BigModel : ObservableObject {
         var productName: String
         var status: OrderStatusEnum
         var location: Location
-        var measurements: [MeasurementModel]
+        var measurements: Measurements
         var orderDate: Date
     }
     
@@ -385,7 +379,7 @@ class BigModel : ObservableObject {
     }
 
     // cette fonction récupère les infos de type NeededMeasurementsModel depuis le fichier Json stocké dans GCS puis renvoie un tableau rempli de NeededMeasurementsModel avec les infos correspondantes
-    func fetchNeededMeasurement() async throws -> [NeededMeasurementsModel] {
+    func fetchNeededMeasurementsInfo() async throws -> [NeededMeasurementsModel] {
         
         /*{
          
@@ -428,6 +422,7 @@ class BigModel : ObservableObject {
              for neededMeasurementInfo in neededmeasurInfo {
                  neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
              }
+             
              print("done")
              
          } catch {
@@ -438,29 +433,69 @@ class BigModel : ObservableObject {
         
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    var measurementTab: [MeasurementModel] = []
+    
     //MARK: updateMeasurementModel
     var isMeasurementModelUpdated: Bool = false
-    func updateMeasurementModel() async {
+    func updatedMeasurementModel() async -> [MeasurementModel] {
         
-        self.user.persons[self.currentPersonIndex ?? 0].measurements = []
+        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.removeAll()
         
         do {
             
-            let fetchedNeededMeasurement = try await fetchNeededMeasurement()[self.dressPictures[self.selectedProductId ?? 0].id ?? 0].neededMeasurements
+            let fetchedNeededMeasurementIndexs = try await fetchNeededMeasurementsInfo()[self.dressPictures[self.selectedProductId ?? 0].id ].neededMeasurements
             
-            for i in 0..<fetchedNeededMeasurement.count {
-                
-                DispatchQueue.main.async {
-                    print("fetch needed measurements count \(self.allMeasurements.count)")
-                    print(fetchedNeededMeasurement[i])
-                    self.user.persons[self.currentPersonIndex ?? 0].measurements?.append(self.allMeasurements[fetchedNeededMeasurement[i]])
+            if self.currentPersonIndex != nil {
+                for i in 0..<fetchedNeededMeasurementIndexs.count {
+                    
+                    Task {
+                        
+                        DispatchQueue.main.async {
+                            //self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
+                            //print(self.allMeasurements[fetchedNeededMeasurementIndexs[i]].measurementName)
+                            self.measurementTab.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
+                            print("append")
+                        }
+                        
+                    }
+                    
                 }
-                
+            } else {
+                print("current person nil")
             }
+            
+            print(fetchedNeededMeasurementIndexs.count)
+            
+            //print("measurements \(String(describing: self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count))")
             
         } catch {
             print("error")
         }
+        
+        return measurementTab
         
     }
     
@@ -983,7 +1018,7 @@ class BigModel : ObservableObject {
             productName: dressPictures[selectedProductId ?? 0].productName,
             status: .CommandeEnregistree,
             location: user.persons[currentPersonIndex ?? 0].location ?? Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""),
-            measurements: user.persons[currentPersonIndex ?? 0].measurements ?? [], orderDate: Date(timeIntervalSinceNow: 0))
+            measurements: user.persons[currentPersonIndex ?? 0].measurements ?? Measurements(measurements: []), orderDate: Date(timeIntervalSinceNow: 0))
         
         let collectionRef = self.db.collection("Orders")
         
@@ -1018,6 +1053,15 @@ class BigModel : ObservableObject {
             }
             
         }
+    }
+    
+    func isMeasurementRequested(measurementName: String) -> Bool {
+        for i in 0..<(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count ?? 0) {
+            if measurementName == self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements[i].measurementName ?? "Armpits measurement" {
+                return true
+            }
+        }
+        return false
     }
     
     /*let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
@@ -1085,7 +1129,7 @@ class BigModel : ObservableObject {
     init(shouldInjectMockedData: Bool) {
         print("Constructor BigModel - shouldInjectMockedData==true")
         
-        let theMeasurement = [MeasurementModel(measurementName: "armpits", measurementValue: ""), MeasurementModel(measurementName: "shoulders", measurementValue: ""), MeasurementModel(measurementName: "legs", measurementValue: "")]
+        let theMeasurement = Measurements(measurements: [MeasurementModel(measurementName: "armpits", measurementValue: ""), MeasurementModel(measurementName: "shoulders", measurementValue: ""), MeasurementModel(measurementName: "legs", measurementValue: "")])
         let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3")
         
         let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation, orders: [])

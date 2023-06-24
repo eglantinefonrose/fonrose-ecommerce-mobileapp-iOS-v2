@@ -119,7 +119,7 @@ struct UserInfo: View {
                                     if let snapshot = snapshot {
                                         for document in snapshot.documents {
                                             do {
-                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements = try document.data(as: [BigModel.MeasurementModel].self)
+                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements = try document.data(as: BigModel.Measurements.self)
                                             } catch {
                                                 print(error)
                                             }

@@ -242,7 +242,7 @@ struct Header: View {
 struct SuiviDeCommande_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 16.0, *) {
-            SuiviDeCommande( order: BigModel.Order(productName: "Robe", status: .EnCoursDePrep, location: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""), measurements: [], orderDate: .now))
+            SuiviDeCommande( order: BigModel.Order(productName: "Robe", status: .EnCoursDePrep, location: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""), measurements: BigModel.Measurements(measurements: []), orderDate: .now))
                 .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions

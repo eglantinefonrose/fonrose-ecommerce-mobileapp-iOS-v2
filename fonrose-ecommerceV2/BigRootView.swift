@@ -96,7 +96,7 @@ struct BigRootView: View {
                 }
                 if (self.bigModel.currentview == .ServiceClient_showSuiviDeCommande) {
                     if #available(iOS 16.0, *) {
-                        SuiviDeCommande(order: BigModel.Order(productName: "", status: .CommandeEnregistree, location: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""), measurements: [], orderDate: .now))
+                        SuiviDeCommande(order: BigModel.Order(productName: "", status: .CommandeEnregistree, location: BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""), measurements: BigModel.Measurements(measurements: []), orderDate: .now))
                     } else {
                         // Fallback on earlier versions
                     }

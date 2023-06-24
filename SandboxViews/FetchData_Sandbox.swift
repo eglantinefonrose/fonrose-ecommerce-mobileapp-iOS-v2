@@ -18,13 +18,13 @@ struct FetchData_Sandbox: View {
             
             if show {
                 VStack {
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[0].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[1].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[2].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[3].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[4].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[5].measurementName ?? "nil")
-                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?[6].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementName ?? "nil")
+                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementName ?? "nil")
                     Text("💋")
                         .onTapGesture {
                             show = false
@@ -38,7 +38,7 @@ struct FetchData_Sandbox: View {
                         .onTapGesture {
                             
                             Task {
-                                await bigModel.updateMeasurementModel()
+                                //await bigModel.updateMeasurementModel()
                                 show = true
                             }
                             

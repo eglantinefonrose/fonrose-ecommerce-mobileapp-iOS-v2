@@ -119,7 +119,7 @@ struct PagingView<Content>: View where Content: View {
                                 Task {
                                     
                                     if bigModel.currentPersonIndex != nil {
-                                        await bigModel.updateMeasurementModel()
+                                        bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements = await bigModel.updatedMeasurementModel()
                                     }
                                     
                                     bigModel.currentview = .Measurement_Mensurations

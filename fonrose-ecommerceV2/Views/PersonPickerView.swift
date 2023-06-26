@@ -115,19 +115,24 @@ struct PersonPickerViewHome: View {
                                             
                                             //Task {
                                                 
-                                                bigModel.currentPersonIndex = index
-                                                bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
-                                                bigModel.isMeasurementModelUpdated = true
-                                                    bigModel.authCurrentView = .Auth_UserInfo
-                                                //try await bigModel.fetchOrders()
-                                                                                                
-                                                //if bigModel.selectedProductId != nil {
-                                                    //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId)
-                                                //}
+                                            bigModel.currentPersonIndex = index
+                                            bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
+                                            bigModel.isMeasurementModelUpdated = true
+                                            bigModel.selectedProductId = nil
+                                            
+                                            Task {
                                                 
-                                                //bigModel.fetchLocation()
+                                                await bigModel.fetchMeasurements()
                                                 
-                                            //}
+                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements == nil {
+                                                    bigModel.initializeMeasurements()
+                                                    await bigModel.fetchMeasurements()
+                                                } else {
+                                                }
+                                            }
+                                            
+                                            bigModel.authCurrentView = .Auth_UserInfo
+                                            
                                             
                                         }
                                         

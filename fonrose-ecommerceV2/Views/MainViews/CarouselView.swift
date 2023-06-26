@@ -117,26 +117,11 @@ struct PagingView<Content>: View where Content: View {
                             
                             if bigModel.selectedProductId != nil {
                                 
-                                if bigModel.selectedProductId != nil {
-                                    Task {
-                                        
-                                        await bigModel.getRequestedMeasurements()
-                                        
-                                        bigModel.currentview = .Measurement_Mensurations
-                                        
-                                    }
+                                Task {
+                                    await bigModel.getRequestedMeasurements()
+                                    bigModel.currentview = .Measurement_Mensurations
                                 }
-                                /*Task {
-                                    
-                                    if bigModel.currentPersonIndex != nil {
-                                        try await
-                                        if bigModel.isMeasurementModelUpdated {
-                                            
-                                        }
-                                    }
-                                    
-                                    isFetchingNeededMeasurementsInfo = false
-                                }*/
+                                
                             } else {
                                 
                             }

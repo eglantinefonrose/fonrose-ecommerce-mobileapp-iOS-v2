@@ -682,51 +682,7 @@ struct HomeView: View {
                             }
                         }
                             
-                        /*if measurementText1 != "" && measurementText2 != "" && measurementText3 != "" && measurementText4 != "" && measurementText5 != "" && measurementText6 != "" && measurementText7 != "" {
-                            
-                            /*self.bigModel.lastViews.append(.Measurement_Mensurations)
-                            
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            
-                            print(self.bigModel.lastViews.count)
-                            
-                            db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex].measurements?.id ?? "").setData(["ArmpitsMeasurement": measurementText1, "ArmsLength": measurementText2, "HeadMeasurement": measurementText3, "PelvisMeasurement": measurementText4, "PelvisKnee": measurementText5, "ShouldersMeasurement": measurementText6, "ShouldersPelvis": measurementText7]) { _ in
-                                
-                                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Measurements").getDocuments { snapshot, error in
-                                       guard error == nil else {
-                                           print(error!.localizedDescription)
-                                           return
-                                       }
-                                       
-                                       if let snapshot = snapshot {
-                                           for document in snapshot.documents {
-                                               let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                               let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                               let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                               let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                               let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                               let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                               let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                               
-                                               bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(id: document.documentID, ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                               
-                                               
-                                           }
-                                       }
-                                       
-                                    bigModel.currentview = .Measurement_RecapMensurations
-                                    
-                                   }
-                                
-                            }*/
-                            
-                        } else {
-                            
-                            alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
-                                
-                            }
-                            
-                        }*/
+                        
                                                     
                     }
                 
@@ -734,14 +690,18 @@ struct HomeView: View {
                             
     }.padding(20)
             .onAppear {
-                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? "nil"
-                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? "nil"
-                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? "nil"
-                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? "nil"
-                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? "nil"
-                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? "nil"
-                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? "nil"
-                self.measurementsTexts = [measurementText1, measurementText2, measurementText3, measurementText4, measurementText5, measurementText6, measurementText7]
+                measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? "nil"
+                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? "nil"
+                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? "nil"
+                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? "nil"
+                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? "nil"
+                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? "nil"
+                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? "nil"
+                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue ?? "nil"
+                measurementText8 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue ?? "nil"
+                measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? "nil"
+                measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? "nil"
+                measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? "nil"
                 
                 /*Task {
                     do {

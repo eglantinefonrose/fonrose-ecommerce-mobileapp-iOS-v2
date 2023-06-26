@@ -545,13 +545,31 @@ class BigModel : ObservableObject {
     
         
     //MARK: Fetch Measurements
-    func fetchMeasurements() {
+    func fetchMeasurements() async {
         
-        /*guard let userId = auth.currentUser?.uid else { return }
-        
-        self.db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments { [self] snapshot, error in
+        do {
+            guard let userId = auth.currentUser?.uid else { return }
+            let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments()
             
-            guard error == nil else {
+            self.user.persons[self.currentPersonIndex ?? 0].measurements = Measurements(measurements: [])
+            for document in collectionRef.documents {
+                var measurements: Measurements = Measurements(measurements: [])
+                do {
+                    measurements = try document.data(as: Measurements.self)
+                    self.user.persons[self.currentPersonIndex ?? 0].measurements = measurements
+                }
+                catch {
+                    print(error)
+                }
+                
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+            
+            /*guard error == nil else {
                 print("ERROR WHEN FETCHING MEASUREMENTS \(error!.localizedDescription)")
                 return
             }

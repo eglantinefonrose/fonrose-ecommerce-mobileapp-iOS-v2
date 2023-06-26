@@ -193,56 +193,7 @@ struct LocationHome: View {
                                 .font(adressStreet == "No location selected" ? .footnote : .headline)
                         }
                         .onTapGesture {
-                            /*self.bigModel.lastViews.append(.LivraisonViews_Livraison)
                             
-                            if self.adressStreet != "No location selected" {
-                                    
-                                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "").setData(["civility": "", "firstName": "", "lastName": "", "emailAdress": bigModel.user.persons[bigModel.currentPersonIndex].email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": adressLat, "adressLong": adressLong]) { _ in
-                                    
-                                    db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").getDocuments { snapshot, error in
-                                           guard error == nil else {
-                                               print(error!.localizedDescription)
-                                               return
-                                           }
-                                           
-                                           if let snapshot = snapshot {
-                                               for document in snapshot.documents {
-                                                
-                                                print("doc snapshot")
-                                                
-                                                let dbCivility = document.data()["civility"] as? String ?? ""
-                                                let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                                let dbLastName = document.data()["lastName"] as? String ?? ""
-                                                let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                                let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                                let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                                let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                                let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                                let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                                let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                                let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                                let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                                let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                                let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-                                                   
-                                                bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
-                                                   
-                                                   
-                                               }
-                                           }
-                                           
-                                        self.bigModel.currentview = .LivraisonViews_RecapLivraison
-                                        isAlertPresented = true
-                                           
-                                       }
-                                    
-                                }
-                                
-                            } else {
-                                
-                            }
-                            
-                            print("back")*/
                         }
                         
                         Spacer()

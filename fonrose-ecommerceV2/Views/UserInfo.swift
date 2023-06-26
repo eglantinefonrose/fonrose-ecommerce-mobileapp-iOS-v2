@@ -24,9 +24,6 @@ struct UserInfo: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                                    
-                Spacer()
-                    .frame(height: 20)
                 
                 HStack {
                     
@@ -56,13 +53,11 @@ struct UserInfo: View {
                         }
                     
                 }.padding(20)
-                        
+                      
                 Spacer()
                 
                 VStack {
-                    
-                    Spacer()
-                    
+                                        
                     if #available(iOS 14.0, *) {
                         if #available(iOS 16.0, *) {
                             if bigModel.user.id != "" {
@@ -102,49 +97,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
-                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements == nil {
-                                
-                                bigModel.initializeMeasurements()
-                                
-                                guard let userId = auth.currentUser?.uid else { return }
-                                    
-                                let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements")
-                                
-                                collectionRef.getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
-                                       return
-                                    }
-
-                                    if let snapshot = snapshot {
-                                        for document in snapshot.documents {
-                                            do {
-                                                bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements = try document.data(as: BigModel.Measurements.self)
-                                            } catch {
-                                                print(error)
-                                            }
-                                        }
-                                        
-                                        if bigModel.selectedProductId != nil {
-                                            Task {
-                                                await bigModel.getRequestedMeasurements()
-                                            }
-                                        }
-                                        
-                                        
-                                        bigModel.currentview = .Measurement_Mensurations
-                                    }
-                                }
-                                
-                            } else {
-                                
-                                if bigModel.selectedProductId != nil {
-                                    Task {
-                                        await bigModel.getRequestedMeasurements()
-                                        
-                                    }
-                                }
-                                
+                            bigModel.currentview = .Measurement_Mensurations
                                 
                             }
                         }
@@ -224,16 +177,10 @@ struct UserInfo: View {
                                 
                             } else {bigModel.currentview = .LivraisonViews_Livraison}
                         }
-                    }.padding(20)
-                        
-                Spacer()
-                    
-                }
+                    }
                 
-                /*if bigModel.user.id != "" {
-                    Text("Connect with \(bigModel.user.email)")
-                }*/
-            
+                Spacer()
+                
                 VStack {
                     
                     HStack {
@@ -261,13 +208,8 @@ struct UserInfo: View {
                     .onTapGesture {
                         bigModel.signOut()
                     }
-                    
                 }
-                
             }
-            
-            //Change(isShowing: $isChangeViewShowed)
-                
         }
     }
 }

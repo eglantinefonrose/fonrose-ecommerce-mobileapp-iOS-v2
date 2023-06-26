@@ -113,27 +113,23 @@ struct PersonPickerViewHome: View {
                                             
                                         }.onTapGesture {
                                             
-                                            Task {
+                                            //Task {
                                                 
                                                 bigModel.currentPersonIndex = index
-                                                bigModel.currentPersonId = bigModel.user.persons[index].id
-                                                
-                                                if bigModel.selectedProductId != nil {
-                                                    bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements = await bigModel.updatedMeasurementModel()
-                                                }
-                                                bigModel.authCurrentView = .Auth_UserInfo
-                                                
+                                                bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
+                                            bigModel.initializeMeasurements()
+                                            
+                                                bigModel.isMeasurementModelUpdated = true
+                                                    bigModel.authCurrentView = .Auth_UserInfo
                                                 //try await bigModel.fetchOrders()
-                                                
-                                                print("true")
-                                                
+                                                                                                
                                                 //if bigModel.selectedProductId != nil {
                                                     //bigModel.fetchNeededMeasurement(selectedProductId: bigModel.selectedProductId)
                                                 //}
                                                 
                                                 //bigModel.fetchLocation()
                                                 
-                                            }
+                                            //}
                                             
                                         }
                                         
@@ -144,7 +140,7 @@ struct PersonPickerViewHome: View {
                                                 print(bigModel.user.persons[index].id)
                                                 print(bigModel.user.persons[index].name)
                                                 //affichage de l'alerte
-                                                bigModel.deletedPersonID = bigModel.user.persons[index].id
+                                                bigModel.deletedPersonID = bigModel.user.persons[index].id ?? "nil"
                                                 bigModel.deletedPersonName = bigModel.user.persons[index].name
                                             }
                                     }.padding(.vertical, 10)
@@ -159,7 +155,12 @@ struct PersonPickerViewHome: View {
                     } else {
                         // Fallback on earlier versions
                     }
-                                                                                        
+                      
+                    Text("❤️‍🔥")
+                        .onTapGesture {
+                            bigModel.authCurrentView = .Auth_UserInfo
+                        }
+                    
                     Text("Sign out")
                         .foregroundColor(.blue)
                         .onTapGesture {

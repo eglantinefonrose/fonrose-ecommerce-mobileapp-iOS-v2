@@ -116,15 +116,19 @@ struct PagingView<Content>: View where Content: View {
                             self.bigModel.lastViews.append(.MeasurementCarouselView)    // On gère le back à la main (car on n'utilise pas de NavigationView)
                             
                             if bigModel.selectedProductId != nil {
-                                Task {
+                                bigModel.currentview = .Measurement_Mensurations
+                                print("count = \(String(describing: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count))")
+                                /*Task {
                                     
                                     if bigModel.currentPersonIndex != nil {
-                                        bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements = await bigModel.updatedMeasurementModel()
+                                        try await
+                                        if bigModel.isMeasurementModelUpdated {
+                                            
+                                        }
                                     }
                                     
-                                    bigModel.currentview = .Measurement_Mensurations
                                     isFetchingNeededMeasurementsInfo = false
-                                }
+                                }*/
                             } else {
                                 
                             }

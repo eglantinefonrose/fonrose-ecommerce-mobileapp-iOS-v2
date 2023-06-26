@@ -64,7 +64,7 @@ class BigModel : ObservableObject {
     }
     
     struct MeasurementModel: Codable {
-        var id: Int?
+        var id: Int
         var measurementName: String
         var measurementValue: String
     }
@@ -84,7 +84,7 @@ class BigModel : ObservableObject {
     }
     
     struct Person: Identifiable, Codable {
-        var id = UUID().uuidString
+        @DocumentID var id: String?
         var email: String
         var name: String
         var measurements: Measurements?
@@ -448,6 +448,7 @@ class BigModel : ObservableObject {
     
     
     
+    @Published var test2012: String = ""
     
     
     
@@ -455,10 +456,9 @@ class BigModel : ObservableObject {
     
     
     
-    
-    var measurementTab: [MeasurementModel] = []
     
     //MARK: updateMeasurementModel
+    var tabMeasurementModel: [MeasurementModel] = []
     var isMeasurementModelUpdated: Bool = false
     func updatedMeasurementModel() async -> [MeasurementModel] {
         
@@ -471,32 +471,35 @@ class BigModel : ObservableObject {
             if self.currentPersonIndex != nil {
                 for i in 0..<fetchedNeededMeasurementIndexs.count {
                     
-                    Task {
                         
                         DispatchQueue.main.async {
-                            //self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
-                            //print(self.allMeasurements[fetchedNeededMeasurementIndexs[i]].measurementName)
-                            self.measurementTab.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
+                            self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
                             print("append")
                         }
-                        
-                    }
                     
                 }
             } else {
                 print("current person nil")
             }
             
-            print(fetchedNeededMeasurementIndexs.count)
-            
+            print("fetchedNeededMeasurementIndexs.count \(fetchedNeededMeasurementIndexs.count)")
+            print(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count ?? 0)
             //print("measurements \(String(describing: self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count))")
             
         } catch {
             print("error")
         }
+        print("fetch is done")
+        isMeasurementModelUpdated = true
+        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements = []
+        return tabMeasurementModel
         
-        return measurementTab
-        
+    }
+    
+    func test() async {
+        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements = await updatedMeasurementModel()
+        isMeasurementModelUpdated = true
+        print("true")
     }
     
     
@@ -745,17 +748,26 @@ class BigModel : ObservableObject {
     
     func initializeMeasurements() {
         
-        guard let userId = auth.currentUser?.uid else { return }
-        let docRef = db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document()
+        fetchAllMeasurementInfo()
         
-        do {
-            try docRef.setData(from: BigModel.MeasurementModel(measurementName: "", measurementValue: ""))
+        for i in 0..<self.allMeasurements.count {
+            
+            guard let userId = auth.currentUser?.uid else { return }
+            let docRef = db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document()
+            
+            do {
+                
+                //try docRef.setData(from: BigModel.MeasurementModel(measurementName: "", measurementValue: ""))
+                
+                try docRef.setData(from: BigModel.MeasurementModel(id: self.allMeasurements[i].id, measurementName: self.allMeasurements[i].measurementName, measurementValue: ""))
+                //self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(MeasurementModel(id: self.allMeasurements[i].id, measurementName: self.allMeasurements[i].measurementName, measurementValue: ""))
+                //print("user \(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements[i].measurementName)")
+            }
+            catch {
+                print(error)
+            }
+            //db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
         }
-        catch {
-            print(error)
-        }
-        //db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
-        
     }
     
     func initializeLocation() {
@@ -1129,7 +1141,7 @@ class BigModel : ObservableObject {
     init(shouldInjectMockedData: Bool) {
         print("Constructor BigModel - shouldInjectMockedData==true")
         
-        let theMeasurement = Measurements(measurements: [MeasurementModel(measurementName: "armpits", measurementValue: ""), MeasurementModel(measurementName: "shoulders", measurementValue: ""), MeasurementModel(measurementName: "legs", measurementValue: "")])
+        let theMeasurement = Measurements(measurements: [MeasurementModel(id: 0, measurementName: "armpits", measurementValue: ""), MeasurementModel(id: 1, measurementName: "shoulders", measurementValue: ""), MeasurementModel(id: 2, measurementName: "legs", measurementValue: "")])
         let theLocation = Location(id: "idLocation", civility: "Mr", firstName: "Eglantine", lastName: "Fonrose", emailAdress: "egl@gmail.com", phoneNumber: "782068157", adressCountry: "France", adressPostalCode: "59300", adressCity: "Va", adressStreet: "3 rue bessmeres", adressMailBox: "3", adressBasement: "1", adressStage: "3")
         
         let person001 : Person = Person(id: "idPerson001", email: "eglantine.fonrose@gmail.com", name: "Eglantine Fonrose", measurements: theMeasurement, location: theLocation, orders: [])

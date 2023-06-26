@@ -126,7 +126,18 @@ struct HomeView: View {
                         
                         ScrollView {
                             
-                            VStack(spacing: 20) {
+                            if bigModel.currentPersonIndex != nil {
+                                VStack {
+                                    
+                                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "nil")
+                                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementName ?? "nil")
+                                }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
+                                    .onRotate { newOrientation in orientation = newOrientation }
+                            }
+                                
+                        }
+                            
+                            /*VStack(spacing: 20) {
                                     
                                 Spacer()
                                 
@@ -165,6 +176,12 @@ struct HomeView: View {
                                             
                                         }
                                     })
+                                } else {
+                                    
+                                    if bigModel.currentPersonIndex != nil {
+                                        Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "rien")
+                                    }
+                                    
                                 }
                                 
                                 if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[1].measurementName) {
@@ -202,6 +219,8 @@ struct HomeView: View {
                                             
                                         }
                                     })
+                                } else {
+                                    Text("0")
                                 }
                                 
                                 if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[2].measurementName) {
@@ -239,6 +258,8 @@ struct HomeView: View {
                                             
                                         }
                                     })
+                                } else {
+                                    Text("0")
                                 }
                                 
                                 if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[3].measurementName) {
@@ -276,6 +297,8 @@ struct HomeView: View {
                                             
                                         }
                                     })
+                                } else {
+                                    Text("0")
                                 }
                                 
                                 if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[4].measurementName) {
@@ -588,14 +611,13 @@ struct HomeView: View {
                                 
                                 Spacer()
                                                                    
-                                }
+                                }*/
                                                         
-                        }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
-                        .onRotate { newOrientation in orientation = newOrientation }
+                        }
                         
-                    } else {
+                    /*} else {
                         
-                    }
+                    }*/
                 
                 Spacer()
                         

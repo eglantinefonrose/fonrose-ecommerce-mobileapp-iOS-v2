@@ -86,6 +86,7 @@ struct HomeView: View {
     @State var measurementText11: String = ""
     @State var measurementText12: String = ""
     @State var measurementText13: String = ""
+    
     @State var arrayOfFields: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     
     @State var measurementsTexts: [String] = []
@@ -126,22 +127,23 @@ struct HomeView: View {
                         
                         ScrollView {
                             
-                            if bigModel.currentPersonIndex != nil {
+                            /*if bigModel.currentPersonIndex != nil {
                                 VStack {
                                     
                                     Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "nil")
                                     Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementName ?? "nil")
                                 }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
                                     .onRotate { newOrientation in orientation = newOrientation }
-                            }
+                            }*/
                                 
                         }
                             
-                            /*VStack(spacing: 20) {
+                            VStack(spacing: 20) {
                                     
                                 Spacer()
                                 
-                                if bigModel.isMeasurementRequested(measurementName: "Armpits measurement") {
+                                if bigModel.isMeasurements0Requested {
+                                    
                                     VStack {
                                      
                                      Spacer()
@@ -184,7 +186,7 @@ struct HomeView: View {
                                     
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[1].measurementName) {
+                                if bigModel.isMeasurements1Requested {
                                     VStack {
                                      
                                      Spacer()
@@ -220,10 +222,9 @@ struct HomeView: View {
                                         }
                                     })
                                 } else {
-                                    Text("0")
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[2].measurementName) {
+                                if bigModel.isMeasurements2Requested {
                                     VStack {
                                         
                                         Spacer()
@@ -262,7 +263,7 @@ struct HomeView: View {
                                     Text("0")
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[3].measurementName) {
+                                if bigModel.isMeasurements3Requested {
                                     VStack {
                                         
                                         Spacer()
@@ -301,7 +302,7 @@ struct HomeView: View {
                                     Text("0")
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[4].measurementName) {
+                                if bigModel.isMeasurements4Requested {
                                     VStack {
                                         
                                         Spacer()
@@ -338,7 +339,7 @@ struct HomeView: View {
                                     })
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[5].measurementName) {
+                                if bigModel.isMeasurements5Requested {
                                     VStack {
                                         
                                         Spacer()
@@ -375,7 +376,7 @@ struct HomeView: View {
                                     })
                                 }
                                 
-                                if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[6].measurementName) {
+                                if bigModel.isMeasurements6Requested {
                                     
                                     VStack {
                                         
@@ -415,7 +416,7 @@ struct HomeView: View {
                                 
                                 VStack {
                                     
-                                    if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[7].measurementName) {
+                                    if bigModel.isMeasurements7Requested {
                                         
                                         VStack {
                                             
@@ -453,7 +454,7 @@ struct HomeView: View {
                                         })
                                     }
                                     
-                                    if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[8].measurementName) {
+                                    if bigModel.isMeasurements8Requested {
                                         
                                         VStack {
                                             
@@ -491,7 +492,7 @@ struct HomeView: View {
                                         })
                                     }
                                     
-                                    if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[9].measurementName) {
+                                    if bigModel.isMeasurements9Requested {
                                         
                                         VStack {
                                             
@@ -529,7 +530,7 @@ struct HomeView: View {
                                         })
                                     }
                                     
-                                    if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[10].measurementName) {
+                                    if bigModel.isMeasurements10Requested {
                                         
                                         VStack {
                                             
@@ -567,7 +568,7 @@ struct HomeView: View {
                                         })
                                     }
                                     
-                                    if bigModel.isMeasurementRequested(measurementName: bigModel.allMeasurements[11].measurementName) {
+                                    if bigModel.isMeasurements11Requested {
                                         
                                         VStack {
                                             
@@ -611,7 +612,7 @@ struct HomeView: View {
                                 
                                 Spacer()
                                                                    
-                                }*/
+                                }
                                                         
                         }
                         
@@ -717,7 +718,7 @@ struct HomeView: View {
             }
                             
     }.padding(20)
-            /*.onAppear {
+            .onAppear {
                 measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? "nil"
                 measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? "nil"
                 measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? "nil"
@@ -726,7 +727,10 @@ struct HomeView: View {
                 measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? "nil"
                 measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? "nil"
                 self.measurementsTexts = [measurementText1, measurementText2, measurementText3, measurementText4, measurementText5, measurementText6, measurementText7]
-            }*/
+                
+                
+                
+            }
         
     }
     

@@ -346,6 +346,38 @@ class BigModel : ObservableObject {
         
     }
     
+    // cette fonction récupère les infos de type NeededMeasurementsModel depuis le fichier Json stocké dans GCS puis renvoie un tableau rempli de NeededMeasurementsModel avec les infos correspondantes
+    func fetchNeededMeasurementsInfo() async throws -> [NeededMeasurementsModel] {
+        
+        var neededMeasurement: [NeededMeasurementsModel] = []
+        
+        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54") else {
+                throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
+            }
+            
+        /*let (_, response) = try await URLSession.shared.data(from: storageURL)
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                throw NSError(domain: "Invalid HTTP Response", code: 0, userInfo: nil)
+            }*/
+        
+         do {
+             let (data, _) = try await URLSession.shared.data(from: storageURL)
+             let neededmeasurInfo = try  JSONDecoder().decode([NeededMeasurementsModel].self, from: data)
+             
+             for neededMeasurementInfo in neededmeasurInfo {
+                 neededMeasurement.append(NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
+             }
+             
+             print("done")
+             
+         } catch {
+             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
+         }
+        
+        return neededMeasurement
+        
+    }
+    
     
     
     
@@ -378,60 +410,7 @@ class BigModel : ObservableObject {
         
     }
 
-    // cette fonction récupère les infos de type NeededMeasurementsModel depuis le fichier Json stocké dans GCS puis renvoie un tableau rempli de NeededMeasurementsModel avec les infos correspondantes
-    func fetchNeededMeasurementsInfo() async throws -> [NeededMeasurementsModel] {
-        
-        /*{
-         
-         var mainViewArrayElements: [MainViewArrayElements] = []
-         let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
-         
-         do {
-             
-             let (data, _) = try await URLSession.shared.data(from: storageURL)
-             let arrayElements = try  JSONDecoder().decode([MainViewArrayElements].self, from: data)
-             
-             for ArrayElements in arrayElements {
-                 mainViewArrayElements.append(MainViewArrayElements(id: ArrayElements.id, imageName: ArrayElements.imageName, text: ArrayElements.text))
-             }
-             
-         } catch {
-             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
-         }
-         
-         return mainViewArrayElements
-         
-     }*/
-        
-        var neededMeasurement: [NeededMeasurementsModel] = []
-        //let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54")!
-        
-        guard let storageURL = URL(string: "https://firebasestorage.googleapis.com/v0/b/fonrose-ecommerce-v2.appspot.com/o/NeededMeasurementsInfo.json?alt=media&token=bd0281da-b3c7-4c60-9e09-15160a1c6b54") else {
-                throw NSError(domain: "Invalid URL", code: 0, userInfo: nil)
-            }
-            
-        let (_, response) = try await URLSession.shared.data(from: storageURL)
-            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-                throw NSError(domain: "Invalid HTTP Response", code: 0, userInfo: nil)
-            }
-        
-         do {
-             let (data, _) = try await URLSession.shared.data(from: storageURL)
-             let neededmeasurInfo = try  JSONDecoder().decode([NeededMeasurementsModel].self, from: data)
-             
-             for neededMeasurementInfo in neededmeasurInfo {
-                 neededMeasurement.append(BigModel.NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
-             }
-             
-             print("done")
-             
-         } catch {
-             print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
-         }
-        
-        return neededMeasurement
-        
-    }
+    
     
     
     
@@ -1070,13 +1049,56 @@ class BigModel : ObservableObject {
         }
     }
     
-    func isMeasurementRequested(measurementName: String) -> Bool {
-        for i in 0..<(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count ?? 0) {
-            if measurementName == self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements[i].measurementName ?? "Armpits measurement" {
-                return true
+    @Published var isMeasurements0Requested: Bool = false
+    @Published var isMeasurements1Requested: Bool = false
+    @Published var isMeasurements2Requested: Bool = false
+    @Published var isMeasurements3Requested: Bool = false
+    @Published var isMeasurements4Requested: Bool = false
+    @Published var isMeasurements5Requested: Bool = false
+    @Published var isMeasurements6Requested: Bool = false
+    @Published var isMeasurements7Requested: Bool = false
+    @Published var isMeasurements8Requested: Bool = false
+    @Published var isMeasurements9Requested: Bool = false
+    @Published var isMeasurements10Requested: Bool = false
+    @Published var isMeasurements11Requested: Bool = false
+    
+    func isMeasurementRequested(measurementName: String) async -> Bool {
+        
+        do {
+            
+            let neededMeasurements = try await self.fetchNeededMeasurementsInfo()
+            
+            for i in 0..<(neededMeasurements[self.selectedProductId ?? 0].neededMeasurements.count) {
+                if measurementName == self.allMeasurements[neededMeasurements[self.selectedProductId ?? 0].neededMeasurements[i]].measurementName {
+                    return true
+                }
             }
+        } catch {
+            print(error)
         }
+        
         return false
+        
+    }
+    
+    
+    func getRequestedMeasurements() async {
+        
+        self.isMeasurements0Requested = await self.isMeasurementRequested(measurementName: "Armpits measurement")
+        self.isMeasurements1Requested = await self.isMeasurementRequested(measurementName: "Arms length")
+        self.isMeasurements2Requested = await self.isMeasurementRequested(measurementName: "Head measurement")
+        self.isMeasurements3Requested = await self.isMeasurementRequested(measurementName: "Pelvis measurement")
+        self.isMeasurements4Requested = await self.isMeasurementRequested(measurementName: "Pelvis Knee")
+        self.isMeasurements5Requested = await self.isMeasurementRequested(measurementName: "Shoulders measurement")
+        self.isMeasurements6Requested = await self.isMeasurementRequested(measurementName: "Shoulders pelvis")
+        self.isMeasurements7Requested = await self.isMeasurementRequested(measurementName: "Tour de poitrine")
+        self.isMeasurements8Requested = await self.isMeasurementRequested(measurementName: "Entrejambe")
+        self.isMeasurements9Requested = await self.isMeasurementRequested(measurementName: "Aisselles-Tetons")
+        self.isMeasurements10Requested = await self.isMeasurementRequested(measurementName: "Teton-Nombril")
+        self.isMeasurements11Requested = await self.isMeasurementRequested(measurementName: "Teton-Hanches")
+        
+        self.currentview = .Measurement_Mensurations
+        
     }
     
     /*let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()

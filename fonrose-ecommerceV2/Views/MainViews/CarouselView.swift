@@ -116,7 +116,27 @@ struct PagingView<Content>: View where Content: View {
                             self.bigModel.lastViews.append(.MeasurementCarouselView)    // On gère le back à la main (car on n'utilise pas de NavigationView)
                             
                             if bigModel.selectedProductId != nil {
-                                bigModel.currentview = .Measurement_Mensurations
+                                
+                                if bigModel.selectedProductId != nil {
+                                    Task {
+                                        
+                                        bigModel.isMeasurements0Requested = await bigModel.isMeasurementRequested(measurementName: "Armpits measurement")
+                                        bigModel.isMeasurements1Requested = await bigModel.isMeasurementRequested(measurementName: "Arms length")
+                                        bigModel.isMeasurements2Requested = await bigModel.isMeasurementRequested(measurementName: "Head measurement")
+                                        bigModel.isMeasurements3Requested = await bigModel.isMeasurementRequested(measurementName: "Pelvis measurement")
+                                        bigModel.isMeasurements4Requested = await bigModel.isMeasurementRequested(measurementName: "Pelvis Knee")
+                                        bigModel.isMeasurements5Requested = await bigModel.isMeasurementRequested(measurementName: "Shoulders measurement")
+                                        bigModel.isMeasurements6Requested = await bigModel.isMeasurementRequested(measurementName: "Shoulders pelvis")
+                                        bigModel.isMeasurements7Requested = await bigModel.isMeasurementRequested(measurementName: "Tour de poitrine")
+                                        bigModel.isMeasurements8Requested = await bigModel.isMeasurementRequested(measurementName: "Entrejambe")
+                                        bigModel.isMeasurements9Requested = await bigModel.isMeasurementRequested(measurementName: "Aisselles-Tetons")
+                                        bigModel.isMeasurements10Requested = await bigModel.isMeasurementRequested(measurementName: "Teton-Nombril")
+                                        bigModel.isMeasurements11Requested = await bigModel.isMeasurementRequested(measurementName: "Teton-Hanches")
+                                        
+                                        bigModel.currentview = .Measurement_Mensurations
+                                        
+                                    }
+                                }
                                 print("count = \(String(describing: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count))")
                                 /*Task {
                                     

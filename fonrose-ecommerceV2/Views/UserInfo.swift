@@ -124,12 +124,28 @@ struct UserInfo: View {
                                                 print(error)
                                             }
                                         }
+                                        
+                                        if bigModel.selectedProductId != nil {
+                                            Task {
+                                                await bigModel.getRequestedMeasurements()
+                                            }
+                                        }
+                                        
+                                        
                                         bigModel.currentview = .Measurement_Mensurations
                                     }
                                 }
                                 
                             } else {
-                                bigModel.currentview = .Measurement_Mensurations
+                                
+                                if bigModel.selectedProductId != nil {
+                                    Task {
+                                        await bigModel.getRequestedMeasurements()
+                                        
+                                    }
+                                }
+                                
+                                
                             }
                         }
                         

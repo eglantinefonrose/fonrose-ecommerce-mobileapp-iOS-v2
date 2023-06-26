@@ -654,8 +654,27 @@ struct HomeView: View {
                         
                         if sum(array: arrayOfFields) == bigModel.neededMeasurements.count {
                             
-                            //let docRef = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements
-                            //self.db.collection("q").document().setData(["name": "name"])
+                            guard let userId = auth.currentUser?.uid else { return }
+                            let docRef = db.collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.id ?? "nil")
+                            
+                            do {
+                                try docRef.setData(from: BigModel.Measurements(measurements: [
+                                    BigModel.MeasurementModel(id: 0, measurementName: "Armpits measurement", measurementValue: measurementText0),
+                                    BigModel.MeasurementModel(id: 1, measurementName: "Arms length", measurementValue: measurementText1),
+                                    BigModel.MeasurementModel(id: 2, measurementName: "Head measurement", measurementValue: measurementText2),
+                                    BigModel.MeasurementModel(id: 3, measurementName: "Pelvis measurement", measurementValue: measurementText3),
+                                    BigModel.MeasurementModel(id: 4, measurementName: "Pelvis Knee", measurementValue: measurementText4),
+                                    BigModel.MeasurementModel(id: 5, measurementName: "Shoulders measurement", measurementValue: measurementText5),
+                                    BigModel.MeasurementModel(id: 6, measurementName: "Shoulders pelvis", measurementValue: measurementText6),
+                                    BigModel.MeasurementModel(id: 7, measurementName: "Tour de poitrine", measurementValue: measurementText7),
+                                    BigModel.MeasurementModel(id: 8, measurementName: "Entrejambe", measurementValue: measurementText8),
+                                    BigModel.MeasurementModel(id: 9, measurementName: "Aisselles-Tetons", measurementValue: measurementText9),
+                                    BigModel.MeasurementModel(id: 10, measurementName: "Teton-Nombril", measurementValue: measurementText10),
+                                    BigModel.MeasurementModel(id: 11, measurementName: "Teton-Hanches", measurementValue: measurementText11)
+                                ]))
+                            } catch {
+                                print(error)
+                            }
                             
                             bigModel.currentview = .Measurement_RecapMensurations
                         } else {

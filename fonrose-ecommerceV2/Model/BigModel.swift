@@ -749,17 +749,21 @@ class BigModel : ObservableObject {
     func initializeMeasurements() {
         
         fetchAllMeasurementInfo()
-        
-        for i in 0..<self.allMeasurements.count {
-            
+                    
             guard let userId = auth.currentUser?.uid else { return }
             let docRef = db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document()
+            var fbMeasurements: Measurements = Measurements(measurements: [])
             
             do {
                 
+                fbMeasurements.measurements = []
+                for i in 0..<self.allMeasurements.count {
+                    fbMeasurements.measurements.append(MeasurementModel(id: allMeasurements[i].id, measurementName: allMeasurements[i].measurementName, measurementValue: ""))
+                }
+                
                 //try docRef.setData(from: BigModel.MeasurementModel(measurementName: "", measurementValue: ""))
                 
-                try docRef.setData(from: BigModel.MeasurementModel(id: self.allMeasurements[i].id, measurementName: self.allMeasurements[i].measurementName, measurementValue: ""))
+                try docRef.setData(from: fbMeasurements)
                 //self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(MeasurementModel(id: self.allMeasurements[i].id, measurementName: self.allMeasurements[i].measurementName, measurementValue: ""))
                 //print("user \(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements[i].measurementName)")
             }
@@ -768,7 +772,6 @@ class BigModel : ObservableObject {
             }
             //db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
         }
-    }
     
     func initializeLocation() {
         

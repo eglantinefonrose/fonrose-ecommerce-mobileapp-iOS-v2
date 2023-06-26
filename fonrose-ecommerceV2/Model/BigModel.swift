@@ -368,8 +368,6 @@ class BigModel : ObservableObject {
                  neededMeasurement.append(NeededMeasurementsModel(id: neededMeasurementInfo.id, productName: neededMeasurementInfo.productName, neededMeasurements: neededMeasurementInfo.neededMeasurements))
              }
              
-             print("done")
-             
          } catch {
              print("Une erreur est survenue lors de l'analyse JSON :  \(String(describing: error))")
          }
@@ -377,6 +375,10 @@ class BigModel : ObservableObject {
         return neededMeasurement
         
     }
+    
+    
+    
+    
     
     
     
@@ -434,17 +436,18 @@ class BigModel : ObservableObject {
     
     
     
-    
+    @Published var neededMeasurements: [BigModel.MeasurementModel] = []
     
     //MARK: updateMeasurementModel
     var tabMeasurementModel: [MeasurementModel] = []
     var isMeasurementModelUpdated: Bool = false
-    func updatedMeasurementModel() async -> [MeasurementModel] {
+    func updateMeasurementModel() async {
         
-        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.removeAll()
+        self.neededMeasurements.removeAll()
         
         do {
             
+            fetchAllMeasurementInfo()
             let fetchedNeededMeasurementIndexs = try await fetchNeededMeasurementsInfo()[self.dressPictures[self.selectedProductId ?? 0].id ].neededMeasurements
             
             if self.currentPersonIndex != nil {
@@ -452,17 +455,17 @@ class BigModel : ObservableObject {
                     
                         
                         DispatchQueue.main.async {
-                            self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
-                            print("append")
+                            self.neededMeasurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
                         }
                     
                 }
+                print("needed measurements count = \(neededMeasurements.count)")
             } else {
                 print("current person nil")
             }
             
-            print("fetchedNeededMeasurementIndexs.count \(fetchedNeededMeasurementIndexs.count)")
-            print(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count ?? 0)
+            print("neededMeasurements \(neededMeasurements.count)")
+            print(neededMeasurements.count)
             //print("measurements \(String(describing: self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.count))")
             
         } catch {
@@ -470,15 +473,7 @@ class BigModel : ObservableObject {
         }
         print("fetch is done")
         isMeasurementModelUpdated = true
-        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements = []
-        return tabMeasurementModel
         
-    }
-    
-    func test() async {
-        self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements = await updatedMeasurementModel()
-        isMeasurementModelUpdated = true
-        print("true")
     }
     
     
@@ -1066,10 +1061,8 @@ class BigModel : ObservableObject {
         
         do {
             
-            let neededMeasurements = try await self.fetchNeededMeasurementsInfo()
-            
-            for i in 0..<(neededMeasurements[self.selectedProductId ?? 0].neededMeasurements.count) {
-                if measurementName == self.allMeasurements[neededMeasurements[self.selectedProductId ?? 0].neededMeasurements[i]].measurementName {
+            for i in 0..<(neededMeasurements.count) {
+                if measurementName == neededMeasurements[i].measurementName {
                     return true
                 }
             }
@@ -1084,6 +1077,7 @@ class BigModel : ObservableObject {
     
     func getRequestedMeasurements() async {
         
+        await updateMeasurementModel()
         self.isMeasurements0Requested = await self.isMeasurementRequested(measurementName: "Armpits measurement")
         self.isMeasurements1Requested = await self.isMeasurementRequested(measurementName: "Arms length")
         self.isMeasurements2Requested = await self.isMeasurementRequested(measurementName: "Head measurement")

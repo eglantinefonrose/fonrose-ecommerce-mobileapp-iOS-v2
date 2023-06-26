@@ -86,6 +86,7 @@ struct HomeView: View {
     @State var measurementText11: String = ""
     @State var measurementText12: String = ""
     @State var measurementText13: String = ""
+    @State var neededMeasurements: [BigModel.NeededMeasurementsModel] = []
     
     @State var arrayOfFields: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     
@@ -107,7 +108,7 @@ struct HomeView: View {
             
             Spacer()
                                 
-            Text("Mensurations")
+            Text("Mensurations \(bigModel.neededMeasurements.count)")
                 .font(.system(size: 35, weight: .bold, design: .default))
                 .fontWeight(.semibold)
             
@@ -651,15 +652,10 @@ struct HomeView: View {
                     .cornerRadius(15)
                     .onTapGesture {
                         
-                        print(measurementText1)
-                        print(measurementText2)
-                        print(measurementText3)
-                        print(measurementText4)
-                        
-                        if sum(array: arrayOfFields) == bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count {
+                        if sum(array: arrayOfFields) == bigModel.neededMeasurements.count {
                             
-                            let docRef = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements
-                            self.db.collection("q").document().setData(["name": "name"])
+                            //let docRef = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements
+                            //self.db.collection("q").document().setData(["name": "name"])
                             
                             bigModel.currentview = .Measurement_RecapMensurations
                         } else {
@@ -728,7 +724,14 @@ struct HomeView: View {
                 measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? "nil"
                 self.measurementsTexts = [measurementText1, measurementText2, measurementText3, measurementText4, measurementText5, measurementText6, measurementText7]
                 
-                
+                /*Task {
+                    do {
+                        self.neededMeasurements = try await bigModel.fetchNeededMeasurementsInfo()
+                    }
+                    catch {
+                        print(error)
+                    }
+                }*/
                 
             }
         

@@ -117,7 +117,7 @@ struct BigRootView: View {
                     if bigModel.selectedProductId != nil && bigModel.currentPersonIndex == nil {
                         AuthView()
                     }
-                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex != nil && bigModel.isMeasurementModelUpdated == true {
+                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex != nil {
                         MeasurementView()
                     }
                 }

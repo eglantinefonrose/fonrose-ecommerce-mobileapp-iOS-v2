@@ -124,10 +124,12 @@ struct PersonPickerViewHome: View {
                                                 
                                                 await bigModel.fetchMeasurements()
                                                 
-                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements == nil {
-                                                    bigModel.initializeMeasurements()
+                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count == 0 {
+                                                    print("measurments nil")
+                                                    await bigModel.initializeMeasurements()
                                                     await bigModel.fetchMeasurements()
                                                 } else {
+                                                    print("not nil")
                                                 }
                                             }
                                             

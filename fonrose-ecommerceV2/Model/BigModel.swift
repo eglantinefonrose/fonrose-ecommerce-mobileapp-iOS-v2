@@ -436,7 +436,7 @@ class BigModel : ObservableObject {
     
     
     
-    @Published var neededMeasurements: [BigModel.MeasurementModel] = []
+   var neededMeasurements: [BigModel.MeasurementModel] = []
     
     //MARK: updateMeasurementModel
     var tabMeasurementModel: [MeasurementModel] = []
@@ -448,17 +448,17 @@ class BigModel : ObservableObject {
         do {
             
             fetchAllMeasurementInfo()
-            let fetchedNeededMeasurementIndexs = try await fetchNeededMeasurementsInfo()[self.dressPictures[self.selectedProductId ?? 0].id ].neededMeasurements
+            let fetchedNeededMeasurementIndexs = try await fetchNeededMeasurementsInfo()[self.dressPictures[self.selectedProductId ?? 0].id].neededMeasurements
             
             if self.currentPersonIndex != nil {
                 for i in 0..<fetchedNeededMeasurementIndexs.count {
-                    
                         
                         DispatchQueue.main.async {
                             self.neededMeasurements.append(self.allMeasurements[fetchedNeededMeasurementIndexs[i]])
                         }
                     
                 }
+                print("fetchedNeededMeasurementIndexs.count \(fetchedNeededMeasurementIndexs.count)")
                 print("needed measurements count = \(neededMeasurements.count)")
             } else {
                 print("current person nil")
@@ -472,7 +472,6 @@ class BigModel : ObservableObject {
             print("error")
         }
         print("fetch is done")
-        isMeasurementModelUpdated = true
         
     }
     
@@ -738,7 +737,7 @@ class BigModel : ObservableObject {
     
     
     
-    func initializeMeasurements() {
+    func initializeMeasurements () async {
         
         fetchAllMeasurementInfo()
                     
@@ -752,17 +751,12 @@ class BigModel : ObservableObject {
                 for i in 0..<self.allMeasurements.count {
                     fbMeasurements.measurements.append(MeasurementModel(id: allMeasurements[i].id, measurementName: allMeasurements[i].measurementName, measurementValue: ""))
                 }
-                
-                //try docRef.setData(from: BigModel.MeasurementModel(measurementName: "", measurementValue: ""))
-                
                 try docRef.setData(from: fbMeasurements)
-                //self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements.append(MeasurementModel(id: self.allMeasurements[i].id, measurementName: self.allMeasurements[i].measurementName, measurementValue: ""))
-                //print("user \(self.user.persons[self.currentPersonIndex ?? 0].measurements?.measurements[i].measurementName)")
             }
             catch {
                 print(error)
             }
-            //db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""])
+            
         }
     
     func initializeLocation() {
@@ -1079,15 +1073,21 @@ class BigModel : ObservableObject {
         
         do {
             
+            await updateMeasurementModel()
+            print("isMeasurementRequested neededMeasurements.count \(neededMeasurements.count)")
+            
             for i in 0..<(neededMeasurements.count) {
                 if measurementName == neededMeasurements[i].measurementName {
+                    
+                    print("return true")
+                    print("neededMeasurements.count \(neededMeasurements.count)")
                     return true
                 }
             }
-        } catch {
-            print(error)
         }
         
+        
+        print("return false")
         return false
         
     }
@@ -1096,6 +1096,7 @@ class BigModel : ObservableObject {
     func getRequestedMeasurements() async {
         
         await updateMeasurementModel()
+        
         self.isMeasurements0Requested = await self.isMeasurementRequested(measurementName: "Armpits measurement")
         self.isMeasurements1Requested = await self.isMeasurementRequested(measurementName: "Arms length")
         self.isMeasurements2Requested = await self.isMeasurementRequested(measurementName: "Head measurement")
@@ -1109,7 +1110,10 @@ class BigModel : ObservableObject {
         self.isMeasurements10Requested = await self.isMeasurementRequested(measurementName: "Teton-Nombril")
         self.isMeasurements11Requested = await self.isMeasurementRequested(measurementName: "Teton-Hanches")
         
-        self.currentview = .Measurement_Mensurations
+        
+        DispatchQueue.main.async {
+            self.currentview = .Measurement_Mensurations
+        }
         
     }
     

@@ -117,13 +117,15 @@ struct PagingView<Content>: View where Content: View {
                             
                             if bigModel.selectedProductId != nil {
                                 
-                                Task {
-                                    await bigModel.getRequestedMeasurements()
-                                    bigModel.currentview = .Measurement_Mensurations
+                                print("bigModel.selectedProductId != nil")
+                                DispatchQueue.main.async {
+                                    Task {
+                                        await bigModel.getRequestedMeasurements()
+                                    }
                                 }
                                 
                             } else {
-                                
+                                print("bigModel.selectedProductId = nil")
                             }
                             
                         }.disabled(isFetchingNeededMeasurementsInfo)

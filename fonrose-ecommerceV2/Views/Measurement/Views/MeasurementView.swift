@@ -163,6 +163,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText0 != "" {
+                                            arrayOfFields[0] = 1
+                                        }
+                                    }
                                     .onChange(of: (measurementText0), perform: { value in
                                         perform: do {
                                             if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -206,6 +211,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText1 != "" {
+                                            arrayOfFields[1] = 1
+                                        }
+                                    }
                                     .onChange(of: (measurementText1), perform: { value in
                                         perform: do {
                                             if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -244,6 +254,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                         .cornerRadius(7)
                                         .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText2 != "" {
+                                                arrayOfFields[2] = 1
+                                            }
+                                        }
                                         .onChange(of: (measurementText2), perform: { value in
                                         perform: do {
                                             if measurementText2.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -283,6 +298,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                         .cornerRadius(7)
                                         .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText3 != "" {
+                                                arrayOfFields[3] = 1
+                                            }
+                                        }
                                         .onChange(of: (measurementText3), perform: { value in
                                         perform: do {
                                             if measurementText3.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -322,6 +342,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                         .cornerRadius(7)
                                         .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText4 != "" {
+                                                arrayOfFields[4] = 1
+                                            }
+                                        }
                                         .onChange(of: (measurementText4), perform: { value in
                                         perform: do {
                                             if measurementText4.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -359,6 +384,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                         .cornerRadius(7)
                                         .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText5 != "" {
+                                                arrayOfFields[5] = 1
+                                            }
+                                        }
                                         .onChange(of: (measurementText5), perform: { value in
                                         perform: do {
                                             if measurementText5.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -397,6 +427,11 @@ struct HomeView: View {
                                     }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                         .cornerRadius(7)
                                         .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText6 != "" {
+                                                arrayOfFields[6] = 1
+                                            }
+                                        }
                                         .onChange(of: (measurementText6), perform: { value in
                                         perform: do {
                                             if measurementText6.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -437,6 +472,11 @@ struct HomeView: View {
                                         }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                             .cornerRadius(7)
                                             .frame(height: 30)
+                                            .onAppear {
+                                                if measurementText7 != "" {
+                                                    arrayOfFields[7] = 1
+                                                }
+                                            }
                                             .onChange(of: (measurementText7), perform: { value in
                                             perform: do {
                                                 if measurementText7.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -475,7 +515,12 @@ struct HomeView: View {
                                         }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                             .cornerRadius(7)
                                             .frame(height: 30)
-                                            .onChange(of: (measurementText6), perform: { value in
+                                            .onAppear {
+                                                if measurementText8 != "" {
+                                                    arrayOfFields[8] = 1
+                                                }
+                                            }
+                                            .onChange(of: (measurementText8), perform: { value in
                                             perform: do {
                                                 if measurementText8.rangeOfCharacter(from: CharacterSet.letters) != nil {
                                                     alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
@@ -513,6 +558,11 @@ struct HomeView: View {
                                         }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                             .cornerRadius(7)
                                             .frame(height: 30)
+                                            .onAppear {
+                                                if measurementText9 != "" {
+                                                    arrayOfFields[9] = 1
+                                                }
+                                            }
                                             .onChange(of: (measurementText9), perform: { value in
                                             perform: do {
                                                 if measurementText9.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -551,6 +601,11 @@ struct HomeView: View {
                                         }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                             .cornerRadius(7)
                                             .frame(height: 30)
+                                            .onAppear {
+                                                if measurementText10 != "" {
+                                                    arrayOfFields[10] = 1
+                                                }
+                                            }
                                             .onChange(of: (measurementText10), perform: { value in
                                             perform: do {
                                                 if measurementText10.rangeOfCharacter(from: CharacterSet.letters) != nil {
@@ -589,6 +644,11 @@ struct HomeView: View {
                                         }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                             .cornerRadius(7)
                                             .frame(height: 30)
+                                            .onAppear {
+                                                if measurementText11 != "" {
+                                                    arrayOfFields[11] = 1
+                                                }
+                                            }
                                             .onChange(of: (measurementText11), perform: { value in
                                             perform: do {
                                                 if measurementText11.rangeOfCharacter(from: CharacterSet.symbols) != nil || measurementText11.rangeOfCharacter(from: CharacterSet.letters) != nil  {
@@ -652,6 +712,8 @@ struct HomeView: View {
                     .cornerRadius(15)
                     .onTapGesture {
                         
+                        print(arrayOfFields)
+                        
                         if sum(array: arrayOfFields) == bigModel.neededMeasurements.count {
                             
                             guard let userId = auth.currentUser?.uid else { return }
@@ -676,7 +738,11 @@ struct HomeView: View {
                                 print(error)
                             }
                             
-                            bigModel.currentview = .Measurement_RecapMensurations
+                            Task {
+                                await bigModel.fetchMeasurements()
+                                bigModel.currentview = .Measurement_RecapMensurations
+                            }
+                            
                         } else {
                             alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
                             }
@@ -702,6 +768,43 @@ struct HomeView: View {
                 measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? "nil"
                 measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? "nil"
                 measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? "nil"
+                
+                if measurementText0 != "" && bigModel.isMeasurements0Requested {
+                    arrayOfFields[0] = 1
+                }
+                if measurementText1 != "" && bigModel.isMeasurements1Requested {
+                    arrayOfFields[1] = 1
+                }
+                if measurementText2 != "" && bigModel.isMeasurements2Requested {
+                    arrayOfFields[2] = 1
+                }
+                if measurementText3 != "" && bigModel.isMeasurements3Requested {
+                    arrayOfFields[3] = 1
+                }
+                if measurementText4 != "" && bigModel.isMeasurements4Requested {
+                    arrayOfFields[4] = 1
+                }
+                if measurementText5 != "" && bigModel.isMeasurements5Requested {
+                    arrayOfFields[5] = 1
+                }
+                if measurementText6 != "" && bigModel.isMeasurements6Requested {
+                    arrayOfFields[6] = 1
+                }
+                if measurementText7 != "" && bigModel.isMeasurements7Requested {
+                    arrayOfFields[7] = 1
+                }
+                if measurementText8 != "" && bigModel.isMeasurements8Requested {
+                    arrayOfFields[8] = 1
+                }
+                if measurementText9 != "" && bigModel.isMeasurements9Requested {
+                    arrayOfFields[9] = 1
+                }
+                if measurementText10 != "" && bigModel.isMeasurements10Requested {
+                    arrayOfFields[10] = 1
+                }
+                if measurementText11 != "" && bigModel.isMeasurements11Requested {
+                    arrayOfFields[11] = 1
+                }
                 
                 /*Task {
                     do {

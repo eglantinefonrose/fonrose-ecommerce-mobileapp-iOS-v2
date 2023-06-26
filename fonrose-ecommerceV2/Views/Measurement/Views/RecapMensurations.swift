@@ -40,20 +40,58 @@ struct RecapMensurations: View {
                     Spacer()
                     
                     VStack {
-                                            
-                        /*RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmpitsMeasurement ?? "nil")
+                         
+                        VStack {
+                            if bigModel.isMeasurements0Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue) ?? "nil")
+                            }
                             
-                        RecapMensurationsTextStruct(recapMeasurementText: "Arms Length", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ArmsLength ?? "nil")
+                            if bigModel.isMeasurements1Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements2Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements3Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements4Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements5Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements6Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements7Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue) ?? "nil")
+                            }
+                            
+                            if bigModel.isMeasurements8Requested {
+                                RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue) ?? "nil")
+                                
+                            }
+                            
+                        }
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Head Measurement", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.HeadMeasurement ?? "nil")
+                        if bigModel.isMeasurements9Requested {
+                            RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue) ?? "nil")
+                        }
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis knee", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisKnee ?? "nil")
+                        if bigModel.isMeasurements10Requested {
+                            RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue) ?? "nil")
+                        }
                         
-                        RecapMensurationsTextStruct(recapMeasurementText: "Pelvis Measurement", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.PelvisMeasurement ?? "nil")
-                        
-                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Measurement", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersMeasurement ?? "nil")
-                        
-                        RecapMensurationsTextStruct(recapMeasurementText: "Shoulders Pelvis", recapMeasurementText2: bigModel.user.persons[bigModel.currentPersonIndex].measurements?.ShouldersPelvis ?? "nil")*/
+                        if bigModel.isMeasurements11Requested {
+                            RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue) ?? "nil")
+                        }
                             
                         }
                     

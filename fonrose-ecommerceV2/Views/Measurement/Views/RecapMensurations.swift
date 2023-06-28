@@ -135,8 +135,11 @@ struct RecapMensurations: View {
                                         bigModel.fetchLocation()
                                     }
                                     bigModel.currentview = .LivraisonViews_Livraison
+                                    bigModel.lastViews.append(.Measurement_RecapMensurations)
                                     
-                                } else {bigModel.currentview = .LivraisonViews_Livraison}
+                                } else {bigModel.currentview = .LivraisonViews_Livraison
+                                    bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                }
                             } else {
                                 bigModel.currentview = .Home_homeFeed0
                             }
@@ -152,6 +155,7 @@ struct RecapMensurations: View {
                         .foregroundColor(Color.blue)
                         .onTapGesture {
                             self.bigModel.currentview = .Measurement_Mensurations
+                            bigModel.lastViews.append(.Measurement_RecapMensurations)
                         }
                     }
                                 

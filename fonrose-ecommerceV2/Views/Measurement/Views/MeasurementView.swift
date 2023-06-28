@@ -691,6 +691,7 @@ struct HomeView: View {
                         .font(.body)
                         .underline()
                         .onTapGesture {
+                            bigModel.lastViews.append(.Measurement_Mensurations)
                             bigModel.currentview = .Measurement_MeasurementsTut
                         }
                 }
@@ -735,6 +736,7 @@ struct HomeView: View {
                             Task {
                                 await bigModel.fetchMeasurements()
                                 bigModel.currentview = .Measurement_RecapMensurations
+                                self.bigModel.lastViews.append(.Measurement_Mensurations)
                             }
                             
                         } else {

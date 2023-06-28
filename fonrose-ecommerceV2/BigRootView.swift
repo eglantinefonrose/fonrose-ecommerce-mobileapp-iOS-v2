@@ -65,6 +65,10 @@ struct BigRootView: View {
                     HelpView()
                 }
                 
+                if (self.bigModel.currentview == .ProductsView) {
+                    ProductsScreen()
+                }
+                
             }
             
             //MARK: Service client

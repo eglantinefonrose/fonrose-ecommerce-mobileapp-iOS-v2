@@ -206,46 +206,29 @@ struct ShowDeliveryView: View {
     
     var body: some View {
      
-        VStack {
-            
-            Spacer()
-                .frame(height: 30)
-            
-            ZStack {
-               Button(action: {
-                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                    bigModel.lastViews.removeLast()
-                }) {
-                    Text("Back")
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                }
-            }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-            .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-            
-            Spacer()
-            
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("Livraison")
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
-                        
-                Text("en collaboration avec")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 25, weight: .semibold, design: .default))
-            }
-         
-         Spacer()
-                                            
-        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .background(Color.black)
-            .edgesIgnoringSafeArea(.all)
+                
+                BackButtonModel(text: "")
+                
+                Spacer()
+                
+                VStack {
+                    Text("Livraison")
+                        .font(.system(size: 40, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                            
+                    Text("en collaboration avec")
+                        .foregroundColor(Color.gray)
+                        .font(.system(size: 25, weight: .semibold, design: .default))
+                }
+             
+             Spacer()
+                                                
+            }.padding(20)
+        }
 
     }
     
@@ -257,48 +240,39 @@ struct showReturnView: View {
     
     var body: some View {
     
-        VStack {
-            
-            Spacer()
-                .frame(height: 30)
-            
-            ZStack {
-                Button(action: {
-                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                    bigModel.lastViews.removeLast()
-                }) {
-                        Text("Back")
-                    }
-                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-            
-            Spacer()
+        ZStack {
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
-                Text("Renvoi")
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
-                                    
-                Text("de colis")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 25, weight: .semibold, design: .default))
-                                
+                BackButtonModel(text: "")
+                
                 Spacer()
-                    .frame(height: 40)
-                                
-                Text("Renvoi gratuit et produit remboursé après le renvoi du produit")
-                    .foregroundColor(Color.gray)
-                    //.font(.system(size: 20, weight: .light, design: .default))
-                    .frame(width: UIScreen.main.bounds.width-60)
-            
-            }.frame(width: UIScreen.main.bounds.width, alignment: .center)
-            
-            Spacer()
-                        
-        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
+                
+                VStack {
+                    
+                    Text("Renvoi")
+                        .font(.system(size: 40, weight: .bold, design: .default))
+                                        
+                    Text("de colis")
+                        .foregroundColor(Color.gray)
+                        .font(.system(size: 25, weight: .semibold, design: .default))
+                                    
+                    Spacer()
+                        .frame(height: 40)
+                                    
+                    Text("Renvoi gratuit et produit remboursé après le renvoi du produit")
+                        .foregroundColor(Color.gray)
+                        //.font(.system(size: 20, weight: .light, design: .default))
+                        .frame(width: UIScreen.main.bounds.width-60)
+                
+                }.frame(width: UIScreen.main.bounds.width, alignment: .center)
+                
+                Spacer()
+                            
+            }.padding(20)
+        }
     }
 }
 
@@ -308,71 +282,64 @@ struct showCardView: View {
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Spacer()
-                .frame(height: 30)
-            
-            ZStack {
-                Button(action: {
-                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                    bigModel.lastViews.removeLast()
-                }) {
-                        Text("Back")
-                    }
-                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-            
-            Spacer()
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-            Text("Fiche")
-                .font(.system(size: 40, weight: .bold, design: .default))
-                .foregroundColor(Color.white)
+                
+                BackButtonModel(text: "")
+                
+                Spacer()
+                
+                VStack {
+                Text("Fiche")
+                    .font(.system(size: 40, weight: .bold, design: .default))
+                    .foregroundColor(Color.white)
+                                    
+                Text("complète de commande")
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 25, weight: .semibold, design: .default))
+                    .frame(alignment: .center)
                                 
-            Text("complète de commande")
-                .foregroundColor(Color.gray)
-                .font(.system(size: 25, weight: .semibold, design: .default))
-                .frame(alignment: .center)
-                            
-            Spacer()
-                .frame(height: 100)
-                                
-            VStack {
+                Spacer()
+                    .frame(height: 100)
                                     
-                Text("N° de commande")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, design: .default))
-                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                    
-                Text("Date d’expedition prévue")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, design: .default))
-                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                    
-                Text("Date de livraison")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, design: .default))
-                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                    
-                Text("Nom du transporteur")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, design: .default))
-                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                    
-                Text("N° de suivi")
-                    .foregroundColor(Color.white)
-                    .font(.system(size: 20, design: .default))
-                    .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                    
-            }.padding(.leading, 80)
-            }.frame(width: UIScreen.main.bounds.width)
-            
-            Spacer()
+                VStack {
+                                        
+                    Text("N° de commande")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20, design: .default))
+                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                        
+                    Text("Date d’expedition prévue")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20, design: .default))
+                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
                         
-        }.padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
+                    Text("Date de livraison")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20, design: .default))
+                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                        
+                    Text("Nom du transporteur")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20, design: .default))
+                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                        
+                    Text("N° de suivi")
+                        .foregroundColor(Color.white)
+                        .font(.system(size: 20, design: .default))
+                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
+                                        
+                }.padding(.leading, 80)
+                }.frame(width: UIScreen.main.bounds.width)
+                
+                Spacer()
+                            
+            }.padding(20)
+        }
     }
 }
 
@@ -382,52 +349,45 @@ struct ShowServicesView: View {
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Spacer()
-                .frame(height: 30)
-            
-            ZStack {
-                Button(action: {
-                    self.bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-                    bigModel.lastViews.removeLast()
-                }) {
-                        Text("Back")
-                    }
-                }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
-                .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))
-            
-            Spacer()
-            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
             VStack {
-                Text("Service")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
-                    .frame(alignment: .center)
-                            
-                Text("client")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 25, weight: .semibold, design: .default))
-            }
-            
-            Spacer()
                 
-            ZStack {
-                Rectangle()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
-                    .foregroundColor(Color.gray)
-                    
+                BackButtonModel(text: "")
+                
+                Spacer()
+                
+                
                 VStack {
-                    Text("24/7")
+                    Text("Service")
                         .font(.system(size: 35, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                         .frame(alignment: .center)
-                    }
+                                
+                    Text("client")
+                        .foregroundColor(Color.gray)
+                        .font(.system(size: 25, weight: .semibold, design: .default))
                 }
+                
+                Spacer()
+                    
+                ZStack {
+                    Rectangle()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height/2)
+                        .foregroundColor(Color.gray)
+                        
+                    VStack {
+                        Text("24/7")
+                            .font(.system(size: 35, weight: .bold, design: .default))
+                            .foregroundColor(Color.white)
+                            .frame(alignment: .center)
+                        }
+                    }
+                }.padding(20)
             }
-            .background(Color.black)
-        .edgesIgnoringSafeArea(.all)
         }
         
     }

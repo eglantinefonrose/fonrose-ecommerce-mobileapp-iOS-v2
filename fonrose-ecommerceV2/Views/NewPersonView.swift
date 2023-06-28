@@ -159,6 +159,7 @@ struct NewPersonView: View {
                                     
                                     await bigModel.fetchPerson()
                                     bigModel.authCurrentView = .Auth_PersonPickerView
+                                    bigModel.authLastViews.append(.Auth_NewUserView)
                                 }
                                 
                                 //db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name])

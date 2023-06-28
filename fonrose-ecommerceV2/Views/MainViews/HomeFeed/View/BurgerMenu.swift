@@ -73,6 +73,7 @@ struct BurgerMenu: View {
                     .font(.headline)
                     .onTapGesture {
                         bigModel.currentview = .HelpView
+                        bigModel.lastViews.append(.Home_homeFeed0)
                     }
                 
                 Spacer()

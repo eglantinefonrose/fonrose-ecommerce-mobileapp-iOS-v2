@@ -97,6 +97,7 @@ struct UserInfo: View {
                                 .padding(10)
                         }.onTapGesture {
                             
+                            bigModel.lastViews.append(.Auth_AuthView)
                             bigModel.currentview = .Measurement_Mensurations
                             bigModel.needToSeeEveryMeasurements = true
                             
@@ -174,11 +175,13 @@ struct UserInfo: View {
                                                 print(error)
                                             }
                                         }
+                                        bigModel.lastViews.append(.Auth_AuthView)
                                         bigModel.currentview = .LivraisonViews_Livraison
                                     }
                                 }
                                 
-                            } else {bigModel.currentview = .LivraisonViews_Livraison}
+                            } else {bigModel.lastViews.append(.Auth_AuthView)
+                                bigModel.currentview = .LivraisonViews_Livraison}
                         }
                     }
                 

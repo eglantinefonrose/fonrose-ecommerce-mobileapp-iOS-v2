@@ -60,6 +60,7 @@ struct TrailerPlayer: View {
                     Image(systemName: "house")
                         .foregroundColor(Color.blue)
                         .onTapGesture {
+                            bigModel.lastViews.append(.VideoPlayer_trailerPlayer)
                             bigModel.currentview = .Home_homeFeed0
                         }
                 
@@ -72,6 +73,7 @@ struct TrailerPlayer: View {
                 Text("Buy")
                     .foregroundColor(.blue)
                     .onTapGesture {
+                        bigModel.lastViews.append(.VideoPlayer_trailerPlayer)
                         bigModel.currentview = .MeasurementCarouselView
                     }
                 

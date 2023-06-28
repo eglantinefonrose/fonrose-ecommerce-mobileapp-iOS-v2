@@ -96,6 +96,7 @@ struct HelpView: View {
                 .cornerRadius(15)
                 .onTapGesture {
                     bigModel.currentview = .Home_homeFeed0
+                    bigModel.lastViews.append(.HelpView)
                 }
                 
             }.padding(20)

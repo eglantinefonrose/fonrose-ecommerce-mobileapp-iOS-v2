@@ -105,6 +105,7 @@ struct HomeFeedView: View {
                                             .navigationBarHidden(true)
                                             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                             .onTapGesture {
+                                                self.bigModel.lastViews.append(.Home_homeFeed0)
                                                 bigModel.currentview = bigModel.mainArrayInfos[index].nextScreen
                                             }
                                     }
@@ -197,6 +198,7 @@ struct HomeFeedView: View {
                                     .onTapGesture {
                                         bigModel.lastViews.append(.Home_homeFeed0)
                                         self.bigModel.currentview = .Auth_AuthView
+                                        
                                         print(bigModel.user.id)
                                         print(bigModel.user.email)
                                         //.standard ? "network" : "map"

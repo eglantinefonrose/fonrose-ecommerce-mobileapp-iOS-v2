@@ -51,6 +51,7 @@ struct ProductsScreen: View {
                                 .onTapGesture {
                                     bigModel.selectedProductId = index
                                     bigModel.currentview = .MeasurementCarouselView
+                                    bigModel.lastViews.append(.ProductsView)
                                 }
                             }
                         }

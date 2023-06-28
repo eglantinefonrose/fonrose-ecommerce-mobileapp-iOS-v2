@@ -29,6 +29,7 @@ struct PaymentScreen: View {
                 Text("Pay")
                     .onTapGesture {
                         bigModel.currentview = .FinalizeOrderViews_FinDeCommande
+                        bigModel.lastViews.append(.FinalizeOrderViews_PaymentScreen)
                         
                         if bigModel.currentPersonIndex != nil && bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location != nil  {
                             

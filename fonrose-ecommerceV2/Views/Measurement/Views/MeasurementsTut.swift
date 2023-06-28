@@ -181,6 +181,7 @@ struct MeasurementsTut: View {
                         }.background(Color.blue)
                         .cornerRadius(15)
                         .onTapGesture {
+                            self.bigModel.authLastViews.append(.Measurement_MeasurementsTut)
                             bigModel.currentview = .Measurement_Mensurations
                         }
                     }

@@ -15,6 +15,7 @@ struct SignInView: View {
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
     @StateObject var loginModel: LoginViewModel = .init()
+    @State var isTheFinalNumberCorrect: Bool = true
     
     @available(iOS 14.0, *)
     var body: some View {
@@ -58,6 +59,9 @@ struct SignInView: View {
                                                 .opacity(0.6)
                                                 .padding(.horizontal, 5)
                                         }
+                                        .onChange(of: bigModel.mobileNo) { newValue in
+                                            isTheFinalNumberCorrect = true
+                                        }
                                         
                                     
                                     Text("Get code")
@@ -65,11 +69,22 @@ struct SignInView: View {
                                         .padding(10)
                                         .font(.caption)
                                         .onTapGesture {
-                                            bigModel.getOTPCode()
+                                            
+                                            if bigModel.mobileNo.isValidPhoneNumber() {
+                                                bigModel.getOTPCode()
+                                            } else {
+                                                isTheFinalNumberCorrect = false
+                                            }
+                                            
                                         }
                                     
                                 }.background(Color.white)
                                 .cornerRadius(10)
+                                
+                                if !isTheFinalNumberCorrect {
+                                    Text("The phone number is not valid, please verify your phone number.")
+                                        .foregroundColor(.red)
+                                }
                                 
                                 VStack {
                                     TextField("", text: $bigModel.otpCode)
@@ -211,6 +226,15 @@ extension View {
             placeholder().opacity(shouldShow ? 1 : 0)
             self
         }
+    }
+}
+
+extension String {
+    func isValidPhoneNumber() -> Bool {
+        let regEx = "^\\+(?:[0-9]?){6,14}[0-9]$"
+
+        let phoneCheck = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
+        return phoneCheck.evaluate(with: self)
     }
 }
 

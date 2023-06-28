@@ -18,6 +18,7 @@ struct NewPersonView: View {
     @State var newPersonName: String = ""
     @EnvironmentObject var bigModel: BigModel
     var auth = Auth.auth()
+    @State var isFinalEmailValid: Bool = true
 
     var body: some View {
         
@@ -34,39 +35,7 @@ struct NewPersonView: View {
             
             VStack {
                 
-                Spacer()
-                    .frame(height: 20)
-                
-                HStack {
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.authLastViews.isEmpty {
-                                print("back")
-                                self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                self.bigModel.authLastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Text("New person")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                }.padding(20)
+                BackAuthButtonModel(text: "New person")
                 
                 Spacer()
                 
@@ -95,7 +64,9 @@ struct NewPersonView: View {
                 }.background(theColorScheme == .dark ? Color.gray : Color.white)
                 .cornerRadius(7)
                 .frame(height: 30)
-                .padding(10)
+                
+                Spacer()
+                    .frame(height: 20)
                                 
                 VStack {
                  
@@ -105,15 +76,22 @@ struct NewPersonView: View {
                                                      
                      Spacer()
                     
-                     TextField("", text: $newPersonEmail)
-                         .disableAutocorrection(true)
-                         .autocapitalization(.none)
-                         .placeholder(when: newPersonEmail.isEmpty) {
-                             Text("Email")
-                                 .foregroundColor(.gray)
-                                 .opacity(0.6)
-                                 .padding(.horizontal, 5)
-                         }
+                     if #available(iOS 14.0, *) {
+                         TextField("", text: $newPersonEmail)
+                             .disableAutocorrection(true)
+                             .autocapitalization(.none)
+                             .placeholder(when: newPersonEmail.isEmpty) {
+                                 Text("Email")
+                                     .foregroundColor(.gray)
+                                     .opacity(0.6)
+                                     .padding(.horizontal, 5)
+                             }
+                             .onChange(of: newPersonEmail) { newValue in
+                                 isFinalEmailValid = true
+                             }
+                     } else {
+                         // Fallback on earlier versions
+                     }
                  }
                  
                  Spacer()
@@ -121,7 +99,11 @@ struct NewPersonView: View {
                 }.background(theColorScheme == .dark ? Color.gray : Color.white)
                 .cornerRadius(7)
                 .frame(height: 30)
-                .padding(10)
+                
+                if !isFinalEmailValid {
+                    Text("The email adress is not valid, please verify your email adress.")
+                        .foregroundColor(.red)
+                }
                 
                 Spacer()
                 
@@ -137,118 +119,47 @@ struct NewPersonView: View {
 
                         Spacer()
                         
-                    }.frame(width: UIScreen.main.bounds.width - 50)
+                    }
                     .padding(5)
                     .background(Color.blue)
                     .cornerRadius(15)
                     .onTapGesture {
-                            
-                        Task {
-                            
-                            if newPersonEmail != "" && newPersonName != "" {
+                        
+                        if newPersonEmail.isValideEmailAdress() {
+                            Task {
                                 
-                                if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
-                                    alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
+                                if newPersonEmail != "" && newPersonName != "" {
+                                    
+                                    if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
+                                        alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
+                                            
+                                        }
+                                    } else {
                                         
+                                        try  db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
+                                        
+                                        //setData(["email": newPersonEmail, "name": newPersonName])
+                                        
+                                        await bigModel.fetchPerson()
+                                        bigModel.authCurrentView = .Auth_PersonPickerView
+                                        bigModel.authLastViews.append(.Auth_NewUserView)
                                     }
-                                } else {
-                                    
-                                    try await db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
-                                    
-                                    //setData(["email": newPersonEmail, "name": newPersonName])
-                                    
-                                    await bigModel.fetchPerson()
-                                    bigModel.authCurrentView = .Auth_PersonPickerView
-                                    bigModel.authLastViews.append(.Auth_NewUserView)
                                 }
                                 
-                                //db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document().setData(["email": email, "name": name])
-                                
-    //                            self.db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-    //                                guard error == nil else {
-    //                                    print(error!.localizedDescription)
-    //                                    return
-    //                                }
-    //
-    //                                bigModel.user.persons.removeAll()
-    //
-    //                                if let snapshot = snapshot {
-    //                                    for document in snapshot.documents {
-    //                                        let dbID = document.documentID
-    //                                        let dbName = document.data()["name"] as? String ?? ""
-    //                                        let dbEmail = document.data()["email"] as? String ?? ""
-    //
-    //                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
-    //                                        print(bigModel.user.persons.count)
-    //                                        print("person added")
-    //
-    //                                    }
-    //
-    //                                    bigModel.authCurrentView = .Auth_PersonPickerView
-    //
-    //                                }
-    //
-    //                                email = ""
-    //                                name = ""
-    //                                print(bigModel.user.persons.count)
-    //                                print(Auth.auth().currentUser?.uid ?? "nil")
-    //
-    //                            }
-                                
                             }
-                            
                         }
                         
+                        else {
+                            isFinalEmailValid = false
+                        }
+                        
+                        
                     }
-//                        .onChange(of: bigModel.user.persons.count) { newValue in
-//                            db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Location").document().setData(["civilty": "", "firstName": "", "lastName": "", "emailAdress": email, "phoneNumber": "", "adressPostalCode": "", "adressCity": "", "adressStreet": "", "adressMailBox": "", "adressBasement": "", "adressStage": "", "adressLat": 0, "adressLong": 0]) { _ in
-//
-//                                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Location").getDocuments { snapshot, error in
-//
-//                                    guard error == nil else {
-//                                        print(error!.localizedDescription)
-//                                        return
-//                                    }
-//
-//                                    if let snapshot = snapshot {
-//                                        for document in snapshot.documents {
-//
-//                                            let dbCivility = document.data()["civility"] as? String ?? ""
-//                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
-//                                            let dbLastName = document.data()["lastName"] as? String ?? ""
-//                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-//                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-//                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-//                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-//                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-//                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-//                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-//                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-//                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-//                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-//                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-//
-//                                            bigModel.user.persons[bigModel.user.persons.count-1].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
-//
-//                                        }
-//                                    }
-//
-//                                }
-//
-//                            }
-//
-//                            db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Measurements").document().setData(["ArmpitsMeasurement": "", "ArmsLength": "", "HeadMeasurement": "", "PelvisMeasurement": "", "PelvisKnee": "", "ShouldersMeasurement": "", "ShouldersPelvis": ""]) { _ in
-//
-//                            }
-//                        }
                 } else {
                     // Fallback on earlier versions
                 }
                 
-                Spacer()
-                    .frame(height: 30)
-                
-            }
+            }.padding(20)
             
         }
     }
@@ -259,5 +170,14 @@ struct NewUserView_Previews: PreviewProvider {
     static var previews: some View {
         NewPersonView()
             .environmentObject(BigModel())
+    }
+}
+
+extension String {
+    func isValideEmailAdress() -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailCheck = NSPredicate(format: "SELF MATCHES[c] %@", emailRegEx)
+        return emailCheck.evaluate(with: self)
     }
 }

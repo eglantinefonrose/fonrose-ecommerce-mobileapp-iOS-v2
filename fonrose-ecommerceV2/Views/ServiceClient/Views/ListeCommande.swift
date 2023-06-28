@@ -23,23 +23,52 @@ struct ListeCommande: View {
                 
                 BackButtonModel(text: "Suivi de Commande")
                 
+                Spacer()
                 
-                VStack {
-                    if #available(iOS 16.0, *) {
-                        List(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders) { order in
-                            Text(order.productName)
-                                .listRowBackground(Color("Background"))
+                if bigModel.currentPersonIndex != nil {
+                    
+                    if (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders.count != 0) {
+                        VStack {
+                            if #available(iOS 16.0, *) {
+                                List(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].orders) { order in
+                                    Text(order.productName)
+                                        .listRowBackground(Color("Background"))
+                                        .onTapGesture {
+                                            SuiviDeCommande(order: order)
+                                        }
+                                }
+                                .listStyle(PlainListStyle())
+                                .background(Color("Background"))
+                                .scrollContentBackground(.hidden)
+                            } else {
+                                // Fallback on earlier versions
+                            }
+                        }
+                    } else {
+                        VStack(spacing: 20) {
+                            Text("No orders here")
+                            Text("See our products")
+                                .foregroundColor(.blue)
                                 .onTapGesture {
-                                    SuiviDeCommande(order: order)
+                                    bigModel.lastViews.append(.ServiceClient_showOrdersList)
+                                    bigModel.currentview = .ProductsView
                                 }
                         }
-                        .listStyle(PlainListStyle())
-                        .background(Color("Background"))
-                        .scrollContentBackground(.hidden)
-                    } else {
-                        // Fallback on earlier versions
+                    }
+                    
+                } else {
+                    VStack(spacing: 20) {
+                        Text("You can find all your orders here")
+                        Text("Log in")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                bigModel.lastViews.append(.ServiceClient_showOrdersList)
+                                bigModel.currentview = .Auth_AuthView
+                            }
                     }
                 }
+                
+                Spacer()
                 
             }.padding(20)
         }

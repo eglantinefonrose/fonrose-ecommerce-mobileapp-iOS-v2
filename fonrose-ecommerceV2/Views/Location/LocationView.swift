@@ -176,18 +176,7 @@ struct LocationTextField: View {
                     
                     
                     if !showStreetCompletion {
-                        VStack {
-                            
-                            VStack {
-                                                                                    
-                                Text("Location")
-                                    .font(.system(size: 35, weight: .bold, design: .default))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.white)
-                                                                                    
-                            }
-                            
-                            //Spacer()
+                        VStack(spacing: 20) {
                             
                             VStack {
                                 
@@ -266,7 +255,7 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("Last name", text: $lastNameText)
+                                                     TextField("", text: $lastNameText)
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: lastNameText.isEmpty) {
@@ -577,7 +566,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressMailBoxText.isEmpty) {
-                                                             Text("Mail box")
+                                                             Text("Mail box (optionnal)")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -605,7 +594,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressBasementText.isEmpty) {
-                                                             Text("Basement")
+                                                             Text("Basement (optionnal)")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -633,7 +622,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressStageText.isEmpty) {
-                                                             Text("Stage")
+                                                             Text("Stage (optionnal)")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -680,18 +669,59 @@ struct LocationTextField: View {
                                     .padding(20)
                                     .onTapGesture {
                                         
-                                        let docRef = db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(/*bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? */"prout")
-                                        let docOrderRef = db.collection("Orders").document()
+                                        let docRef = db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "nil")
+                                        //let docOrderRef = db.collection("Orders").document()
                                         
-                                        do {
-                                            try docRef.setData(from: BigModel.Location(civility: civilityText, firstName: firstNameText, lastName: lastNameText, emailAdress: emailAdressText, phoneNumber: phoneNumberText, adressCountry: adressCountryText, adressPostalCode: adressPostalCodeText, adressCity: adressCityText, adressStreet: adressStreetText, adressMailBox: adressMailBoxText, adressBasement: adressBasementText, adressStage: adressStageText))
+                                        /*if sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil {
                                             
-                                          }
-                                          catch {
-                                            print(error)
-                                          }
+                                            guard let userId = auth.currentUser?.uid else { return }
+                                            let docRef = db.collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.id ?? "nil")
+                                            
+                                            do {
+                                                try docRef.setData(from: BigModel.Measurements(measurements: [
+                                                    BigModel.MeasurementModel(id: 0, measurementName: "Armpits measurement", measurementValue: measurementText0),
+                                                    BigModel.MeasurementModel(id: 1, measurementName: "Arms length", measurementValue: measurementText1),
+                                                    BigModel.MeasurementModel(id: 2, measurementName: "Head measurement", measurementValue: measurementText2),
+                                                    BigModel.MeasurementModel(id: 3, measurementName: "Pelvis measurement", measurementValue: measurementText3),
+                                                    BigModel.MeasurementModel(id: 4, measurementName: "Pelvis Knee", measurementValue: measurementText4),
+                                                    BigModel.MeasurementModel(id: 5, measurementName: "Shoulders measurement", measurementValue: measurementText5),
+                                                    BigModel.MeasurementModel(id: 6, measurementName: "Shoulders pelvis", measurementValue: measurementText6),
+                                                    BigModel.MeasurementModel(id: 7, measurementName: "Tour de poitrine", measurementValue: measurementText7),
+                                                    BigModel.MeasurementModel(id: 8, measurementName: "Entrejambe", measurementValue: measurementText8),
+                                                    BigModel.MeasurementModel(id: 9, measurementName: "Aisselles-Tetons", measurementValue: measurementText9),
+                                                    BigModel.MeasurementModel(id: 10, measurementName: "Teton-Nombril", measurementValue: measurementText10),
+                                                    BigModel.MeasurementModel(id: 11, measurementName: "Teton-Hanches", measurementValue: measurementText11)
+                                                ]))
+                                            } catch {
+                                                print(error)
+                                            }
+                                            
+                                            Task {
+                                                await bigModel.fetchMeasurements()
+                                                bigModel.currentview = .Measurement_RecapMensurations
+                                            }
+                                            
+                                        } else {
+                                            alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
+                                            }
+                                        }*/
                                         
-                                        bigModel.currentview = .LivraisonViews_RecapLivraison
+                                        if civilityText != "" && firstNameText != "" && lastNameText != "" && civilityText != "" && emailAdressText != "" && phoneNumberText != "" && adressCountryText != "" && adressPostalCodeText != "" && adressCityText != "" && adressStreetText != "" && adressMailBoxText != "" && adressBasementText != "" && adressStageText != "" {
+                                            
+                                            do {
+                                                try docRef.setData(from: BigModel.Location(civility: civilityText, firstName: firstNameText, lastName: lastNameText, emailAdress: emailAdressText, phoneNumber: phoneNumberText, adressCountry: adressCountryText, adressPostalCode: adressPostalCodeText, adressCity: adressCityText, adressStreet: adressStreetText, adressMailBox: adressMailBoxText, adressBasement: adressBasementText, adressStage: adressStageText))
+                                                bigModel.fetchLocation()
+                                                bigModel.currentview = .LivraisonViews_RecapLivraison
+                                                
+                                              }
+                                              catch {
+                                                print(error)
+                                              }
+                                            
+                                        } else {
+                                            alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
+                                            }
+                                        }
                                         
                                         /*guard let userId = auth.currentUser?.uid else { return }
                                             
@@ -724,7 +754,7 @@ struct LocationTextField: View {
                     }
                 }
                 
-            }
+            }.padding(20)
             
         }
     }

@@ -98,7 +98,8 @@ struct UserInfo: View {
                         }.onTapGesture {
                             
                             bigModel.currentview = .Measurement_Mensurations
-                                
+                            bigModel.needToSeeEveryMeasurements = true
+                            
                             }
                         }
                         
@@ -112,7 +113,9 @@ struct UserInfo: View {
                             
                             if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
                                 
-                                bigModel.initializeLocation()
+                                Task {
+                                    await bigModel.initializeLocation()
+                                }
                             
                                 /*let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Location")
                                 

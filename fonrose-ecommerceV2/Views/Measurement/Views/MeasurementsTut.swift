@@ -40,7 +40,7 @@ struct MeasurementsTut: View {
         
         ZStack {
             
-            Color("Background")
+            Color("Black")
                 .edgesIgnoringSafeArea(.all)
             
             if show {
@@ -77,7 +77,7 @@ struct MeasurementsTut: View {
                             Image(systemName: "house")
                                 .foregroundColor(Color.blue)
                                 .onTapGesture {
-                                    //bigModel.currentview = .Home_homeFeed0
+                                    bigModel.currentview = .Home_homeFeed0
                                 }
                             
                         }.onRotate { newOrientation in orientation = newOrientation }
@@ -180,6 +180,9 @@ struct MeasurementsTut: View {
                             Spacer()
                         }.background(Color.blue)
                         .cornerRadius(15)
+                        .onTapGesture {
+                            bigModel.currentview = .Measurement_Mensurations
+                        }
                     }
                     
                 }.padding(20)

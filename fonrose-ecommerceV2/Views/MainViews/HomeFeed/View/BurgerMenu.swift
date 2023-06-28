@@ -55,6 +55,7 @@ struct BurgerMenu: View {
                     .onTapGesture {
                         bigModel.currentview = ViewEnum.Measurement_Mensurations
                         bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.needToSeeEveryMeasurements = true
                         self.bigModel.showMenu = false
                     }
                 
@@ -65,84 +66,6 @@ struct BurgerMenu: View {
                         bigModel.currentview = ViewEnum.LivraisonViews_Livraison
                         bigModel.lastViews.append(.Home_homeFeed0)
                         self.bigModel.showMenu = false
-                        
-                        if bigModel.signedIn {
-                            
-                            print("signed in")
-                            
-                            if (bigModel.currentPersonIndex ?? 0)+1 < 10 {
-                                
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex ?? 0+1)").collection("Location").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    if let snapshot = snapshot {
-                                        
-                                        for document in snapshot.documents {
-                                            let dbCivility = document.data()["civility"] as? String ?? ""
-                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                            let dbLastName = document.data()["lastName"] as? String ?? ""
-                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-                                            
-                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage)
-                                            
-                                        }
-                                        
-                                    }
-
-                                    
-                                }
-                                  
-                            }
-                            
-                            else {
-                                
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\((bigModel.currentPersonIndex ?? 0)+1)").collection("Location").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    if let snapshot = snapshot {
-                                        
-                                        for document in snapshot.documents {
-                                            let dbCivility = document.data()["civility"] as? String ?? ""
-                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                            let dbLastName = document.data()["lastName"] as? String ?? ""
-                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                            
-                                            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage)
-                                            
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
-                            }
-                            
-                        }
-                        
                     }
                 
                 Image(systemName: "questionmark.circle")

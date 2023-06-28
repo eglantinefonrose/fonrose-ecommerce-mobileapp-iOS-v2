@@ -133,6 +133,19 @@ struct PersonPickerViewHome: View {
                                                 }
                                             }
                                             
+                                            Task {
+                                                
+                                                bigModel.fetchLocation()
+                                                
+                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                                    print("location nil")
+                                                    await bigModel.initializeLocation()
+                                                    bigModel.fetchLocation()
+                                                } else {
+                                                    print("not nil")
+                                                }
+                                            }
+                                            
                                             bigModel.authCurrentView = .Auth_UserInfo
                                             
                                             

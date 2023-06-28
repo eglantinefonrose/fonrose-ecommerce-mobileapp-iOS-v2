@@ -111,14 +111,11 @@ struct BigRootView: View {
                     if bigModel.selectedProductId == nil && bigModel.currentPersonIndex == nil {
                         ProductsScreen()
                     }
-                    if bigModel.selectedProductId == nil && bigModel.currentPersonIndex != nil {
-                        ProductsScreen()
+                    if (bigModel.selectedProductId == nil || bigModel.selectedProductId != nil) && bigModel.currentPersonIndex != nil {
+                        MeasurementView()
                     }
                     if bigModel.selectedProductId != nil && bigModel.currentPersonIndex == nil {
                         AuthView()
-                    }
-                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex != nil {
-                        MeasurementView()
                     }
                 }
                 

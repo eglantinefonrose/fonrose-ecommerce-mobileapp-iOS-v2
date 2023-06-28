@@ -97,70 +97,57 @@ struct HomeView: View {
     var auth = Auth.auth()
     
     var body: some View {
-                    
-    VStack {
-                
-        Spacer()
-         
-        BackButtonModel(text: "Measurements")
-                   
-        VStack {
+        
+        ZStack {
             
-            Spacer()
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+        
+        VStack(spacing: 20) {
+            
+            BackButtonModel(text: "Measurements")
+            
+            VStack {
                                 
-            Text("Mensurations \(bigModel.neededMeasurements.count)")
-                .font(.system(size: 35, weight: .bold, design: .default))
-                .fontWeight(.semibold)
-            
-            Text("all values in millimeters")
-                .foregroundColor(Color.gray)
-                .font(.system(size: 15, weight: .semibold, design: .default))
+                Text("Mensurations")
+                    .font(.system(size: 35, weight: .bold, design: .default))
+                    .fontWeight(.semibold)
                 
+                Text("all values in millimeters")
+                    .foregroundColor(Color.gray)
+                    .font(.system(size: 15, weight: .semibold, design: .default))
+                
+            }
+            
             Spacer()
             
-            }
-                
             VStack {
                 
-                Spacer()
+                
+                if #available(iOS 15.0, *) {
                     
-                    if #available(iOS 15.0, *) {
+                    ScrollView {
                         
-                        ScrollView {
+                        VStack(spacing: 20) {
                             
-                            /*if bigModel.currentPersonIndex != nil {
+                            if bigModel.isMeasurements0Requested ||  bigModel.selectedProductId == nil {
+                                
                                 VStack {
                                     
-                                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "nil")
-                                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementName ?? "nil")
-                                }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
-                                    .onRotate { newOrientation in orientation = newOrientation }
-                            }*/
-                                
-                        }
-                            
-                            VStack(spacing: 20) {
+                                    Spacer()
                                     
-                                Spacer()
-                                
-                                if bigModel.isMeasurements0Requested {
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        TextField("Armpits measurement", text: $measurementText0)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
                                     
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField("Armpits measurement", text: $measurementText0)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
                                     .onAppear {
@@ -169,46 +156,46 @@ struct HomeView: View {
                                         }
                                     }
                                     .onChange(of: (measurementText0), perform: { value in
-                                        perform: do {
-                                            if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText0 == "" {
-                                                arrayOfFields[0] = 0
-                                            } else {
-                                                arrayOfFields[0] = 1
+                                    perform: do {
+                                        if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
                                             }
-                                            
+                                        } else {}
+                                        
+                                        if measurementText0 == "" {
+                                            arrayOfFields[0] = 0
+                                        } else {
+                                            arrayOfFields[0] = 1
                                         }
-                                    })
-                                } else {
-                                    
-                                    if bigModel.currentPersonIndex != nil {
-                                        Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "rien")
+                                        
                                     }
-                                    
+                                    })
+                            } else {
+                                
+                                if bigModel.currentPersonIndex != nil {
+                                    Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementName ?? "rien")
                                 }
                                 
-                                if bigModel.isMeasurements1Requested {
-                                    VStack {
-                                     
-                                     Spacer()
-                                     
-                                     HStack {
-                                                                         
-                                         Spacer()
-                                         
-                                         TextField(bigModel.allMeasurements[1].measurementName, text: $measurementText1)
-                                             .disableAutocorrection(true)
-                                             .autocapitalization(.none)
-                                     }
-                                     
-                                     Spacer()
-
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                            }
+                            
+                            if bigModel.isMeasurements1Requested ||  bigModel.selectedProductId == nil {
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        TextField(bigModel.allMeasurements[1].measurementName, text: $measurementText1)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
                                     .cornerRadius(7)
                                     .frame(height: 30)
                                     .onAppear {
@@ -217,504 +204,511 @@ struct HomeView: View {
                                         }
                                     }
                                     .onChange(of: (measurementText1), perform: { value in
-                                        perform: do {
-                                            if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText1 == "" {
-                                                arrayOfFields[1] = 0
-                                            } else {
-                                                arrayOfFields[1] = 1
+                                    perform: do {
+                                        if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
                                             }
-                                            
+                                        } else {}
+                                        
+                                        if measurementText1 == "" {
+                                            arrayOfFields[1] = 0
+                                        } else {
+                                            arrayOfFields[1] = 1
                                         }
+                                        
+                                    }
                                     })
-                                } else {
-                                }
-                                
-                                if bigModel.isMeasurements2Requested {
-                                    VStack {
-                                        
-                                        Spacer()
-                                        
-                                        HStack {
-                                            
-                                            Spacer()
-                                            
-                                            TextField(bigModel.allMeasurements[2].measurementName, text: $measurementText2)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                        .cornerRadius(7)
-                                        .frame(height: 30)
-                                        .onAppear {
-                                            if measurementText2 != "" {
-                                                arrayOfFields[2] = 1
-                                            }
-                                        }
-                                        .onChange(of: (measurementText2), perform: { value in
-                                        perform: do {
-                                            if measurementText2.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText2 == "" {
-                                                arrayOfFields[2] = 0
-                                            } else {
-                                                arrayOfFields[2] = 1
-                                            }
-                                            
-                                        }
-                                    })
-                                } else {
-                                    Text("0")
-                                }
-                                
-                                if bigModel.isMeasurements3Requested {
-                                    VStack {
-                                        
-                                        Spacer()
-                                        
-                                        HStack {
-                                            
-                                            Spacer()
-                                            
-                                            TextField(bigModel.allMeasurements[3].measurementName, text: $measurementText3)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                        .cornerRadius(7)
-                                        .frame(height: 30)
-                                        .onAppear {
-                                            if measurementText3 != "" {
-                                                arrayOfFields[3] = 1
-                                            }
-                                        }
-                                        .onChange(of: (measurementText3), perform: { value in
-                                        perform: do {
-                                            if measurementText3.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText3 == "" {
-                                                arrayOfFields[3] = 0
-                                            } else {
-                                                arrayOfFields[3] = 1
-                                            }
-                                            
-                                        }
-                                    })
-                                } else {
-                                    Text("0")
-                                }
-                                
-                                if bigModel.isMeasurements4Requested {
-                                    VStack {
-                                        
-                                        Spacer()
-                                        
-                                        HStack {
-                                            
-                                            Spacer()
-                                            
-                                            TextField(bigModel.allMeasurements[4].measurementName, text: $measurementText4)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                        .cornerRadius(7)
-                                        .frame(height: 30)
-                                        .onAppear {
-                                            if measurementText4 != "" {
-                                                arrayOfFields[4] = 1
-                                            }
-                                        }
-                                        .onChange(of: (measurementText4), perform: { value in
-                                        perform: do {
-                                            if measurementText4.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText4 == "" {
-                                                arrayOfFields[4] = 0
-                                            } else {
-                                                arrayOfFields[4] = 1
-                                            }
-                                            
-                                        }
-                                    })
-                                }
-                                
-                                if bigModel.isMeasurements5Requested {
-                                    VStack {
-                                        
-                                        Spacer()
-                                        
-                                        HStack {
-                                            
-                                            Spacer()
-                                            
-                                            TextField(bigModel.allMeasurements[5].measurementName, text: $measurementText5)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
-                                        }
-                                        
-                                        Spacer()
-                                        
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                        .cornerRadius(7)
-                                        .frame(height: 30)
-                                        .onAppear {
-                                            if measurementText5 != "" {
-                                                arrayOfFields[5] = 1
-                                            }
-                                        }
-                                        .onChange(of: (measurementText5), perform: { value in
-                                        perform: do {
-                                            if measurementText5.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText5 == "" {
-                                                arrayOfFields[5] = 0
-                                            } else {
-                                                arrayOfFields[5] = 1
-                                            }
-                                            
-                                        }
-                                    })
-                                }
-                                
-                                if bigModel.isMeasurements6Requested {
+                            } else {
+                            }
+                            
+                            if bigModel.isMeasurements2Requested ||  bigModel.selectedProductId == nil {
+                                VStack {
                                     
-                                    VStack {
+                                    Spacer()
+                                    
+                                    HStack {
                                         
                                         Spacer()
                                         
-                                        HStack {
-                                            
-                                            Spacer()
-                                            
-                                            TextField(bigModel.allMeasurements[6].measurementName, text: $measurementText6)
-                                                .disableAutocorrection(true)
-                                                .autocapitalization(.none)
+                                        TextField(bigModel.allMeasurements[2].measurementName, text: $measurementText2)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    .cornerRadius(7)
+                                    .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText2 != "" {
+                                            arrayOfFields[2] = 1
+                                        }
+                                    }
+                                    .onChange(of: (measurementText2), perform: { value in
+                                    perform: do {
+                                        if measurementText2.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
+                                            }
+                                        } else {}
+                                        
+                                        if measurementText2 == "" {
+                                            arrayOfFields[2] = 0
+                                        } else {
+                                            arrayOfFields[2] = 1
                                         }
                                         
-                                        Spacer()
-                                        
-                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                        .cornerRadius(7)
-                                        .frame(height: 30)
-                                        .onAppear {
-                                            if measurementText6 != "" {
-                                                arrayOfFields[6] = 1
-                                            }
-                                        }
-                                        .onChange(of: (measurementText6), perform: { value in
-                                        perform: do {
-                                            if measurementText6.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                    
-                                                }
-                                            } else {}
-                                            
-                                            if measurementText6 == "" {
-                                                arrayOfFields[6] = 0
-                                            } else {
-                                                arrayOfFields[6] = 1
-                                            }
-                                            
-                                        }
+                                    }
                                     })
-                                }
+                            } else {
+                                Text("0")
+                            }
+                            
+                            if bigModel.isMeasurements3Requested ||  bigModel.selectedProductId == nil {
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        TextField(bigModel.allMeasurements[3].measurementName, text: $measurementText3)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    .cornerRadius(7)
+                                    .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText3 != "" {
+                                            arrayOfFields[3] = 1
+                                        }
+                                    }
+                                    .onChange(of: (measurementText3), perform: { value in
+                                    perform: do {
+                                        if measurementText3.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
+                                            }
+                                        } else {}
+                                        
+                                        if measurementText3 == "" {
+                                            arrayOfFields[3] = 0
+                                        } else {
+                                            arrayOfFields[3] = 1
+                                        }
+                                        
+                                    }
+                                    })
+                            } else {
+                                Text("0")
+                            }
+                            
+                            if bigModel.isMeasurements4Requested ||  bigModel.selectedProductId == nil {
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        TextField(bigModel.allMeasurements[4].measurementName, text: $measurementText4)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    .cornerRadius(7)
+                                    .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText4 != "" {
+                                            arrayOfFields[4] = 1
+                                        }
+                                    }
+                                    .onChange(of: (measurementText4), perform: { value in
+                                    perform: do {
+                                        if measurementText4.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
+                                            }
+                                        } else {}
+                                        
+                                        if measurementText4 == "" {
+                                            arrayOfFields[4] = 0
+                                        } else {
+                                            arrayOfFields[4] = 1
+                                        }
+                                        
+                                    }
+                                    })
+                            }
+                            
+                            if bigModel.isMeasurements5Requested ||  bigModel.selectedProductId == nil {
+                                VStack {
+                                    
+                                    Spacer()
+                                    
+                                    HStack {
+                                        
+                                        Spacer()
+                                        
+                                        TextField(bigModel.allMeasurements[5].measurementName, text: $measurementText5)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    .cornerRadius(7)
+                                    .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText5 != "" {
+                                            arrayOfFields[5] = 1
+                                        }
+                                    }
+                                    .onChange(of: (measurementText5), perform: { value in
+                                    perform: do {
+                                        if measurementText5.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
+                                            }
+                                        } else {}
+                                        
+                                        if measurementText5 == "" {
+                                            arrayOfFields[5] = 0
+                                        } else {
+                                            arrayOfFields[5] = 1
+                                        }
+                                        
+                                    }
+                                    })
+                            }
+                            
+                            if bigModel.isMeasurements6Requested ||  bigModel.selectedProductId == nil {
                                 
                                 VStack {
                                     
-                                    if bigModel.isMeasurements7Requested {
+                                    Spacer()
+                                    
+                                    HStack {
                                         
-                                        VStack {
-                                            
-                                            Spacer()
-                                            
-                                            HStack {
-                                                
-                                                Spacer()
-                                                
-                                                TextField(bigModel.allMeasurements[7].measurementName, text: $measurementText7)
-                                                    .disableAutocorrection(true)
-                                                    .autocapitalization(.none)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                            .cornerRadius(7)
-                                            .frame(height: 30)
-                                            .onAppear {
-                                                if measurementText7 != "" {
-                                                    arrayOfFields[7] = 1
-                                                }
-                                            }
-                                            .onChange(of: (measurementText7), perform: { value in
-                                            perform: do {
-                                                if measurementText7.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                        
-                                                    }
-                                                } else {}
-                                                
-                                                if measurementText7 == "" {
-                                                    arrayOfFields[7] = 0
-                                                } else {
-                                                    arrayOfFields[7] = 1
-                                                }
-                                                
-                                            }
-                                        })
+                                        Spacer()
+                                        
+                                        TextField(bigModel.allMeasurements[6].measurementName, text: $measurementText6)
+                                            .disableAutocorrection(true)
+                                            .autocapitalization(.none)
                                     }
                                     
-                                    if bigModel.isMeasurements8Requested {
-                                        
-                                        VStack {
-                                            
-                                            Spacer()
-                                            
-                                            HStack {
-                                                
-                                                Spacer()
-                                                
-                                                TextField(bigModel.allMeasurements[8].measurementName, text: $measurementText8)
-                                                    .disableAutocorrection(true)
-                                                    .autocapitalization(.none)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                            .cornerRadius(7)
-                                            .frame(height: 30)
-                                            .onAppear {
-                                                if measurementText8 != "" {
-                                                    arrayOfFields[8] = 1
-                                                }
-                                            }
-                                            .onChange(of: (measurementText8), perform: { value in
-                                            perform: do {
-                                                if measurementText8.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                        
-                                                    }
-                                                } else {}
-                                                
-                                                if measurementText8 == "" {
-                                                    arrayOfFields[8] = 0
-                                                } else {
-                                                    arrayOfFields[8] = 1
-                                                }
-                                                
-                                            }
-                                        })
-                                    }
+                                    Spacer()
                                     
-                                    if bigModel.isMeasurements9Requested {
-                                        
-                                        VStack {
-                                            
-                                            Spacer()
-                                            
-                                            HStack {
-                                                
-                                                Spacer()
-                                                
-                                                TextField(bigModel.allMeasurements[9].measurementName, text: $measurementText9)
-                                                    .disableAutocorrection(true)
-                                                    .autocapitalization(.none)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                            .cornerRadius(7)
-                                            .frame(height: 30)
-                                            .onAppear {
-                                                if measurementText9 != "" {
-                                                    arrayOfFields[9] = 1
-                                                }
-                                            }
-                                            .onChange(of: (measurementText9), perform: { value in
-                                            perform: do {
-                                                if measurementText9.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                        
-                                                    }
-                                                } else {}
-                                                
-                                                if measurementText9 == "" {
-                                                    arrayOfFields[9] = 0
-                                                } else {
-                                                    arrayOfFields[9] = 1
-                                                }
-                                                
-                                            }
-                                        })
+                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                    .cornerRadius(7)
+                                    .frame(height: 30)
+                                    .onAppear {
+                                        if measurementText6 != "" {
+                                            arrayOfFields[6] = 1
+                                        }
                                     }
-                                    
-                                    if bigModel.isMeasurements10Requested {
+                                    .onChange(of: (measurementText6), perform: { value in
+                                    perform: do {
+                                        if measurementText6.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                
+                                            }
+                                        } else {}
                                         
-                                        VStack {
-                                            
-                                            Spacer()
-                                            
-                                            HStack {
-                                                
-                                                Spacer()
-                                                
-                                                TextField(bigModel.allMeasurements[10].measurementName, text: $measurementText10)
-                                                    .disableAutocorrection(true)
-                                                    .autocapitalization(.none)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                            .cornerRadius(7)
-                                            .frame(height: 30)
-                                            .onAppear {
-                                                if measurementText10 != "" {
-                                                    arrayOfFields[10] = 1
-                                                }
-                                            }
-                                            .onChange(of: (measurementText10), perform: { value in
-                                            perform: do {
-                                                if measurementText10.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                        
-                                                    }
-                                                } else {}
-                                                
-                                                if measurementText10 == "" {
-                                                    arrayOfFields[10] = 0
-                                                } else {
-                                                    arrayOfFields[10] = 1
-                                                }
-                                                
-                                            }
-                                        })
-                                    }
-                                    
-                                    if bigModel.isMeasurements11Requested {
+                                        if measurementText6 == "" {
+                                            arrayOfFields[6] = 0
+                                        } else {
+                                            arrayOfFields[6] = 1
+                                        }
                                         
-                                        VStack {
-                                            
-                                            Spacer()
-                                            
-                                            HStack {
-                                                
-                                                Spacer()
-                                                
-                                                TextField(bigModel.allMeasurements[11].measurementName, text: $measurementText10)
-                                                    .disableAutocorrection(true)
-                                                    .autocapitalization(.none)
-                                            }
-                                            
-                                            Spacer()
-                                            
-                                        }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                            .cornerRadius(7)
-                                            .frame(height: 30)
-                                            .onAppear {
-                                                if measurementText11 != "" {
-                                                    arrayOfFields[11] = 1
-                                                }
-                                            }
-                                            .onChange(of: (measurementText11), perform: { value in
-                                            perform: do {
-                                                if measurementText11.rangeOfCharacter(from: CharacterSet.symbols) != nil || measurementText11.rangeOfCharacter(from: CharacterSet.letters) != nil  {
-                                                    alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
-                                                        
-                                                    }
-                                                } else {}
-                                                
-                                                if measurementText11 == "" {
-                                                    arrayOfFields[11] = 0
-                                                } else {
-                                                    arrayOfFields[11] = 1
-                                                }
-                                                
-                                            }
-                                        })
                                     }
-
-                                    
-                                }
-
+                                    })
+                            }
+                            
+                            VStack(spacing: 20) {
                                 
-                                Spacer()
-                                                                   
+                                if bigModel.isMeasurements7Requested ||  bigModel.selectedProductId == nil {
+                                    
+                                    VStack {
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            
+                                            Spacer()
+                                            
+                                            TextField(bigModel.allMeasurements[7].measurementName, text: $measurementText7)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                        .cornerRadius(7)
+                                        .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText7 != "" {
+                                                arrayOfFields[7] = 1
+                                            }
+                                        }
+                                        .onChange(of: (measurementText7), perform: { value in
+                                        perform: do {
+                                            if measurementText7.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                            
+                                            if measurementText7 == "" {
+                                                arrayOfFields[7] = 0
+                                            } else {
+                                                arrayOfFields[7] = 1
+                                            }
+                                            
+                                        }
+                                        })
                                 }
-                                                        
+                                
+                                if bigModel.isMeasurements8Requested ||  bigModel.selectedProductId == nil {
+                                    
+                                    VStack {
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            
+                                            Spacer()
+                                            
+                                            TextField(bigModel.allMeasurements[8].measurementName, text: $measurementText8)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                        .cornerRadius(7)
+                                        .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText8 != "" {
+                                                arrayOfFields[8] = 1
+                                            }
+                                        }
+                                        .onChange(of: (measurementText8), perform: { value in
+                                        perform: do {
+                                            if measurementText8.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                            
+                                            if measurementText8 == "" {
+                                                arrayOfFields[8] = 0
+                                            } else {
+                                                arrayOfFields[8] = 1
+                                            }
+                                            
+                                        }
+                                        })
+                                }
+                                
+                                if bigModel.isMeasurements9Requested ||  bigModel.selectedProductId == nil {
+                                    
+                                    VStack {
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            
+                                            Spacer()
+                                            
+                                            TextField(bigModel.allMeasurements[9].measurementName, text: $measurementText9)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                        .cornerRadius(7)
+                                        .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText9 != "" {
+                                                arrayOfFields[9] = 1
+                                            }
+                                        }
+                                        .onChange(of: (measurementText9), perform: { value in
+                                        perform: do {
+                                            if measurementText9.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                            
+                                            if measurementText9 == "" {
+                                                arrayOfFields[9] = 0
+                                            } else {
+                                                arrayOfFields[9] = 1
+                                            }
+                                            
+                                        }
+                                        })
+                                }
+                                
+                                if bigModel.isMeasurements10Requested ||  bigModel.selectedProductId == nil {
+                                    
+                                    VStack {
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            
+                                            Spacer()
+                                            
+                                            TextField(bigModel.allMeasurements[10].measurementName, text: $measurementText10)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                        .cornerRadius(7)
+                                        .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText10 != "" {
+                                                arrayOfFields[10] = 1
+                                            }
+                                        }
+                                        .onChange(of: (measurementText10), perform: { value in
+                                        perform: do {
+                                            if measurementText10.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                            
+                                            if measurementText10 == "" {
+                                                arrayOfFields[10] = 0
+                                            } else {
+                                                arrayOfFields[10] = 1
+                                            }
+                                            
+                                        }
+                                        })
+                                }
+                                
+                                if bigModel.isMeasurements11Requested ||  bigModel.selectedProductId == nil {
+                                    
+                                    
+                                    VStack {
+                                        
+                                        Spacer()
+                                        
+                                        HStack {
+                                            
+                                            Spacer()
+                                            
+                                            TextField(bigModel.allMeasurements[11].measurementName, text: $measurementText11)
+                                                .disableAutocorrection(true)
+                                                .autocapitalization(.none)
+                                        }
+                                        
+                                        Spacer()
+                                        
+                                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                        .cornerRadius(7)
+                                        .frame(height: 30)
+                                        .onAppear {
+                                            if measurementText11 != "" {
+                                                arrayOfFields[11] = 1
+                                            }
+                                        }
+                                        .onChange(of: (measurementText11), perform: { value in
+                                        perform: do {
+                                            if measurementText11.rangeOfCharacter(from: CharacterSet.symbols) != nil || measurementText11.rangeOfCharacter(from: CharacterSet.letters) != nil  {
+                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                    
+                                                }
+                                            } else {}
+                                            
+                                            if measurementText11 == "" {
+                                                arrayOfFields[11] = 0
+                                            } else {
+                                                arrayOfFields[11] = 1
+                                            }
+                                            
+                                        }
+                                        })
+                                }
+                                
+                                
+                            }
+                            
                         }
-                        
-                    /*} else {
-                        
-                    }*/
+                    }
+                    
+                }
+                
+                /*} else {
+                 
+                 }*/
                 
                 Spacer()
-                        
-                }
-                                            
-                VStack {
-                    
-                    Spacer()
-                    
-                    HStack {
-                        Image(systemName: "questionmark.video")
-                            .foregroundColor(.blue)
-                        Text("Comment prendre ses mensurations ?")
-                            .foregroundColor(.blue)
-                            .font(.body)
-                            .underline()
-                            .onTapGesture {
-                                bigModel.currentview = .Measurement_MeasurementsTut
-                            }
+                
+            }
+            
+            Spacer()
+            
+            VStack {
+                
+                HStack {
+                    VStack {
+                        Image(systemName: "chevron.down")
+                        Image(systemName: "chevron.down")
                     }
-                                        
-                    HStack {
-                        Spacer()
-                        Text("Save")
-                            .foregroundColor(Color.white)
-                            .fontWeight(.semibold)
-                            .padding(10)
-                        Spacer()
-                    }.background(Color.blue)
+                    Text("Scroll down to see all measurements")
+                }
+                
+                HStack {
+                    Image(systemName: "questionmark.video")
+                        .foregroundColor(.blue)
+                    Text("Comment prendre ses mensurations ?")
+                        .foregroundColor(.blue)
+                        .font(.body)
+                        .underline()
+                        .onTapGesture {
+                            bigModel.currentview = .Measurement_MeasurementsTut
+                        }
+                }
+                
+                HStack {
+                    Spacer()
+                    Text("Save")
+                        .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
+                        .padding(10)
+                    Spacer()
+                }.background(Color.blue)
                     .cornerRadius(15)
                     .onTapGesture {
                         
                         print(arrayOfFields)
                         
-                        if sum(array: arrayOfFields) == bigModel.neededMeasurements.count {
+                        if sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil {
                             
                             guard let userId = auth.currentUser?.uid else { return }
                             let docRef = db.collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.id ?? "nil")
@@ -747,14 +741,14 @@ struct HomeView: View {
                             alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
                             }
                         }
-                            
                         
-                                                    
+                        
+                        
                     }
                 
             }
-                            
-    }.padding(20)
+            
+        }.padding(20)
             .onAppear {
                 measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? "nil"
                 measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? "nil"
@@ -807,15 +801,16 @@ struct HomeView: View {
                 }
                 
                 /*Task {
-                    do {
-                        self.neededMeasurements = try await bigModel.fetchNeededMeasurementsInfo()
-                    }
-                    catch {
-                        print(error)
-                    }
-                }*/
+                 do {
+                 self.neededMeasurements = try await bigModel.fetchNeededMeasurementsInfo()
+                 }
+                 catch {
+                 print(error)
+                 }
+                 }*/
                 
             }
+        }
         
     }
     

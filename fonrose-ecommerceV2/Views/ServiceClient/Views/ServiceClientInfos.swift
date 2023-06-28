@@ -17,7 +17,7 @@ struct ServiceClientModel: Identifiable, Hashable {
 @available(iOS 14.0, *)
 struct ServiceClientInfos: View {
     
-    let serviceClient = [ServiceClientModel(id: 0, text: "Livraison", nextView: .ServiceClient_showDelivery), ServiceClientModel(id: 1, text: "Suivi en temps réel", nextView: .ServiceClient_showSuiviDeCommande), ServiceClientModel(id: 2, text: "Renvoi de colis", nextView: .ServiceClient_showReturn), ServiceClientModel(id: 3, text: "Fiche de livraison", nextView: .ServiceClient_showCard), ServiceClientModel(id: 4, text: "Service client", nextView: .ServiceClient_showServices)]
+    let serviceClient = [ServiceClientModel(id: 0, text: "Livraison", nextView: .ServiceClient_showDelivery), ServiceClientModel(id: 1, text: "Suivi en temps réel", nextView: .ServiceClient_showOrdersList), ServiceClientModel(id: 2, text: "Renvoi de colis", nextView: .ServiceClient_showReturn), ServiceClientModel(id: 3, text: "Fiche de livraison", nextView: .ServiceClient_showCard), ServiceClientModel(id: 4, text: "Service client", nextView: .ServiceClient_showServices)]
     let columns = [ GridItem(.flexible()), GridItem(.flexible()) ]
     
     @Environment(\.colorScheme) var theColorScheme
@@ -217,6 +217,14 @@ struct ShowDeliveryView: View {
                     bigModel.lastViews.removeLast()
                 }) {
                     Text("Back")
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
                 }
             }.frame(width: UIScreen.main.bounds.width, height: 30, alignment: .leading)
             .padding(EdgeInsets(top: 0, leading: 40, bottom: 0, trailing: 0))

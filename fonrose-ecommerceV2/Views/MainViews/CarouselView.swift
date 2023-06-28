@@ -121,6 +121,7 @@ struct PagingView<Content>: View where Content: View {
                                 DispatchQueue.main.async {
                                     Task {
                                         await bigModel.getRequestedMeasurements()
+                                        
                                     }
                                 }
                                 

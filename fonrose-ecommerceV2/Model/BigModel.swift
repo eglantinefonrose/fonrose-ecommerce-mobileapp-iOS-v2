@@ -566,52 +566,6 @@ class BigModel : ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
-        
-            
-            /*guard error == nil else {
-                print("ERROR WHEN FETCHING MEASUREMENTS \(error!.localizedDescription)")
-                return
-            }
-                  
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? "nil"
-                    let dbArmsLength = document.data()["ArmsLength"] as? String ?? "nil"
-                    let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? "nil"
-                    let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? "nil"
-                    let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? "nil"
-                    let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? "nil"
-                    let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? "nil"
-                    
-                    //ajout des données de mensurations à la personne sélectionnée du tableau personne, donc à la personne venant d'être crée
-                    self.user.persons[self.currentPersonIndex].measurements = BigModel.Measurements(id: document.documentID, ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                    
-                }
-                print("measurements fetched \(self.currentPersonId)")
-            }
-            
-        }*/
-        
-        /*guard let userId = auth.currentUser?.uid else { return }
-            
-        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements")
-        
-        collectionRef.getDocuments { snapshot, error in
-            guard error == nil else {
-                print("ERROR WHEN FETCHING MEASUREMENTS \(error!.localizedDescription)")
-                return
-            }
-            
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    do {
-                        self.user.persons[self.currentPersonIndex].measurements = try document.data(as: Measurements.self)
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
-        }*/
     }
     
     
@@ -654,43 +608,6 @@ class BigModel : ObservableObject {
                 }
             }
         }
-        
-        /*{ snapshot, error in
-            
-            guard error == nil else {
-                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
-               return
-            }
-                  
-            if let snapshot = snapshot {
-                
-                for document in snapshot.documents {
-
-                    let dbCivility = document.data()["civility"] as? String ?? ""
-                    let dbFirstName = document.data()["firstName"] as? String ?? ""
-                    let dbLastName = document.data()["lastName"] as? String ?? ""
-                    let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                    let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                    let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                    let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                    let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                    let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                    let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                    let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                    let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-
-                    self.user.persons[self.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
-
-                }
-                
-                print("location infos fetched \(self.currentPersonId)")
-                
-            }
-            
-        }*/
-        
     }
     
     
@@ -759,7 +676,7 @@ class BigModel : ObservableObject {
             
         }
     
-    func initializeLocation() {
+    func initializeLocation() async {
         
         print(self.currentPersonId)
         guard let userId = auth.currentUser?.uid else { return }
@@ -1068,12 +985,13 @@ class BigModel : ObservableObject {
     @Published var isMeasurements9Requested: Bool = false
     @Published var isMeasurements10Requested: Bool = false
     @Published var isMeasurements11Requested: Bool = false
+
+    @Published var needToSeeEveryMeasurements: Bool = false
     
     func isMeasurementRequested(measurementName: String) async -> Bool {
         
         do {
             
-            await updateMeasurementModel()
             print("isMeasurementRequested neededMeasurements.count \(neededMeasurements.count)")
             
             for i in 0..<(neededMeasurements.count) {
@@ -1116,6 +1034,204 @@ class BigModel : ObservableObject {
         }
         
     }
+    
+    var neededMeasurementsTab: [MeasurementModel] = []
+    
+    /*func newGetRequestedMeasurements() async -> [Int] {
+          
+        var neededMeasurementsTab: [MeasurementModel] = []
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Armpits measurement" == neededMeasurements[i].measurementName {
+                    neededMeasurementsTab[0] = 1
+                    print("0 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements0Requested = false
+        print("0 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Arms length" == neededMeasurements[i].measurementName {
+                    self.isMeasurements1Requested = true
+                    print("1 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements1Requested = false
+        print("1 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Head measurement" == neededMeasurements[i].measurementName {
+                    self.isMeasurements2Requested = true
+                    print("2 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements2Requested = false
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Pelvis measurement" == neededMeasurements[i].measurementName {
+                    self.isMeasurements3Requested = true
+                    print("3 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements3Requested = false
+        print("3 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Pelvis Knee" == neededMeasurements[i].measurementName {
+                    self.isMeasurements4Requested = true
+                    print("4 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements4Requested = false
+        print("4 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Shoulders measurement" == neededMeasurements[i].measurementName {
+                    self.isMeasurements5Requested = true
+                    print("5 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements5Requested = false
+        print("5 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Shoulders pelvis" == neededMeasurements[i].measurementName {
+                    self.isMeasurements6Requested = true
+                    print("6 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements6Requested = false
+        print("6 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Tour de poitrine" == neededMeasurements[i].measurementName {
+                    self.isMeasurements7Requested = true
+                    print("7 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements7Requested = false
+        print("7 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Entrejambe" == neededMeasurements[i].measurementName {
+                    self.isMeasurements8Requested = true
+                    print("8 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements8Requested = false
+        print("8 : false")
+    
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Aisselles-Tetons" == neededMeasurements[i].measurementName {
+                    self.isMeasurements9Requested = true
+                    print("9 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements9Requested = false
+        print("9 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Teton-Nombril" == neededMeasurements[i].measurementName {
+                    self.isMeasurements10Requested = true
+                    print("10 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements10Requested = false
+        print("10 : false")
+        
+        do {
+            for i in 0..<(neededMeasurements.count) {
+                
+                await updateMeasurementModel()
+                if "Teton-Hanches" == neededMeasurements[i].measurementName {
+                    self.isMeasurements11Requested = true
+                    print("11 : true")
+                }
+                
+            }
+            
+        }
+        self.isMeasurements11Requested = false
+        print("11 : false")
+        
+        DispatchQueue.main.async {
+            self.currentview = .Measurement_Mensurations
+        }
+        
+    }
+    
+    func groovyBaby() async {
+        await newGetRequestedMeasurements()
+        DispatchQueue.main.async {
+            self.currentview = .Measurement_Mensurations
+        }
+    }*/
     
     /*let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
      

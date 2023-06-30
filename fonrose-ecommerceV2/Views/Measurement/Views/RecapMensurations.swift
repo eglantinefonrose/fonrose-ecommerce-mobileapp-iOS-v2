@@ -122,31 +122,36 @@ struct RecapMensurations: View {
                         }.background(Color.blue)
                         .cornerRadius(15)
                         .onTapGesture {
-                            self.bigModel.lastViews.append(.Measurement_RecapMensurations)
                             
-                            if bigModel.selectedProductId != nil {
+                            Task {
                                 
-                                bigModel.fetchLocation()
+                                self.bigModel.lastViews.append(.Measurement_RecapMensurations)
                                 
-                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                if bigModel.selectedProductId != nil {
                                     
-                                    Task {
-                                        await bigModel.initializeLocation()
-                                        bigModel.fetchLocation()
+                                    await bigModel.fetchLocation()
+                                    
+                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                        
+                                        Task {
+                                            await bigModel.initializeLocation()
+                                            await bigModel.fetchLocation()
+                                        }
+                                        bigModel.currentview = .LivraisonViews_Livraison
+                                        bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                        
+                                    } else {bigModel.currentview = .LivraisonViews_Livraison
+                                        bigModel.lastViews.append(.Measurement_RecapMensurations)
                                     }
-                                    bigModel.currentview = .LivraisonViews_Livraison
-                                    bigModel.lastViews.append(.Measurement_RecapMensurations)
-                                    
-                                } else {bigModel.currentview = .LivraisonViews_Livraison
-                                    bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                } else {
+                                    bigModel.currentview = .Home_homeFeed0
                                 }
-                            } else {
-                                bigModel.currentview = .Home_homeFeed0
+                                
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                                print(self.bigModel.lastViews.count)
+                                print("location")
+                                
                             }
-                            
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            print(self.bigModel.lastViews.count)
-                            print("location")
                             
                         }
                            

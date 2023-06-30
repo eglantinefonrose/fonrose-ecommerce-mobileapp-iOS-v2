@@ -585,28 +585,27 @@ class BigModel : ObservableObject {
     
     
     //MARK: Fetch Location
-    func fetchLocation() {
+    func fetchLocation() async {
         
-        //fetch location
-        guard let userId = auth.currentUser?.uid else { return }
-            
-        let collectionRef = Firestore.firestore().collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location")
-        
-        collectionRef.getDocuments { snapshot, error in
-            guard error == nil else {
-                print("ERROR WHEN FETCHING LOCATION \(error!.localizedDescription)")
-               return
-            }
-
-            if let snapshot = snapshot {
-                for document in snapshot.documents {
-                    do {
-                        self.user.persons[self.currentPersonIndex ?? 0].location = try document.data(as: Location.self)
-                    } catch {
-                        print(error)
-                    }
-                }
-            }
+        do {
+         guard let userId = auth.currentUser?.uid else { return }
+         let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").getDocuments()
+         
+         self.user.persons[self.currentPersonIndex ?? 0].location = Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: "")
+         for document in collectionRef.documents {
+             var location: Location = Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: "")
+             do {
+                 location = try document.data(as: Location.self)
+                 self.user.persons[self.currentPersonIndex ?? 0].location = location
+             }
+             catch {
+                 print(error)
+             }
+             
+         }
+         
+        } catch {
+             print(error.localizedDescription)
         }
     }
     

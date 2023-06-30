@@ -135,12 +135,12 @@ struct PersonPickerViewHome: View {
                                             
                                             Task {
                                                 
-                                                bigModel.fetchLocation()
+                                                await bigModel.fetchLocation()
                                                 
                                                 if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
                                                     print("location nil")
                                                     await bigModel.initializeLocation()
-                                                    bigModel.fetchLocation()
+                                                    await bigModel.fetchLocation()
                                                 } else {
                                                     print("not nil")
                                                 }

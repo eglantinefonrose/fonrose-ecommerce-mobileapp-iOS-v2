@@ -156,9 +156,12 @@ struct LogInPhoneView: View {
                     .cornerRadius(15)
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                     .onTapGesture {
-                        print("click")
-                        bigModel.signIn(email: email, password: password)
-                        self.bigModel.authLastViews.append(.Auth_SignInView)
+                        Task {
+                            print("click")
+                            await bigModel.signIn(email: email, password: password)
+                            bigModel.currentview = .Auth_PersonPickerView
+                            self.bigModel.authLastViews.append(.Auth_SignInView)
+                        }
                     }
                     
                     HStack {

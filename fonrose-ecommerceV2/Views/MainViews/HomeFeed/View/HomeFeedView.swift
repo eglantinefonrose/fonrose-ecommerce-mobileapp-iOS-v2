@@ -179,12 +179,16 @@ struct HomeFeedView: View {
                                 Spacer()
                                 
                                 if bigModel.user.id != "" {
-                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].id != "" {
-                                        
-                                        Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].name)
-                                            .opacity(bigModel.showMenu ? 0 : 1)
-                                            .foregroundColor(.white)
-                                            .font(.system(size: 17, weight: .bold, design: .default))
+                                    if bigModel.user.persons.count != 0 {
+                                        if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].id != "" {
+                                            
+                                            Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].name)
+                                                .opacity(bigModel.showMenu ? 0 : 1)
+                                                .foregroundColor(.white)
+                                                .font(.system(size: 17, weight: .bold, design: .default))
+                                            
+                                        }
+                                    } else {
                                         
                                     }
                                 }
@@ -235,9 +239,17 @@ struct HomeFeedView: View {
                                                             
                                 bigModel.fetchAllMeasurementInfo()
                                 if bigModel.lastUserID != "" {
-                                    bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
+                                    await bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
                                 } else {
                                     print("no user logged before 🌳")
+                                }
+                            
+                                bigModel.currentPersonIndex = bigModel.lastCurrentPersonIndex
+                                bigModel.currentPersonId = bigModel.lastCurrentPersonId
+                                if bigModel.currentPersonIndex != nil {
+                                    bigModel.authCurrentView = .Auth_UserInfo
+                                } else {
+                                    bigModel.currentview = .Auth_PersonPickerView
                                 }
                             
                                 do {

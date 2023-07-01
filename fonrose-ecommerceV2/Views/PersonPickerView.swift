@@ -97,76 +97,86 @@ struct PersonPickerViewHome: View {
                     if #available(iOS 15.0, *) {
                                                                                     
                         if #available(iOS 16.0, *) {
-                            List {
-                                
-                                ForEach(bigModel.user.persons.indices, id: \.self) { index in
+                            
+                            if bigModel.user.persons.count != 0 {
+                                List {
                                     
-                                    HStack {
+                                    ForEach(bigModel.user.persons.indices, id: \.self) { index in
                                         
                                         HStack {
                                             
-                                            Text(bigModel.user.persons[index].name)
-                                                //.foregroundColor(colorScheme == .dark ? .white : .black)
-                                                .foregroundColor(.black)
-                                            
-                                            Spacer()
-                                            
-                                        }.onTapGesture {
-                                            
-                                            //Task {
+                                            HStack {
                                                 
-                                            bigModel.currentPersonIndex = index
-                                            bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
-                                            bigModel.isMeasurementModelUpdated = true
-                                            bigModel.selectedProductId = nil
-                                            
-                                            Task {
+                                                Text(bigModel.user.persons[index].name)
+                                                    //.foregroundColor(colorScheme == .dark ? .white : .black)
+                                                    .foregroundColor(.black)
                                                 
-                                                await bigModel.fetchMeasurements()
+                                                Spacer()
                                                 
-                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count == 0 {
-                                                    print("measurments nil")
-                                                    await bigModel.initializeMeasurements()
+                                            }.onTapGesture {
+                                                
+                                                //Task {
+                                                    
+                                                bigModel.currentPersonIndex = index
+                                                UserDefaults.standard.set(index, forKey: "lastCurrentPersonIndex")
+                                                bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
+                                                UserDefaults.standard.set(index, forKey: "lastCurrentPersonId")
+                                                bigModel.isMeasurementModelUpdated = true
+                                                bigModel.selectedProductId = nil
+                                                
+                                                Task {
+                                                    
                                                     await bigModel.fetchMeasurements()
-                                                } else {
-                                                    print("not nil")
+                                                    
+                                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count == 0 {
+                                                        print("measurments nil")
+                                                        await bigModel.initializeMeasurements()
+                                                        await bigModel.fetchMeasurements()
+                                                    } else {
+                                                        print("not nil")
+                                                    }
                                                 }
-                                            }
-                                            
-                                            Task {
                                                 
-                                                await bigModel.fetchLocation()
-                                                
-                                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
-                                                    print("location nil")
-                                                    await bigModel.initializeLocation()
+                                                Task {
+                                                    
                                                     await bigModel.fetchLocation()
-                                                } else {
-                                                    print("not nil")
+                                                    
+                                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                                        print("location nil")
+                                                        await bigModel.initializeLocation()
+                                                        await bigModel.fetchLocation()
+                                                    } else {
+                                                        print("not nil")
+                                                    }
                                                 }
+                                                
+                                                bigModel.authCurrentView = .Auth_UserInfo
+                                                bigModel.authLastViews.append(.Auth_PersonPickerView)
+                                                
+                                                
                                             }
                                             
-                                            bigModel.authCurrentView = .Auth_UserInfo
-                                            bigModel.authLastViews.append(.Auth_PersonPickerView)
-                                            
-                                            
-                                        }
-                                        
-                                        Image(systemName: "trash")
-                                            .foregroundColor(.blue)
-                                            .onTapGesture {
-                                                print(index)
-                                                print(bigModel.user.persons[index].id)
-                                                print(bigModel.user.persons[index].name)
-                                                //affichage de l'alerte
-                                                bigModel.deletedPersonID = bigModel.user.persons[index].id ?? "nil"
-                                                bigModel.deletedPersonName = bigModel.user.persons[index].name
-                                            }
-                                    }.padding(.vertical, 10)
-                                }.listRowBackground(Color("Background"))
-                            }.listStyle(PlainListStyle())
-                            .background(Color("Background"))
-                            .scrollContentBackground(.hidden)
+                                            Image(systemName: "trash")
+                                                .foregroundColor(.blue)
+                                                .onTapGesture {
+                                                    print(index)
+                                                    print(bigModel.user.persons[index].id)
+                                                    print(bigModel.user.persons[index].name)
+                                                    //affichage de l'alerte
+                                                    bigModel.deletedPersonID = bigModel.user.persons[index].id ?? "nil"
+                                                    bigModel.deletedPersonName = bigModel.user.persons[index].name
+                                                }
+                                        }.padding(.vertical, 10)
+                                    }.listRowBackground(Color("Background"))
+                                }.listStyle(PlainListStyle())
+                                .background(Color("Background"))
+                                .scrollContentBackground(.hidden)
+                            } else {
+                                Spacer()
+                                Text("No persons have been created, click on the + button to create one")
+                                Spacer()
+                            }
+                            
                         } else {
                             // Fallback on earlier versions
                         }

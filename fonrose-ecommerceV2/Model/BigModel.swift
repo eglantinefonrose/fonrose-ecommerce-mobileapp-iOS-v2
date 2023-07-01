@@ -31,6 +31,8 @@ class BigModel : ObservableObject {
     @Published var lastUserEmail: String = (UserDefaults.standard.string(forKey: "lastUserEmail") ?? "nil")
     @Published var lastUserPassword: String = (UserDefaults.standard.string(forKey: "lastUserPassword") ?? "nil")
     @Published var lastUserID: String = (UserDefaults.standard.string(forKey: "lastUserID") ?? "nil")
+    @Published var lastCurrentPersonIndex: Int = (UserDefaults.standard.integer(forKey: "lastCurrentPersonIndex"))
+    @Published var lastCurrentPersonId: String = (UserDefaults.standard.string(forKey: "lastCurrentPersonId") ?? "nil")
         
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
@@ -722,7 +724,7 @@ class BigModel : ObservableObject {
     @Published var deletedPersonID: String = ""
     @Published var deletedPersonName: String = ""
     
-    func signIn(email: String, password: String) {
+    func signIn(email: String, password: String) async {
         
         //[weak self] sert à ce que Xcode considère les variables email et password comme des "Strongs References" pour pas qu'elles soient effacées si jamais elles ne servent pas
         // !!!!!! il faut que l'adresse email soit valide et que le mdp ait + de 6 caractères, sinon erreur
@@ -741,15 +743,16 @@ class BigModel : ObservableObject {
                 Task {
                     self.signedIn = true
                     await self.fetchPerson()
-                    self.authCurrentView = .Auth_PersonPickerView
                     self.user.id = self.auth.currentUser?.uid ?? "nil"
                 }
             }
             
+            //self.authCurrentView = .Auth_PersonPickerView
             self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
             UserDefaults.standard.set(email , forKey: "lastUserEmail")
             UserDefaults.standard.set(password , forKey: "lastUserPassword")
             UserDefaults.standard.set(self.auth.currentUser?.uid ?? "error", forKey: "lastUserID")
+            
         }
     }
     
@@ -857,6 +860,7 @@ class BigModel : ObservableObject {
         self.user.persons = []
         UserDefaults.standard.set("", forKey: "lastUserEmail")
         UserDefaults.standard.set("", forKey: "lastUserPassword")
+        UserDefaults.standard.set("", forKey: "lastCurrentPersonIndex")
         
         self.currentview = .Home_homeFeed0
         self.authCurrentView = .Auth_SignInView

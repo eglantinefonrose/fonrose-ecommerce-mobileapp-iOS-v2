@@ -106,7 +106,7 @@ struct SignInView: View {
                         
                         HStack {
                             Spacer()
-                            Text("Save")
+                            Text("Sign in or sign up")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.semibold)
                                 .padding(10)
@@ -116,10 +116,6 @@ struct SignInView: View {
                         .onTapGesture {
                             bigModel.verifyOTPCode()
                         }
-                        
-                        Text("No account ? Sign up here")
-                            .fontWeight(.medium)
-                            .underline()
                         
                     }
                     

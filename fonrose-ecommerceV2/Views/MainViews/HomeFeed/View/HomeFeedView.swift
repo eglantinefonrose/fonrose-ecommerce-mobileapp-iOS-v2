@@ -234,6 +234,11 @@ struct HomeFeedView: View {
                         .task {
                                                             
                                 bigModel.fetchAllMeasurementInfo()
+                                if bigModel.lastUserID != "" {
+                                    bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
+                                } else {
+                                    print("no user logged before 🌳")
+                                }
                             
                                 do {
                                     bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()

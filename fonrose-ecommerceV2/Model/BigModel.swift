@@ -28,6 +28,9 @@ class BigModel : ObservableObject {
     }
     
     @Published var user: User = User(id: "", email: "", persons: [])
+    @Published var lastUserEmail: String = (UserDefaults.standard.string(forKey: "lastUserEmail") ?? "nil")
+    @Published var lastUserPassword: String = (UserDefaults.standard.string(forKey: "lastUserPassword") ?? "nil")
+    @Published var lastUserID: String = (UserDefaults.standard.string(forKey: "lastUserID") ?? "nil")
         
     @Published var signInErrorMessage = ""
     @Published var signOutErrorMessage = ""
@@ -734,9 +737,19 @@ class BigModel : ObservableObject {
             print("sign in")
             print(self.auth.currentUser?.uid ?? "fck")
             
+            DispatchQueue.main.async {
+                Task {
+                    self.signedIn = true
+                    await self.fetchPerson()
+                    self.authCurrentView = .Auth_PersonPickerView
+                    self.user.id = self.auth.currentUser?.uid ?? "nil"
+                }
+            }
+            
             self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
-            //self.fetchPerson()
-            self.authCurrentView = .Auth_PersonPickerView
+            UserDefaults.standard.set(email , forKey: "lastUserEmail")
+            UserDefaults.standard.set(password , forKey: "lastUserPassword")
+            UserDefaults.standard.set(self.auth.currentUser?.uid ?? "error", forKey: "lastUserID")
         }
     }
     
@@ -838,9 +851,12 @@ class BigModel : ObservableObject {
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
         
         self.isPersonChosen = false
+        //self.lastUserID = ""
         self.user.id = ""
         self.user.email = ""
         self.user.persons = []
+        UserDefaults.standard.set("", forKey: "lastUserEmail")
+        UserDefaults.standard.set("", forKey: "lastUserPassword")
         
         self.currentview = .Home_homeFeed0
         self.authCurrentView = .Auth_SignInView

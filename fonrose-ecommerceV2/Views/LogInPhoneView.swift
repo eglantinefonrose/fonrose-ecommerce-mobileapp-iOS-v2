@@ -11,7 +11,7 @@ import SwiftUI
 import FirebaseAuth
 
 @available(iOS 14.0, *)
-struct LogInPhoneView: View {
+struct LogInEmailView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
@@ -159,7 +159,7 @@ struct LogInPhoneView: View {
                         Task {
                             print("click")
                             bigModel.signIn(email: email, password: password)
-                            self.bigModel.authLastViews.append(.Auth_SignInView)
+                            self.bigModel.authLastViews.append(.Auth_LogInEmailView)
                             if bigModel.signedIn {
                                 bigModel.currentview = .Auth_PersonPickerView
                             }
@@ -178,7 +178,7 @@ struct LogInPhoneView: View {
                     .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20))
                     .onTapGesture {
                         self.bigModel.authCurrentView = .Auth_SignUpView
-                        self.bigModel.authLastViews.append(.Auth_SignInView)
+                        self.bigModel.authLastViews.append(.Auth_LogInEmailView)
                     }
                                                                         
                     Spacer()
@@ -259,7 +259,7 @@ struct SecureFieldModel: View {
 struct LogInGoogleView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            LogInPhoneView()
+            LogInEmailView()
                 .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions

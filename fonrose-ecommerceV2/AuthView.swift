@@ -18,8 +18,8 @@ struct AuthView: View {
                                                 
         VStack {
                             
-            if (self.bigModel.authCurrentView == .Auth_SignInView) {
-                LogInPhoneView()
+            if (self.bigModel.authCurrentView == .Auth_LogInEmailView) {
+                LogInEmailView()
             }
                 
             if (self.bigModel.authCurrentView == .Auth_SignUpView) {

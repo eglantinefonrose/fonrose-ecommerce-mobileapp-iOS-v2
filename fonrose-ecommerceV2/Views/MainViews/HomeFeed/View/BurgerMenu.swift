@@ -63,9 +63,20 @@ struct BurgerMenu: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .onTapGesture {
-                        bigModel.currentview = ViewEnum.LivraisonViews_Livraison
-                        bigModel.lastViews.append(.Home_homeFeed0)
-                        self.bigModel.showMenu = false
+                        Task {
+                            await bigModel.fetchLocation()
+                            
+                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                
+                                await bigModel.initializeLocation()
+                                await bigModel.fetchLocation()
+                                
+                            } else {
+                                bigModel.currentview = ViewEnum.LivraisonViews_Livraison
+                                bigModel.lastViews.append(.Home_homeFeed0)
+                                self.bigModel.showMenu = false
+                            }
+                        }
                     }
                 
                 Image(systemName: "questionmark.circle")

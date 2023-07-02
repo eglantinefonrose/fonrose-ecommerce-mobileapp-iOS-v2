@@ -193,7 +193,6 @@
 		7001F3A829FB022B00AC8791 /* New Group */ = {
 			isa = PBXGroup;
 			children = (
-				702A7D692953C222006338C0 /* LogInPhoneView.swift */,
 				7031EF9627F04C27009CA3A2 /* LocationHome.swift */,
 			);
 			path = "New Group";
@@ -324,6 +323,7 @@
 		7034753E285F67C50030C906 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				702A7D692953C222006338C0 /* LogInPhoneView.swift */,
 				7034753C285F67BD0030C906 /* SignInView.swift */,
 				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
 				7034754C285F7D000030C906 /* SignUpView.swift */,

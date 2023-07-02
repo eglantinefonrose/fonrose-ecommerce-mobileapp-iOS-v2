@@ -10,7 +10,7 @@ import SwiftUI
 import FirebaseAuth
 
 @available(iOS 14.0, *)
-struct SignInView: View {
+struct LogInPhoneView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
@@ -237,7 +237,7 @@ extension String {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            SignInView()
+            LogInPhoneView()
                 .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions

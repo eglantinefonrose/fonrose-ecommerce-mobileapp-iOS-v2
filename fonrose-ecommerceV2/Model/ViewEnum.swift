@@ -44,7 +44,7 @@ enum ViewEnum: String, Codable {
     case ServiceClient_ServiceClientInfos
     
     //MARK: Auth
-    case Auth_SignInView
+    case Auth_LogInEmailView
     case Auth_SignUpView
     case Auth_LogInNewUserView
     case Auth_PersonPickerView

@@ -606,9 +606,9 @@ class BigModel : ObservableObject {
          guard let userId = auth.currentUser?.uid else { return }
          let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Location").getDocuments()
          
-         self.user.persons[self.currentPersonIndex ?? 0].location = Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: "")
+         self.user.persons[self.currentPersonIndex ?? 0].location = nil
          for document in collectionRef.documents {
-             var location: Location = Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: "")
+             var location: Location? = nil
              do {
                  location = try document.data(as: Location.self)
                  self.user.persons[self.currentPersonIndex ?? 0].location = location
@@ -706,7 +706,7 @@ class BigModel : ObservableObject {
     }
 
     @Published var currentview = ViewEnum.Home_homeFeed0
-    @Published var currentPopUpView = ViewEnum.Auth_SignInView
+    @Published var currentPopUpView = ViewEnum.Auth_LogInEmailView
     @Published var lastViews: [ViewEnum] = []
     @Published var previousView: ViewEnum? = nil
     
@@ -828,7 +828,7 @@ class BigModel : ObservableObject {
     
     //MARK: Sign up
     
-    @Published var authCurrentView =  ViewEnum.Auth_SignInView
+    @Published var authCurrentView =  ViewEnum.Auth_LogInEmailView
     @Published var authLastViews: [ViewEnum] = []
     
     var newUserAccountEmail: String = ""
@@ -881,8 +881,8 @@ class BigModel : ObservableObject {
         UserDefaults.standard.set("", forKey: "lastUserPassword")
         UserDefaults.standard.set("", forKey: "lastCurrentPersonIndex")
         
-        self.currentview = .Home_homeFeed0
-        self.authCurrentView = .Auth_SignInView
+        //self.currentview = .Home_homeFeed0
+        self.authCurrentView = .Auth_LogInEmailView
         
         self.signedIn = false
     }

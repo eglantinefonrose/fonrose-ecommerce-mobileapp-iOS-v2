@@ -135,9 +135,6 @@ struct PersonPickerViewHome: View {
                                                     } else {
                                                         print("not nil")
                                                     }
-                                                }
-                                                
-                                                Task {
                                                     
                                                     await bigModel.fetchLocation()
                                                     
@@ -194,7 +191,7 @@ struct PersonPickerViewHome: View {
                         .foregroundColor(.blue)
                         .onTapGesture {
                             bigModel.signOut()
-                            bigModel.authCurrentView = ViewEnum.Auth_SignInView
+                            bigModel.authCurrentView = ViewEnum.Auth_LogInEmailView
                         }
                     
                     Text("+")

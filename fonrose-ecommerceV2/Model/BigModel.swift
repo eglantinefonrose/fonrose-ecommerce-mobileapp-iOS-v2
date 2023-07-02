@@ -525,21 +525,31 @@ class BigModel : ObservableObject {
             guard let userId = auth.currentUser?.uid else { return }
             let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
             
-            self.user.persons.removeAll()
+            var newlyLoadedPersons : [Person] = []
+            //self.user.currentPersonIndex =
+            //self.user.persons.removeAll()
             for document in collectionRef.documents {
                 var person: Person = Person(email: "", name: "tt", orders: [])
                 do {
                   person = try document.data(as: Person.self)
-                    self.user.persons.append(person)
-                    print(person.id)
+                  newlyLoadedPersons.append(person)
+                  print(person.name)
                 }
                 catch {
                   print(error)
                 }
                 
             }
+            print("On vient de charger \(newlyLoadedPersons.count) personnes")
 
-            print("Il y a \(self.user.persons.count) personnes")
+            // Store the new loaded persons in the BigModel (we do this in the main thread because
+            // the BigModel is bound to some views (and we want to avoid the "[SwiftUI] Publishing changes from background threads is not allowed"
+            //  - As newlyLoadedPersons is going to be used in an async closure, its value needs to be stored
+            //    in a constant to avoid the "Reference to captured var 'newlyLoadedPersons' in concurrently-executing code" error
+            let constantNewlyLoadedPersons = newlyLoadedPersons
+            DispatchQueue.main.async {
+                self.user.persons = constantNewlyLoadedPersons
+            }
             
         } catch {
             print(error.localizedDescription)

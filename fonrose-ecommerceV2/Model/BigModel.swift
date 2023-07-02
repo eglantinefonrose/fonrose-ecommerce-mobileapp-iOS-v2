@@ -751,10 +751,12 @@ class BigModel : ObservableObject {
             
             DispatchQueue.main.async {
                 Task {
-                    await self.fetchPerson()
                     self.user.id = self.auth.currentUser?.uid ?? "nil"
                     self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
                     self.signedIn = true
+                    
+                    // Charge les Person qui correspondent au User connecté (signedIn)
+                    await self.fetchPerson()
                 }
             }
             

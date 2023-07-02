@@ -200,17 +200,19 @@ struct HomeFeedView: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 20))
                                     .onTapGesture {
-                                        bigModel.lastViews.append(.Home_homeFeed0)
-                                        self.bigModel.currentview = .Auth_AuthView
                                         
-                                        print(bigModel.user.id)
-                                        print(bigModel.user.email)
-                                        //.standard ? "network" : "map"
-                                        withAnimation {
-                                            if bigModel.showMenu {
-                                                print("menu")
-                                            } else {
-                                                print("no menu")
+                                        Task {
+                                            bigModel.lastViews.append(.Home_homeFeed0)
+                                            self.bigModel.currentview = .Auth_AuthView
+                                            print(bigModel.user.id)
+                                            print(bigModel.user.email)
+                                            //.standard ? "network" : "map"
+                                            withAnimation {
+                                                if bigModel.showMenu {
+                                                    print("menu")
+                                                } else {
+                                                    print("no menu")
+                                                }
                                             }
                                         }
                                         
@@ -239,18 +241,13 @@ struct HomeFeedView: View {
                                                             
                                 bigModel.fetchAllMeasurementInfo()
                                 if bigModel.lastUserID != "" {
-                                    await bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
+                                    bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
                                 } else {
                                     print("no user logged before 🌳")
                                 }
                             
                                 bigModel.currentPersonIndex = bigModel.lastCurrentPersonIndex
                                 bigModel.currentPersonId = bigModel.lastCurrentPersonId
-                                if bigModel.currentPersonIndex != nil {
-                                    bigModel.authCurrentView = .Auth_UserInfo
-                                } else {
-                                    bigModel.currentview = .Auth_PersonPickerView
-                                }
                             
                                 do {
                                     bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()

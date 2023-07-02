@@ -98,7 +98,7 @@ struct PersonPickerViewHome: View {
                                                                                     
                         if #available(iOS 16.0, *) {
                             
-                            if bigModel.user.persons.count != 0 {
+                            //if bigModel.user.persons.count != 0 {
                                 List {
                                     
                                     ForEach(bigModel.user.persons.indices, id: \.self) { index in
@@ -171,11 +171,11 @@ struct PersonPickerViewHome: View {
                                 }.listStyle(PlainListStyle())
                                 .background(Color("Background"))
                                 .scrollContentBackground(.hidden)
-                            } else {
-                                Spacer()
-                                Text("No persons have been created, click on the + button to create one")
-                                Spacer()
-                            }
+                            //} else {
+                                //Spacer()
+                                //Text("No persons have been created, click on the + button to create one")
+                                //Spacer()
+                            //}
                             
                         } else {
                             // Fallback on earlier versions

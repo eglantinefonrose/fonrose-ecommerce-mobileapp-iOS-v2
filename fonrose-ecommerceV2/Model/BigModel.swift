@@ -538,7 +538,7 @@ class BigModel : ObservableObject {
                 }
                 
             }
-            
+
             print("Il y a \(self.user.persons.count) personnes")
             
         } catch {
@@ -724,7 +724,7 @@ class BigModel : ObservableObject {
     @Published var deletedPersonID: String = ""
     @Published var deletedPersonName: String = ""
     
-    func signIn(email: String, password: String) async {
+    func signIn(email: String, password: String) {
         
         //[weak self] sert à ce que Xcode considère les variables email et password comme des "Strongs References" pour pas qu'elles soient effacées si jamais elles ne servent pas
         // !!!!!! il faut que l'adresse email soit valide et que le mdp ait + de 6 caractères, sinon erreur
@@ -741,14 +741,21 @@ class BigModel : ObservableObject {
             
             DispatchQueue.main.async {
                 Task {
-                    self.signedIn = true
                     await self.fetchPerson()
                     self.user.id = self.auth.currentUser?.uid ?? "nil"
+                    self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
+                    self.signedIn = true
                 }
             }
             
-            //self.authCurrentView = .Auth_PersonPickerView
-            self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
+            //self.currentview = .Auth_PersonPickerView
+            
+            if self.user.persons.count != 0 {
+                self.authCurrentView = .Auth_UserInfo
+            } else {
+                self.authCurrentView = .Auth_PersonPickerView
+            }
+            
             UserDefaults.standard.set(email , forKey: "lastUserEmail")
             UserDefaults.standard.set(password , forKey: "lastUserPassword")
             UserDefaults.standard.set(self.auth.currentUser?.uid ?? "error", forKey: "lastUserID")

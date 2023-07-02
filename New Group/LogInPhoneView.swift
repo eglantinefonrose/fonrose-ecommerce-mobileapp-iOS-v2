@@ -158,9 +158,11 @@ struct LogInPhoneView: View {
                     .onTapGesture {
                         Task {
                             print("click")
-                            await bigModel.signIn(email: email, password: password)
-                            bigModel.currentview = .Auth_PersonPickerView
+                            bigModel.signIn(email: email, password: password)
                             self.bigModel.authLastViews.append(.Auth_SignInView)
+                            if bigModel.signedIn {
+                                bigModel.currentview = .Auth_PersonPickerView
+                            }
                         }
                     }
                     

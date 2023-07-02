@@ -41,7 +41,7 @@ struct MeasurementView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
-    @State var showPopup = !BigModel().isPersonChosen
+    @State var showPopup = false // BUG ici à régler. On ne peut pas utiliser BigModel() comme ça       !BigModel().isPersonChosen
     var user = BigModel.User.self
     
     var body: some View {

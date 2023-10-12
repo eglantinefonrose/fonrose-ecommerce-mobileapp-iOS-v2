@@ -846,7 +846,12 @@ class BigModel : ObservableObject {
                 if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
                     self.authCurrentView = .Auth_UserInfo
                 } else {
-                    self.authCurrentView = .Auth_PersonPickerView
+                    if self.user.persons.count == 0 {
+                        self.authCurrentView = .HelpView
+                    }
+                    else {
+                        self.authCurrentView = .Auth_PersonPickerView
+                    }
                 }
             }
         }

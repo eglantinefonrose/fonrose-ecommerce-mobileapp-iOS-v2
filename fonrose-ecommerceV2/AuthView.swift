@@ -19,7 +19,7 @@ struct AuthView: View {
         VStack {
                             
             if (self.bigModel.authCurrentView == .Auth_LogInEmailView) {
-                LogInEmailView()
+                LogInGoogleAppleView()
             }
                 
             if (self.bigModel.authCurrentView == .Auth_SignUpView) {
@@ -44,6 +44,10 @@ struct AuthView: View {
             
             if (self.bigModel.authCurrentView == .Auth_DeleteScreen) {
                 DeletePersonView()
+            }
+            
+            if (self.bigModel.authCurrentView == .HelpView) {
+                HelpView()
             }
             
             /*if (self.bigModel.authCurrentView == .Auth_EditPerson) {

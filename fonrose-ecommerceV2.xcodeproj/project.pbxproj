@@ -26,7 +26,7 @@
 		7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451E29FDAD0A00C421AA /* TextField-002.swift */; };
 		702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */; };
 		702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */; };
-		702A7D6A2953C222006338C0 /* LogInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInEmailView.swift */; };
+		702A7D6A2953C222006338C0 /* LogInGoogleAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInGoogleAppleView.swift */; };
 		7031EF9727F04C27009CA3A2 /* LocationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9627F04C27009CA3A2 /* LocationHome.swift */; };
 		7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */; };
 		7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */; };
@@ -70,6 +70,7 @@
 		70AF90D929FA739D00FB9212 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D829FA739D00FB9212 /* FirebaseStorageCombine-Community */; };
 		70B0371F2AD7ED09004A4870 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 70B0371E2AD7ED09004A4870 /* GoogleSignIn */; };
 		70B037212AD7ED09004A4870 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 70B037202AD7ED09004A4870 /* GoogleSignInSwift */; };
+		70B037252AD813B6004A4870 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B037242AD813B6004A4870 /* PaymentButton.swift */; };
 		70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */; };
 		70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */; };
 		70B7146829EFBD9D00C05CAC /* MeasurementsTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */; };
@@ -116,7 +117,7 @@
 		702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton_sandbox.swift; sourceTree = "<group>"; };
 		702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen_sandbox.swift; sourceTree = "<group>"; };
 		702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fonrose-ecommerceV2.entitlements"; sourceTree = "<group>"; };
-		702A7D692953C222006338C0 /* LogInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInEmailView.swift; sourceTree = "<group>"; };
+		702A7D692953C222006338C0 /* LogInGoogleAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInGoogleAppleView.swift; sourceTree = "<group>"; };
 		7031EF9627F04C27009CA3A2 /* LocationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHome.swift; sourceTree = "<group>"; };
 		7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 		7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
+		70B037242AD813B6004A4870 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
 		70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
 		70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsTut.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		7025B18F24699EB400F43171 /* FinalizeOrderView */ = {
 			isa = PBXGroup;
 			children = (
+				70B037242AD813B6004A4870 /* PaymentButton.swift */,
 				708F28B024680AB4005BFE7C /* FinDeCommande.swift */,
 				708F28AE246805A0005BFE7C /* PaymentScreen.swift */,
 			);
@@ -328,7 +331,7 @@
 		7034753E285F67C50030C906 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				702A7D692953C222006338C0 /* LogInEmailView.swift */,
+				702A7D692953C222006338C0 /* LogInGoogleAppleView.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
 				7034753C285F67BD0030C906 /* SignInView.swift */,
@@ -551,7 +554,7 @@
 				702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */,
 				704D0A2928A0286100AACF36 /* LocationView.swift in Sources */,
 				70BB819A246D7EC500695F19 /* About_us.swift in Sources */,
-				702A7D6A2953C222006338C0 /* LogInEmailView.swift in Sources */,
+				702A7D6A2953C222006338C0 /* LogInGoogleAppleView.swift in Sources */,
 				70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */,
 				70347553286090590030C906 /* MeasurementView.swift in Sources */,
 				7045357E2477BB29001F20A8 /* BigModel.swift in Sources */,
@@ -581,6 +584,7 @@
 				70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */,
 				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
+				70B037252AD813B6004A4870 /* PaymentButton.swift in Sources */,
 				7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */,
 				70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,

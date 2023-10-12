@@ -15,7 +15,7 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 @available(iOS 14.0, *)
-struct LogInEmailView: View {
+struct LogInGoogleAppleView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
@@ -44,106 +44,11 @@ struct LogInEmailView: View {
                 Spacer()
                     .frame(height: 10)
                 
-                HStack {
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }
+                BackButtonModel(text: "Sign in")
                 
                 Spacer()
                     
-                Text("Sign in")
-                    .font(.system(size: 35, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
-                    .fontWeight(.semibold)
-            
-                Spacer()
-                
                 VStack {
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                         
-                         TextField("Email", text: $email)
-                             .textContentType(.emailAddress)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                             .keyboardType(UIKeyboardType.emailAddress)
-                         
-                     }
-                     
-                     Spacer()
-
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
-                    
-                    VStack {
-                     
-                     Spacer()
-                     
-                     HStack {
-                                                         
-                         Spacer()
-                         
-                         SecureField("Password", text: $password)
-                             .keyboardType(.asciiCapable)
-                            .textContentType(.password)
-                             .disableAutocorrection(true)
-                             .autocapitalization(.none)
-                         
-                     }
-                     
-                     Spacer()
-
-                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                    .cornerRadius(7)
-                    .frame(height: 30)
-                    .padding(10)
-                    
-                }
-                
-                Spacer()
-                
-                /*Text(bigModel.signInErrorMessage)
-                    .foregroundColor(.red)
-                
-                Spacer()*/
-                
-                VStack {
-                    
-                    HStack(spacing: 10) {
                         
                         SignInWithAppleButton { (request) in
                             
@@ -180,18 +85,18 @@ struct LogInEmailView: View {
                             // Start the sign in flow!
                             GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) { result, error in
                                 
-                              guard error == nil else {
-                                  return
-                              }
+                                guard error == nil else {
+                                    return
+                                }
 
-                              guard let user = result?.user,
-                                let idToken = user.idToken?.tokenString
-                              else {
-                                return
-                              }
+                                guard let user = result?.user,
+                                    let idToken = user.idToken?.tokenString
+                                else {
+                                      return
+                                }
 
-                              let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-                                
+                                let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+                                    
                                 Auth.auth().signIn(with: credential) { result, error in
                                     
                                     guard error == nil else {
@@ -201,20 +106,10 @@ struct LogInEmailView: View {
                                     bigModel.updateUserInfos()
                                     
                                 }
-
                             }
-                            
                         }
-                        
-                        
-                        
-                    }.padding(.horizontal, 20)
                     
-                    
-                    
-                    
-                    
-                    HStack {
+                    /*HStack {
                         Spacer()
                         if !email.isEmpty, !password.isEmpty {
                             Text("Sign in")
@@ -258,11 +153,13 @@ struct LogInEmailView: View {
                     }
                                                                         
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 10)*/
                     
-                }
+                }.padding(20)
                 
-            }
+                Spacer()
+                
+            }.padding(20)
             
         }
         
@@ -335,7 +232,7 @@ struct SecureFieldModel: View {
 struct LogInEmailView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            LogInEmailView()
+            LogInGoogleAppleView()
                 .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions

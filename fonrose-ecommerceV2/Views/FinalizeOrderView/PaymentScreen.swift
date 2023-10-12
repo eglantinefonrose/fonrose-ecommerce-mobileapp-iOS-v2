@@ -26,7 +26,7 @@ struct PaymentScreen: View {
             VStack {
                 BackButtonModel(text: "Payment")
                 Spacer()
-                Text("Pay")
+                PaymentButton(action: {})
                     .onTapGesture {
                         bigModel.currentview = .FinalizeOrderViews_FinDeCommande
                         bigModel.lastViews.append(.FinalizeOrderViews_PaymentScreen)

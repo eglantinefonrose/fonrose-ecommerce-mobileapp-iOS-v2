@@ -16,6 +16,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import MapKit
 import AuthenticationServices
+import GoogleSignIn
 
 class BigModel : ObservableObject {
     
@@ -825,16 +826,11 @@ class BigModel : ObservableObject {
             print ("Logged In Success")
             
             self.updateUserInfos()
-            
-            if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
-                self.authCurrentView = .Auth_UserInfo
-            } else {
-                self.authCurrentView = .Auth_PersonPickerView
-            }
                         
         }
         
     }
+    
     
     func updateUserInfos() {
         
@@ -846,6 +842,12 @@ class BigModel : ObservableObject {
                 
                 // Charge les Person qui correspondent au User connecté (signedIn)
                 await self.fetchPerson()
+                
+                if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
+                    self.authCurrentView = .Auth_UserInfo
+                } else {
+                    self.authCurrentView = .Auth_PersonPickerView
+                }
             }
         }
         
@@ -1151,220 +1153,6 @@ class BigModel : ObservableObject {
     
     var neededMeasurementsTab: [MeasurementModel] = []
     
-    /*func newGetRequestedMeasurements() async -> [Int] {
-          
-        var neededMeasurementsTab: [MeasurementModel] = []
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Armpits measurement" == neededMeasurements[i].measurementName {
-                    neededMeasurementsTab[0] = 1
-                    print("0 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements0Requested = false
-        print("0 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Arms length" == neededMeasurements[i].measurementName {
-                    self.isMeasurements1Requested = true
-                    print("1 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements1Requested = false
-        print("1 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Head measurement" == neededMeasurements[i].measurementName {
-                    self.isMeasurements2Requested = true
-                    print("2 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements2Requested = false
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Pelvis measurement" == neededMeasurements[i].measurementName {
-                    self.isMeasurements3Requested = true
-                    print("3 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements3Requested = false
-        print("3 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Pelvis Knee" == neededMeasurements[i].measurementName {
-                    self.isMeasurements4Requested = true
-                    print("4 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements4Requested = false
-        print("4 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Shoulders measurement" == neededMeasurements[i].measurementName {
-                    self.isMeasurements5Requested = true
-                    print("5 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements5Requested = false
-        print("5 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Shoulders pelvis" == neededMeasurements[i].measurementName {
-                    self.isMeasurements6Requested = true
-                    print("6 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements6Requested = false
-        print("6 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Tour de poitrine" == neededMeasurements[i].measurementName {
-                    self.isMeasurements7Requested = true
-                    print("7 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements7Requested = false
-        print("7 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Entrejambe" == neededMeasurements[i].measurementName {
-                    self.isMeasurements8Requested = true
-                    print("8 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements8Requested = false
-        print("8 : false")
-    
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Aisselles-Tetons" == neededMeasurements[i].measurementName {
-                    self.isMeasurements9Requested = true
-                    print("9 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements9Requested = false
-        print("9 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Teton-Nombril" == neededMeasurements[i].measurementName {
-                    self.isMeasurements10Requested = true
-                    print("10 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements10Requested = false
-        print("10 : false")
-        
-        do {
-            for i in 0..<(neededMeasurements.count) {
-                
-                await updateMeasurementModel()
-                if "Teton-Hanches" == neededMeasurements[i].measurementName {
-                    self.isMeasurements11Requested = true
-                    print("11 : true")
-                }
-                
-            }
-            
-        }
-        self.isMeasurements11Requested = false
-        print("11 : false")
-        
-        DispatchQueue.main.async {
-            self.currentview = .Measurement_Mensurations
-        }
-        
-    }
-    
-    func groovyBaby() async {
-        await newGetRequestedMeasurements()
-        DispatchQueue.main.async {
-            self.currentview = .Measurement_Mensurations
-        }
-    }*/
-    
-    /*let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
-     
-     self.user.persons.removeAll()
-     for document in collectionRef.documents {
-         var person: Person = Person(email: "", name: "tt", orders: [])
-         do {
-           person = try document.data(as: Person.self)
-             self.user.persons.append(person)
-             print(person.id)
-         }
-         catch {
-           print(error)
-         }
-         
-     }*/
-    
-    
-    
     
     
     
@@ -1426,6 +1214,28 @@ class BigModel : ObservableObject {
         self.selectedProductId = 0
         self.currentPersonIndex = 0 // Eglantine
     }
-
     
+}
+
+extension UIApplication {
+    
+    func rootController()->UIViewController {
+        guard let window = connectedScenes.first as? UIWindowScene else {return .init()}
+        guard let viewcontroller = window.windows.last?.rootViewController else {return .init()}
+        return viewcontroller
+    }
+    
+}
+
+extension View {
+    func getRootViewController () -> UIViewController {
+        
+        guard let screen = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+            return .init()
+        }
+        guard let root = screen.windows.first?.rootViewController else {
+            return.init()
+        }
+        return root
+    }
 }

@@ -8,8 +8,11 @@
 //
 
 import SwiftUI
+import Firebase
 import FirebaseAuth
 import AuthenticationServices
+import GoogleSignIn
+import GoogleSignInSwift
 
 @available(iOS 14.0, *)
 struct LogInEmailView: View {
@@ -140,30 +143,67 @@ struct LogInEmailView: View {
                 
                 VStack {
                     
-                    SignInWithAppleButton { (request) in
+                    HStack(spacing: 10) {
                         
-                        bigModel.nonce = randomNonceString(length: 32)
-                        request.requestedScopes = [.email,.fullName]
-                        
-                    } onCompletion: { (result) in
-                        
-                        switch result {
-                            case .success(let user):
-                            guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
-                                print("error with firebase")
-                                return
-                            }
-                            bigModel.authentificateWithApple(credential: credential)
-                            bigModel.updateUserInfos()
+                        SignInWithAppleButton { (request) in
                             
-                            print("success")
-                            // do Login With Firebase..
-                            case .failure (let error):
-                                print (error.localizedDescription)
+                            bigModel.nonce = randomNonceString(length: 32)
+                            request.requestedScopes = [.email,.fullName]
+                            
+                        } onCompletion: { (result) in
+                            
+                            switch result {
+                                case .success(let user):
+                                guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
+                                    print("error with firebase")
+                                    return
+                                }
+                                bigModel.authentificateWithApple(credential: credential)
+                                bigModel.updateUserInfos()
+                                
+                                print("success")
+                                // do Login With Firebase..
+                                case .failure (let error):
+                                    print (error.localizedDescription)
+                            }
+                            
+                        }.frame(height: 40)
+                        
+                        GoogleSignInButton {
+                            
+                            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+                            // Create Google Sign In configuration object.
+                            let config = GIDConfiguration(clientID: clientID)
+                            GIDSignIn.sharedInstance.configuration = config
+
+                            // Start the sign in flow!
+                            GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) { result, error in
+                                
+                              guard error == nil else {
+                                  return
+                              }
+
+                              guard let user = result?.user,
+                                let idToken = user.idToken?.tokenString
+                              else {
+                                return
+                              }
+
+                              let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
+                            bigModel.updateUserInfos()
+
+                            }
+                            
                         }
                         
-                    }.frame(height: 45)
-                    .padding(.horizontal, 20)
+                        
+                        
+                    }.padding(.horizontal, 20)
+                    
+                    
+                    
+                    
                     
                     HStack {
                         Spacer()
@@ -287,7 +327,7 @@ struct LogInEmailView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             LogInEmailView()
-                .environmentObject(BigModel())
+                .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions
         }

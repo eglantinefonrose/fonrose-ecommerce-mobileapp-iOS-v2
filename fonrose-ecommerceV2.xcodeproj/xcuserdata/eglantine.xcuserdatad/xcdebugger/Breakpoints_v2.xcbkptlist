@@ -14,8 +14,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
             landmarkName = "fetchPerson()"
             landmarkType = "7">
          </BreakpointContent>
@@ -108,8 +108,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "692"
-            endingLineNumber = "692"
+            startingLineNumber = "693"
+            endingLineNumber = "693"
             landmarkName = "initializeMeasurements()"
             landmarkType = "7">
          </BreakpointContent>
@@ -124,148 +124,13 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "713"
-            endingLineNumber = "713"
+            startingLineNumber = "714"
+            endingLineNumber = "714"
             landmarkName = "initializeLocation()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 6c25de4aa7c9c6fd"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "property wrapper backing initializer of fonrose_ecommerceV2.BigModel.showMenu : Swift.Bool"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 8f13e665631aedd7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.showMenu.getter : Swift.Bool"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 6cd5ff4cc267c52b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.showMenu.setter : Swift.Bool"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "144">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - c11b9ff6cebac7d4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.showMenu.modify : Swift.Bool"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 91316dee19bf7d2b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.showMenu.modify : Swift.Bool with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 34ccedab78fd2332"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.$showMenu.getter : Combine.Published&lt;Swift.Bool&gt;.Publisher"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - e9e137c6b44cf706"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.$showMenu.setter : Combine.Published&lt;Swift.Bool&gt;.Publisher"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - d55da09f6e89a4d9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.$showMenu.modify : Combine.Published&lt;Swift.Bool&gt;.Publisher"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - bc2717c19fafabed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "fonrose_ecommerceV2.BigModel.$showMenu.modify : Combine.Published&lt;Swift.Bool&gt;.Publisher with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "714"
-                  endingLineNumber = "714"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 336f30dad5cf2446"
+                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 336f30dad5cf2429"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -275,8 +140,23 @@
                   urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "713"
-                  endingLineNumber = "713"
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
+                  offsetFromSymbolStart = "576">
+               </Location>
+               <Location
+                  uuid = "4C8555A8-EF0C-407A-A799-80CFAB11EB24 - 336f30dad5cf2429"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for fonrose_ecommerceV2.BigModel.initializeLocation() async -&gt; ()"
+                  moduleName = "fonrose-ecommerceV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "714"
+                  endingLineNumber = "714"
                   offsetFromSymbolStart = "328">
                </Location>
             </Locations>

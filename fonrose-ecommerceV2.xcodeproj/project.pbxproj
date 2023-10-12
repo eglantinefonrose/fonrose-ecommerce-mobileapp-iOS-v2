@@ -68,6 +68,8 @@
 		70AF90D529FA739D00FB9212 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D429FA739D00FB9212 /* FirebaseFirestoreSwift */; };
 		70AF90D729FA739D00FB9212 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D629FA739D00FB9212 /* FirebaseStorage */; };
 		70AF90D929FA739D00FB9212 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90D829FA739D00FB9212 /* FirebaseStorageCombine-Community */; };
+		70B0371F2AD7ED09004A4870 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 70B0371E2AD7ED09004A4870 /* GoogleSignIn */; };
+		70B037212AD7ED09004A4870 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 70B037202AD7ED09004A4870 /* GoogleSignInSwift */; };
 		70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */; };
 		70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */; };
 		70B7146829EFBD9D00C05CAC /* MeasurementsTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */; };
@@ -176,6 +178,8 @@
 			files = (
 				70AF90D129FA739D00FB9212 /* FirebaseDatabaseSwift in Frameworks */,
 				70AF90CF29FA739D00FB9212 /* FirebaseDatabase in Frameworks */,
+				70B0371F2AD7ED09004A4870 /* GoogleSignIn in Frameworks */,
+				70B037212AD7ED09004A4870 /* GoogleSignInSwift in Frameworks */,
 				70AF90D929FA739D00FB9212 /* FirebaseStorageCombine-Community in Frameworks */,
 				70AF90D729FA739D00FB9212 /* FirebaseStorage in Frameworks */,
 				70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */,
@@ -325,12 +329,12 @@
 			isa = PBXGroup;
 			children = (
 				702A7D692953C222006338C0 /* LogInEmailView.swift */,
-				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
-				7034753C285F67BD0030C906 /* SignInView.swift */,
-				7034754C285F7D000030C906 /* SignUpView.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
+				7034753C285F67BD0030C906 /* SignInView.swift */,
+				7034754C285F7D000030C906 /* SignUpView.swift */,
 				70347558286284220030C906 /* UserInfo.swift */,
+				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -474,6 +478,8 @@
 				70AF90D429FA739D00FB9212 /* FirebaseFirestoreSwift */,
 				70AF90D629FA739D00FB9212 /* FirebaseStorage */,
 				70AF90D829FA739D00FB9212 /* FirebaseStorageCombine-Community */,
+				70B0371E2AD7ED09004A4870 /* GoogleSignIn */,
+				70B037202AD7ED09004A4870 /* GoogleSignInSwift */,
 			);
 			productName = "fonrose-ecommerceV2";
 			productReference = 7019ABF72347E73F00F5EF15 /* fonrose-ecommerceV2.app */;
@@ -506,6 +512,7 @@
 			packageReferences = (
 				70B83179290D969000C0BF84 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				70AF90C729FA739D00FB9212 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 7019ABF82347E73F00F5EF15 /* Products */;
 			projectDirPath = "";
@@ -816,6 +823,14 @@
 				kind = branch;
 			};
 		};
+		70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		70B83179290D969000C0BF84 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
@@ -871,6 +886,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 70AF90C729FA739D00FB9212 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageCombine-Community";
+		};
+		70B0371E2AD7ED09004A4870 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		70B037202AD7ED09004A4870 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
 		};
 		70B8317A290D969000C0BF84 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;

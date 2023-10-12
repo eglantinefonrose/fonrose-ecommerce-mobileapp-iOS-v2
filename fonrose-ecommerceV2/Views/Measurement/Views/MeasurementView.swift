@@ -709,7 +709,7 @@ struct HomeView: View {
                         
                         print(arrayOfFields)
                         
-                        if sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil {
+                        if (sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil) && (measurementText0 != "") && (measurementText1 != "") && (measurementText2 != "") && (measurementText3 != "") && (measurementText4 != "") && (measurementText5 != "") && (measurementText6 != "") && (measurementText7 != "") && (measurementText8 != "") && (measurementText9 != "") && (measurementText10 != "") && (measurementText11 != "") {
                             
                             guard let userId = auth.currentUser?.uid else { return }
                             let docRef = db.collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.id ?? "nil")
@@ -740,8 +740,14 @@ struct HomeView: View {
                             }
                             
                         } else {
-                            alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
+                            
+                            if !(sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil) {
+                                alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {}
                             }
+                            if (measurementText0 != "") && (measurementText1 != "") && (measurementText2 != "") && (measurementText3 != "") && (measurementText4 != "") && (measurementText5 != "") && (measurementText6 != "") && (measurementText7 != "") && (measurementText8 != "") && (measurementText9 != "") && (measurementText10 != "") && (measurementText11 != "") {
+                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {}
+                            }
+                            
                         }
                         
                         
@@ -752,18 +758,18 @@ struct HomeView: View {
             
         }.padding(20)
             .onAppear {
-                measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? "nil"
-                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? "nil"
-                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? "nil"
-                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? "nil"
-                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? "nil"
-                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? "nil"
-                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? "nil"
-                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue ?? "nil"
-                measurementText8 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue ?? "nil"
-                measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? "nil"
-                measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? "nil"
-                measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? "nil"
+                measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? ""
+                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? ""
+                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? ""
+                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? ""
+                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? ""
+                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? ""
+                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? ""
+                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue ?? ""
+                measurementText8 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue ?? ""
+                measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? ""
+                measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? ""
+                measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? ""
                 
                 if measurementText0 != "" && bigModel.isMeasurements0Requested {
                     arrayOfFields[0] = 1

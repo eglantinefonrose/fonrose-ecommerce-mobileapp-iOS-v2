@@ -9,12 +9,14 @@
 
 import SwiftUI
 import FirebaseAuth
+import AuthenticationServices
 
 @available(iOS 14.0, *)
 struct LogInEmailView: View {
     
     @Environment(\.colorScheme) var theColorScheme
     @EnvironmentObject var bigModel: BigModel
+    @StateObject var loginModel: LoginViewModel = .init()
     var textContentType: UITextContentType!
     @State var email = ""
     @State var password = ""
@@ -131,12 +133,37 @@ struct LogInEmailView: View {
                 
                 Spacer()
                 
-                Text(bigModel.signInErrorMessage)
+                /*Text(bigModel.signInErrorMessage)
                     .foregroundColor(.red)
                 
-                Spacer()
+                Spacer()*/
                 
                 VStack {
+                    
+                    SignInWithAppleButton { (request) in
+                        
+                        bigModel.nonce = randomNonceString(length: 32)
+                        request.requestedScopes = [.email,.fullName]
+                        
+                    } onCompletion: { (result) in
+                        
+                        switch result {
+                            case .success(let user):
+                            guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
+                                print("error with firebase")
+                                return
+                            }
+                            bigModel.authentificateWithApple(credential: credential)
+                            bigModel.updateUserInfos()
+                            
+                            print("success")
+                            // do Login With Firebase..
+                            case .failure (let error):
+                                print (error.localizedDescription)
+                        }
+                        
+                    }.frame(height: 45)
+                    .padding(.horizontal, 20)
                     
                     HStack {
                         Spacer()
@@ -256,7 +283,7 @@ struct SecureFieldModel: View {
     }
 }*/
 
-struct LogInGoogleView_Previews: PreviewProvider {
+struct LogInEmailView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             LogInEmailView()

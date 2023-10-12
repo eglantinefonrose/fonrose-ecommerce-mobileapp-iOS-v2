@@ -227,27 +227,27 @@ struct HomeFeedView: View {
                 VStack {
                     if #available(iOS 15.0, *) {
                         VStack {
-                            //GifImage(name: "simpson")
-                                //.frame(height: 300)
-                            ZStack {
-                                Rectangle()
-                                    .foregroundColor(Color.blue)
-                                Text("ecommerce")
-                                    .font(.title)
-                            }
+                            GifImage(name: "logo-animation-v2_AdobeExpress")
+                                .frame(height: 300)
+                            //ZStack {
+                                //Rectangle()
+                                    //.foregroundColor(Color.blue)
+                                //Text("ecommerce")
+                                    //.font(.title)
+                            //}
                         }
                         .opacity(opacity)
                         .task {
                                                             
                                 bigModel.fetchAllMeasurementInfo()
-                                if bigModel.lastUserID != "" {
+                                /*if bigModel.lastUserID != "" {
                                     bigModel.signIn(email: bigModel.lastUserEmail, password: bigModel.lastUserPassword)
                                 } else {
                                     print("no user logged before 🌳")
-                                }
+                                }*/
                             
-                                bigModel.currentPersonIndex = bigModel.lastCurrentPersonIndex
-                                bigModel.currentPersonId = bigModel.lastCurrentPersonId
+                                //bigModel.currentPersonIndex = bigModel.lastCurrentPersonIndex
+                                //bigModel.currentPersonId = bigModel.lastCurrentPersonId
                             
                                 do {
                                     bigModel.productMainArrayInfos = try await bigModel.fetchProductInfo()
@@ -339,7 +339,7 @@ struct GifImage: UIViewRepresentable {
     
     func makeUIView(context: Context) -> WKWebView {
         let webView = WKWebView()
-        let url = Bundle.main.url(forResource: "simpson", withExtension: "gif")!
+        let url = Bundle.main.url(forResource: "logo-animation-v2_AdobeExpress", withExtension: "gif")!
         let data = try! Data(contentsOf: url)
         
         webView.load(data, mimeType: "image/gif", characterEncodingName: "UTF-8", baseURL: url.deletingLastPathComponent()

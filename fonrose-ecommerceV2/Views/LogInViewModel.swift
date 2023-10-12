@@ -8,14 +8,17 @@
 
 import SwiftUI
 import Firebase
+import AuthenticationServices
 
 class LoginViewModel: ObservableObject {
     
+    @EnvironmentObject var bigModel: BigModel
     @Published var mobileNo: String = ""
     @Published var otpCode: String = ""
     @Published var CLIENT_CODE: String = ""
     @Published var showError: Bool = false
     @Published var errorMessage: String = ""
+    let auth = Auth.auth()
     
     func getOTPCode() {
         UIApplication.shared.closeKeyboard()
@@ -58,6 +61,27 @@ class LoginViewModel: ObservableObject {
             showError.toggle()
         })
     }
+}
+
+func randomNonceString(length: Int = 32) -> String {
+  precondition(length > 0)
+  var randomBytes = [UInt8](repeating: 0, count: length)
+  let errorCode = SecRandomCopyBytes(kSecRandomDefault, randomBytes.count, &randomBytes)
+  if errorCode != errSecSuccess {
+    fatalError(
+      "Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)"
+    )
+  }
+
+  let charset: [Character] =
+    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+
+  let nonce = randomBytes.map { byte in
+    // Pick a random character from the set, wrapping around if needed.
+    charset[Int(byte) % charset.count]
+  }
+
+  return String(nonce)
 }
 
 extension UIApplication{

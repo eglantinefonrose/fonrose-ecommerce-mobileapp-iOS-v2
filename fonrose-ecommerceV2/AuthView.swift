@@ -46,9 +46,9 @@ struct AuthView: View {
                 DeletePersonView()
             }
             
-            if (self.bigModel.authCurrentView == .Auth_EditPerson) {
+            /*if (self.bigModel.authCurrentView == .Auth_EditPerson) {
                 EditPersonView()
-            }
+            }*/
             
         }
         

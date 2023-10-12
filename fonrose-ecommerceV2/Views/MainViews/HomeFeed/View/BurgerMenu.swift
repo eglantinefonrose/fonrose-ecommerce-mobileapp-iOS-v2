@@ -49,6 +49,15 @@ struct BurgerMenu: View {
                         }
                 }
                 
+                Text("All products")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .onTapGesture {
+                        bigModel.currentview = ViewEnum.ProductsView
+                        bigModel.lastViews.append(.Home_homeFeed0)
+                        self.bigModel.showMenu = false
+                    }
+                
                 Text("Measurement")
                     .foregroundColor(.white)
                     .font(.headline)

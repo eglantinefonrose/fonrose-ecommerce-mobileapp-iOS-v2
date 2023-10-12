@@ -15,6 +15,7 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import MapKit
+import AuthenticationServices
 
 class BigModel : ObservableObject {
     
@@ -350,6 +351,22 @@ class BigModel : ObservableObject {
         return mainViewArrayElements
         
     }
+    
+    
+    
+    //
+    //
+    //
+    //
+    //
+    //MARK: Measurements
+    //
+    //
+    
+    
+    
+    
+    
     
     // cette fonction récupère les infos de type NeededMeasurementsModel depuis le fichier Json stocké dans GCS puis renvoie un tableau rempli de NeededMeasurementsModel avec les infos correspondantes
     func fetchNeededMeasurementsInfo() async throws -> [NeededMeasurementsModel] {
@@ -734,6 +751,14 @@ class BigModel : ObservableObject {
     @Published var deletedPersonID: String = ""
     @Published var deletedPersonName: String = ""
     
+    //
+    //
+    //
+    //
+    //
+    //MARK: Auth
+    //
+    //
     func signIn(email: String, password: String) {
         
         //[weak self] sert à ce que Xcode considère les variables email et password comme des "Strongs References" pour pas qu'elles soient effacées si jamais elles ne servent pas
@@ -762,7 +787,7 @@ class BigModel : ObservableObject {
             
             //self.currentview = .Auth_PersonPickerView
             
-            if self.user.persons.count != 0 {
+            if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
                 self.authCurrentView = .Auth_UserInfo
             } else {
                 self.authCurrentView = .Auth_PersonPickerView
@@ -773,6 +798,57 @@ class BigModel : ObservableObject {
             UserDefaults.standard.set(self.auth.currentUser?.uid ?? "error", forKey: "lastUserID")
             
         }
+    }
+    
+    @Published var nonce = ""
+    
+    func authentificateWithApple(credential: ASAuthorizationAppleIDCredential) {
+        
+        guard let token = credential.identityToken else {
+            print("error with firebase")
+            return
+        }
+        
+        guard let tokenString = String(data: token, encoding: .utf8) else {
+            print("error with Token")
+            return
+        }
+        
+        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString, rawNonce: nonce)
+        
+        Auth.auth().signIn(with: firebaseCredential) { [self] (result, err) in
+            if let error = err {
+            print(error.localizedDescription)
+            return
+            }
+            // Userl Successfully Logged Into Firebase.
+            print ("Logged In Success")
+            
+            self.updateUserInfos()
+            
+            if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
+                self.authCurrentView = .Auth_UserInfo
+            } else {
+                self.authCurrentView = .Auth_PersonPickerView
+            }
+                        
+        }
+        
+    }
+    
+    func updateUserInfos() {
+        
+        DispatchQueue.main.async {
+            Task {
+                self.user.id = self.auth.currentUser?.uid ?? "nil"
+                self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
+                self.signedIn = true
+                
+                // Charge les Person qui correspondent au User connecté (signedIn)
+                await self.fetchPerson()
+            }
+        }
+        
     }
     
     //MARK: Des modifications de l'appli à la db Firebase
@@ -1347,6 +1423,7 @@ class BigModel : ObservableObject {
 
         self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons)
         
+        self.selectedProductId = 0
         self.currentPersonIndex = 0 // Eglantine
     }
 

@@ -26,7 +26,7 @@
 		7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451E29FDAD0A00C421AA /* TextField-002.swift */; };
 		702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */; };
 		702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */; };
-		702A7D6A2953C222006338C0 /* LogInPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInPhoneView.swift */; };
+		702A7D6A2953C222006338C0 /* LogInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D692953C222006338C0 /* LogInEmailView.swift */; };
 		7031EF9727F04C27009CA3A2 /* LocationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9627F04C27009CA3A2 /* LocationHome.swift */; };
 		7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */; };
 		7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */; };
@@ -50,6 +50,7 @@
 		70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */; };
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
 		705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF2243F988100D47D6C /* dataSuivi.swift */; };
+		706140482A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif in Resources */ = {isa = PBXBuildFile; fileRef = 706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */; };
 		7067C75B29FC01C2003F5A1D /* FetchData_Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */; };
 		708698392A25228C00E393E9 /* OrderStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708698382A25228C00E393E9 /* OrderStatusEnum.swift */; };
 		70887906292F70FC00391A41 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70887905292F70FC00391A41 /* ShopView.swift */; };
@@ -57,7 +58,6 @@
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
 		709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */; };
-		70A19AC629FB05DB0047D2E9 /* EditPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */; };
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90C829FA739D00FB9212 /* FirebaseAnalytics */; };
 		70AF90CB29FA739D00FB9212 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90CA29FA739D00FB9212 /* FirebaseAuth */; };
@@ -114,7 +114,7 @@
 		702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton_sandbox.swift; sourceTree = "<group>"; };
 		702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen_sandbox.swift; sourceTree = "<group>"; };
 		702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "fonrose-ecommerceV2.entitlements"; sourceTree = "<group>"; };
-		702A7D692953C222006338C0 /* LogInPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInPhoneView.swift; sourceTree = "<group>"; };
+		702A7D692953C222006338C0 /* LogInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInEmailView.swift; sourceTree = "<group>"; };
 		7031EF9627F04C27009CA3A2 /* LocationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHome.swift; sourceTree = "<group>"; };
 		7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 		7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 		70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFbDocumentUID.swift; sourceTree = "<group>"; };
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
 		705ABCF2243F988100D47D6C /* dataSuivi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataSuivi.swift; sourceTree = "<group>"; };
+		706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "logo-animation-v2_AdobeExpress.gif"; path = "../../../../../Desktop/projet-robe/Logos/logo/logo-principal/animations/version-finale/logo-animation-v2_AdobeExpress.gif"; sourceTree = "<group>"; };
 		7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData_Sandbox.swift; sourceTree = "<group>"; };
 		708698382A25228C00E393E9 /* OrderStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusEnum.swift; sourceTree = "<group>"; };
 		70887905292F70FC00391A41 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
@@ -145,7 +146,6 @@
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
-		70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditPersonView.swift; path = ../../../../../../../.Trash/EditPersonView.swift; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewTest.swift; sourceTree = "<group>"; };
 		70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPersonView.swift; sourceTree = "<group>"; };
@@ -224,6 +224,7 @@
 				70CFDBC729F1FC1200F19D41 /* simpson.gif */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
+				706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */,
 				70BB8199246D7EC500695F19 /* About_us.swift */,
 				7001F3A829FB022B00AC8791 /* New Group */,
 				7025B19024699EED00F43171 /* SandboxViews */,
@@ -323,14 +324,13 @@
 		7034753E285F67C50030C906 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				702A7D692953C222006338C0 /* LogInPhoneView.swift */,
-				7034753C285F67BD0030C906 /* SignInView.swift */,
+				702A7D692953C222006338C0 /* LogInEmailView.swift */,
 				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
+				7034753C285F67BD0030C906 /* SignInView.swift */,
 				7034754C285F7D000030C906 /* SignUpView.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
 				70347558286284220030C906 /* UserInfo.swift */,
-				70A19AC529FB05DB0047D2E9 /* EditPersonView.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -522,6 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
+				706140482A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
@@ -543,7 +544,7 @@
 				702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */,
 				704D0A2928A0286100AACF36 /* LocationView.swift in Sources */,
 				70BB819A246D7EC500695F19 /* About_us.swift in Sources */,
-				702A7D6A2953C222006338C0 /* LogInPhoneView.swift in Sources */,
+				702A7D6A2953C222006338C0 /* LogInEmailView.swift in Sources */,
 				70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */,
 				70347553286090590030C906 /* MeasurementView.swift in Sources */,
 				7045357E2477BB29001F20A8 /* BigModel.swift in Sources */,
@@ -573,7 +574,6 @@
 				70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */,
 				709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */,
 				70D4E45224608458002B2BE8 /* player2.swift in Sources */,
-				70A19AC629FB05DB0047D2E9 /* EditPersonView.swift in Sources */,
 				7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */,
 				70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */,
 				705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */,
@@ -742,7 +742,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4LQFF9PJNU;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
@@ -767,7 +767,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "fonrose-ecommerceV2/Preview\\ Content";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4LQFF9PJNU;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "fonrose-ecommerceV2/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;

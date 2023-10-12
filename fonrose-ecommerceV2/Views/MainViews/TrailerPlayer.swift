@@ -34,7 +34,7 @@ struct TrailerPlayer: View {
             
             VStack {
                 
-                HStack {
+                /*HStack {
                     
                     Text("Back")
                         .foregroundColor(Color.blue)
@@ -64,9 +64,12 @@ struct TrailerPlayer: View {
                             bigModel.currentview = .Home_homeFeed0
                         }
                 
-                }.onRotate { newOrientation in orientation = newOrientation }
-                .padding(20)
-                .frame(width: UIScreen.main.bounds.width)
+                }*/
+                
+                BackButtonModel(text: bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
+                    .onRotate { newOrientation in orientation = newOrientation }
+                    .padding(20)
+                    .frame(width: UIScreen.main.bounds.width)
                 
                 Spacer()
                 

@@ -44,7 +44,7 @@ struct BurgerMenu: View {
                         .foregroundColor(.white)
                         .font(.headline)
                         .onTapGesture {
-                            proxy.scrollTo(index + bigModel.productMainArrayInfos.count + 1)
+                            bigModel.currentview = bigModel.mainArrayInfos[index].nextScreen
                             self.bigModel.showMenu = false
                         }
                 }

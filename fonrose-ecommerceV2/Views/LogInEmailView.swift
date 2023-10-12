@@ -191,7 +191,16 @@ struct LogInEmailView: View {
                               }
 
                               let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-                            bigModel.updateUserInfos()
+                                
+                                Auth.auth().signIn(with: credential) { result, error in
+                                    
+                                    guard error == nil else {
+                                        return
+                                    }
+                                    
+                                    bigModel.updateUserInfos()
+                                    
+                                }
 
                             }
                             

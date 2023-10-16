@@ -11,8 +11,6 @@ import SwiftUI
 struct ProductsScreen: View {
     
     @EnvironmentObject var bigModel: BigModel
-    let dressPic: [BigModel.DressPictures] = [BigModel.DressPictures(id: 0, pictureName: "IMG_5141", productName: "The dress", videoURL: "", price: "", carouselProductPictures: []),
-        BigModel.DressPictures(id: 0, pictureName: "60511853694__59B14B15-472E-4D34-A312-FB963FEDA4D8", productName: "Le serpent", videoURL: "", price: "", carouselProductPictures: [])]
     
     var body: some View {
         ZStack {
@@ -22,9 +20,9 @@ struct ProductsScreen: View {
             
             VStack() {
                 
-                BackButtonModel(text: "Products")
+                BackButtonModel(text: "products")
                                                
-                Text("Products")
+                Text("products")
                     .font(.system(size: 35, weight: .bold, design: .default))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -64,7 +62,7 @@ struct ProductsScreen: View {
                         Image(systemName: "chevron.down")
                         Image(systemName: "chevron.down")
                     }
-                    Text("Scroll down to see all products")
+                    Text("scroll-down-to-see-all-products")
                 }
                 
             }.padding(20)

@@ -105,15 +105,15 @@ struct HomeView: View {
         
         VStack(spacing: 20) {
             
-            BackButtonModel(text: "Measurements")
+            BackButtonModel(text: "measurements")
             
             VStack {
                                 
-                Text("Mensurations")
+                Text("measurements")
                     .font(.system(size: 35, weight: .bold, design: .default))
                     .fontWeight(.semibold)
                 
-                Text("all values in millimeters")
+                Text("all-values-in-millimeters")
                     .foregroundColor(Color.gray)
                     .font(.system(size: 15, weight: .semibold, design: .default))
                 
@@ -140,7 +140,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField("Armpits measurement", text: $measurementText0)
+                                        TextField(bigModel.allMeasurements[0].measurementName, text: $measurementText0)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -158,7 +158,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText0), perform: { value in
                                     perform: do {
                                         if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -206,7 +206,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText1), perform: { value in
                                     perform: do {
                                         if measurementText1.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -249,7 +249,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText2), perform: { value in
                                     perform: do {
                                         if measurementText2.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -293,7 +293,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText3), perform: { value in
                                     perform: do {
                                         if measurementText3.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -337,7 +337,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText4), perform: { value in
                                     perform: do {
                                         if measurementText4.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -379,7 +379,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText5), perform: { value in
                                     perform: do {
                                         if measurementText5.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -422,7 +422,7 @@ struct HomeView: View {
                                     .onChange(of: (measurementText6), perform: { value in
                                     perform: do {
                                         if measurementText6.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                 
                                             }
                                         } else {}
@@ -467,7 +467,7 @@ struct HomeView: View {
                                         .onChange(of: (measurementText7), perform: { value in
                                         perform: do {
                                             if measurementText7.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                     
                                                 }
                                             } else {}
@@ -510,7 +510,7 @@ struct HomeView: View {
                                         .onChange(of: (measurementText8), perform: { value in
                                         perform: do {
                                             if measurementText8.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                     
                                                 }
                                             } else {}
@@ -553,7 +553,7 @@ struct HomeView: View {
                                         .onChange(of: (measurementText9), perform: { value in
                                         perform: do {
                                             if measurementText9.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                     
                                                 }
                                             } else {}
@@ -596,7 +596,7 @@ struct HomeView: View {
                                         .onChange(of: (measurementText10), perform: { value in
                                         perform: do {
                                             if measurementText10.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                     
                                                 }
                                             } else {}
@@ -640,7 +640,7 @@ struct HomeView: View {
                                         .onChange(of: (measurementText11), perform: { value in
                                         perform: do {
                                             if measurementText11.rangeOfCharacter(from: CharacterSet.symbols) != nil || measurementText11.rangeOfCharacter(from: CharacterSet.letters) != nil  {
-                                                alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {
+                                                alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
                                                     
                                                 }
                                             } else {}
@@ -680,13 +680,13 @@ struct HomeView: View {
                         Image(systemName: "chevron.down")
                         Image(systemName: "chevron.down")
                     }
-                    Text("Scroll down to see all measurements")
+                    Text("scroll-down-to-see-all-measurements")
                 }
                 
                 HStack {
                     Image(systemName: "questionmark.video")
                         .foregroundColor(.blue)
-                    Text("Comment prendre ses mensurations ?")
+                    Text("how-to-take-your-measurements")
                         .foregroundColor(.blue)
                         .font(.body)
                         .underline()
@@ -698,7 +698,7 @@ struct HomeView: View {
                 
                 HStack {
                     Spacer()
-                    Text("Save")
+                    Text("save")
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
                         .padding(10)

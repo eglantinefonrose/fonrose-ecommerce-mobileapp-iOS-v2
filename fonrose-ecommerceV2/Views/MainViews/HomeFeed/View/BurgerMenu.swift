@@ -62,7 +62,13 @@ struct BurgerMenu: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .onTapGesture {
-                        bigModel.currentview = ViewEnum.Measurement_Mensurations
+                        
+                        if bigModel.currentPersonIndex == nil {
+                            bigModel.currentview = ViewEnum.Measurement_MeasurementsTut
+                        } else {
+                            bigModel.currentview = ViewEnum.Measurement_Mensurations
+                        }
+                        
                         bigModel.lastViews.append(.Home_homeFeed0)
                         bigModel.needToSeeEveryMeasurements = true
                         self.bigModel.showMenu = false
@@ -73,18 +79,26 @@ struct BurgerMenu: View {
                     .font(.headline)
                     .onTapGesture {
                         Task {
+                            
                             await bigModel.fetchLocation()
                             
-                            if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
-                                
-                                await bigModel.initializeLocation()
-                                await bigModel.fetchLocation()
-                                
+                            if bigModel.currentPersonIndex != nil {
+                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                    
+                                    await bigModel.initializeLocation()
+                                    await bigModel.fetchLocation()
+                                    
+                                } else {
+                                    bigModel.currentview = ViewEnum.LivraisonViews_Livraison
+                                    bigModel.lastViews.append(.Home_homeFeed0)
+                                    self.bigModel.showMenu = false
+                                }
                             } else {
                                 bigModel.currentview = ViewEnum.LivraisonViews_Livraison
                                 bigModel.lastViews.append(.Home_homeFeed0)
                                 self.bigModel.showMenu = false
                             }
+                            
                         }
                     }
                 

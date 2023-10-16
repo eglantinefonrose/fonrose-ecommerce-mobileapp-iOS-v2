@@ -43,10 +43,6 @@ struct HelpView: View {
                                     Text("Personnes")
                                         .font(Font.title.weight(.semibold))
                                     
-                                    
-                                    Text("À chaque compte sont associés des personnes qui ont des mensurations spécifiques et des données de localisation spécifiques. Grâce à ça, vous pouvez commander des produits aux mensurations de plusieurs personnes en n'utilisant qu’un seul compte. Cependant, les données relatives aux données de paiement sont communes à chaque personne.")
-                                        .multilineTextAlignment(.leading)
-                                    
                                 }.padding(.vertical, 10)
                                 
                             }.background(Color("Background"))
@@ -62,8 +58,8 @@ struct HelpView: View {
                                         .font(Font.title.weight(.semibold))
                                     
                                     
-                                    Text("Pour chaque produit, des mensurations spécifiques à l’article sélectionné vous sont demandées afin de préparer votre commande. Des vidéos explicatives pour prendre au mieux ses mensurations sont à votre disposition pour vous aider.")
-                                        .multilineTextAlignment(.leading)
+                                    //Text("Pour chaque produit, des ") + Text("mensurations").bold() + Text(" spécifiques à l’article sélectionné vous sont demandées afin de préparer votre commande. Des") + Text(" vidéos explicatives ").bold() + Text("pour prendre au mieux ses mensurations sont à votre disposition pour vous aider.")
+                                        //.multilineTextAlignment(.leading)
                                     
                                 }.padding(.vertical, 10)
                                 
@@ -116,5 +112,6 @@ struct HelpView: View {
 struct HelpView_Previews: PreviewProvider {
     static var previews: some View {
         HelpView()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
 }

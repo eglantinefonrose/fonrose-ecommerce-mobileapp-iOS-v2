@@ -35,7 +35,7 @@ struct NewPersonView: View {
             
             VStack {
                 
-                BackAuthButtonModel(text: "New person")
+                BackAuthButtonModel(text: "new-person")
                 
                 Spacer()
                 
@@ -51,7 +51,7 @@ struct NewPersonView: View {
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
                          .placeholder(when: newPersonName.isEmpty) {
-                             Text("Name")
+                             Text("name")
                                  .foregroundColor(.gray)
                                  .opacity(0.6)
                                  .padding(.horizontal, 5)
@@ -81,7 +81,7 @@ struct NewPersonView: View {
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
                              .placeholder(when: newPersonEmail.isEmpty) {
-                                 Text("Email")
+                                 Text("email")
                                      .foregroundColor(.gray)
                                      .opacity(0.6)
                                      .padding(.horizontal, 5)
@@ -113,7 +113,7 @@ struct NewPersonView: View {
                             
                         Spacer()
             
-                        Text("Save")
+                        Text("save")
                             .foregroundColor(newPersonName != "" && newPersonEmail != "" ? Color.white: Color.black)
                             .fontWeight(.semibold)
 

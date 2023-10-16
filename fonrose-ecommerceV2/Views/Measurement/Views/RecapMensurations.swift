@@ -25,13 +25,13 @@ struct RecapMensurations: View {
             
             VStack(spacing: 20) {
                 
-                BackButtonModel(text: "Recap")
+                BackButtonModel(text: "recap")
                 
                 Spacer()
                     
                     HStack {
                         
-                        Text("Recap")
+                        Text("recap")
                             .font(.system(size: 45, weight: .bold, design: .default))
                         
                         Spacer()
@@ -44,54 +44,54 @@ struct RecapMensurations: View {
                              
                             VStack {
                                 if bigModel.isMeasurements0Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Armpits Measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "armpits-measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements1Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Arms length", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "arms-length", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements2Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Head measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "head-measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements3Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Pelvis measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "pelvis-measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements4Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Pelvis Knee", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "pelvis-knee", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements5Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Shoulders measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "shoulders-measurement", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements6Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Shoulders pelvis", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "shoulders-pelvis", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements7Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Tour de poitrine", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "chest-size", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue) ?? "nil")
                                 }
                                 
                                 if bigModel.isMeasurements8Requested ||  bigModel.selectedProductId == nil {
-                                    RecapMensurationsTextStruct(recapMeasurementText: "Entrejambe", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue) ?? "nil")
+                                    RecapMensurationsTextStruct(recapMeasurementText: "crotch", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue) ?? "nil")
                                     
                                 }
                                 
                             }
                             
                             if bigModel.isMeasurements9Requested ||  bigModel.selectedProductId == nil {
-                                RecapMensurationsTextStruct(recapMeasurementText: "Aisselles-Tetons", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue) ?? "nil")
+                                RecapMensurationsTextStruct(recapMeasurementText: "armpits-tits", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue) ?? "nil")
                             }
                             
                             if bigModel.isMeasurements10Requested ||  bigModel.selectedProductId == nil {
-                                RecapMensurationsTextStruct(recapMeasurementText: "Teton-Nombril", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue) ?? "nil")
+                                RecapMensurationsTextStruct(recapMeasurementText: "tits-belly-button", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue) ?? "nil")
                             }
                             
                             if bigModel.isMeasurements11Requested ||  bigModel.selectedProductId == nil {
-                                RecapMensurationsTextStruct(recapMeasurementText: "Teton-Hanches", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue) ?? "nil")
+                                RecapMensurationsTextStruct(recapMeasurementText: "tits-hips", recapMeasurementText2: (bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue) ?? "nil")
                             }
                                 
                     }
@@ -108,13 +108,13 @@ struct RecapMensurations: View {
                                 Image(systemName: "chevron.down")
                                     .foregroundColor(.blue)
                             }
-                            Text("Scroll down to see all measurements")
+                            Text("scroll-down-to-see-all-measurements")
                                 .foregroundColor(.blue)
                         }
                         
                         HStack {
                             Spacer()
-                            Text("Save")
+                            Text("save")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.semibold)
                                 .padding(10)
@@ -156,7 +156,7 @@ struct RecapMensurations: View {
                         }
                            
                         
-                    Text("Edit measurements")
+                    Text("edit-measurements")
                         .foregroundColor(Color.blue)
                         .onTapGesture {
                             self.bigModel.currentview = .Measurement_Mensurations

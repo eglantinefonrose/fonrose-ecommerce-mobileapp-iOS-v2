@@ -21,7 +21,7 @@ struct ListeCommande: View {
             
             VStack {
                 
-                BackButtonModel(text: "Suivi de Commande")
+                BackButtonModel(text: "order-tracking")
                 
                 Spacer()
                 
@@ -46,8 +46,8 @@ struct ListeCommande: View {
                         }
                     } else {
                         VStack(spacing: 20) {
-                            Text("No orders here")
-                            Text("See our products")
+                            Text("no-orders-here")
+                            Text("see-our-products")
                                 .foregroundColor(.blue)
                                 .onTapGesture {
                                     bigModel.lastViews.append(.ServiceClient_showOrdersList)
@@ -58,8 +58,8 @@ struct ListeCommande: View {
                     
                 } else {
                     VStack(spacing: 20) {
-                        Text("You can find all your orders here")
-                        Text("Log in")
+                        Text("you-can-find-all-your-orders-here")
+                        Text("log-in")
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 bigModel.lastViews.append(.ServiceClient_showOrdersList)

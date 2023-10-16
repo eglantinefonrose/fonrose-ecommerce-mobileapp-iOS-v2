@@ -41,7 +41,7 @@ struct UserInfo: View {
                     
                     Spacer()
                     
-                    Text("User Info")
+                    Text("user-info")
                         .fontWeight(.semibold)
                     
                     Spacer()
@@ -81,7 +81,7 @@ struct UserInfo: View {
                             .foregroundColor(.blue)
                             .font(.callout)
                         
-                        Text("Edit...")
+                        Text("edit")
                             .foregroundColor(.blue)
                             .font(.caption)
                     }.onTapGesture {
@@ -92,7 +92,7 @@ struct UserInfo: View {
                         HStack {
                             Image(systemName: "pencil.and.outline")
                                 .foregroundColor(.blue)
-                            Text("See my measurements")
+                            Text("see-my-measurements")
                                 .foregroundColor(.blue)
                                 .padding(10)
                         }.onTapGesture {
@@ -107,7 +107,7 @@ struct UserInfo: View {
                         HStack {
                             Image(systemName: "mappin.circle")
                                 .foregroundColor(.blue)
-                            Text("See my location informations")
+                            Text("see-my-location-informations")
                                 .foregroundColor(.blue)
                                 .padding(10)
                         }.onTapGesture {
@@ -132,7 +132,7 @@ struct UserInfo: View {
                     
                     HStack {
                         Image(systemName: "person.fill")
-                        Text("Change of person")
+                        Text("change-of-person")
                             .padding(5)
                     }.onTapGesture {
                         bigModel.authCurrentView = .Auth_PersonPickerView
@@ -144,7 +144,7 @@ struct UserInfo: View {
                     
                     HStack {
                         Spacer()
-                            Text("Sign out")
+                            Text("sign-out")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.medium)
                                 .padding(7)

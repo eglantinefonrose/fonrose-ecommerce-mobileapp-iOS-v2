@@ -23,84 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5B6C160E-EA6E-4357-9209-45197C9FB957"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "5B6C160E-EA6E-4357-9209-45197C9FB957 - ebce9c00d42b8cc5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #4 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "300">
-               </Location>
-               <Location
-                  uuid = "5B6C160E-EA6E-4357-9209-45197C9FB957 - 3668f7e43352e30f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "1604">
-               </Location>
-               <Location
-                  uuid = "5B6C160E-EA6E-4357-9209-45197C9FB957 - e3e4dd61b783f0ef"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) await resume partial function for closure #1 @Sendable () async -&gt; () in closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "5B6C160E-EA6E-4357-9209-45197C9FB957 - 7390f0e2d7692671"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "539E61E3-D25A-485A-B36F-1D6CDE85765C"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -181,54 +103,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "91F599A1-387E-4F83-80D6-1BBDC289AA58"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "91F599A1-387E-4F83-80D6-1BBDC289AA58 - 823ed0075c5002d1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "3052">
-               </Location>
-               <Location
-                  uuid = "91F599A1-387E-4F83-80D6-1BBDC289AA58 - 3668f7e43352e383"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in closure #5 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.edgesIgnoringSafeArea(SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;)&gt; in fonrose_ecommerceV2.BurgerMenu.body.getter : some"
-                  moduleName = "fonrose-ecommerceV2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Views/MainViews/HomeFeed/View/BurgerMenu.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "1772">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "12B2B392-2713-4663-990C-B34F60713F99"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -240,6 +114,85 @@
             endingLineNumber = "65"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "402ABA42-2A5A-4C6F-BA67-FCD967D04D4D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "fonrose-ecommerceV2/BigRootView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A402037-7D8A-45FA-B0CA-B05052EF5483"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1141"
+            endingLineNumber = "1141"
+            landmarkName = "getRequestedMeasurements()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4A402037-7D8A-45FA-B0CA-B05052EF5483 - 7f8cd3ce17fbdc98"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) suspend resume partial function for fonrose_ecommerceV2.BigModel.getRequestedMeasurements() async -&gt; ()"
+                  moduleName = "fonrose-ecommerceV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1141"
+                  endingLineNumber = "1141"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "4A402037-7D8A-45FA-B0CA-B05052EF5483 - e0767f6b396ea665"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) await resume partial function for fonrose_ecommerceV2.BigModel.getRequestedMeasurements() async -&gt; ()"
+                  moduleName = "fonrose-ecommerceV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1141"
+                  endingLineNumber = "1141"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "4A402037-7D8A-45FA-B0CA-B05052EF5483 - efa23ad3a7fd1086"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for fonrose_ecommerceV2.BigModel.getRequestedMeasurements() async -&gt; ()"
+                  moduleName = "fonrose-ecommerceV2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/eglantine/Dev/0.perso/0.fonroseECommerceApp/0.code/fonrose-ecommerceV2/fonrose-ecommerceV2/Model/BigModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1141"
+                  endingLineNumber = "1141"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

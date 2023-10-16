@@ -34,13 +34,13 @@ struct SignUpView: View {
             
             VStack {
                  
-                BackButtonModel(text: "Sign up")
+                BackButtonModel(text: "sign-up")
                 
                 Spacer()
                     
                 VStack(spacing: 50) {
                     
-                    Text("Sign Up")
+                    Text("sign-up")
                         .font(.system(size: 35, weight: .bold, design: .default))
                         .foregroundColor(Color.white)
                 
@@ -59,7 +59,7 @@ struct SignUpView: View {
                                  .disableAutocorrection(true)
                                  .autocapitalization(.none)
                                  .placeholder(when: email.isEmpty) {
-                                     Text("Email")
+                                     Text("email")
                                          .foregroundColor(.gray)
                                          .opacity(0.6)
                                          .padding(.horizontal, 5)
@@ -84,7 +84,7 @@ struct SignUpView: View {
                                  .disableAutocorrection(true)
                                  .autocapitalization(.none)
                                  .placeholder(when: password.isEmpty) {
-                                     Text("Password")
+                                     Text("password")
                                          .foregroundColor(.gray)
                                          .opacity(0.6)
                                          .padding(.horizontal, 5)
@@ -117,7 +117,7 @@ struct SignUpView: View {
                         HStack {
                             
                             Spacer()
-                            Text("Create account")
+                            Text("create-account")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.semibold)
                             Spacer()

@@ -112,13 +112,11 @@ struct BigRootView: View {
             VStack {
                 
                 if (self.bigModel.currentview == .Measurement_Mensurations) {
-                    if bigModel.selectedProductId == nil && bigModel.currentPersonIndex == nil {
-                        ProductsScreen()
-                    }
-                    if (bigModel.selectedProductId == nil || bigModel.selectedProductId != nil) && bigModel.currentPersonIndex != nil {
+                    
+                    if bigModel.currentPersonIndex != nil {
                         MeasurementView()
                     }
-                    if bigModel.selectedProductId != nil && bigModel.currentPersonIndex == nil {
+                    if bigModel.currentPersonIndex == nil {
                         AuthView()
                     }
                 }

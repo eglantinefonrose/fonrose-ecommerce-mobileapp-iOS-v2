@@ -119,7 +119,7 @@ struct LocationTextField: View {
             
             VStack {
                 
-                BackButtonModel(text: "Location")
+                BackButtonModel(text: "location")
                 
                 ZStack {
                     
@@ -142,7 +142,7 @@ struct LocationTextField: View {
                                      .disableAutocorrection(true)
                                      .autocapitalization(.none)
                                      .placeholder(when: adressStreet.isEmpty) {
-                                         Text("Street")
+                                         Text("street")
                                              .foregroundColor(.gray)
                                              .opacity(0.6)
                                              .padding(.horizontal, 5)
@@ -227,7 +227,7 @@ struct LocationTextField: View {
                                                             self.civilityText = "man"
                                                         }
                                                     
-                                                    Text("Mr")
+                                                    Text("mr")
                                                         //.foregroundColor(.black)
                                                     
                                                     Spacer()
@@ -238,7 +238,7 @@ struct LocationTextField: View {
                                                             self.civilityText = "woman"
                                                         }
                                                     
-                                                    Text("Mme")
+                                                    Text("mme")
                                                         //.foregroundColor(.black)
                                                     
                                                 }
@@ -259,7 +259,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: firstNameText.isEmpty) {
-                                                             Text("First name")
+                                                             Text("first-name")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -285,7 +285,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: lastNameText.isEmpty) {
-                                                             Text("Last name")
+                                                             Text("last-name")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -311,7 +311,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: emailAdressText.isEmpty) {
-                                                             Text("Email adress")
+                                                             Text("email-adress")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -326,7 +326,7 @@ struct LocationTextField: View {
                                                 .padding(10)
                                                 
                                                 if !isTheFinalEmailCorrect {
-                                                    Text("The email adress is not valid, please verify your email adress.")
+                                                    Text("email-adress-not-valid")
                                                         .foregroundColor(.red)
                                                 }
                                                 
@@ -342,7 +342,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: phoneNumberText.isEmpty) {
-                                                             Text("Phone")
+                                                             Text("phone")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -357,7 +357,7 @@ struct LocationTextField: View {
                                                 .padding(10)
                                                 
                                                 if !isTheFinalNumberCorrect {
-                                                    Text("The phone number is not valid, please verify your phone number.")
+                                                    Text("unvalid-phone-number")
                                                         .foregroundColor(.red)
                                                 }
                                                 
@@ -378,7 +378,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressStreet.isEmpty) {
-                                                             Text("Street")
+                                                             Text("street")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -444,7 +444,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressMailBoxText.isEmpty) {
-                                                             Text("Mail box (optionnal)")
+                                                             Text("mail-box")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -472,7 +472,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressBasementText.isEmpty) {
-                                                             Text("Basement (optionnal)")
+                                                             Text("basement")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -500,7 +500,7 @@ struct LocationTextField: View {
                                                          .disableAutocorrection(true)
                                                          .autocapitalization(.none)
                                                          .placeholder(when: adressStageText.isEmpty) {
-                                                             Text("Stage (optionnal)")
+                                                             Text("stage")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
@@ -537,7 +537,7 @@ struct LocationTextField: View {
                                 
                                 HStack {
                                     Spacer()
-                                    Text("Save")
+                                    Text("save")
                                         .foregroundColor(Color.white)
                                         .fontWeight(.semibold)
                                         .padding(10)
@@ -564,7 +564,7 @@ struct LocationTextField: View {
                                                       }
                                                     
                                                 } else {
-                                                    alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {
+                                                    alertTF(title: "some-fields-empty", message: "fill-all-the-fields", primaryTitle: "ok") {
                                                     }
                                                 }
                                             } else {

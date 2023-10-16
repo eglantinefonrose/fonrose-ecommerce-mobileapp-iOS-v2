@@ -57,6 +57,7 @@
 		708CF08728A4BB0300397DED /* LoopTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF08628A4BB0300397DED /* LoopTest.swift */; };
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
+		7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7098BF552AD9E9C70012AFBA /* Localizable.strings */; };
 		709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */; };
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90C829FA739D00FB9212 /* FirebaseAnalytics */; };
@@ -148,6 +149,7 @@
 		708CF08628A4BB0300397DED /* LoopTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopTest.swift; sourceTree = "<group>"; };
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
+		7098BF552AD9E9C70012AFBA /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B037242AD813B6004A4870 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		7019ABEE2347E73F00F5EF15 = {
 			isa = PBXGroup;
 			children = (
+				7098BF552AD9E9C70012AFBA /* Localizable.strings */,
 				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
 				70CFDBC729F1FC1200F19D41 /* simpson.gif */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
@@ -534,6 +537,7 @@
 				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
 				706140482A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
+				7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
 				70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */,

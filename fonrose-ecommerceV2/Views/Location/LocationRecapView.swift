@@ -31,38 +31,11 @@ struct LocationRecapView: View {
             
             VStack {
                 
-                HStack {
-                    Spacer()
-                        .frame(width: 20)
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.lastViews.isEmpty {
-                                print("back")
-                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                                self.bigModel.lastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                    
-                }
+                BackButtonModel(text: "location-recap")
                 
                 Spacer()
                                                           
-                Text("Recap")
+                Text("recap")
                     .font(.system(size: 35, weight: .bold, design: .default))
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -75,29 +48,29 @@ struct LocationRecapView: View {
                                                         
                             VStack {
                                 
-                                LocationText(locationName: "Civility", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "")
+                                LocationText(locationName: "civility", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "")
                                     
-                                LocationText(locationName: "First Name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "")
+                                LocationText(locationName: "first-name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "")
                                     
-                                LocationText(locationName: "Last Name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "")
+                                LocationText(locationName: "last-name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "")
                                 
-                                LocationText(locationName: "Email Adress", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "")
+                                LocationText(locationName: "email-adress", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "")
                                 
-                                LocationText(locationName: "Phone Number", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "")
+                                LocationText(locationName: "phone-number", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "")
                                 
                             }
                                 
-                            LocationText(locationName: "Adress Country", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "")
+                            LocationText(locationName: "adress-country", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "")
                             
-                            LocationText(locationName: "Adress Postal Code", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "")
+                            LocationText(locationName: "adress-postal-code", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "")
                             
-                            LocationText(locationName: "Adress City", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "")
+                            LocationText(locationName: "adress-city", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "")
                             
-                            LocationText(locationName: "Adress Street", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "")
+                            LocationText(locationName: "adress-street", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "")
                             
-                            LocationText(locationName: "Adress Mail Box", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "")
+                            LocationText(locationName: "adress-mail-box", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "")
                         
-                            LocationText(locationName: "Adress Basement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "")
+                            LocationText(locationName: "adress-basement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "")
                             
                         }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 450 : 100)
                         .onRotate { newOrientation in orientation = newOrientation }
@@ -108,7 +81,7 @@ struct LocationRecapView: View {
                     
                     VStack {
                                                                                      
-                        Text("Edit location informations")
+                        Text("edit-location-informations")
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 bigModel.currentview = .LivraisonViews_Livraison
@@ -118,7 +91,7 @@ struct LocationRecapView: View {
                         
                         HStack {
                             Spacer()
-                            Text("Save")
+                            Text("save")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.semibold)
                                 .padding(10)

@@ -473,7 +473,7 @@ class BigModel : ObservableObject {
             fetchAllMeasurementInfo()
             let fetchedNeededMeasurementIndexs = try await fetchNeededMeasurementsInfo()[self.dressPictures[self.selectedProductId ?? 0].id].neededMeasurements
             
-            if self.currentPersonIndex != nil {
+            //if self.currentPersonIndex != nil {
                 for i in 0..<fetchedNeededMeasurementIndexs.count {
                         
                         DispatchQueue.main.async {
@@ -483,9 +483,9 @@ class BigModel : ObservableObject {
                 }
                 print("fetchedNeededMeasurementIndexs.count \(fetchedNeededMeasurementIndexs.count)")
                 print("needed measurements count = \(neededMeasurements.count)")
-            } else {
-                print("current person nil")
-            }
+            //} else {
+                //print("current person nil")
+            //}
             
             print("neededMeasurements \(neededMeasurements.count)")
             print(neededMeasurements.count)
@@ -956,6 +956,8 @@ class BigModel : ObservableObject {
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
         
         self.isPersonChosen = false
+        self.currentPersonIndex = nil
+        self.currentPersonId = ""
         //self.lastUserID = ""
         self.user.id = ""
         self.user.email = ""
@@ -1148,7 +1150,6 @@ class BigModel : ObservableObject {
         self.isMeasurements9Requested = await self.isMeasurementRequested(measurementName: "Aisselles-Tetons")
         self.isMeasurements10Requested = await self.isMeasurementRequested(measurementName: "Teton-Nombril")
         self.isMeasurements11Requested = await self.isMeasurementRequested(measurementName: "Teton-Hanches")
-        
         
         DispatchQueue.main.async {
             self.currentview = .Measurement_Mensurations

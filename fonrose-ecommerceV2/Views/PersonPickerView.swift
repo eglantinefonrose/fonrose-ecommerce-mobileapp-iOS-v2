@@ -53,46 +53,7 @@ struct PersonPickerViewHome: View {
                 
                 VStack {
                     
-                    ZStack {
-                        //BackButtonModel()
-                        Text("Persons")
-                            .fontWeight(.semibold)
-                        
-                        HStack {
-                            
-                            Text("Back")
-                                .foregroundColor(Color.blue)
-                                .fontWeight(.semibold)
-                                .onTapGesture {
-                                    if !self.bigModel.authLastViews.isEmpty {
-                                        print("back")
-                                        self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                        self.bigModel.authLastViews.removeLast()
-                                        print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                                    } else { print("array empty") }
-                                }
-                            
-                            Spacer()
-                            
-                            
-                            
-                            Spacer()
-                            
-                            Image(systemName: "house")
-                                .foregroundColor(Color.blue)
-                                .onTapGesture {
-                                    if bigModel.currentPersonId != "" {
-                                        self.bigModel.currentview = .Home_homeFeed0
-                                    } else {
-                                        alertTF(title: "No person chosen", message: "Please click on the person you want to select", primaryTitle: "Ok") {
-                                            
-                                        }
-                                    }
-                                    
-                                }
-                            
-                        }.padding(20)
-                    }
+                    BackButtonModel(text: "persons")
                     
                     if #available(iOS 15.0, *) {
                                                                                     
@@ -122,7 +83,7 @@ struct PersonPickerViewHome: View {
                                                 bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
                                                 UserDefaults.standard.set(index, forKey: "lastCurrentPersonId")
                                                 bigModel.isMeasurementModelUpdated = true
-                                                bigModel.selectedProductId = nil
+                                                //bigModel.selectedProductId = nil
                                                 
                                                 Task {
                                                     
@@ -181,13 +142,8 @@ struct PersonPickerViewHome: View {
                     } else {
                         // Fallback on earlier versions
                     }
-                      
-                    Text("❤️‍🔥")
-                        .onTapGesture {
-                            bigModel.authCurrentView = .Auth_UserInfo
-                        }
                     
-                    Text("Sign out")
+                    Text("sign-out")
                         .foregroundColor(.blue)
                         .onTapGesture {
                             bigModel.signOut()

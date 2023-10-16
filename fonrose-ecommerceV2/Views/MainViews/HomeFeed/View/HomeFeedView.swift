@@ -317,17 +317,17 @@ struct HomeFeedView: View {
 
 
 #if DEBUG
-/*struct homeFeed_Previews: PreviewProvider {
+struct homeFeed_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             HomeFeedView()
-                .environmentObject(BigModel())
+                .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions
         }
     }
         
-}*/
+}
 #endif
 
 struct GifImage: UIViewRepresentable {

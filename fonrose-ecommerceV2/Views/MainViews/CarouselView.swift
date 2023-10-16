@@ -38,7 +38,7 @@ struct CarouselView: View {
                     .stroke(.black, lineWidth: 2)
                     .foregroundColor(.white)
                     .frame(height: 40)
-                Text("Acheter")
+                Text("buy")
                     .foregroundColor(.black)
                     .onTapGesture {
                         

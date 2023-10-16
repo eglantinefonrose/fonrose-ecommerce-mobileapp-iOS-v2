@@ -34,7 +34,7 @@ struct LogInPhoneView: View {
                 
                 VStack {
                     
-                    BackButtonModel(text: "Sign in")
+                    BackButtonModel(text: "sign-in")
                         
                     Spacer()
                     
@@ -44,7 +44,7 @@ struct LogInPhoneView: View {
                         
                         VStack(spacing: 50) {
                             
-                            Text("Sign in")
+                            Text("sign-in")
                                 .font(.largeTitle)
                                 .fontWeight(.semibold)
                             
@@ -55,7 +55,7 @@ struct LogInPhoneView: View {
                                     TextField("", text: $bigModel.mobileNo)
                                         .padding(5)
                                         .placeholder(when: bigModel.mobileNo.isEmpty) {
-                                            Text("Phone number").foregroundColor(.gray)
+                                            Text("phone-number").foregroundColor(.gray)
                                                 .opacity(0.6)
                                                 .padding(.horizontal, 5)
                                         }
@@ -64,7 +64,7 @@ struct LogInPhoneView: View {
                                         }
                                         
                                     
-                                    Text("Get code")
+                                    Text("get-code")
                                         .foregroundColor(.blue)
                                         .padding(10)
                                         .font(.caption)
@@ -90,7 +90,7 @@ struct LogInPhoneView: View {
                                     TextField("", text: $bigModel.otpCode)
                                         .padding(5)
                                         .placeholder(when: bigModel.otpCode.isEmpty) {
-                                            Text("OTP Code")
+                                            Text("otp-code")
                                                 .foregroundColor(.gray)
                                                 .opacity(0.6)
                                                 .padding(.horizontal, 5)
@@ -106,7 +106,7 @@ struct LogInPhoneView: View {
                         
                         HStack {
                             Spacer()
-                            Text("Sign in or sign up")
+                            Text("sign-in-or-sign-up")
                                 .foregroundColor(Color.white)
                                 .fontWeight(.semibold)
                                 .padding(10)

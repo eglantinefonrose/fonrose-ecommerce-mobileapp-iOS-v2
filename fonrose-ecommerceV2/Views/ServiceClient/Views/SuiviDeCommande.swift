@@ -30,7 +30,7 @@ struct SuiviDeCommande: View {
             
             VStack {
                 
-                BackButtonModel(text: "Suivi de commande")
+                BackButtonModel(text: "tracking-control")
                     .padding(20)
                 
                 VStack(spacing: 0) {
@@ -39,7 +39,7 @@ struct SuiviDeCommande: View {
                         Rectangle()
                             .foregroundColor(.gray)
                         HStack {
-                            Text("Commande Enregistrée")
+                            Text("order-saved")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -52,7 +52,7 @@ struct SuiviDeCommande: View {
                         Rectangle()
                             .foregroundColor(order.status != .CommandeEnregistree ? .gray : Color("Background"))
                         HStack {
-                            Text("En cours de preparation")
+                            Text("in-preparation")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -66,7 +66,7 @@ struct SuiviDeCommande: View {
                         Rectangle()
                             .foregroundColor(order.status == .Arrived || order.status == .Recieved || order.status == .Expedie ? .gray : Color("Background"))
                         HStack {
-                            Text("En cours d'expedition")
+                            Text("in-shipment")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -80,7 +80,7 @@ struct SuiviDeCommande: View {
                         Rectangle()
                             .foregroundColor(order.status == .Arrived || order.status == .Recieved ? .gray : Color("Background"))
                         HStack {
-                            Text("Arrivée")
+                            Text("arrived")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -94,7 +94,7 @@ struct SuiviDeCommande: View {
                         Rectangle()
                             .foregroundColor(order.status == .Recieved ? .gray : Color("Background"))
                         HStack {
-                            Text("Reçue")
+                            Text("recieved")
                                 .font(.title2)
                                 .fontWeight(.semibold)
                             Spacer()
@@ -108,32 +108,32 @@ struct SuiviDeCommande: View {
                 
                 VStack(spacing: 10) {
                     if order.status == .CommandeEnregistree {
-                        Text("Status : Commande enregistrée")
+                        Text("\("status%@") : \("order-saved")")
                             .font(.title3)
                     }
                     if order.status == .Expedie {
-                        Text("Status : Expédiée")
+                        Text("\("status%@") : \("shipped")")
                             .font(.title3)
                     }
                     if order.status == .Recieved {
-                        Text("Status : Reçue")
+                        Text("\("status%@") : \("recieved")")
                             .font(.title3)
                     }
                     if order.status == .EnCoursDePrep {
-                        Text("Status : En cours de préparation")
+                        Text("\("status%@") : \("in-preparation")")
                             .font(.title3)
                     }
                     if order.status == .Arrived {
-                        Text("Status : Arrivée")
+                        Text("\("status%@") : \("arrived")")
                             .font(.title3)
                     }
                     
-                    Text("En savoir plus sur la livraison")
+                    Text("more-about-the-delivery")
                         .foregroundColor(.blue)
                     
                     HStack {
                         Spacer()
-                        Text("Save")
+                        Text("save")
                             .foregroundColor(Color.white)
                             .fontWeight(.semibold)
                             .padding(10)
@@ -176,7 +176,7 @@ struct PrisEnCharge: View {
             Spacer()
                 .frame(width: 30)
             
-             Text("Pris en charge")
+             Text("order-saved")
                  .foregroundColor(Color.white)
                  .font(.system(size: 27, weight: .semibold, design: .default))
             

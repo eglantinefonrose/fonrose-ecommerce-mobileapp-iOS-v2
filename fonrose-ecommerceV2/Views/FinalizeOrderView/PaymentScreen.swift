@@ -24,7 +24,7 @@ struct PaymentScreen: View {
         ZStack {
                         
             VStack {
-                BackButtonModel(text: "Payment")
+                BackButtonModel(text: "payment")
                 Spacer()
                 PaymentButton(action: {})
                     .onTapGesture {

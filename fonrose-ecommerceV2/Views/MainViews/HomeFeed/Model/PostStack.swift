@@ -26,7 +26,7 @@ struct PostStack: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                Text(cellText)
+                Text(LocalizedStringKey(cellText))
                     .frame(alignment: .center)
                     .foregroundColor(.white)
                     .font(.largeTitle)

@@ -30,7 +30,7 @@ struct BackButtonModel: View {
             
             Spacer()
             
-            Text(text)
+            Text(LocalizedStringKey(text))
                 .bold()
             
             Spacer()

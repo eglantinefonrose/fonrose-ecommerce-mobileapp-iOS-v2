@@ -30,9 +30,7 @@
 		7031EF9727F04C27009CA3A2 /* LocationHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9627F04C27009CA3A2 /* LocationHome.swift */; };
 		7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */; };
 		7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */; };
-		7034753D285F67BD0030C906 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034753C285F67BD0030C906 /* SignInView.swift */; };
 		70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70347548285F6B910030C906 /* GoogleService-Info.plist */; };
-		7034754D285F7D000030C906 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034754C285F7D000030C906 /* SignUpView.swift */; };
 		70347551285F8F170030C906 /* PersonPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347550285F8F160030C906 /* PersonPickerView.swift */; };
 		70347553286090590030C906 /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70347552286090590030C906 /* MeasurementView.swift */; };
 		7034755728623E000030C906 /* SignInSandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034755628623E000030C906 /* SignInSandbox.swift */; };
@@ -87,7 +85,6 @@
 		70CCEC5E29E8587500EFABA5 /* Sandbox-TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */; };
 		70CDA5E9244B77DB0080B47C /* ServiceClientInfos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */; };
 		70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */; };
-		70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */ = {isa = PBXBuildFile; fileRef = 70CFDBC729F1FC1200F19D41 /* simpson.gif */; };
 		70CFDBCA29F5A39400F19D41 /* ListeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBC929F5A39400F19D41 /* ListeCommande.swift */; };
 		70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */; };
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
@@ -122,9 +119,7 @@
 		7031EF9627F04C27009CA3A2 /* LocationHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHome.swift; sourceTree = "<group>"; };
 		7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationMapView.swift; sourceTree = "<group>"; };
 		7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
-		7034753C285F67BD0030C906 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		70347548285F6B910030C906 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7034754C285F7D000030C906 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		70347550285F8F160030C906 /* PersonPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonPickerView.swift; sourceTree = "<group>"; };
 		70347552286090590030C906 /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
 		7034755628623E000030C906 /* SignInSandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInSandbox.swift; sourceTree = "<group>"; };
@@ -167,7 +162,6 @@
 		70CCEC5D29E8587500EFABA5 /* Sandbox-TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandbox-TextFields.swift"; sourceTree = "<group>"; };
 		70CDA5E8244B77DB0080B47C /* ServiceClientInfos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientInfos.swift; sourceTree = "<group>"; };
 		70CFDBC529F1F3B300F19D41 /* Splash-screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Splash-screen.swift"; sourceTree = "<group>"; };
-		70CFDBC729F1FC1200F19D41 /* simpson.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = simpson.gif; path = ../../../../../Desktop/simpson.gif; sourceTree = "<group>"; };
 		70CFDBC929F5A39400F19D41 /* ListeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListeCommande.swift; sourceTree = "<group>"; };
 		70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModel.swift; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
@@ -230,7 +224,6 @@
 			children = (
 				7098BF552AD9E9C70012AFBA /* Localizable.strings */,
 				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
-				70CFDBC729F1FC1200F19D41 /* simpson.gif */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */,
@@ -337,8 +330,6 @@
 				702A7D692953C222006338C0 /* LogInGoogleAppleView.swift */,
 				70347550285F8F160030C906 /* PersonPickerView.swift */,
 				70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */,
-				7034753C285F67BD0030C906 /* SignInView.swift */,
-				7034754C285F7D000030C906 /* SignUpView.swift */,
 				70347558286284220030C906 /* UserInfo.swift */,
 				700F4B18295738DE00D0167C /* LogInViewModel.swift */,
 			);
@@ -540,7 +531,6 @@
 				7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
-				70CFDBC829F1FC1200F19D41 /* simpson.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +567,6 @@
 				700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */,
 				70CCEC5E29E8587500EFABA5 /* Sandbox-TextFields.swift in Sources */,
 				70B9B1842566C64E00317086 /* test-binding.swift in Sources */,
-				7034753D285F67BD0030C906 /* SignInView.swift in Sources */,
 				700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */,
 				7034755B2864D0F70030C906 /* AuthView.swift in Sources */,
 				7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */,
@@ -606,7 +595,6 @@
 				708CF08728A4BB0300397DED /* LoopTest.swift in Sources */,
 				700F4B19295738DE00D0167C /* LogInViewModel.swift in Sources */,
 				70CFDBC629F1F3B300F19D41 /* Splash-screen.swift in Sources */,
-				7034754D285F7D000030C906 /* SignUpView.swift in Sources */,
 				70BF3CAC2A0D3BE8007CCBE3 /* ProductsScreen.swift in Sources */,
 				7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */,
 				703CE0EC28A96D300073712E /* ArrayTest.swift in Sources */,

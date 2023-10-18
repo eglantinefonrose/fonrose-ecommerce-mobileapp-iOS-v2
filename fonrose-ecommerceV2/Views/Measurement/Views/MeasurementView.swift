@@ -140,7 +140,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[0].measurementName, text: $measurementText0)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[0].measurementName), text: $measurementText0)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -188,7 +188,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[1].measurementName, text: $measurementText1)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[1].measurementName), text: $measurementText1)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -231,7 +231,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[2].measurementName, text: $measurementText2)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[2].measurementName), text: $measurementText2)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -275,7 +275,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[3].measurementName, text: $measurementText3)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[3].measurementName), text: $measurementText3)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -319,7 +319,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[4].measurementName, text: $measurementText4)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[4].measurementName), text: $measurementText4)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -361,7 +361,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[5].measurementName, text: $measurementText5)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[5].measurementName), text: $measurementText5)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -404,7 +404,7 @@ struct HomeView: View {
                                         
                                         Spacer()
                                         
-                                        TextField(bigModel.allMeasurements[6].measurementName, text: $measurementText6)
+                                        TextField(LocalizedStringKey(bigModel.allMeasurements[6].measurementName), text: $measurementText6)
                                             .disableAutocorrection(true)
                                             .autocapitalization(.none)
                                     }
@@ -449,7 +449,7 @@ struct HomeView: View {
                                             
                                             Spacer()
                                             
-                                            TextField(bigModel.allMeasurements[7].measurementName, text: $measurementText7)
+                                            TextField(LocalizedStringKey(bigModel.allMeasurements[7].measurementName), text: $measurementText7)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                         }
@@ -492,7 +492,7 @@ struct HomeView: View {
                                             
                                             Spacer()
                                             
-                                            TextField(bigModel.allMeasurements[8].measurementName, text: $measurementText8)
+                                            TextField(LocalizedStringKey(bigModel.allMeasurements[8].measurementName), text: $measurementText8)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                         }
@@ -535,7 +535,7 @@ struct HomeView: View {
                                             
                                             Spacer()
                                             
-                                            TextField(bigModel.allMeasurements[9].measurementName, text: $measurementText9)
+                                            TextField(LocalizedStringKey(bigModel.allMeasurements[9].measurementName), text: $measurementText9)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                         }
@@ -578,7 +578,7 @@ struct HomeView: View {
                                             
                                             Spacer()
                                             
-                                            TextField(bigModel.allMeasurements[10].measurementName, text: $measurementText10)
+                                            TextField(LocalizedStringKey(bigModel.allMeasurements[10].measurementName), text: $measurementText10)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                         }
@@ -622,7 +622,7 @@ struct HomeView: View {
                                             
                                             Spacer()
                                             
-                                            TextField(bigModel.allMeasurements[11].measurementName, text: $measurementText11)
+                                            TextField(LocalizedStringKey(bigModel.allMeasurements[11].measurementName), text: $measurementText11)
                                                 .disableAutocorrection(true)
                                                 .autocapitalization(.none)
                                         }

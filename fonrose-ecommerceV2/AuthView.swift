@@ -22,10 +22,6 @@ struct AuthView: View {
                 LogInGoogleAppleView()
             }
                 
-            if (self.bigModel.authCurrentView == .Auth_SignUpView) {
-                SignUpView()
-            }
-                
             if (self.bigModel.authCurrentView == .Auth_UserInfo) {
                 UserInfo()
             }

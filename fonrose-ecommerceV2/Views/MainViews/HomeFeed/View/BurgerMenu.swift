@@ -40,7 +40,7 @@ struct BurgerMenu: View {
                 }
                 
                 ForEach(bigModel.mainArrayInfos.indices, id: \.self) { index in
-                    Text(bigModel.mainArrayInfos[index].text)
+                    Text(LocalizedStringKey(bigModel.mainArrayInfos[index].text))
                         .foregroundColor(.white)
                         .font(.headline)
                         .onTapGesture {

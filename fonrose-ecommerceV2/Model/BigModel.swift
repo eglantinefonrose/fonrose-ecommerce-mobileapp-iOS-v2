@@ -1138,18 +1138,18 @@ class BigModel : ObservableObject {
         
         await updateMeasurementModel()
         
-        self.isMeasurements0Requested = await self.isMeasurementRequested(measurementName: "Armpits measurement")
-        self.isMeasurements1Requested = await self.isMeasurementRequested(measurementName: "Arms length")
-        self.isMeasurements2Requested = await self.isMeasurementRequested(measurementName: "Head measurement")
-        self.isMeasurements3Requested = await self.isMeasurementRequested(measurementName: "Pelvis measurement")
-        self.isMeasurements4Requested = await self.isMeasurementRequested(measurementName: "Pelvis Knee")
-        self.isMeasurements5Requested = await self.isMeasurementRequested(measurementName: "Shoulders measurement")
-        self.isMeasurements6Requested = await self.isMeasurementRequested(measurementName: "Shoulders pelvis")
-        self.isMeasurements7Requested = await self.isMeasurementRequested(measurementName: "Tour de poitrine")
-        self.isMeasurements8Requested = await self.isMeasurementRequested(measurementName: "Entrejambe")
-        self.isMeasurements9Requested = await self.isMeasurementRequested(measurementName: "Aisselles-Tetons")
-        self.isMeasurements10Requested = await self.isMeasurementRequested(measurementName: "Teton-Nombril")
-        self.isMeasurements11Requested = await self.isMeasurementRequested(measurementName: "Teton-Hanches")
+        self.isMeasurements0Requested = await self.isMeasurementRequested(measurementName: "armpits-measurement")
+        self.isMeasurements1Requested = await self.isMeasurementRequested(measurementName: "arms-length")
+        self.isMeasurements2Requested = await self.isMeasurementRequested(measurementName: "head-measurement")
+        self.isMeasurements3Requested = await self.isMeasurementRequested(measurementName: "pelvis-measurement")
+        self.isMeasurements4Requested = await self.isMeasurementRequested(measurementName: "pelvis-knee")
+        self.isMeasurements5Requested = await self.isMeasurementRequested(measurementName: "shoulders-measurement")
+        self.isMeasurements6Requested = await self.isMeasurementRequested(measurementName: "shoulders-pelvis")
+        self.isMeasurements7Requested = await self.isMeasurementRequested(measurementName: "chest-size")
+        self.isMeasurements8Requested = await self.isMeasurementRequested(measurementName: "crotch")
+        self.isMeasurements9Requested = await self.isMeasurementRequested(measurementName: "armpits-tits")
+        self.isMeasurements10Requested = await self.isMeasurementRequested(measurementName: "tits-belly-button")
+        self.isMeasurements11Requested = await self.isMeasurementRequested(measurementName: "tits-hips")
         
         DispatchQueue.main.async {
             self.currentview = .Measurement_Mensurations

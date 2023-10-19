@@ -9,7 +9,6 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
-import iPhoneNumberField
 
 @available(iOS 14.0, *)
 struct LocationRecapView: View {

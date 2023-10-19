@@ -50,12 +50,12 @@ struct NewPersonView: View {
                      TextField("", text: $newPersonName)
                          .disableAutocorrection(true)
                          .autocapitalization(.none)
-                         .placeholder(when: newPersonName.isEmpty) {
+                         /*.placeholder(when: newPersonName.isEmpty) {
                              Text("name")
                                  .foregroundColor(.gray)
                                  .opacity(0.6)
                                  .padding(.horizontal, 5)
-                         }
+                         }*/
                      
                  }
                  
@@ -80,12 +80,12 @@ struct NewPersonView: View {
                          TextField("", text: $newPersonEmail)
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
-                             .placeholder(when: newPersonEmail.isEmpty) {
+                             /*.placeholder(when: newPersonEmail.isEmpty) {
                                  Text("email")
                                      .foregroundColor(.gray)
                                      .opacity(0.6)
                                      .padding(.horizontal, 5)
-                             }
+                             }*/
                              .onChange(of: newPersonEmail) { newValue in
                                  isFinalEmailValid = true
                              }
@@ -174,10 +174,19 @@ struct NewUserView_Previews: PreviewProvider {
 }
 
 extension String {
+    
     func isValideEmailAdress() -> Bool {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 
         let emailCheck = NSPredicate(format: "SELF MATCHES[c] %@", emailRegEx)
         return emailCheck.evaluate(with: self)
     }
+    
+    func isValidPhoneNumber() -> Bool {
+        let regEx = "^\\+(?:[0-9]?){6,14}[0-9]$"
+
+        let phoneCheck = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
+        return phoneCheck.evaluate(with: self)
+    }
+    
 }

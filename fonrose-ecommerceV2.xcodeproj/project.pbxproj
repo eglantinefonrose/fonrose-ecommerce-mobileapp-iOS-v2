@@ -48,7 +48,6 @@
 		70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */; };
 		705ABCF1243F983900D47D6C /* SuiviDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */; };
 		705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705ABCF2243F988100D47D6C /* dataSuivi.swift */; };
-		706140482A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif in Resources */ = {isa = PBXBuildFile; fileRef = 706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */; };
 		7067C75B29FC01C2003F5A1D /* FetchData_Sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */; };
 		708698392A25228C00E393E9 /* OrderStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708698382A25228C00E393E9 /* OrderStatusEnum.swift */; };
 		70887906292F70FC00391A41 /* ShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70887905292F70FC00391A41 /* ShopView.swift */; };
@@ -73,7 +72,6 @@
 		70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC128755A4C005AE3B0 /* PopUpViewTest.swift */; };
 		70B5CDC42875CA46005AE3B0 /* NewPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B5CDC32875CA46005AE3B0 /* NewPersonView.swift */; };
 		70B7146829EFBD9D00C05CAC /* MeasurementsTut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */; };
-		70B8317B290D969000C0BF84 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 70B8317A290D969000C0BF84 /* iPhoneNumberField */; };
 		70B83187290D9B9200C0BF84 /* BurgerMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B83186290D9B9200C0BF84 /* BurgerMenu.swift */; };
 		70B97A4B2467646100E5E1A3 /* RecapMensurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */; };
 		70B9B1842566C64E00317086 /* test-binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B9B1832566C64E00317086 /* test-binding.swift */; };
@@ -90,6 +88,8 @@
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
 		70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E599342472C6B600F84295 /* MeasurementValue.swift */; };
 		70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */; };
+		70FFE7E72AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif in Resources */ = {isa = PBXBuildFile; fileRef = 70FFE7E62AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif */; };
+		70FFE7EA2AE0F5190078B573 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 70FFE7E92AE0F5190078B573 /* iPhoneNumberField */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,7 +137,6 @@
 		70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFbDocumentUID.swift; sourceTree = "<group>"; };
 		705ABCF0243F983900D47D6C /* SuiviDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuiviDeCommande.swift; sourceTree = "<group>"; };
 		705ABCF2243F988100D47D6C /* dataSuivi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataSuivi.swift; sourceTree = "<group>"; };
-		706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "logo-animation-v2_AdobeExpress.gif"; path = "../../../../../Desktop/projet-robe/Logos/logo/logo-principal/animations/version-finale/logo-animation-v2_AdobeExpress.gif"; sourceTree = "<group>"; };
 		7067C75A29FC01C2003F5A1D /* FetchData_Sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchData_Sandbox.swift; sourceTree = "<group>"; };
 		708698382A25228C00E393E9 /* OrderStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusEnum.swift; sourceTree = "<group>"; };
 		70887905292F70FC00391A41 /* ShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopView.swift; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
 		70E599342472C6B600F84295 /* MeasurementValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementValue.swift; sourceTree = "<group>"; };
 		70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTest.swift; sourceTree = "<group>"; };
+		70FFE7E62AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "logo-animation-v2_AdobeExpress.gif"; path = "../../../../../Desktop/projet-robe/Illustrations/Logos/logo/logo-principal/animations/version-finale/logo-animation-v2_AdobeExpress.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,11 +179,11 @@
 				70B0371F2AD7ED09004A4870 /* GoogleSignIn in Frameworks */,
 				70B037212AD7ED09004A4870 /* GoogleSignInSwift in Frameworks */,
 				70AF90D929FA739D00FB9212 /* FirebaseStorageCombine-Community in Frameworks */,
+				70FFE7EA2AE0F5190078B573 /* iPhoneNumberField in Frameworks */,
 				70AF90D729FA739D00FB9212 /* FirebaseStorage in Frameworks */,
 				70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */,
 				70AF90CD29FA739D00FB9212 /* FirebaseCrashlytics in Frameworks */,
 				70AF90CB29FA739D00FB9212 /* FirebaseAuth in Frameworks */,
-				70B8317B290D969000C0BF84 /* iPhoneNumberField in Frameworks */,
 				70AF90D329FA739D00FB9212 /* FirebaseFirestore in Frameworks */,
 				70AF90D529FA739D00FB9212 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -226,8 +226,8 @@
 				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
-				706140472A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif */,
 				70BB8199246D7EC500695F19 /* About_us.swift */,
+				70FFE7E62AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif */,
 				7001F3A829FB022B00AC8791 /* New Group */,
 				7025B19024699EED00F43171 /* SandboxViews */,
 				7019ABF92347E73F00F5EF15 /* fonrose-ecommerceV2 */,
@@ -465,7 +465,6 @@
 			);
 			name = "fonrose-ecommerceV2";
 			packageProductDependencies = (
-				70B8317A290D969000C0BF84 /* iPhoneNumberField */,
 				70AF90C829FA739D00FB9212 /* FirebaseAnalytics */,
 				70AF90CA29FA739D00FB9212 /* FirebaseAuth */,
 				70AF90CC29FA739D00FB9212 /* FirebaseCrashlytics */,
@@ -477,6 +476,7 @@
 				70AF90D829FA739D00FB9212 /* FirebaseStorageCombine-Community */,
 				70B0371E2AD7ED09004A4870 /* GoogleSignIn */,
 				70B037202AD7ED09004A4870 /* GoogleSignInSwift */,
+				70FFE7E92AE0F5190078B573 /* iPhoneNumberField */,
 			);
 			productName = "fonrose-ecommerceV2";
 			productReference = 7019ABF72347E73F00F5EF15 /* fonrose-ecommerceV2.app */;
@@ -507,9 +507,9 @@
 			);
 			mainGroup = 7019ABEE2347E73F00F5EF15;
 			packageReferences = (
-				70B83179290D969000C0BF84 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 				70AF90C729FA739D00FB9212 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				70FFE7E82AE0F5190078B573 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */,
 			);
 			productRefGroup = 7019ABF82347E73F00F5EF15 /* Products */;
 			projectDirPath = "";
@@ -526,7 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
-				706140482A51FC5C000B41DA /* logo-animation-v2_AdobeExpress.gif in Resources */,
+				70FFE7E72AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
 				7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
@@ -827,12 +827,12 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		70B83179290D969000C0BF84 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
+		70FFE7E82AE0F5190078B573 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MojtabaHs/iPhoneNumberField";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.0;
+				minimumVersion = 0.10.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -893,9 +893,9 @@
 			package = 70B0371D2AD7ED09004A4870 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
 		};
-		70B8317A290D969000C0BF84 /* iPhoneNumberField */ = {
+		70FFE7E92AE0F5190078B573 /* iPhoneNumberField */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 70B83179290D969000C0BF84 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
+			package = 70FFE7E82AE0F5190078B573 /* XCRemoteSwiftPackageReference "iPhoneNumberField" */;
 			productName = iPhoneNumberField;
 		};
 /* End XCSwiftPackageProductDependency section */

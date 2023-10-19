@@ -138,15 +138,18 @@ struct LocationTextField: View {
                                                                  
                                  Spacer()
                                  
-                                 TextField("", text: $adressStreet)
-                                     .disableAutocorrection(true)
-                                     .autocapitalization(.none)
-                                     .placeholder(when: adressStreet.isEmpty) {
-                                         Text("street")
+                                 ZStack(alignment: .leading) {
+                                     if adressStageText.isEmpty {
+                                         Text("stage")
                                              .foregroundColor(.gray)
                                              .opacity(0.6)
                                              .padding(.horizontal, 5)
                                      }
+                                     TextField("", text: $adressStageText)
+                                         .disableAutocorrection(true)
+                                         .autocapitalization(.none)
+                                 }
+                                 
                              }
                              
                              Spacer()
@@ -255,15 +258,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $firstNameText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: firstNameText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if firstNameText.isEmpty {
                                                              Text("first-name")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $firstNameText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
                                                  }
                                                  
                                                  Spacer()
@@ -281,15 +287,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $lastNameText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: lastNameText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if lastNameText.isEmpty {
                                                              Text("last-name")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $lastNameText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
                                                  }
                                                  
                                                  Spacer()
@@ -307,15 +316,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $emailAdressText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: emailAdressText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if emailAdressText.isEmpty {
                                                              Text("email-adress")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $emailAdressText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                         
                                                  }
                                                  
                                                  Spacer()
@@ -338,15 +350,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $phoneNumberText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: phoneNumberText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if phoneNumberText.isEmpty {
                                                              Text("phone")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         iPhoneNumberField("", text: $phoneNumberText)
+                                                             .prefixHidden(false)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
                                                  }
                                                  
                                                  Spacer()
@@ -374,15 +389,17 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $adressStreet)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: adressStreet.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if adressStreet.isEmpty {
                                                              Text("street")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $adressStreet)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
                                                  }
                                                  
                                                  Spacer()
@@ -440,15 +457,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $adressMailBoxText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: adressMailBoxText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if adressMailBoxText.isEmpty {
                                                              Text("mail-box")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $adressMailBoxText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
                                                  }
                                                  
                                                  Spacer()
@@ -468,15 +488,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $adressBasementText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: adressBasementText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if adressBasementText.isEmpty {
                                                              Text("basement")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $adressBasementText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
                                                  }
                                                  
                                                  Spacer()
@@ -496,15 +519,18 @@ struct LocationTextField: View {
                                                                                      
                                                      Spacer()
                                                      
-                                                     TextField("", text: $adressStageText)
-                                                         .disableAutocorrection(true)
-                                                         .autocapitalization(.none)
-                                                         .placeholder(when: adressStageText.isEmpty) {
+                                                     ZStack(alignment: .leading) {
+                                                         if adressStageText.isEmpty {
                                                              Text("stage")
                                                                  .foregroundColor(.gray)
                                                                  .opacity(0.6)
                                                                  .padding(.horizontal, 5)
                                                          }
+                                                         TextField("", text: $adressStageText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
                                                  }
                                                  
                                                  Spacer()
@@ -548,7 +574,7 @@ struct LocationTextField: View {
                                     .onTapGesture {
                                         
                                         Task {
-                                            if emailAdressText.isValideEmailAdress() && phoneNumberText.isValidPhoneNumber() {
+                                            if emailAdressText.isValideEmailAdress() {
                                                 let docRef = db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "nil")
                                                 if civilityText != "" && firstNameText != "" && lastNameText != "" && civilityText != "" && emailAdressText != "" && phoneNumberText != "" && adressCountryText != "" && adressPostalCodeText != "" && adressCityText != "" && adressStreetText != "" {
                                                     

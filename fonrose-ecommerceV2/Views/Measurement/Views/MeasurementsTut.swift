@@ -140,10 +140,12 @@ struct MeasurementsTut: View {
                                             .frame(height: 150)
                                             .foregroundColor(.blue)
                                         VStack(alignment: .leading) {
-                                            Image("meter-icon")
+                                            
+                                            Image(theColorScheme == .light ? "meter-icon" : "meter-icon-white")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 40, height: 40)
+                                            
                                             Text(measurement.measurement)
                                                 .fontWeight(.semibold)
                                         }

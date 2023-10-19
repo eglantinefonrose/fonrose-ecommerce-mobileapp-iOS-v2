@@ -47,9 +47,20 @@ struct LogInGoogleAppleView: View {
                 BackButtonModel(text: "sign-in")
                 
                 Spacer()
+                                                    
+                ZStack {
                     
-                VStack {
-                        
+                    VStack {
+                        HStack {
+                            Text("sign-in")
+                                .font(.system(size: 50, weight: .semibold))
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                                                                            
+                    VStack {
+                                            
                         SignInWithAppleButton { (request) in
                             
                             bigModel.nonce = randomNonceString(length: 32)
@@ -58,7 +69,7 @@ struct LogInGoogleAppleView: View {
                         } onCompletion: { (result) in
                             
                             switch result {
-                                case .success(let user):
+                            case .success(let user):
                                 guard let credential = user.credential as? ASAuthorizationAppleIDCredential else {
                                     print("error with firebase")
                                     return
@@ -68,8 +79,8 @@ struct LogInGoogleAppleView: View {
                                 
                                 print("success")
                                 // do Login With Firebase..
-                                case .failure (let error):
-                                    print (error.localizedDescription)
+                            case .failure (let error):
+                                print (error.localizedDescription)
                             }
                             
                         }.frame(height: 40)
@@ -77,26 +88,26 @@ struct LogInGoogleAppleView: View {
                         GoogleSignInButton {
                             
                             guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
+                            
                             // Create Google Sign In configuration object.
                             let config = GIDConfiguration(clientID: clientID)
                             GIDSignIn.sharedInstance.configuration = config
-
+                            
                             // Start the sign in flow!
                             GIDSignIn.sharedInstance.signIn(withPresenting: getRootViewController()) { result, error in
                                 
                                 guard error == nil else {
                                     return
                                 }
-
+                                
                                 guard let user = result?.user,
-                                    let idToken = user.idToken?.tokenString
+                                      let idToken = user.idToken?.tokenString
                                 else {
-                                      return
+                                    return
                                 }
-
+                                
                                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: user.accessToken.tokenString)
-                                    
+                                
                                 Auth.auth().signIn(with: credential) { result, error in
                                     
                                     guard error == nil else {
@@ -108,7 +119,10 @@ struct LogInGoogleAppleView: View {
                                 }
                             }
                         }
+                    }
                     
+                    Spacer()
+                                        
                     /*HStack {
                         Spacer()
                         if !email.isEmpty, !password.isEmpty {

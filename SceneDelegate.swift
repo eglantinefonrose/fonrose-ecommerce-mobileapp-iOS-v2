@@ -31,8 +31,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 window.rootViewController = UIHostingController(rootView: BigRootView()
-                                                                //FetchData_Sandbox()
-                    .environmentObject(BigModel()))
+                                                                //MeasurementsTut())
+                    .environmentObject(BigModel())
+                    .environment(\.locale, Locale.init(identifier: "fr")))
                 
                 
                     //.environmentObject(BigModel.shared))

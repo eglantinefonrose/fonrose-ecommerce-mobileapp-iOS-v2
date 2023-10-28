@@ -12,10 +12,11 @@ import AVKit
 struct MeasurementTut: Identifiable, Hashable {
     var id: Int
     var measurement: String
-    var url: URL
-    var explanations: String?
+    var imagesNames: [String]
+    var explenations: String
 }
 
+@available(iOS 14.0, *)
 struct MeasurementsTut: View {
     
     @Environment(\.colorScheme) var theColorScheme
@@ -23,88 +24,115 @@ struct MeasurementsTut: View {
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
     
-    let measurementsTut = [MeasurementTut(id: 0, measurement: "All measurements", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 1, measurement: "Armpits", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!, explanations: "Levez légèrement votre bras et repérez le creux à coté de la bosse de l’os de l’épaule, puis enroulez le mètre ruban autour de ce point en passant sous l’aisselle"),
-       MeasurementTut(id: 2, measurement: "Arms", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 3, measurement: "Head", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 4, measurement: "Pelvis", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 5, measurement: "Pelvis to knee", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 6, measurement: "Shoulders", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!),
-       MeasurementTut(id: 7, measurement: "Shoulders to pelvis", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!)
+    let measurementsTut = [MeasurementTut(id: 0, measurement: "All measurements", imagesNames: [], explenations: ""),
+                           MeasurementTut(id: 1, measurement: "armpits-measurement", imagesNames: ["armpits-size-1", "armpit-measurement"], explenations: "armpits-measurement-explenations"),
+       MeasurementTut(id: 2, measurement: "arms-length", imagesNames: [], explenations: "arms-length-explenations"),
+       MeasurementTut(id: 3, measurement: "head-measurement", imagesNames: [], explenations: "head-measurement-explenations"),
+       MeasurementTut(id: 4, measurement: "pelvis-measurement", imagesNames: ["hips-size", "hips-size-2"], explenations: "pelvis-measurement-explenations"),
+       MeasurementTut(id: 5, measurement: "pelvis-knee", imagesNames: [], explenations: "pelvis-knee-explenations"),
+       MeasurementTut(id: 6, measurement: "shoulders-measurement", imagesNames: ["shoulders-size"], explenations: "shoulders-measurement-explenations"),
+       MeasurementTut(id: 7, measurement: "shoulders-pelvis", imagesNames: [], explenations: "shoulders-pelvis-explenations"),
+       MeasurementTut(id: 8, measurement: "waist-size", imagesNames: ["waist-size", "waist-size2"], explenations: "waist-size-explenations"),
+       MeasurementTut(id: 9, measurement: "armpits-tits", imagesNames: ["armpit-nipple"], explenations: "armpits-tits-explenations"),
+       MeasurementTut(id: 10, measurement: "tits-belly-button", imagesNames: ["nipple-navel"], explenations: "tits-belly-button-explenations"),
+       MeasurementTut(id: 11, measurement: "hips-navel", imagesNames: ["nipple-hips"], explenations: "hips-navel-explenations"),
+       MeasurementTut(id: 12, measurement: "waist-navel", imagesNames: ["nipple-waist"], explenations: "waist-navel-explenations"),
+       MeasurementTut(id: 13, measurement: "tits-middle-of-breasts", imagesNames: ["mid-tit"], explenations: "tits-middle-of-breasts-explenations")
     ]
     
     @State var show = false
     @State var currentTutId: Int = 0
+    @State private var index = 0
     
     var body: some View {
         
         ZStack {
             
-            Color("Black")
+            Color("Background")
                 .edgesIgnoringSafeArea(.all)
             
             if show {
+                
                 ZStack {
-                     if #available(iOS 14.0, *) {
-                         VideoPlayer(player: AVPlayer(url: measurementsTut[currentTutId].url))
-                    } else {
-                        // Fallback on earlier versions
-                    }
+                    
+                    //Color("Tut-blue")
+                        //.edgesIgnoringSafeArea(.all)
                     
                     VStack {
-                        HStack {
+                        BackButtonModel(text: measurementsTut[currentTutId].measurement)
+                            .padding(20)
+                        
+                        ZStack {
                             
-                            if #available(iOS 16.0, *) {
-                                Image(systemName: "x.circle")
-                                    .foregroundColor(.blue)
-                                    .bold()
-                                    .onTapGesture {
-                                        self.show = false
+                            Color("Tut-blue")
+                                .edgesIgnoringSafeArea(.all)
+                            
+                            VStack {
+                                
+                                ZStack {
+                                    
+                                    Color(.white)
+                                    
+                                    VStack {
+                                        
+                                        HStack {
+                                            Spacer()
+                                            Image(systemName: "x.circle")
+                                                .foregroundColor(.blue)
+                                                .onTapGesture {
+                                                    show.toggle()
+                                                }
+                                        }.padding(20)
+                                        
+                                        TabView(selection: $index) {
+                                            ForEach((0..<measurementsTut[currentTutId].imagesNames.count), id: \.self) { index in
+                                                ZStack {
+                                                    Image(measurementsTut[currentTutId].imagesNames[index])
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                }
+                                            }
+                                        }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                                     }
-                            } else {
-                                // Fallback on earlier versions
-                            }
-                            
-                            Spacer()
-                            
-                            Text(measurementsTut[currentTutId].measurement)
-                                .font(.headline)
-                                .foregroundColor(Color.white)
-                                .fontWeight(.semibold)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "house")
-                                .foregroundColor(Color.blue)
-                                .onTapGesture {
-                                    bigModel.currentview = .Home_homeFeed0
+                                    
+                                    if measurementsTut[currentTutId].imagesNames.count > 1 {
+                                        VStack {
+                                            Spacer()
+                                            HStack(spacing: 15) {
+                                                ForEach((0..<measurementsTut[currentTutId].imagesNames.count), id: \.self) { index in
+                                                    Circle()
+                                                        .fill(index == self.index ? Color.gray : Color.gray.opacity(0.5))
+                                                        .frame(width: 10, height: 10)
+
+                                                }
+                                            }
+                                            .padding()
+                                        }
+                                    }
+                                    
                                 }
-                            
-                        }.onRotate { newOrientation in orientation = newOrientation }
-                            .padding(20)
-                        .frame(width: UIScreen.main.bounds.width)
-                        Spacer()
-                        Text(measurementsTut[currentTutId].explanations ?? "")
-                        Spacer()
-                        
-                        HStack {
-                            Spacer()
-                            if #available(iOS 14.0, *) {
-                                Image(systemName: "text.bubble")
-                                    .font(.title3)
-                                    .foregroundColor(Color.blue)
-                                    .onTapGesture {
-                                        //bigModel.currentview = .Home_homeFeed0
-                                    }
-                            } else {
-                                // Fallback on earlier versions
+                                    
+                                    VStack(alignment: .leading, spacing: 10) {
+                                        Text(LocalizedStringKey(measurementsTut[currentTutId].measurement))
+                                            .font(.title)
+                                            .foregroundColor(.white)
+                                            .fontWeight(.semibold)
+                                        
+                                        Text(LocalizedStringKey(measurementsTut[currentTutId].explenations))
+                                            .foregroundColor(.white)
+                                    }.padding(20)
+                                    
+                                
                             }
-                        }.onRotate { newOrientation in orientation = newOrientation }
-                            .padding(20)
-                        .frame(width: UIScreen.main.bounds.width)
+                            
+                        }
                         
-                    }.padding(20)
+                    
+                        
                 }
+                    
+                }
+                
             }
             
             if !show {
@@ -146,7 +174,7 @@ struct MeasurementsTut: View {
                                                 .scaledToFit()
                                                 .frame(width: 40, height: 40)
                                             
-                                            Text(measurement.measurement)
+                                            Text(LocalizedStringKey(measurement.measurement))
                                                 .fontWeight(.semibold)
                                         }
                                     }.onTapGesture {
@@ -315,9 +343,9 @@ struct MeasurementPlayerView: View {
     }
 }
 
+@available(iOS 14.0, *)
 struct MeasurementsTut_Previews: PreviewProvider {
     static var previews: some View {
-        MeasurementPlayerView(explanations: "Repérez votre taille (l’endroit le moins large verticalement entre votre poitrine et vos hanches) et entourez le mètre ruban autour de votre corps à cet endroit, en faisant attention à garder le mètre au même niveau sur l’ensemble de votre corps", url: URL(string: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4")!, measurementText: "")
         MeasurementsTut()
     }
 }

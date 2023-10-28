@@ -19,7 +19,6 @@
 		7019AC002347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7019ABFE2347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld */; };
 		7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC032347E74100F5EF15 /* Assets.xcassets */; };
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
-		7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */; };
 		701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B9E1D2876DF90004DE780 /* Test-coordinate.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
 		7029451D29FDA9AF00C421AA /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451C29FDA9AF00C421AA /* SwiftUIView.swift */; };
@@ -43,6 +42,7 @@
 		704535802477BB8F001F20A8 /* ViewEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7045357F2477BB8F001F20A8 /* ViewEnum.swift */; };
 		704535822477BD85001F20A8 /* BigRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704535812477BD85001F20A8 /* BigRootView.swift */; };
 		7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7049ED27281E7C2B00C16C3B /* PostStack.swift */; };
+		704C4F3A2AE32A560080382C /* Meas-Tut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704C4F392AE32A560080382C /* Meas-Tut.swift */; };
 		704D0A2928A0286100AACF36 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D0A2828A0286100AACF36 /* LocationView.swift */; };
 		704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704D2197245B377500D0B13F /* SANDBOX_textField.swift */; };
 		70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */; };
@@ -54,7 +54,6 @@
 		708CF08728A4BB0300397DED /* LoopTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708CF08628A4BB0300397DED /* LoopTest.swift */; };
 		708F28AF246805A0005BFE7C /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28AE246805A0005BFE7C /* PaymentScreen.swift */; };
 		708F28B124680AB4005BFE7C /* FinDeCommande.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708F28B024680AB4005BFE7C /* FinDeCommande.swift */; };
-		7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7098BF552AD9E9C70012AFBA /* Localizable.strings */; };
 		709A989429342DEF00B7AE4D /* VideoPlayer-test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */; };
 		70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */; };
 		70AF90C929FA739D00FB9212 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 70AF90C829FA739D00FB9212 /* FirebaseAnalytics */; };
@@ -87,6 +86,7 @@
 		70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */; };
 		70D4E45224608458002B2BE8 /* player2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D4E45124608458002B2BE8 /* player2.swift */; };
 		70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70E599342472C6B600F84295 /* MeasurementValue.swift */; };
+		70FB2C9B2AEC84FF00370F2B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70FB2C9D2AEC84FF00370F2B /* Localizable.strings */; };
 		70FBE57C28FB55F4006D4CC3 /* LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */; };
 		70FFE7E72AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif in Resources */ = {isa = PBXBuildFile; fileRef = 70FFE7E62AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif */; };
 		70FFE7EA2AE0F5190078B573 /* iPhoneNumberField in Frameworks */ = {isa = PBXBuildFile; productRef = 70FFE7E92AE0F5190078B573 /* iPhoneNumberField */; };
@@ -106,7 +106,6 @@
 		7019ABFF2347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = fonrose_ecommerceV2.xcdatamodel; sourceTree = "<group>"; };
 		7019AC032347E74100F5EF15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7019AC062347E74100F5EF15 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7019AC092347E74100F5EF15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		701B9E1D2876DF90004DE780 /* Test-coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test-coordinate.swift"; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		7045357F2477BB8F001F20A8 /* ViewEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEnum.swift; sourceTree = "<group>"; };
 		704535812477BD85001F20A8 /* BigRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigRootView.swift; sourceTree = "<group>"; };
 		7049ED27281E7C2B00C16C3B /* PostStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStack.swift; sourceTree = "<group>"; };
+		704C4F392AE32A560080382C /* Meas-Tut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Meas-Tut.swift"; sourceTree = "<group>"; };
 		704D0A2828A0286100AACF36 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		704D2197245B377500D0B13F /* SANDBOX_textField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SANDBOX_textField.swift; sourceTree = "<group>"; };
 		70512A9B28AE2E6400D7E05E /* testFbDocumentUID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testFbDocumentUID.swift; sourceTree = "<group>"; };
@@ -143,7 +143,6 @@
 		708CF08628A4BB0300397DED /* LoopTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopTest.swift; sourceTree = "<group>"; };
 		708F28AE246805A0005BFE7C /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
 		708F28B024680AB4005BFE7C /* FinDeCommande.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinDeCommande.swift; sourceTree = "<group>"; };
-		7098BF552AD9E9C70012AFBA /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		709A989329342DEF00B7AE4D /* VideoPlayer-test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VideoPlayer-test.swift"; sourceTree = "<group>"; };
 		70AB2A49235CB2C3004856D7 /* HomeFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedView.swift; sourceTree = "<group>"; };
 		70B037242AD813B6004A4870 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
@@ -165,6 +164,9 @@
 		70CFDBCB29F5BF0400F19D41 /* BackButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonModel.swift; sourceTree = "<group>"; };
 		70D4E45124608458002B2BE8 /* player2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = player2.swift; sourceTree = "<group>"; };
 		70E599342472C6B600F84295 /* MeasurementValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementValue.swift; sourceTree = "<group>"; };
+		70FB2C9C2AEC84FF00370F2B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		70FB2C9F2AEC85E600370F2B /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		70FB2CA02AEC866700370F2B /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		70FBE57B28FB55F4006D4CC3 /* LocationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTest.swift; sourceTree = "<group>"; };
 		70FFE7E62AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "logo-animation-v2_AdobeExpress.gif"; path = "../../../../../Desktop/projet-robe/Illustrations/Logos/logo/logo-principal/animations/version-finale/logo-animation-v2_AdobeExpress.gif"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,6 +209,7 @@
 				70B97A4A2467646100E5E1A3 /* RecapMensurations.swift */,
 				70D4E45124608458002B2BE8 /* player2.swift */,
 				70B7146729EFBD9D00C05CAC /* MeasurementsTut.swift */,
+				704C4F392AE32A560080382C /* Meas-Tut.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,7 +225,7 @@
 		7019ABEE2347E73F00F5EF15 = {
 			isa = PBXGroup;
 			children = (
-				7098BF552AD9E9C70012AFBA /* Localizable.strings */,
+				70FB2C9D2AEC84FF00370F2B /* Localizable.strings */,
 				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
@@ -255,7 +258,6 @@
 				7049ED23281E7B3F00C16C3B /* Views */,
 				70512A9D28AE9EFC00D7E05E /* Services */,
 				7019AC032347E74100F5EF15 /* Assets.xcassets */,
-				7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */,
 				7019AC0B2347E74100F5EF15 /* Info.plist */,
 				7019ABFE2347E73F00F5EF15 /* fonrose_ecommerceV2.xcdatamodeld */,
 				70347548285F6B910030C906 /* GoogleService-Info.plist */,
@@ -503,7 +505,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
+				fr,
+				it,
 			);
 			mainGroup = 7019ABEE2347E73F00F5EF15;
 			packageReferences = (
@@ -525,10 +528,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7019AC0A2347E74100F5EF15 /* LaunchScreen.storyboard in Resources */,
+				70FB2C9B2AEC84FF00370F2B /* Localizable.strings in Resources */,
 				70FFE7E72AE0F3DC0078B573 /* logo-animation-v2_AdobeExpress.gif in Resources */,
 				7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */,
-				7098BF562AD9E9C70012AFBA /* Localizable.strings in Resources */,
 				7019AC042347E74100F5EF15 /* Assets.xcassets in Resources */,
 				70347549285F6B910030C906 /* GoogleService-Info.plist in Resources */,
 			);
@@ -602,6 +604,7 @@
 				7045357C24770D84001F20A8 /* AboutUs.swift in Sources */,
 				7067C75B29FC01C2003F5A1D /* FetchData_Sandbox.swift in Sources */,
 				703C28AF27E755BC00DE8B3B /* Binding-test1.swift in Sources */,
+				704C4F3A2AE32A560080382C /* Meas-Tut.swift in Sources */,
 				70B7146829EFBD9D00C05CAC /* MeasurementsTut.swift in Sources */,
 				7031EF9C27F04E07009CA3A2 /* LocationViewModel.swift in Sources */,
 				70512A9C28AE2E6400D7E05E /* testFbDocumentUID.swift in Sources */,
@@ -612,12 +615,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7019AC082347E74100F5EF15 /* LaunchScreen.storyboard */ = {
+		70FB2C9D2AEC84FF00370F2B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7019AC092347E74100F5EF15 /* Base */,
+				70FB2C9C2AEC84FF00370F2B /* en */,
+				70FB2C9F2AEC85E600370F2B /* it */,
+				70FB2CA02AEC866700370F2B /* fr */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -627,6 +632,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -687,6 +693,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

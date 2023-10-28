@@ -26,7 +26,12 @@
 "crotch" = "Crotch";
 "armpits-tits" = "Armptis tits";
 "tits-belly-button" = "Tits-navel";
+"hips-navel" = "Hips-navel";
+"waist-navel" = "Waist-navel";
+"tits-middle-of-breasts" = "Tits to middle of breasts";
 "tits-hips" = "Tits-hips";
+"waist-size" = "Waist size";
+"hips-size" = "Hips size";
 "scroll-down-to-see-all-measurements" = "Scroll down to see all measurements";
 "how-to-take-your-measurements" = "How to take your measurement ?";
 "save" = "Save";
@@ -140,3 +145,25 @@
 "edit-measurements" = "Edit measurements";
 "about-us" = "About us";
 "service-client" = "Service client";
+"shoulders-waist-explenations" = "Place the tape measure on your back and wrap it around your chest and arms while keeping your arms close to your chest, then adjust the tape so it sits just below your shoulders";
+"armpits-measurement-explenations" = "Gently lift your arm and locate the hollow next to the shoulder bone bump, then wrap the tape measure around that point, passing it under the armpit.";
+"arms-length-explenations" = "Extend your arm to align it with your shoulder, then place the end of the tape measure in the hollow of your shoulder. Extend the tape measure along your arm so that it is straight on your arm in line with your hand. Measure to the tips of your outstretched fingers";
+"head-measurement-explenations" = "";
+"pelvis-measurement-explenations" = "Identify the widest point vertically on your body and wrap the tape measure around your body at that point, ensuring that the tape remains at the same level all around your body.";
+"pelvis-knee-explenations" = "";
+"shoulders-measurement-explenations" = "Position the tape measure on your back and wrap it around your chest and arms while keeping your arms close to your chest, then adjust the tape to sit just below your shoulders";
+"shoulders-pelvis-explenations" = "Place the end of your tape measure on the center of your shoulder, let it drop along your body's line, and take the measurement at your waist.";
+"waist-size-explenations" = "Locate your waist (the narrowest point vertically between your chest and hips) and wrap the tape measure around your body at that point, ensuring that the tape remains at the same level all around your body";
+"armpits-tits-explenations" = "With arms down by the sides, draw an imaginary line connecting both armpits. Follow this imaginary line towards the center of the body and stop at the level of the nipple. Measure from this point to the nipple while contouring the body's shape with the tape measure";
+"tits-belly-button-explenations" = "Place the end of the tape measure between your two nipples and let the tape measure drop down to your navel (without contouring the shape of your body)";
+"hips-navel-explenations" = "Place the end of the tape measure at your navel and let the tape measure drop down to your hips";
+"waist-navel-explenations" = "Place the end of the tape measure at your navel and then move it upward toward your face until it intersects the imaginary line of your waist";
+"tits-middle-of-breasts-explenations" = "Place the end of the tape measure on your left nipple and measure to the middle of your two nipples while contouring the shape of your body with the tape measure";
+
+
+
+
+
+
+
+

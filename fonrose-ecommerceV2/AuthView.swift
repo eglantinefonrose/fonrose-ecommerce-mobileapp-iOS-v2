@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct AuthView: View {
     
     @EnvironmentObject var bigModel: BigModel
     
-    @available(iOS 14.0, *)
+    @available(iOS 15.0, *)
     var body: some View {
                                                 
         VStack {

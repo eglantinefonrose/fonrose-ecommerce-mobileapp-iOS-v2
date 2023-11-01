@@ -9,7 +9,7 @@
 import SwiftUI
 import AVFoundation
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct AboutUs: View {
     
     @EnvironmentObject var bigModel: BigModel
@@ -60,7 +60,7 @@ struct AboutUs: View {
 struct AboutUsView_Previews: PreviewProvider {
      
     static var previews: some View {
-        if #available(iOS 14.0, *) {
+        if #available(iOS 15.0, *) {
             AboutUs()
         } else {
             // Fallback on earlier versions

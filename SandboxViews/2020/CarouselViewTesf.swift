@@ -130,7 +130,6 @@ struct Home : View {
                     Text("Acheter")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            
                         }
                     
                     Spacer()

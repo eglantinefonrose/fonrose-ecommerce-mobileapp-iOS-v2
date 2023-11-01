@@ -18,6 +18,7 @@ import MapKit
 import AuthenticationServices
 import GoogleSignIn
 
+@available(iOS 15.0, *)
 class BigModel : ObservableObject {
     
     //fonction qui crée un textfield
@@ -105,7 +106,7 @@ class BigModel : ObservableObject {
         let pictureName: String
         let productName: String
         var videoURL: String
-        var price: String
+        var price: Int
         var carouselProductPictures: [String]
     }
     
@@ -1162,7 +1163,28 @@ class BigModel : ObservableObject {
     
     
     
+    //MARK: PAYMENT
     
+    let paymentHandler = PaymentHandler()
+    @Published private(set) var paymentSuccess = false
+    @Published private(set) var products: [DressPictures] = []
+    @Published private(set) var total: Int = 0
+    
+    func updateTotal() {
+        if self.selectedProductId != nil {
+            self.total = self.dressPictures[self.selectedProductId ?? 0].price
+        } else {
+            print("no product selected")
+        }
+    }
+    
+    func pay() {
+        paymentHandler.startPayment(products: products, total: total) { success in
+            self.paymentSuccess = success
+            self.products = []
+            self.total = 500
+        }
+    }
     
     
     

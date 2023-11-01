@@ -709,7 +709,7 @@ struct HomeView: View {
                         
                         print(arrayOfFields)
                         
-                        if (sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil) && (measurementText0 != "") && (measurementText1 != "") && (measurementText2 != "") && (measurementText3 != "") && (measurementText4 != "") && (measurementText5 != "") && (measurementText6 != "") && (measurementText7 != "") && (measurementText8 != "") && (measurementText9 != "") && (measurementText10 != "") && (measurementText11 != "") {
+                        /*if (sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil) && (measurementText0 != "") && (measurementText1 != "") && (measurementText2 != "") && (measurementText3 != "") && (measurementText4 != "") && (measurementText5 != "") && (measurementText6 != "") && (measurementText7 != "") && (measurementText8 != "") && (measurementText9 != "") && (measurementText10 != "") && (measurementText11 != "") {*/
                             
                             guard let userId = auth.currentUser?.uid else { return }
                             let docRef = db.collection("users").document("user\(userId)").collection("persons").document(bigModel.currentPersonId).collection("Measurements").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.id ?? "nil")
@@ -739,7 +739,7 @@ struct HomeView: View {
                                 self.bigModel.lastViews.append(.Measurement_Mensurations)
                             }
                             
-                        } else {
+                        /*} else {
                             
                             if !(sum(array: arrayOfFields) == bigModel.neededMeasurements.count || bigModel.selectedProductId == nil) {
                                 alertTF(title: "Some fields are empty", message: "Please fill all the fields", primaryTitle: "Ok") {}
@@ -748,7 +748,7 @@ struct HomeView: View {
                                 alertTF(title: "Only numbers are allowed", message: "Please enter only numbers in the text fields (enter all measurements in millimeters)", primaryTitle: "Ok") {}
                             }
                             
-                        }
+                        }*/
                         
                         
                         

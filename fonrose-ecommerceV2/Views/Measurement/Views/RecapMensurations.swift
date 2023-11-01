@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 
+@available(iOS 15.0, *)
 struct RecapMensurations: View {
     
     @EnvironmentObject var bigModel: BigModel

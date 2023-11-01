@@ -52,7 +52,7 @@ struct CarouselView: View {
                             DispatchQueue.main.async {
                                 Task {
                                     await bigModel.getRequestedMeasurements()
-                                    
+                                    bigModel.updateTotal()
                                 }
                             }
                             

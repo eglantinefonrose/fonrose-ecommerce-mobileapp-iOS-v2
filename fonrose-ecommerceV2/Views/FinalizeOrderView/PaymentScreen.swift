@@ -12,13 +12,13 @@ import Firebase
 import FirebaseAuth
 import FirebaseFirestore
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct PaymentScreen: View {
 
     @EnvironmentObject var bigModel: BigModel
     //var action: () -> Void
     
-    @available(iOS 14.0, *)
+    @available(iOS 15.0, *)
     var body: some View {
         
         ZStack {
@@ -26,8 +26,8 @@ struct PaymentScreen: View {
             VStack {
                 BackButtonModel(text: "payment")
                 Spacer()
-                PaymentButton(action: {})
-                    .onTapGesture {
+                PaymentButton(action: {bigModel.pay()})
+                    /*.onTapGesture {
                         bigModel.currentview = .FinalizeOrderViews_FinDeCommande
                         bigModel.lastViews.append(.FinalizeOrderViews_PaymentScreen)
                         
@@ -63,7 +63,7 @@ struct PaymentScreen: View {
                             }*/
                             
                         }
-                    }
+                    }*/
                 Spacer()
             }.padding(20)
         }

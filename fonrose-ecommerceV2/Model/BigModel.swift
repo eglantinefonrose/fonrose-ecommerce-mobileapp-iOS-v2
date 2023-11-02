@@ -955,7 +955,7 @@ class BigModel : ObservableObject {
         try? auth.signOut()
         self.signedIn = false
         print("current user id is \(self.auth.currentUser?.uid ?? "nil")")
-        
+        self.selectedProductId = nil
         self.isPersonChosen = false
         self.currentPersonIndex = nil
         self.currentPersonId = ""

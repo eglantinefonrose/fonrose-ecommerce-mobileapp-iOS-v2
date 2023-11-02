@@ -109,7 +109,7 @@ struct RecapMensurations: View {
                                 Image(systemName: "chevron.down")
                                     .foregroundColor(.blue)
                             }
-                            Text("scroll-down-to-see-all-measurements")
+                            Text(LocalizedStringKey("scroll-down-to-see-all-measurements"))
                                 .foregroundColor(.blue)
                         }
                         

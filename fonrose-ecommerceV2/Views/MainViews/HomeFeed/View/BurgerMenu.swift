@@ -80,9 +80,10 @@ struct BurgerMenu: View {
                     .onTapGesture {
                         Task {
                             
-                            await bigModel.fetchLocation()
-                            
                             if bigModel.currentPersonIndex != nil {
+                                
+                                await bigModel.fetchLocation()
+                                
                                 if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
                                     
                                     await bigModel.initializeLocation()

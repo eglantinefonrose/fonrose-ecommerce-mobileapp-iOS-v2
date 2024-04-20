@@ -21,6 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         FirebaseApp.configure()
         
+        Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
+            if let user = user {
+                // user is already logged in
+            } else {
+                // user is not logged in
+            }
+        }
+        
         // Connect to the Firebase emulator - BEGIN
         /*print("WARNING - --------------------------------------- ")
         print("WARNING - Connecting the Firebase/Firestore Emulator (not the real firebase)")

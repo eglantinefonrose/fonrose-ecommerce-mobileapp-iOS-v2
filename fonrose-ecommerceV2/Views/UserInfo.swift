@@ -15,6 +15,10 @@ struct UserInfo: View {
     var auth = Auth.auth()
     @EnvironmentObject var bigModel: BigModel
     @State var isChangeViewShowed: Bool = false
+    @State var isEditModeOn = false
+    @State var newFirstName: String = ""
+    @State var name = ""
+    @FocusState var focused1: Bool?
     
     var body: some View {
         
@@ -61,10 +65,30 @@ struct UserInfo: View {
                     if #available(iOS 14.0, *) {
                         if #available(iOS 16.0, *) {
                             if bigModel.user.id != "" {
-                                Text(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].name)
-                                    .font(.title2)
-                                    .padding(5)
-                                    .fontWeight(.semibold)
+                                
+                                if !isEditModeOn {
+                                    Text(name)
+                                        .font(.title2)
+                                        .padding(5)
+                                        .fontWeight(.semibold)
+                                } else {
+                                    TextField("",
+                                            text: $newFirstName,
+                                            prompt: Text("ur-first-name")
+                                                        .foregroundColor(.gray)
+                                    ).multilineTextAlignment(.center)
+                                    .autocorrectionDisabled()
+                                    .textInputAutocapitalization(.never)
+                                    .font(.largeTitle)
+                                    .foregroundColor(.white)
+                                    .focused($focused1, equals: true)
+                                    .onAppear {
+                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                            self.focused1 = true
+                                        }
+                                    }
+                                }
+                                
                             } else {
                                 
                             }
@@ -75,17 +99,30 @@ struct UserInfo: View {
                         // Fallback on earlier versions
                     }
                     
-                    HStack {
-                        
-                        Image(systemName: "pencil.line")
-                            .foregroundColor(.blue)
-                            .font(.callout)
-                        
-                        Text("edit")
-                            .foregroundColor(.blue)
-                            .font(.caption)
-                    }.onTapGesture {
-                        bigModel.authCurrentView = .Auth_EditPerson
+                    
+                    if isEditModeOn {
+                        HStack {
+                            Text("Validate")
+                                .foregroundColor(.blue)
+                                .font(.caption)
+                        }.onTapGesture {
+                            isEditModeOn.toggle()
+                            bigModel.editCurrentPersonNameInDb(newName: newFirstName) { newName in
+                                name = newName
+                            }
+                        }
+                    } else {
+                        HStack {
+                            Image(systemName: "pencil.line")
+                                .foregroundColor(.blue)
+                                .font(.callout)
+                            
+                            Text("edit")
+                                .foregroundColor(.blue)
+                                .font(.caption)
+                        }.onTapGesture {
+                            isEditModeOn.toggle()
+                        }
                     }
                                         
                     VStack {
@@ -157,6 +194,8 @@ struct UserInfo: View {
                     }
                 }
             }
+        }.onAppear {
+            name = bigModel.user.persons[bigModel.currentPersonIndex!].name
         }
     }
 }

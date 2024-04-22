@@ -30,8 +30,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "694"
-            endingLineNumber = "694"
+            startingLineNumber = "712"
+            endingLineNumber = "712"
             landmarkName = "initializeMeasurements()"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "715"
-            endingLineNumber = "715"
+            startingLineNumber = "733"
+            endingLineNumber = "733"
             landmarkName = "initializeLocation()"
             landmarkType = "7">
             <Locations>
@@ -126,8 +126,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1142"
-            endingLineNumber = "1142"
+            startingLineNumber = "1160"
+            endingLineNumber = "1160"
             landmarkName = "getRequestedMeasurements()"
             landmarkType = "7">
             <Locations>

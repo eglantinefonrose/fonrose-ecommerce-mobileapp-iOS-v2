@@ -575,6 +575,24 @@ class BigModel : ObservableObject {
         }
     }
 
+    //MARK: Edit Person
+    
+    func editCurrentPersonNameInDb(newName: String, completion: (String) -> Void) {
+        
+        do {
+            var person: Person = self.user.persons[self.currentPersonIndex!]
+            let currentPersonID: String = self.user.persons[self.currentPersonIndex!].id!
+            person.name = newName
+            try db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document(currentPersonID).setData(from: person)
+            completion(newName)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+    }
+    
+    //try db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
     
         
     //MARK: Fetch Measurements

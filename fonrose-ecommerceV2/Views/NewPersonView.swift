@@ -136,7 +136,7 @@ struct NewPersonView: View {
                                         }
                                     } else {
                                         
-                                        try  db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
+                                        try db.collection("users").document("user\(auth.currentUser?.uid ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
                                         
                                         //setData(["email": newPersonEmail, "name": newPersonName])
                                         

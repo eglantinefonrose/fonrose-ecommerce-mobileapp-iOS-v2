@@ -44,7 +44,7 @@ struct LogInGoogleAppleView: View {
                 Spacer()
                     .frame(height: 10)
                 
-                BackButtonModel(text: "sign-in")
+                //BackButtonModel(text: "sign-in", viewName: )
                 
                 Spacer()
                                                     

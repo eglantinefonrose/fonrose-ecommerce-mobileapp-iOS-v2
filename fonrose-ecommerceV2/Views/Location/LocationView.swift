@@ -119,7 +119,7 @@ struct LocationTextField: View {
             
             VStack {
                 
-                BackButtonModel(text: "location")
+                BackButtonModel(text: "location", viewName: .LivraisonViews_Livraison)
                 
                 ZStack {
                     
@@ -583,6 +583,7 @@ struct LocationTextField: View {
                                                         await bigModel.fetchLocation()
                                                         bigModel.currentview = .LivraisonViews_RecapLivraison
                                                         bigModel.lastViews.append(.LivraisonViews_Livraison)
+                                                        bigModel.fullViewHistory.append(.LivraisonViews_Livraison)
                                                         
                                                       }
                                                       catch {

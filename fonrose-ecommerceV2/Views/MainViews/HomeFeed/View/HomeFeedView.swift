@@ -85,6 +85,7 @@ struct HomeFeedView: View {
                                                 //self.bigModel.currentview = .VideoPlayer_trailerPlayer
                                                 bigModel.currentview = .MeasurementCarouselView
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
+                                                self.bigModel.fullViewHistory.append(.Home_homeFeed0)
                                                 print("append")
                                                 
                                                 if !bigModel.showMenu {
@@ -107,6 +108,7 @@ struct HomeFeedView: View {
                                             .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                             .onTapGesture {
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
+                                                self.bigModel.fullViewHistory.append(.Home_homeFeed0)
                                                 bigModel.currentview = bigModel.mainArrayInfos[index].nextScreen
                                             }
                                     }
@@ -204,6 +206,7 @@ struct HomeFeedView: View {
                                         
                                         Task {
                                             bigModel.lastViews.append(.Home_homeFeed0)
+                                            bigModel.fullViewHistory.append(.Home_homeFeed0)
                                             self.bigModel.currentview = .Auth_AuthView
                                             print(bigModel.user.id)
                                             print(bigModel.user.email)

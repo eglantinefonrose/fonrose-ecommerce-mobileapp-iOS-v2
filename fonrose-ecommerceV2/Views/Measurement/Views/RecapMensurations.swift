@@ -26,7 +26,7 @@ struct RecapMensurations: View {
             
             VStack(spacing: 20) {
                 
-                BackButtonModel(text: "recap")
+                BackButtonModel(text: "recap", viewName: .Measurement_RecapMensurations)
                 
                 Spacer()
                     
@@ -127,6 +127,7 @@ struct RecapMensurations: View {
                             Task {
                                 
                                 self.bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                self.bigModel.fullViewHistory.append(.Measurement_RecapMensurations)
                                 
                                 if bigModel.selectedProductId != nil {
                                     
@@ -140,9 +141,11 @@ struct RecapMensurations: View {
                                         }
                                         bigModel.currentview = .LivraisonViews_Livraison
                                         bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                        bigModel.fullViewHistory.append(.Measurement_RecapMensurations)
                                         
                                     } else {bigModel.currentview = .LivraisonViews_Livraison
                                         bigModel.lastViews.append(.Measurement_RecapMensurations)
+                                        bigModel.fullViewHistory.append(.Measurement_RecapMensurations)
                                     }
                                 } else {
                                     bigModel.currentview = .Home_homeFeed0
@@ -162,6 +165,7 @@ struct RecapMensurations: View {
                         .onTapGesture {
                             self.bigModel.currentview = .Measurement_Mensurations
                             bigModel.lastViews.append(.Measurement_RecapMensurations)
+                            bigModel.fullViewHistory.append(.Measurement_RecapMensurations)
                         }
                     }
                                 

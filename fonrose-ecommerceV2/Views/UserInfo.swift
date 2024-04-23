@@ -142,6 +142,7 @@ struct UserInfo: View {
                             }.onTapGesture {
                                 
                                 bigModel.lastViews.append(.Auth_AuthView)
+                                bigModel.fullViewHistory.append(.Auth_AuthView)
                                 bigModel.currentview = .Measurement_Mensurations
                                 bigModel.needToSeeEveryMeasurements = true
                                 
@@ -165,6 +166,7 @@ struct UserInfo: View {
                                         
                                     } else {
                                         bigModel.lastViews.append(.Auth_AuthView)
+                                        bigModel.fullViewHistory.append(.Auth_AuthView)
                                         bigModel.currentview = .LivraisonViews_Livraison}
                                 }
                             }
@@ -182,6 +184,7 @@ struct UserInfo: View {
                     }.onTapGesture {
                         bigModel.authCurrentView = .Auth_PersonPickerView
                         bigModel.authLastViews.append(.Auth_UserInfo)
+                        bigModel.fullViewHistory.append(.Auth_UserInfo)
                     }
                     
                     Spacer()

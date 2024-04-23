@@ -72,20 +72,18 @@ struct HomeView: View {
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.colorScheme) var theColorScheme
     
-    @State var measurementText0: String = ""
-    @State var measurementText1: String = ""
-    @State var measurementText2: String = ""
-    @State var measurementText3: String = ""
-    @State var measurementText4: String = ""
-    @State var measurementText5: String = ""
-    @State var measurementText6: String = ""
-    @State var measurementText7: String = ""
-    @State var measurementText8: String = ""
-    @State var measurementText9: String = ""
-    @State var measurementText10: String = ""
-    @State var measurementText11: String = ""
-    @State var measurementText12: String = ""
-    @State var measurementText13: String = ""
+    @AppStorage("measurementText0") var measurementText0: String = ""
+    @AppStorage("measurementText1") var measurementText1: String = ""
+    @AppStorage("measurementText2") var measurementText2: String = ""
+    @AppStorage("measurementText3") var measurementText3: String = ""
+    @AppStorage("measurementText4") var measurementText4: String = ""
+    @AppStorage("measurementText5") var measurementText5: String = ""
+    @AppStorage("measurementText6") var measurementText6: String = ""
+    @AppStorage("measurementText7") var measurementText7: String = ""
+    @AppStorage("measurementText8") var measurementText8: String = ""
+    @AppStorage("measurementText9") var measurementText9: String = ""
+    @AppStorage("measurementText10") var measurementText10: String = ""
+    @AppStorage("measurementText11") var measurementText11: String = ""
     @State var neededMeasurements: [BigModel.NeededMeasurementsModel] = []
     
     @State var arrayOfFields: [Int] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -105,7 +103,7 @@ struct HomeView: View {
         
         VStack(spacing: 20) {
             
-            BackButtonModel(text: "measurements")
+            BackButtonModel(text: "measurements", viewName: .Measurement_Mensurations)
             
             VStack {
                                 
@@ -130,7 +128,7 @@ struct HomeView: View {
                         
                         VStack(spacing: 20) {
                             
-                            if bigModel.isMeasurements0Requested ||  bigModel.selectedProductId == nil {
+                            if bigModel.isMeasurements0Requested || bigModel.selectedProductId == nil {
                                 
                                 VStack {
                                     
@@ -148,29 +146,29 @@ struct HomeView: View {
                                     Spacer()
                                     
                                 }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                                    .cornerRadius(7)
-                                    .frame(height: 30)
-                                    .onAppear {
-                                        if measurementText0 != "" {
-                                            arrayOfFields[0] = 1
-                                        }
+                                .cornerRadius(7)
+                                .frame(height: 30)
+                                .onAppear {
+                                    if measurementText0 != "" {
+                                        arrayOfFields[0] = 1
                                     }
-                                    .onChange(of: (measurementText0), perform: { value in
-                                    perform: do {
-                                        if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
-                                            alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
-                                                
-                                            }
-                                        } else {}
-                                        
-                                        if measurementText0 == "" {
-                                            arrayOfFields[0] = 0
-                                        } else {
-                                            arrayOfFields[0] = 1
+                                }
+                                .onChange(of: (measurementText0), perform: { value in
+                                perform: do {
+                                    if measurementText0.rangeOfCharacter(from: CharacterSet.letters) != nil {
+                                        alertTF(title: "only-numbers-are-allowed", message: "plz-only-numbers", primaryTitle: "Ok") {
+                                            
                                         }
-                                        
+                                    } else {}
+                                    
+                                    if measurementText0 == "" {
+                                        arrayOfFields[0] = 0
+                                    } else {
+                                        arrayOfFields[0] = 1
                                     }
-                                    })
+                                    
+                                    }
+                                })
                             } else {
                                 
                                 if bigModel.currentPersonIndex != nil {
@@ -692,17 +690,34 @@ struct HomeView: View {
                         .underline()
                         .onTapGesture {
                             bigModel.lastViews.append(.Measurement_Mensurations)
+                            bigModel.fullViewHistory.append(.Measurement_Mensurations)
                             bigModel.currentview = .Measurement_MeasurementsTut
+                            UserDefaults.standard.set(measurementText0, forKey: "measurementText0")
+                            UserDefaults.standard.set(measurementText1, forKey: "measurementText1")
+                            UserDefaults.standard.set(measurementText2, forKey: "measurementText2")
+                            UserDefaults.standard.set(measurementText3, forKey: "measurementText3")
+                            UserDefaults.standard.set(measurementText4, forKey: "measurementText4")
+                            UserDefaults.standard.set(measurementText5, forKey: "measurementText5")
+                            UserDefaults.standard.set(measurementText6, forKey: "measurementText6")
+                            UserDefaults.standard.set(measurementText7, forKey: "measurementText7")
+                            UserDefaults.standard.set(measurementText8, forKey: "measurementText8")
+                            UserDefaults.standard.set(measurementText9, forKey: "measurementText9")
+                            UserDefaults.standard.set(measurementText10, forKey: "measurementText10")
+                            UserDefaults.standard.set(measurementText11, forKey: "measurementText11")
                         }
                 }
                 
                 HStack {
+                    
                     Spacer()
+                    
                     Text("save")
                         .foregroundColor(Color.white)
                         .fontWeight(.semibold)
                         .padding(10)
+                    
                     Spacer()
+                    
                 }.background(Color.blue)
                     .cornerRadius(15)
                     .onTapGesture {
@@ -735,6 +750,7 @@ struct HomeView: View {
                                 await bigModel.fetchMeasurements()
                                 bigModel.currentview = .Measurement_RecapMensurations
                                 self.bigModel.lastViews.append(.Measurement_Mensurations)
+                                self.bigModel.fullViewHistory.append(.Measurement_Mensurations)
                             }
                             
                         } else {
@@ -759,18 +775,34 @@ struct HomeView: View {
             
         }.padding(20)
             .onAppear {
-                measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? ""
-                measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? ""
-                measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? ""
-                measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? ""
-                measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? ""
-                measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? ""
-                measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? ""
-                measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue ?? ""
-                measurementText8 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue ?? ""
-                measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? ""
-                measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? ""
-                measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? ""
+                
+                //if (bigModel.fullViewHistory.last == .Measurement_MeasurementsTut || bigModel.fullViewHistory.last == .Measurement_Mensurations) {
+                    measurementText0 = UserDefaults.standard.string(forKey: "measurementText0") ?? "nil"
+                    measurementText1 = UserDefaults.standard.string(forKey: "measurementText1") ?? "nil"
+                    measurementText2 = UserDefaults.standard.string(forKey: "measurementText2") ?? "nil"
+                    measurementText3 = UserDefaults.standard.string(forKey: "measurementText3") ?? "nil"
+                    measurementText4 = UserDefaults.standard.string(forKey: "measurementText4") ?? "nil"
+                    measurementText5 = UserDefaults.standard.string(forKey: "measurementText5") ?? "nil"
+                    measurementText6 = UserDefaults.standard.string(forKey: "measurementText6") ?? "nil"
+                    measurementText7 = UserDefaults.standard.string(forKey: "measurementText7") ?? "nil"
+                    measurementText8 = UserDefaults.standard.string(forKey: "measurementText8") ?? "nil"
+                    measurementText9 = UserDefaults.standard.string(forKey: "measurementText9") ?? "nil"
+                    measurementText10 = UserDefaults.standard.string(forKey: "measurementText10") ?? "nil"
+                    measurementText11 = UserDefaults.standard.string(forKey: "measurementText11") ?? "nil"
+                /*} else {
+                    measurementText0 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[0].measurementValue ?? ""
+                    measurementText1 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[1].measurementValue ?? ""
+                    measurementText2 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[2].measurementValue ?? ""
+                    measurementText3 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[3].measurementValue ?? ""
+                    measurementText4 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[4].measurementValue ?? ""
+                    measurementText5 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[5].measurementValue ?? ""
+                    measurementText6 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[6].measurementValue ?? ""
+                    measurementText7 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[7].measurementValue ?? ""
+                    measurementText8 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[8].measurementValue ?? ""
+                    measurementText9 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[9].measurementValue ?? ""
+                    measurementText10 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[10].measurementValue ?? ""
+                    measurementText11 = bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements[11].measurementValue ?? ""
+                }*/
                 
                 if measurementText0 != "" && bigModel.isMeasurements0Requested {
                     arrayOfFields[0] = 1
@@ -808,15 +840,6 @@ struct HomeView: View {
                 if measurementText11 != "" && bigModel.isMeasurements11Requested {
                     arrayOfFields[11] = 1
                 }
-                
-                /*Task {
-                 do {
-                 self.neededMeasurements = try await bigModel.fetchNeededMeasurementsInfo()
-                 }
-                 catch {
-                 print(error)
-                 }
-                 }*/
                 
             }
         }

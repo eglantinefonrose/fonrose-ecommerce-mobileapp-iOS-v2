@@ -23,7 +23,7 @@ struct HelpView: View {
                 
                 VStack(spacing: 20) {
                     
-                    BackButtonModel(text: "Informations")
+                    BackButtonModel(text: "Informations", viewName: .HelpView)
                     
                     Spacer()
                     
@@ -99,6 +99,7 @@ struct HelpView: View {
                         bigModel.currentview = .Auth_AuthView
                         bigModel.authCurrentView = .Auth_PersonPickerView
                         bigModel.lastViews.append(.HelpView)
+                        bigModel.fullViewHistory.append(.HelpView)
                     }
                 }
                 

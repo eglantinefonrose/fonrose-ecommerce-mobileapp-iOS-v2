@@ -143,6 +143,7 @@ struct PersonPickerViewHome: View {
                                                 
                                                 bigModel.authCurrentView = .Auth_UserInfo
                                                 bigModel.authLastViews.append(.Auth_PersonPickerView)
+                                                bigModel.fullViewHistory.append(.Auth_PersonPickerView)
                                                 
                                                 
                                             }

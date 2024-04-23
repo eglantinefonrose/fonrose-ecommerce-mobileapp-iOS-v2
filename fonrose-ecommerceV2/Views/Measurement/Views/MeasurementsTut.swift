@@ -59,7 +59,7 @@ struct MeasurementsTut: View {
                         //.edgesIgnoringSafeArea(.all)
                     
                     VStack {
-                        BackButtonModel(text: measurementsTut[currentTutId].measurement)
+                        BackButtonModel(text: measurementsTut[currentTutId].measurement, viewName: .Measurement_MeasurementsTut)
                             .padding(20)
                         
                         ZStack {
@@ -222,7 +222,7 @@ struct MeasurementsTut: View {
             
             if !show {
                 VStack {
-                    BackButtonModel(text: "Measurements Tutorials")
+                    BackButtonModel(text: "Measurements Tutorials", viewName: .Measurement_MeasurementsTut)
                     Spacer()
                 }.padding(20)
                 /*VStack {

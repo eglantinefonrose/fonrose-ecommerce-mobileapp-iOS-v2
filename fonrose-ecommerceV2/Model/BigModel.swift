@@ -608,13 +608,25 @@ class BigModel : ObservableObject {
                 do {
                     measurements = try document.data(as: Measurements.self)
                     self.user.persons[self.currentPersonIndex ?? 0].measurements = measurements
+                    UserDefaults.standard.set(measurements.measurements[0].measurementValue, forKey: "measurementText0")
+                    UserDefaults.standard.set(measurements.measurements[1].measurementValue, forKey: "measurementText1")
+                    UserDefaults.standard.set(measurements.measurements[2].measurementValue, forKey: "measurementText2")
+                    UserDefaults.standard.set(measurements.measurements[3].measurementValue, forKey: "measurementText3")
+                    UserDefaults.standard.set(measurements.measurements[4].measurementValue, forKey: "measurementText4")
+                    UserDefaults.standard.set(measurements.measurements[5].measurementValue, forKey: "measurementText5")
+                    UserDefaults.standard.set(measurements.measurements[6].measurementValue, forKey: "measurementText6")
+                    UserDefaults.standard.set(measurements.measurements[7].measurementValue, forKey: "measurementText7")
+                    UserDefaults.standard.set(measurements.measurements[8].measurementValue, forKey: "measurementText8")
+                    UserDefaults.standard.set(measurements.measurements[9].measurementValue, forKey: "measurementText9")
+                    UserDefaults.standard.set(measurements.measurements[10].measurementValue, forKey: "measurementText10")
+                    UserDefaults.standard.set(measurements.measurements[11].measurementValue, forKey: "measurementText11")
                 }
                 catch {
                     print(error)
                 }
                 
             }
-            
+                        
         } catch {
             print(error.localizedDescription)
         }
@@ -745,6 +757,7 @@ class BigModel : ObservableObject {
     @Published var currentview = ViewEnum.Home_homeFeed0
     @Published var currentPopUpView = ViewEnum.Auth_LogInEmailView
     @Published var lastViews: [ViewEnum] = []
+    @Published var fullViewHistory: [ViewEnum] = []
     @Published var previousView: ViewEnum? = nil
     
     //MARK: HomeFeed

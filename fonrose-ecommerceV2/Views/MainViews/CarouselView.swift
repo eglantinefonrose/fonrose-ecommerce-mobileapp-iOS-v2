@@ -35,7 +35,7 @@ struct CarouselView: View {
                 }
                 
                 VStack {
-                    BackButtonModel(text: "")
+                    BackButtonModel(text: "", viewName: .MeasurementCarouselView)
                     Spacer()
                 }.padding(20)
                 
@@ -64,7 +64,7 @@ struct CarouselView: View {
                             isFetchingNeededMeasurementsInfo = true
                             
                             self.bigModel.lastViews.append(.MeasurementCarouselView)    // On gère le back à la main (car on n'utilise pas de NavigationView)
-                            
+                            self.bigModel.fullViewHistory.append(.MeasurementCarouselView)
                             if bigModel.selectedProductId != nil {
                                 
                                 print("bigModel.selectedProductId != nil")

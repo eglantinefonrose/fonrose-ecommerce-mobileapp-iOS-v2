@@ -13,6 +13,7 @@ struct BackButtonModel: View {
     
     @EnvironmentObject var bigModel: BigModel
     var text: String
+    var viewName: ViewEnum
     
     var body: some View {
         HStack {
@@ -22,10 +23,17 @@ struct BackButtonModel: View {
                 .fontWeight(.semibold)
                 .onTapGesture {
                     if !self.bigModel.lastViews.isEmpty {
+                        
                         print("back")
+                        
+                        bigModel.fullViewHistory.append(self.bigModel.lastViews.last ?? .AboutUsScreen)
+                        print("full : \(self.bigModel.lastViews.last)")
+                        
                         self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
                         self.bigModel.lastViews.removeLast()
-                        print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                        
+                        //print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                        
                     } else { print("array empty") }
                 }
             
@@ -85,6 +93,6 @@ struct BackAuthButtonModel: View {
 
 struct BackButtonModel_Previews: PreviewProvider {
     static var previews: some View {
-        BackButtonModel(text: "test")
+        BackButtonModel(text: "test", viewName: .AboutUsScreen)
     }
 }

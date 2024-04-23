@@ -21,7 +21,7 @@ struct ListeCommande: View {
             
             VStack {
                 
-                BackButtonModel(text: "order-tracking")
+                BackButtonModel(text: "order-tracking", viewName: .ServiceClient_showOrdersList)
                 
                 Spacer()
                 
@@ -51,6 +51,7 @@ struct ListeCommande: View {
                                 .foregroundColor(.blue)
                                 .onTapGesture {
                                     bigModel.lastViews.append(.ServiceClient_showOrdersList)
+                                    bigModel.fullViewHistory.append(.ServiceClient_showOrdersList)
                                     bigModel.currentview = .ProductsView
                                 }
                         }
@@ -63,6 +64,7 @@ struct ListeCommande: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 bigModel.lastViews.append(.ServiceClient_showOrdersList)
+                                bigModel.fullViewHistory.append(.ServiceClient_showOrdersList)
                                 bigModel.currentview = .Auth_AuthView
                             }
                     }

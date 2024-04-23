@@ -20,7 +20,7 @@ struct ProductsScreen: View {
             
             VStack() {
                 
-                BackButtonModel(text: "products")
+                BackButtonModel(text: "products", viewName: .ProductsView)
                                                
                 Text("products")
                     .font(.system(size: 35, weight: .bold, design: .default))
@@ -50,6 +50,7 @@ struct ProductsScreen: View {
                                     bigModel.selectedProductId = index
                                     bigModel.currentview = .MeasurementCarouselView
                                     bigModel.lastViews.append(.ProductsView)
+                                    bigModel.fullViewHistory.append(.ProductsView)
                                 }
                             }
                         }

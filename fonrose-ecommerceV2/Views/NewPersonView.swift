@@ -145,6 +145,7 @@ struct NewPersonView: View {
                                         await bigModel.fetchPerson()
                                         bigModel.authCurrentView = .Auth_PersonPickerView
                                         bigModel.authLastViews.append(.Auth_NewUserView)
+                                        bigModel.fullViewHistory.append(.Auth_NewUserView)
                                     }
                                 }
                                 

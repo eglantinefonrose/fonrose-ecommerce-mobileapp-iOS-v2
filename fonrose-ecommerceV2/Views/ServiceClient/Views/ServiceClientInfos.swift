@@ -43,6 +43,7 @@ struct ServiceClientInfos: View {
                         .onTapGesture {
                             self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
                             self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                            self.bigModel.fullViewHistory.append(.ServiceClient_ServiceClientInfos)
                             print("back")
                         }
                                     
@@ -100,6 +101,7 @@ struct ServiceClientInfos: View {
                         }.onTapGesture {
                             self.bigModel.currentview = serviceClient.nextView
                             self.bigModel.lastViews.append(.ServiceClient_ServiceClientInfos)
+                            self.bigModel.fullViewHistory.append(.ServiceClient_ServiceClientInfos)
                         }
                     }
                 }.padding(.horizontal, 20)
@@ -212,7 +214,7 @@ struct ShowDeliveryView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 
-                BackButtonModel(text: "")
+                BackButtonModel(text: "", viewName: .ServiceClient_showDelivery)
                 
                 Spacer()
                 
@@ -247,7 +249,7 @@ struct showReturnView: View {
             
             VStack {
                 
-                BackButtonModel(text: "")
+                BackButtonModel(text: "", viewName: .ServiceClient_showReturn)
                 
                 Spacer()
                                 
@@ -288,56 +290,60 @@ struct showCardView: View {
             
             VStack {
                 
-                BackButtonModel(text: "")
+                BackButtonModel(text: "", viewName: .ServiceClient_showCard)
+                    .padding(20)
                 
                 Spacer()
                 
                 VStack {
-                Text("Fiche")
-                    .font(.system(size: 40, weight: .bold, design: .default))
-                    .foregroundColor(Color.white)
+                    Text("Fiche")
+                        .font(.system(size: 40, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                                        
+                    Text("complète de commande")
+                        .foregroundColor(Color.gray)
+                        .font(.system(size: 25, weight: .semibold, design: .default))
+                        .frame(alignment: .center)
                                     
-                Text("complète de commande")
-                    .foregroundColor(Color.gray)
-                    .font(.system(size: 25, weight: .semibold, design: .default))
-                    .frame(alignment: .center)
+                    Spacer()
+                        .frame(height: 100)
+                                        
+                    HStack {
+                        VStack(alignment: .leading) {
+                                                
+                            Text("N° de commande")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20, design: .default))
+                                .frame(height: 50, alignment: .leading)
+                                                
+                            Text("Date d’expedition prévue")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20, design: .default))
+                                .frame(height: 50, alignment: .leading)
                                 
-                Spacer()
-                    .frame(height: 100)
-                                    
-                VStack {
-                                        
-                    Text("N° de commande")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 20, design: .default))
-                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                        
-                    Text("Date d’expedition prévue")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 20, design: .default))
-                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                        
-                    Text("Date de livraison")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 20, design: .default))
-                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                        
-                    Text("Nom du transporteur")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 20, design: .default))
-                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                        
-                    Text("N° de suivi")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 20, design: .default))
-                        .frame(width: UIScreen.main.bounds.width, height: 50, alignment: .leading)
-                                        
-                }.padding(.leading, 80)
+                            Text("Date de livraison")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20, design: .default))
+                                .frame(height: 50, alignment: .leading)
+                                
+                            Text("Nom du transporteur")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20, design: .default))
+                                .frame(height: 50, alignment: .leading)
+                                
+                            Text("N° de suivi")
+                                .foregroundColor(Color.white)
+                                .font(.system(size: 20, design: .default))
+                                .frame(height: 50, alignment: .leading)
+                                                
+                        }
+                        Spacer()
+                    }.padding(.horizontal, 40)
                 }
                 
                 Spacer()
                             
-            }.padding(20)
+            }//.padding(20)
         }
     }
 }
@@ -355,7 +361,7 @@ struct ShowServicesView: View {
             
             VStack {
                 
-                BackButtonModel(text: "")
+                BackButtonModel(text: "", viewName: .ServiceClient_showServices)
                 
                 Spacer()
                 
@@ -397,7 +403,7 @@ struct ShowServicesView: View {
 struct DetailedViewTest2_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
-            ServiceClientInfos()
+            showCardView()
         } else {
             // Fallback on earlier versions
         }

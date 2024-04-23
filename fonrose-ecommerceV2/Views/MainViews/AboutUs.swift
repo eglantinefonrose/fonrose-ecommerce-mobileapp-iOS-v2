@@ -25,7 +25,7 @@ struct AboutUs: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                BackButtonModel(text: "about-us")
+                BackButtonModel(text: "about-us", viewName: .AboutUsScreen)
                     .padding(20)
                 
                 TabView(selection: $index) {

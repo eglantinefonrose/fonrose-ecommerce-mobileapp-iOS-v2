@@ -30,7 +30,7 @@ struct SuiviDeCommande: View {
             
             VStack {
                 
-                BackButtonModel(text: "tracking-control")
+                BackButtonModel(text: "tracking-control", viewName: .ServiceClient_showSuiviDeCommande)
                     .padding(20)
                 
                 VStack(spacing: 0) {

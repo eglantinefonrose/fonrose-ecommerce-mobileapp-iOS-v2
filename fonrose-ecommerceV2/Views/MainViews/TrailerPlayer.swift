@@ -66,7 +66,7 @@ struct TrailerPlayer: View {
                 
                 }*/
                 
-                BackButtonModel(text: bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
+                BackButtonModel(text: bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName, viewName: .VideoPlayer_trailerPlayer)
                     .onRotate { newOrientation in orientation = newOrientation }
                     .padding(20)
                     .frame(width: UIScreen.main.bounds.width)
@@ -77,6 +77,7 @@ struct TrailerPlayer: View {
                     .foregroundColor(.blue)
                     .onTapGesture {
                         bigModel.lastViews.append(.VideoPlayer_trailerPlayer)
+                        bigModel.fullViewHistory.append(.VideoPlayer_trailerPlayer)
                         bigModel.currentview = .MeasurementCarouselView
                     }
                 

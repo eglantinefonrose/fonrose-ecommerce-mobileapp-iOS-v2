@@ -55,6 +55,7 @@ struct BurgerMenu: View {
                     .onTapGesture {
                         bigModel.currentview = ViewEnum.ProductsView
                         bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
                         self.bigModel.showMenu = false
                     }
                 
@@ -69,7 +70,9 @@ struct BurgerMenu: View {
                             bigModel.currentview = ViewEnum.Measurement_Mensurations
                         }
                         
+                        bigModel.selectedProductId = nil
                         bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
                         bigModel.needToSeeEveryMeasurements = true
                         self.bigModel.showMenu = false
                     }
@@ -92,11 +95,13 @@ struct BurgerMenu: View {
                                 } else {
                                     bigModel.currentview = ViewEnum.LivraisonViews_Livraison
                                     bigModel.lastViews.append(.Home_homeFeed0)
+                                    bigModel.fullViewHistory.append(.Home_homeFeed0)
                                     self.bigModel.showMenu = false
                                 }
                             } else {
                                 bigModel.currentview = ViewEnum.LivraisonViews_Livraison
                                 bigModel.lastViews.append(.Home_homeFeed0)
+                                bigModel.fullViewHistory.append(.Home_homeFeed0)
                                 self.bigModel.showMenu = false
                             }
                             
@@ -109,6 +114,7 @@ struct BurgerMenu: View {
                     .onTapGesture {
                         bigModel.currentview = .HelpView
                         bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
                     }
                 
                 Spacer()

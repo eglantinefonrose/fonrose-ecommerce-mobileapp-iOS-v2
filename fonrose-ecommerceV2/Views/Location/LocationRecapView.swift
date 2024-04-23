@@ -30,7 +30,7 @@ struct LocationRecapView: View {
             
             VStack {
                 
-                BackButtonModel(text: "location-recap")
+                BackButtonModel(text: "location-recap", viewName: .LivraisonViews_RecapLivraison)
                 
                 Spacer()
                                                           
@@ -100,6 +100,7 @@ struct LocationRecapView: View {
                         .padding(10)
                         .onTapGesture {
                             bigModel.lastViews.append(.LivraisonViews_RecapLivraison)
+                            bigModel.fullViewHistory.append(.LivraisonViews_RecapLivraison)
                             bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                         }
                     }

@@ -28,142 +28,150 @@ struct UserInfo: View {
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
-                
-                HStack {
-                    
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            if !self.bigModel.authLastViews.isEmpty {
-                                print("back")
-                                self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                self.bigModel.authLastViews.removeLast()
-                                print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                            } else { print("array empty") }
-                        }
-                    
-                    Spacer()
-                    
-                    Text("user-info")
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed0
-                        }
-                    
-                }.padding(20)
-                      
-                Spacer()
-                
                 VStack {
+                    
+                    HStack {
+                        
+                        Text("Back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                            .onTapGesture {
+                                if !self.bigModel.authLastViews.isEmpty {
+                                    print("back")
+                                    self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
+                                    self.bigModel.authLastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
+                                } else { print("array empty") }
+                            }
+                        
+                        Spacer()
+                        
+                        Text("user-info")
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                if bigModel.currentPersonIndex == nil {
+                                    alertTF(title: "Alert", message: "string containts letters", primaryTitle: "Ok") {
                                         
-                    if #available(iOS 14.0, *) {
-                        if #available(iOS 16.0, *) {
-                            if bigModel.user.id != "" {
-                                
-                                if !isEditModeOn {
-                                    Text(name)
-                                        .font(.title2)
-                                        .padding(5)
-                                        .fontWeight(.semibold)
+                                    }
                                 } else {
-                                    TextField("",
-                                            text: $newFirstName,
-                                            prompt: Text("ur-first-name")
-                                                        .foregroundColor(.gray)
-                                    ).multilineTextAlignment(.center)
-                                    .autocorrectionDisabled()
-                                    .textInputAutocapitalization(.never)
-                                    .font(.largeTitle)
-                                    .foregroundColor(.white)
-                                    .focused($focused1, equals: true)
-                                    .onAppear {
-                                        DispatchQueue.main.asyncAfter(deadline: .now()) {
-                                            self.focused1 = true
+                                    self.bigModel.currentview = .Home_homeFeed0
+                                }
+                            }
+                        
+                    }.padding(20)
+                          
+                    Spacer()
+                    
+                    VStack {
+                                            
+                        if #available(iOS 14.0, *) {
+                            if #available(iOS 16.0, *) {
+                                if bigModel.user.id != "" {
+                                    
+                                    if !isEditModeOn {
+                                        Text(name)
+                                            .font(.title2)
+                                            .padding(5)
+                                            .fontWeight(.semibold)
+                                    } else {
+                                        TextField("",
+                                                text: $newFirstName,
+                                                prompt: Text("ur-first-name")
+                                                            .foregroundColor(.gray)
+                                        ).multilineTextAlignment(.center)
+                                        .autocorrectionDisabled()
+                                        .textInputAutocapitalization(.never)
+                                        .font(.largeTitle)
+                                        .foregroundColor(.white)
+                                        .focused($focused1, equals: true)
+                                        .onAppear {
+                                            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                                                self.focused1 = true
+                                            }
                                         }
                                     }
+                                    
+                                } else {
+                                    
                                 }
-                                
                             } else {
-                                
+                                // Fallback on earlier versions
                             }
                         } else {
                             // Fallback on earlier versions
                         }
-                    } else {
-                        // Fallback on earlier versions
-                    }
-                    
-                    
-                    if isEditModeOn {
-                        HStack {
-                            Text("Validate")
-                                .foregroundColor(.blue)
-                                .font(.caption)
-                        }.onTapGesture {
-                            isEditModeOn.toggle()
-                            bigModel.editCurrentPersonNameInDb(newName: newFirstName) { newName in
-                                name = newName
-                            }
-                        }
-                    } else {
-                        HStack {
-                            Image(systemName: "pencil.line")
-                                .foregroundColor(.blue)
-                                .font(.callout)
-                            
-                            Text("edit")
-                                .foregroundColor(.blue)
-                                .font(.caption)
-                        }.onTapGesture {
-                            isEditModeOn.toggle()
-                        }
-                    }
-                                        
-                    VStack {
-                        HStack {
-                            Image(systemName: "pencil.and.outline")
-                                .foregroundColor(.blue)
-                            Text("see-my-measurements")
-                                .foregroundColor(.blue)
-                                .padding(10)
-                        }.onTapGesture {
-                            
-                            bigModel.lastViews.append(.Auth_AuthView)
-                            bigModel.currentview = .Measurement_Mensurations
-                            bigModel.needToSeeEveryMeasurements = true
-                            
-                            }
-                        }
                         
-                        HStack {
-                            Image(systemName: "mappin.circle")
-                                .foregroundColor(.blue)
-                            Text("see-my-location-informations")
-                                .foregroundColor(.blue)
-                                .padding(10)
-                        }.onTapGesture {
-                            Task {
-                                await bigModel.fetchLocation()
+                        
+                        if isEditModeOn {
+                            HStack {
+                                Text("Validate")
+                                    .foregroundColor(.blue)
+                                    .font(.caption)
+                            }.onTapGesture {
+                                isEditModeOn.toggle()
+                                bigModel.editCurrentPersonNameInDb(newName: newFirstName) { newName in
+                                    name = newName
+                                }
+                            }
+                        } else {
+                            HStack {
+                                Image(systemName: "pencil.line")
+                                    .foregroundColor(.blue)
+                                    .font(.callout)
                                 
-                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
-                                    
-                                        await bigModel.initializeLocation()
-                                        await bigModel.fetchLocation()
-                                    
-                                } else {
-                                    bigModel.lastViews.append(.Auth_AuthView)
-                                    bigModel.currentview = .LivraisonViews_Livraison}
+                                Text("edit")
+                                    .foregroundColor(.blue)
+                                    .font(.caption)
+                            }.onTapGesture {
+                                isEditModeOn.toggle()
                             }
                         }
-                    }
-                
-                Spacer()
+                                            
+                        VStack {
+                            HStack {
+                                Image(systemName: "pencil.and.outline")
+                                    .foregroundColor(.blue)
+                                Text("see-my-measurements")
+                                    .foregroundColor(.blue)
+                                    .padding(10)
+                            }.onTapGesture {
+                                
+                                bigModel.lastViews.append(.Auth_AuthView)
+                                bigModel.currentview = .Measurement_Mensurations
+                                bigModel.needToSeeEveryMeasurements = true
+                                
+                                }
+                            }
+                            
+                            HStack {
+                                Image(systemName: "mappin.circle")
+                                    .foregroundColor(.blue)
+                                Text("see-my-location-informations")
+                                    .foregroundColor(.blue)
+                                    .padding(10)
+                            }.onTapGesture {
+                                Task {
+                                    await bigModel.fetchLocation()
+                                    
+                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                        
+                                            await bigModel.initializeLocation()
+                                            await bigModel.fetchLocation()
+                                        
+                                    } else {
+                                        bigModel.lastViews.append(.Auth_AuthView)
+                                        bigModel.currentview = .LivraisonViews_Livraison}
+                                }
+                            }
+                        }
+                    
+                    Spacer()
+                }
                 
                 VStack {
                     
@@ -193,6 +201,7 @@ struct UserInfo: View {
                         bigModel.signOut()
                     }
                 }
+                
             }
         }.onAppear {
             name = bigModel.user.persons[bigModel.currentPersonIndex!].name

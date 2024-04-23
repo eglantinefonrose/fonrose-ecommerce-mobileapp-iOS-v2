@@ -49,11 +49,44 @@ struct PersonPickerViewHome: View {
             Color("Background")
                 .edgesIgnoringSafeArea(.all)
                             
-            HStack {
+            VStack {
                 
                 VStack {
                     
-                    BackButtonModel(text: "persons")
+                    HStack {
+                        
+                        Text("Back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                            .onTapGesture {
+                                if !self.bigModel.authLastViews.isEmpty {
+                                    print("back")
+                                    self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
+                                    self.bigModel.authLastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
+                                } else { print("array empty") }
+                            }
+                        
+                        Spacer()
+                        
+                        Text("persons")
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                if bigModel.currentPersonIndex == nil {
+                                    alertTF(title: "Alert", message: "Select a person first", primaryTitle: "Ok") {
+                                        
+                                    }
+                                } else {
+                                    self.bigModel.currentview = .Home_homeFeed0
+                                }
+                            }
+                        
+                    }
                     
                     if #available(iOS 15.0, *) {
                                                                                     
@@ -69,7 +102,7 @@ struct PersonPickerViewHome: View {
                                             HStack {
                                                 
                                                 Text(bigModel.user.persons[index].name)
-                                                    //.foregroundColor(colorScheme == .dark ? .white : .black)
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
                                                     .foregroundColor(.black)
                                                 
                                                 Spacer()
@@ -150,16 +183,29 @@ struct PersonPickerViewHome: View {
                             bigModel.authCurrentView = ViewEnum.Auth_LogInEmailView
                         }
                     
-                    Text("+")
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            print()
-                            bigModel.authCurrentView = .Auth_NewUserView
-                        }
-                    
-                }.padding(20)
+                }.padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "person.badge.plus")
+                            .foregroundStyle(Color.white)
+                            .padding(.vertical, 7)
+                        Text("New person")
+                            .foregroundColor(Color.white)
+                            .fontWeight(.bold)
+                            .padding(7)
+                        Spacer()
+                    }
+                    .padding(.vertical, 10)
+                    .onTapGesture {
+                        bigModel.authCurrentView = .Auth_NewUserView
+                    }
+                }.background(Color(UIColor.lightGray))
+                
             }
-        }
+        }.edgesIgnoringSafeArea(.bottom)
     }
 }
 

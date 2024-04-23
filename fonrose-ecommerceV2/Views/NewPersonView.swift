@@ -34,78 +34,81 @@ struct NewPersonView: View {
             }
             
             VStack {
-                
-                BackAuthButtonModel(text: "new-person")
-                
-                Spacer()
-                
                 VStack {
-                 
-                 Spacer()
-                 
-                 HStack {
-                                                     
-                     Spacer()
                     
-                     TextField("", text: $newPersonName)
-                         .disableAutocorrection(true)
-                         .autocapitalization(.none)
-                         /*.placeholder(when: newPersonName.isEmpty) {
-                             Text("name")
-                                 .foregroundColor(.gray)
-                                 .opacity(0.6)
-                                 .padding(.horizontal, 5)
-                         }*/
+                    BackAuthButtonModel(text: "new-person")
+                    
+                    Spacer()
+                    
+                    VStack {
                      
-                 }
-                 
-                 Spacer()
-
-                }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                .cornerRadius(7)
-                .frame(height: 30)
-                
-                Spacer()
-                    .frame(height: 20)
-                                
-                VStack {
-                 
-                 Spacer()
-                 
-                 HStack {
-                                                     
                      Spacer()
-                    
-                     if #available(iOS 14.0, *) {
-                         TextField("", text: $newPersonEmail)
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         TextField("name", text: $newPersonName)
                              .disableAutocorrection(true)
                              .autocapitalization(.none)
-                             /*.placeholder(when: newPersonEmail.isEmpty) {
-                                 Text("email")
+                             /*.placeholder(when: newPersonName.isEmpty) {
+                                 Text("name")
                                      .foregroundColor(.gray)
                                      .opacity(0.6)
                                      .padding(.horizontal, 5)
                              }*/
-                             .onChange(of: newPersonEmail) { newValue in
-                                 isFinalEmailValid = true
-                             }
-                     } else {
-                         // Fallback on earlier versions
+                         
                      }
-                 }
-                 
-                 Spacer()
+                     
+                     Spacer()
 
-                }.background(theColorScheme == .dark ? Color.gray : Color.white)
-                .cornerRadius(7)
-                .frame(height: 30)
-                
-                if !isFinalEmailValid {
-                    Text("The email adress is not valid, please verify your email adress.")
-                        .foregroundColor(.red)
-                }
-                
-                Spacer()
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    
+                    Spacer()
+                        .frame(height: 20)
+                                    
+                    VStack {
+                     
+                     Spacer()
+                     
+                     HStack {
+                                                         
+                         Spacer()
+                        
+                         if #available(iOS 14.0, *) {
+                             TextField("email", text: $newPersonEmail)
+                                 .disableAutocorrection(true)
+                                 .autocapitalization(.none)
+                                 /*.placeholder(when: newPersonEmail.isEmpty) {
+                                     Text("email")
+                                         .foregroundColor(.gray)
+                                         .opacity(0.6)
+                                         .padding(.horizontal, 5)
+                                 }*/
+                                 .onChange(of: newPersonEmail) { newValue in
+                                     isFinalEmailValid = true
+                                 }
+                         } else {
+                             // Fallback on earlier versions
+                         }
+                     }
+                     
+                     Spacer()
+
+                    }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                    .cornerRadius(7)
+                    .frame(height: 30)
+                    
+                    if !isFinalEmailValid {
+                        Text("The email adress is not valid, please verify your email adress.")
+                            .foregroundColor(.red)
+                    }
+                    
+                    Spacer()
+                    
+                }.padding(20)
                 
                 if #available(iOS 14.0, *) {
                     
@@ -120,9 +123,8 @@ struct NewPersonView: View {
                         Spacer()
                         
                     }
-                    .padding(5)
+                    .padding(.vertical, 15)
                     .background(Color.blue)
-                    .cornerRadius(15)
                     .onTapGesture {
                         
                         if newPersonEmail.isValideEmailAdress() {
@@ -159,9 +161,9 @@ struct NewPersonView: View {
                     // Fallback on earlier versions
                 }
                 
-            }.padding(20)
+            }
             
-        }
+        }.edgesIgnoringSafeArea(.bottom)
     }
 }
 

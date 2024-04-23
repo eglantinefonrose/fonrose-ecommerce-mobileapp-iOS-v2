@@ -24,20 +24,20 @@ struct MeasurementsTut: View {
     @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
     
-    let measurementsTut = [MeasurementTut(id: 0, measurement: "All measurements", imagesNames: [], explenations: ""),
-                           MeasurementTut(id: 1, measurement: "armpits-measurement", imagesNames: ["armpits-size-1", "armpit-measurement"], explenations: "armpits-measurement-explenations"),
-       MeasurementTut(id: 2, measurement: "arms-length", imagesNames: [], explenations: "arms-length-explenations"),
-       MeasurementTut(id: 3, measurement: "head-measurement", imagesNames: [], explenations: "head-measurement-explenations"),
-       MeasurementTut(id: 4, measurement: "pelvis-measurement", imagesNames: ["hips-size", "hips-size-2"], explenations: "pelvis-measurement-explenations"),
-       MeasurementTut(id: 5, measurement: "pelvis-knee", imagesNames: [], explenations: "pelvis-knee-explenations"),
-       MeasurementTut(id: 6, measurement: "shoulders-measurement", imagesNames: ["shoulders-size"], explenations: "shoulders-measurement-explenations"),
-       MeasurementTut(id: 7, measurement: "shoulders-pelvis", imagesNames: [], explenations: "shoulders-pelvis-explenations"),
-       MeasurementTut(id: 8, measurement: "waist-size", imagesNames: ["waist-size", "waist-size2"], explenations: "waist-size-explenations"),
-       MeasurementTut(id: 9, measurement: "armpits-tits", imagesNames: ["armpit-nipple"], explenations: "armpits-tits-explenations"),
-       MeasurementTut(id: 10, measurement: "tits-belly-button", imagesNames: ["nipple-navel"], explenations: "tits-belly-button-explenations"),
-       MeasurementTut(id: 11, measurement: "hips-navel", imagesNames: ["nipple-hips"], explenations: "hips-navel-explenations"),
-       MeasurementTut(id: 12, measurement: "waist-navel", imagesNames: ["nipple-waist"], explenations: "waist-navel-explenations"),
-       MeasurementTut(id: 13, measurement: "tits-middle-of-breasts", imagesNames: ["mid-tit"], explenations: "tits-middle-of-breasts-explenations")
+    let measurementsTut = [
+                           MeasurementTut(id: 0, measurement: "armpits-measurement", imagesNames: ["armpits-size-1", "armpit-measurement"], explenations: "armpits-measurement-explenations"),
+       //MeasurementTut(id: 2, measurement: "arms-length", imagesNames: [], explenations: "arms-length-explenations"),
+       //MeasurementTut(id: 3, measurement: "head-measurement", imagesNames: [], explenations: "head-measurement-explenations"),
+       MeasurementTut(id: 1, measurement: "pelvis-measurement", imagesNames: ["hips-size", "hips-size-2"], explenations: "pelvis-measurement-explenations"),
+       //MeasurementTut(id: 5, measurement: "pelvis-knee", imagesNames: [], explenations: "pelvis-knee-explenations"),
+       MeasurementTut(id: 2, measurement: "shoulders-measurement", imagesNames: ["shoulders-size"], explenations: "shoulders-measurement-explenations"),
+       //MeasurementTut(id: 7, measurement: "shoulders-pelvis", imagesNames: [], explenations: "shoulders-pelvis-explenations"),
+       MeasurementTut(id: 3, measurement: "waist-size", imagesNames: ["waist-size", "waist-size2"], explenations: "waist-size-explenations"),
+       MeasurementTut(id: 4, measurement: "armpits-tits", imagesNames: ["armpit-nipple"], explenations: "armpits-tits-explenations"),
+       MeasurementTut(id: 5, measurement: "tits-belly-button", imagesNames: ["nipple-navel"], explenations: "tits-belly-button-explenations"),
+       MeasurementTut(id: 6, measurement: "hips-navel", imagesNames: ["nipple-hips"], explenations: "hips-navel-explenations"),
+       MeasurementTut(id: 7, measurement: "waist-navel", imagesNames: ["nipple-waist"], explenations: "waist-navel-explenations"),
+       MeasurementTut(id: 8, measurement: "tits-middle-of-breasts", imagesNames: ["mid-tit"], explenations: "tits-middle-of-breasts-explenations")
     ]
     
     @State var show = false
@@ -169,13 +169,14 @@ struct MeasurementsTut: View {
                                             .foregroundColor(.blue)
                                         VStack(alignment: .leading) {
                                             
-                                            Image(theColorScheme == .light ? "meter-icon" : "meter-icon-white")
+                                            Image("meter-icon-white")
                                                 .resizable()
                                                 .scaledToFit()
                                                 .frame(width: 40, height: 40)
                                             
                                             Text(LocalizedStringKey(measurement.measurement))
                                                 .fontWeight(.semibold)
+                                                .foregroundStyle(Color.white)
                                         }
                                     }.onTapGesture {
                                         print(measurement.measurement)

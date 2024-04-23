@@ -21,7 +21,6 @@
 		7019AC072347E74100F5EF15 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7019AC062347E74100F5EF15 /* Preview Assets.xcassets */; };
 		701B9E1E2876DF90004DE780 /* Test-coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701B9E1D2876DF90004DE780 /* Test-coordinate.swift */; };
 		701FE113245722E600E91EFA /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701FE112245722E600E91EFA /* CarouselView.swift */; };
-		7029451D29FDA9AF00C421AA /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451C29FDA9AF00C421AA /* SwiftUIView.swift */; };
 		7029451F29FDAD0A00C421AA /* TextField-002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7029451E29FDAD0A00C421AA /* TextField-002.swift */; };
 		702A7D6329509088006338C0 /* PaymentButton_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */; };
 		702A7D652950C6A2006338C0 /* PaymentScreen_sandbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */; };
@@ -110,7 +109,6 @@
 		7019AC0B2347E74100F5EF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		701B9E1D2876DF90004DE780 /* Test-coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test-coordinate.swift"; sourceTree = "<group>"; };
 		701FE112245722E600E91EFA /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		7029451C29FDA9AF00C421AA /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		7029451E29FDAD0A00C421AA /* TextField-002.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField-002.swift"; sourceTree = "<group>"; };
 		702A7D6229509088006338C0 /* PaymentButton_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton_sandbox.swift; sourceTree = "<group>"; };
 		702A7D642950C6A2006338C0 /* PaymentScreen_sandbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen_sandbox.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				70FB2C9D2AEC84FF00370F2B /* Localizable.strings */,
-				7029451C29FDA9AF00C421AA /* SwiftUIView.swift */,
 				7019ABFA2347E73F00F5EF15 /* AppDelegate.swift */,
 				7019ABFC2347E73F00F5EF15 /* SceneDelegate.swift */,
 				70BB8199246D7EC500695F19 /* About_us.swift */,
@@ -575,7 +572,6 @@
 				700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */,
 				7034755B2864D0F70030C906 /* AuthView.swift in Sources */,
 				7031EF9A27F04C9E009CA3A2 /* LocationMapView.swift in Sources */,
-				7029451D29FDA9AF00C421AA /* SwiftUIView.swift in Sources */,
 				70E599352472C6B600F84295 /* MeasurementValue.swift in Sources */,
 				7049ED28281E7C2B00C16C3B /* PostStack.swift in Sources */,
 				70887906292F70FC00391A41 /* ShopView.swift in Sources */,

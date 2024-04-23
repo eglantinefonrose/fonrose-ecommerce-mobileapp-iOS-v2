@@ -82,7 +82,8 @@ struct HomeFeedView: View {
                                             .onTapGesture {
                                                 
                                                 bigModel.selectedProductId = bigModel.productMainArrayInfos[index].id
-                                                self.bigModel.currentview = .VideoPlayer_trailerPlayer
+                                                //self.bigModel.currentview = .VideoPlayer_trailerPlayer
+                                                bigModel.currentview = .MeasurementCarouselView
                                                 self.bigModel.lastViews.append(.Home_homeFeed0)
                                                 print("append")
                                                 
@@ -227,14 +228,12 @@ struct HomeFeedView: View {
                 VStack {
                     if #available(iOS 15.0, *) {
                         VStack {
-                            GifImage(name: "logo-animation-v2_AdobeExpress")
-                                .frame(height: 300)
-                            //ZStack {
-                                //Rectangle()
-                                    //.foregroundColor(Color.blue)
-                                //Text("ecommerce")
-                                    //.font(.title)
-                            //}
+                            ZStack {
+                                Rectangle()
+                                    .foregroundStyle(Color.white)
+                                GifImage(name: "logo-animation-v2_AdobeExpress")
+                                    .frame(height: 300)
+                            }.edgesIgnoringSafeArea(.all)
                         }
                         .opacity(opacity)
                         .task {
@@ -309,7 +308,17 @@ struct HomeFeedView: View {
                     }
                 }
             }
-        }
+        }.gesture(DragGesture()
+            .onChanged { gesture in
+                if gesture.translation.width > 0 {
+                    bigModel.showMenu.toggle()
+                    if bigModel.showMenu {
+                        print("menu")
+                    } else {
+                        print("no menu")
+                    }
+                }
+            })
         
     }
             

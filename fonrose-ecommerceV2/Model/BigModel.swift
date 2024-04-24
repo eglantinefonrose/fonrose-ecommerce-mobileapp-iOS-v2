@@ -17,9 +17,10 @@ import FirebaseFirestoreSwift
 import MapKit
 import AuthenticationServices
 import GoogleSignIn
+import PassKit
 
 @available(iOS 15.0, *)
-class BigModel : ObservableObject {
+class BigModel : NSObject, ObservableObject {
     
     //fonction qui crée un textfield
     
@@ -1084,13 +1085,13 @@ class BigModel : ObservableObject {
     
     //MARK: Finalize Order
     
-    func addAnOrder(location: Location, measurements: [MeasurementModel], productName: String) {
+    func addAnOrder(location: Location) {
                 
         let newOrder =
         Order(
             productName: dressPictures[selectedProductId ?? 0].productName,
             status: .CommandeEnregistree,
-            location: user.persons[currentPersonIndex ?? 0].location ?? Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: ""),
+            location: location,
             measurements: user.persons[currentPersonIndex ?? 0].measurements ?? Measurements(measurements: []), orderDate: Date(timeIntervalSinceNow: 0))
         
         let collectionRef = self.db.collection("Orders")
@@ -1196,7 +1197,75 @@ class BigModel : ObservableObject {
     
     //MARK: PAYMENT
     
-    let paymentHandler = PaymentHandler()
+    typealias PaymentCompletionHandler = (Bool) -> Void
+    var paymentController: PKPaymentAuthorizationController?
+    var paymentSummaryItems = [PKPaymentSummaryItem]()
+    var paymentStatus = PKPaymentAuthorizationStatus.failure
+    var completionHandler: PaymentCompletionHandler?
+    var addressHandler: ((String) -> Void)?
+    
+    static let supportedNetworks: [PKPaymentNetwork] = [
+        .visa,
+        .masterCard
+    ]
+    
+    func shippingMethodCalculator() -> [PKShippingMethod] {
+        let today = Date()
+        let calendar = Calendar.current
+        
+        let shippingStart = calendar.date(byAdding: .day, value: 5, to: today)
+        let shippingEnd = calendar.date(byAdding: .day, value: 10, to: today)
+        
+        if let shippingEnd = shippingEnd, let shippingStart = shippingStart {
+            let startComponents = calendar.dateComponents([.calendar, .year, .month, .day], from: shippingStart)
+            let endComponents = calendar.dateComponents ([.calendar, .year, .month, .day], from: shippingEnd)
+            
+            let shippingDelivery = PKShippingMethod(label: "Delivery", amount: NSDecimalNumber(string: "0.00"))
+            shippingDelivery.dateComponentsRange = PKDateComponentsRange(start: startComponents, end: endComponents)
+            shippingDelivery.detail = "Sweaters sent to your address"
+            shippingDelivery.identifier = "DELIVERY"
+            return [shippingDelivery]
+       }
+        
+        return []
+        
+    }
+    
+    func startPayment(products: [BigModel.DressPictures], total: Int, completion: @escaping PaymentCompletionHandler) {
+            
+        completionHandler = completion
+        paymentSummaryItems = []
+        
+        BigModel.shared.dressPictures.forEach { product in
+            let item = PKPaymentSummaryItem(label: product.productName, amount: NSDecimalNumber(string: "\(product.price) .00"), type: .final)
+            paymentSummaryItems.append(item)
+        }
+        
+        let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(total).00"), type: .final)
+        paymentSummaryItems.append(total)
+        
+        let paymentRequest = PKPaymentRequest ()
+        paymentRequest.paymentSummaryItems = paymentSummaryItems
+        paymentRequest.merchantIdentifier = "merchant.com.fonrose.fonrose-ecommerceV2"
+        paymentRequest.merchantCapabilities = .capability3DS
+        paymentRequest.countryCode = "US"
+        paymentRequest.currencyCode = "USD"
+        paymentRequest.supportedNetworks = BigModel.supportedNetworks
+        paymentRequest.shippingType = .delivery
+        paymentRequest.shippingMethods = shippingMethodCalculator ()
+        paymentRequest.requiredShippingContactFields = [.name, .postalAddress]
+        
+        paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
+        paymentController?.delegate = self
+        paymentController?.present(completion: { (presented: Bool) in
+            if presented {
+                debugPrint("Presented payment controller")
+            } else {
+                debugPrint("Failed to present payment controller")
+            }
+        })
+    }
+    
     @Published private(set) var paymentSuccess = false
     @Published private(set) var products: [DressPictures] = []
     @Published private(set) var total: Int = 0
@@ -1210,7 +1279,7 @@ class BigModel : ObservableObject {
     }
     
     func pay() {
-        paymentHandler.startPayment(products: products, total: total) { success in
+        startPayment(products: products, total: total) { success in
             self.paymentSuccess = success
             self.products = []
             self.total = 500
@@ -1252,7 +1321,7 @@ class BigModel : ObservableObject {
     //
     //
     
-    init() {
+    override init() {
         print("Constructor BigModel - default")
     }
 
@@ -1272,6 +1341,68 @@ class BigModel : ObservableObject {
         
         self.selectedProductId = 0
         self.currentPersonIndex = 0 // Eglantine
+    }
+    
+}
+
+extension BigModel: PKPaymentAuthorizationControllerDelegate {
+    
+    func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        // Handle payment authorization here
+        
+        // Accessing the shipping contact information
+        let shippingContact = payment.shippingContact
+        if let postalAddress = shippingContact?.postalAddress {
+            
+            var newLocation = user.persons[currentPersonIndex ?? 0].location ?? BigModel.Location(civility: "", firstName: "", lastName: "", emailAdress: "", phoneNumber: "", adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: "", adressBasement: "", adressStage: "")
+            newLocation.adressStreet = postalAddress.street
+            newLocation.adressCity = postalAddress.city
+            newLocation.adressCountry = postalAddress.country
+            newLocation.adressPostalCode = postalAddress.postalCode
+            print("postalAddress.street = \(postalAddress.street)")
+            print("postalAddress.city = \(postalAddress.city)")
+            print("postalAddress.country = \(postalAddress.country)")
+            print("postalAddress.postalCode = \(postalAddress.postalCode)")
+            
+            // Printing the postal address to the console
+            if currentPersonIndex != nil && user.persons[currentPersonIndex ?? 0].location != nil  {
+                
+                addAnOrder(location: newLocation)
+                
+                /*for i in 0..<bigModel.user.persons[bigModel.currentPersonIndex].orders.count {
+                    
+                    guard let userID = Auth.auth().currentUser?.uid else {return}
+                    
+                    let docRef = db.collection("users").document("user\(userID)")
+
+                      docRef.getDocument { document, error in
+                        if let error = error as NSError? {
+                          self.errorMessage = "Error getting document: \(error.localizedDescription)"
+                        }
+                        else {
+                          if let document = document {
+                            do {
+                              self.book = try document.data(as: Book.self)
+                            }
+                            catch {
+                              print(error)
+                            }
+                          }
+                        }
+                      }
+                }*/
+                
+            }
+        }
+        
+        // Complete the payment authorization process
+        let paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .success, errors: nil)
+        completion(paymentAuthorizationResult)
+    }
+    
+    func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
+        // Dismiss the payment authorization controller
+        controller.dismiss(completion: nil)
     }
     
 }

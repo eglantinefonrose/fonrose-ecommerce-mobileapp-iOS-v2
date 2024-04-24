@@ -9,7 +9,7 @@
 import Foundation
 import PassKit
 
-typealias PaymentCompletionHandler = (Bool) -> Void
+/*typealias PaymentCompletionHandler = (Bool) -> Void
 
 @available(iOS 15.0, *)
 class PaymentHandler: NSObject {
@@ -110,4 +110,4 @@ extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
         controller.dismiss(completion: nil)
     }
     
-}
+}*/

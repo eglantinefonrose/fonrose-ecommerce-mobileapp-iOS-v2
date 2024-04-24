@@ -31,12 +31,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 
                 
                 window.rootViewController = UIHostingController(rootView: BigRootView()
-                                                                //PaymentScreen()
-                    .environmentObject(BigModel()))
-                    //.environment(\.locale, Locale.init(identifier: "fr")))
-                
-                
-                    //.environmentObject(BigModel.shared))
+                    .environmentObject(BigModel.shared))
+                    //LocationRecapView().environmentObject(BigModel.init(shouldInjectMockedData: true)))
             } else {
                 // Fallback on earlier versions
             }

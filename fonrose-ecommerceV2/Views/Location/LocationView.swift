@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import iPhoneNumberField
+import MapKit
 
 @available(iOS 14.0, *)
 struct LocationView: View {
@@ -110,6 +111,10 @@ struct LocationTextField: View {
     @State var isTheFinalNumberCorrect: Bool = true
     @State var isTheFinalEmailCorrect: Bool = true
     
+    @State private var searchText = ""
+    @State private var searchResults: [MKMapItem] = []
+    @State private var isSearching = false
+    
     var body: some View {
         
         ZStack {
@@ -167,7 +172,6 @@ struct LocationTextField: View {
                                     VStack(spacing: 15) {
                                         ForEach(mapData.places) { place in
                                             Text("\(place.placemark.name ?? ""), \(place.placemark.locality ?? ""), \(place.placemark.postalCode ?? ""), \(place.placemark.country ?? "")")
-                                                //.foregroundColor(.black)
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                                 .onTapGesture {
                                                     self.adressStreet = "\(place.placemark.name ?? ""), \(place.placemark.locality ?? ""), \(place.placemark.postalCode ?? ""), \(place.placemark.country ?? "")"
@@ -412,25 +416,34 @@ struct LocationTextField: View {
                                                 //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
                                                 // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
                                                 // place est de type "Place"
-                                                /*if showStreetCompletion {
+                                                if showStreetCompletion {
                                                     ScrollView {
-                                                        VStack(spacing: 15) {
-                                                            ForEach(mapData.places) { place in
-                                                                Text("\(place.placemark.name ?? ""), \(place.placemark.locality ?? ""), \(place.placemark.postalCode ?? ""), \(place.placemark.country ?? "")")
-                                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                                    .onTapGesture {
-                                                                        self.adressStreet = "\(place.placemark.name ?? ""), \(place.placemark.locality ?? ""), \(place.placemark.postalCode ?? ""), \(place.placemark.country ?? "")"
-                                                                        if adressStreet == "\(place.placemark.name ?? ""), \(place.placemark.locality ?? ""), \(place.placemark.postalCode ?? ""), \(place.placemark.country ?? "")" {
-                                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                                                showStreetCompletion = false
+                                                        VStack {
+                                                            SearchBar(text: $searchText, isSearching: $isSearching)
+
+                                                            List(searchResults, id: \.self) { mapItem in
+                                                                Button(action: {
+                                                                    // Handle the selection of the mapItem here
+                                                                    print("Selected address: \(mapItem.name ?? "Unknown")")
+                                                                }) {
+                                                                    Text("\(mapItem.name ?? "Unknown"), \(mapItem.placemark.locality ?? "Unknown"), \(mapItem.placemark.postalCode ?? "Unknown"), \(mapItem.placemark.country ?? "Unknown")")
+                                                                        .foregroundStyle(Color.black)
+                                                                        /*.onTapGesture {
+                                                                            self.adressStreet = "\(mapItem.placemark.name), \(mapItem.placemark.locality ?? ""), \(mapItem.placemark.postalCode ?? ""), \(mapItem.placemark.country ?? "")"
+                                                                            if adressStreet == "\(mapItem.placemark.name), \(mapItem.placemark.locality ?? ""), \(mapItem.placemark.postalCode ?? ""), \(mapItem.placemark.country ?? "")" {
+                                                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                                                    showStreetCompletion = false
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    }
-                                                                Divider()
+                                                                        }*/
+                                                                }
                                                             }
-                                                        }.frame(height: 100)
+                                                        }
+                                                        .onChange(of: searchText) { _ in
+                                                            search()
+                                                        }
                                                     }.background(Color.white)
-                                                }*/
+                                                }
                                             }.onChange(of: adressStreet, perform: { value in
                                                 
                                                 let delay = 0.3
@@ -613,6 +626,58 @@ struct LocationTextField: View {
             }.padding(20)
             
         }
+    }
+    
+    private func search() {
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = searchText
+            let search = MKLocalSearch(request: request)
+
+            search.start { response, _ in
+                guard let response = response else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.searchResults = response.mapItems
+                }
+            }
+        }
+    
+}
+
+struct SearchBar: View {
+    @Binding var text: String
+    @Binding var isSearching: Bool
+
+    var body: some View {
+        HStack {
+            TextField("Search for an address", text: $text)
+                .padding(.leading, 24)
+                .onChange(of: text) { _ in
+                    isSearching = true
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+
+            if isSearching {
+                Button(action: {
+                    withAnimation {
+                        text = ""
+                        isSearching = false
+                    }
+                }) {
+                    Image(systemName: "multiply.circle.fill")
+                        .foregroundColor(.gray)
+                        .padding(.trailing, 8)
+                }
+                .transition(.move(edge: .trailing))
+                .animation(.easeInOut)
+            }
+        }
+        .padding(.horizontal)
     }
 }
 

@@ -65,7 +65,7 @@ class PaymentHandler: NSObject {
         let paymentRequest = PKPaymentRequest ()
         
         paymentRequest.paymentSummaryItems = paymentSummaryItems
-        paymentRequest.merchantIdentifier = "merchant. jo.designcode. sweatershopdemo"
+        paymentRequest.merchantIdentifier = "merchant.com.fonrose.fonrose-ecommerceV2"
         paymentRequest.merchantCapabilities = .capability3DS
         paymentRequest.countryCode = "US"
         paymentRequest.currencyCode = "USD"

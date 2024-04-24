@@ -97,7 +97,6 @@ struct LocationRecapView: View {
                             Spacer()
                         }.background(Color.blue)
                         .cornerRadius(15)
-                        .padding(10)
                         .onTapGesture {
                             bigModel.lastViews.append(.LivraisonViews_RecapLivraison)
                             bigModel.fullViewHistory.append(.LivraisonViews_RecapLivraison)
@@ -105,7 +104,7 @@ struct LocationRecapView: View {
                         }
                     }
                                     
-                }
+                }.padding(20)
             }
         
         } else {

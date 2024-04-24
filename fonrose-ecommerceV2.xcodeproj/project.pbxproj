@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7000292A298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70002929298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift */; };
+		7001D34C2BD93D5B00A3D69A /* LocationTestv2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7001D34B2BD93D5B00A3D69A /* LocationTestv2.swift */; };
+		7001D34E2BD949D700A3D69A /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7001D34D2BD949D700A3D69A /* PaymentView.swift */; };
 		700D61EF2465699A00BCC632 /* CarouselViewTesf.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */; };
 		700D82992444D8C4001CFDDB /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700D82982444D8C4001CFDDB /* IconButton.swift */; };
 		700EA7DF281F024A007E8002 /* NumberDetectorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */; };
@@ -94,6 +96,8 @@
 
 /* Begin PBXFileReference section */
 		70002929298C138700C7EBC4 /* Sandbox-GetInstanceWithID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sandbox-GetInstanceWithID.swift"; sourceTree = "<group>"; };
+		7001D34B2BD93D5B00A3D69A /* LocationTestv2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTestv2.swift; sourceTree = "<group>"; };
+		7001D34D2BD949D700A3D69A /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		700D61EE2465699A00BCC632 /* CarouselViewTesf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselViewTesf.swift; sourceTree = "<group>"; };
 		700D82982444D8C4001CFDDB /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		700EA7DE281F024A007E8002 /* NumberDetectorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberDetectorTest.swift; sourceTree = "<group>"; };
@@ -249,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				702A7D6629521421006338C0 /* fonrose-ecommerceV2.entitlements */,
-				70F5DCED2AED860700DE07BB /* PaymentHandler.swift */,
 				704535812477BD85001F20A8 /* BigRootView.swift */,
 				7034755A2864D0F70030C906 /* AuthView.swift */,
 				701B9E1D2876DF90004DE780 /* Test-coordinate.swift */,
@@ -291,6 +294,7 @@
 				70B037242AD813B6004A4870 /* PaymentButton.swift */,
 				708F28B024680AB4005BFE7C /* FinDeCommande.swift */,
 				708F28AE246805A0005BFE7C /* PaymentScreen.swift */,
+				70F5DCED2AED860700DE07BB /* PaymentHandler.swift */,
 			);
 			path = FinalizeOrderView;
 			sourceTree = "<group>";
@@ -321,6 +325,7 @@
 				7031EF9927F04C9E009CA3A2 /* LocationMapView.swift */,
 				7031EF9B27F04E07009CA3A2 /* LocationViewModel.swift */,
 				704D0A2828A0286100AACF36 /* LocationView.swift */,
+				7001D34B2BD93D5B00A3D69A /* LocationTestv2.swift */,
 				70CBE5C428FDFE8400F2C4B1 /* LocationRecapView.swift */,
 			);
 			path = Location;
@@ -352,6 +357,7 @@
 		7049ED23281E7B3F00C16C3B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7001D34D2BD949D700A3D69A /* PaymentView.swift */,
 				7034753E285F67C50030C906 /* Auth */,
 				701C83782365E502007AF339 /* MainViews */,
 				7031EF9827F04C34009CA3A2 /* Location */,
@@ -552,6 +558,7 @@
 				70BB819A246D7EC500695F19 /* About_us.swift in Sources */,
 				702A7D6A2953C222006338C0 /* LogInGoogleAppleView.swift in Sources */,
 				70CFDBCC29F5BF0400F19D41 /* BackButtonModel.swift in Sources */,
+				7001D34E2BD949D700A3D69A /* PaymentView.swift in Sources */,
 				70347553286090590030C906 /* MeasurementView.swift in Sources */,
 				7045357E2477BB29001F20A8 /* BigModel.swift in Sources */,
 				700F201E242A647B00382533 /* TrailerPlayer.swift in Sources */,
@@ -587,6 +594,7 @@
 				704D2198245B377500D0B13F /* SANDBOX_textField.swift in Sources */,
 				705ABCF3243F988100D47D6C /* dataSuivi.swift in Sources */,
 				70B5CDC228755A4C005AE3B0 /* PopUpViewTest.swift in Sources */,
+				7001D34C2BD93D5B00A3D69A /* LocationTestv2.swift in Sources */,
 				7019ABFD2347E73F00F5EF15 /* SceneDelegate.swift in Sources */,
 				70BB78CC285E1D7A00A0A3B4 /* TestList.swift in Sources */,
 				70AB2A4A235CB2C3004856D7 /* HomeFeedView.swift in Sources */,

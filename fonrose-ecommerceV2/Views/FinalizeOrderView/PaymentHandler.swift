@@ -17,6 +17,7 @@ class PaymentHandler: NSObject {
     var paymentSummaryItems = [PKPaymentSummaryItem]()
     var paymentStatus = PKPaymentAuthorizationStatus.failure
     var completionHandler: PaymentCompletionHandler?
+    var addressHandler: ((String) -> Void)?
     
     static let supportedNetworks: [PKPaymentNetwork] = [
         .visa,
@@ -50,20 +51,19 @@ class PaymentHandler: NSObject {
     }
     
     func startPayment(products: [BigModel.DressPictures], total: Int, completion: @escaping PaymentCompletionHandler) {
-        
+            
         completionHandler = completion
-        
         paymentSummaryItems = []
         
         BigModel.shared.dressPictures.forEach { product in
             let item = PKPaymentSummaryItem(label: product.productName, amount: NSDecimalNumber(string: "\(product.price) .00"), type: .final)
             paymentSummaryItems.append(item)
-            
         }
+        
         let total = PKPaymentSummaryItem(label: "Total", amount: NSDecimalNumber(string: "\(total).00"), type: .final)
         paymentSummaryItems.append(total)
-        let paymentRequest = PKPaymentRequest ()
         
+        let paymentRequest = PKPaymentRequest ()
         paymentRequest.paymentSummaryItems = paymentSummaryItems
         paymentRequest.merchantIdentifier = "merchant.com.fonrose.fonrose-ecommerceV2"
         paymentRequest.merchantCapabilities = .capability3DS
@@ -72,44 +72,42 @@ class PaymentHandler: NSObject {
         paymentRequest.supportedNetworks = PaymentHandler.supportedNetworks
         paymentRequest.shippingType = .delivery
         paymentRequest.shippingMethods = shippingMethodCalculator ()
-        paymentRequest.requiredShippingContactFields=[.name,.postalAddress]
+        paymentRequest.requiredShippingContactFields = [.name, .postalAddress]
         
         paymentController = PKPaymentAuthorizationController(paymentRequest: paymentRequest)
         paymentController?.delegate = self
         paymentController?.present(completion: { (presented: Bool) in
             if presented {
                 debugPrint("Presented payment controller")
-            }
-            else {
+            } else {
                 debugPrint("Failed to present payment controller")
             }
         })
     }
+    
 }
 
 @available(iOS 15.0, *)
 extension PaymentHandler: PKPaymentAuthorizationControllerDelegate {
     
     func paymentAuthorizationController(_ controller: PKPaymentAuthorizationController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
-        let errors = [Error]()
-        let status = PKPaymentAuthorizationStatus.success
-        self.paymentStatus = status
-        completion(PKPaymentAuthorizationResult(status: status, errors: errors))
+        // Handle payment authorization here
+        
+        // Accessing the shipping contact information
+        let shippingContact = payment.shippingContact
+        if let postalAddress = shippingContact?.postalAddress {
+            // Printing the postal address to the console
+            print("Postal Address: \(postalAddress)")
+        }
+        
+        // Complete the payment authorization process
+        let paymentAuthorizationResult = PKPaymentAuthorizationResult(status: .success, errors: nil)
+        completion(paymentAuthorizationResult)
     }
     
     func paymentAuthorizationControllerDidFinish(_ controller: PKPaymentAuthorizationController) {
-        controller.dismiss {
-            DispatchQueue.main.async {
-                if self.paymentStatus == .success {
-                    if let completionHandler = self.completionHandler {
-                        completionHandler (true)
-                    }
-                } else {
-                    if let completionHandler = self.completionHandler {
-                        completionHandler (false)
-                    }
-                }
-            }
-        }
+        // Dismiss the payment authorization controller
+        controller.dismiss(completion: nil)
     }
+    
 }

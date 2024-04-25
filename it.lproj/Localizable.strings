@@ -162,6 +162,5 @@
 "new-person" = "New person";
 "measurements-explanations" = "Ogni account è associato a persone che dispongono di misurazioni specifiche e dati di posizione specifici. Grazie a questo, puoi ordinare prodotti con le misure di più persone utilizzando un solo account. Tuttavia, i dati relativi ai dati di pagamento sono comuni a ciascuna persona.";
 "persons-explanations" = "Per ogni prodotto vengono richieste le misure specifiche dell'articolo selezionato al fine di preparare l'ordine. Per aiutarti sono disponibili video esplicativi su come effettuare al meglio le tue misurazioni.";
-
-//measurements
+"no-persons" = "Nessuna persona è stata creata, clicca qui per creare una nuova persona";
 

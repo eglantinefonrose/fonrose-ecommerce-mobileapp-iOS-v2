@@ -165,7 +165,20 @@ struct PersonPickerViewHome: View {
                                 .scrollContentBackground(.hidden)
                             } else {
                                 Spacer()
-                                Text("No persons have been created, click on the + button to create one")
+                                VStack(spacing: 20) {
+                                    Text("no-persons")
+                                        .multilineTextAlignment(.center)
+                                    ZStack {
+                                        Circle()
+                                            .foregroundStyle(Color(UIColor.lightGray))
+                                            .frame(width: 70, height: 70)
+                                        Image(systemName: "person.badge.plus")
+                                            .font(.title)
+                                            .foregroundStyle(Color.white)
+                                    }.onTapGesture {
+                                        bigModel.authCurrentView = .Auth_NewUserView
+                                    }
+                                }
                                 Spacer()
                             }
                             

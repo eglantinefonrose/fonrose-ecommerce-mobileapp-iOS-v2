@@ -1337,7 +1337,7 @@ class BigModel : NSObject, ObservableObject {
         //let person002: Person = Person(data: "data")
         let thePersons : [Person] = [ person001 , person002 ]
 
-        self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: thePersons)
+        self.user = User(id: "eee", email: "bfonrose@gmail.com", persons: [])
         
         self.selectedProductId = 0
         self.currentPersonIndex = 0 // Eglantine

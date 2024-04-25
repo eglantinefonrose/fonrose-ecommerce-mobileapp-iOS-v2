@@ -162,6 +162,4 @@
 "new-person" = "New person";
 "measurements-explanations" = "For each product, specific measurements of the selected item are requested in order to prepare your order. Explanatory videos on how to best take your measurements are available to help you.";
 "persons-explanations" = "Each account is associated with people who have specific measurements and specific location data. Thanks to this, you can order products with the measurements of several people using only one account. However, data relating to payment data is common to each person.";
-
-//persons
-
+"no-persons" = "No persons have been created, click here to create a new person";

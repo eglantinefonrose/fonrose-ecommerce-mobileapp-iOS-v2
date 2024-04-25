@@ -165,19 +165,21 @@ struct HomeFeedView: View {
                         VStack {
                             
                             HStack {
-                                
-                                Image(systemName: "text.justify")
-                                    .opacity(bigModel.showMenu ? 0 : 1)
-                                    .font(.system(size: 20))
-                                    .padding(20)
-                                    .onTapGesture {
-                                        bigModel.showMenu.toggle()
-                                        if bigModel.showMenu {
-                                            print("menu")
-                                        } else {
-                                            print("no menu")
-                                        }
+                                ZStack {
+                                    Text(" ")
+                                    Image(systemName: "text.justify")
+                                        .opacity(bigModel.showMenu ? 0 : 1)
+                                        .font(.system(size: 20))
+                                        .padding(20)
+                                        .onTapGesture {
+                                            bigModel.showMenu.toggle()
+                                            if bigModel.showMenu {
+                                                print("menu")
+                                            } else {
+                                                print("no menu")
+                                            }
                                     }
+                                }
                                 
                                 Spacer()
                                 
@@ -314,7 +316,15 @@ struct HomeFeedView: View {
         }.gesture(DragGesture()
             .onChanged { gesture in
                 if gesture.translation.width > 0 {
-                    bigModel.showMenu.toggle()
+                    bigModel.showMenu = true
+                    if bigModel.showMenu {
+                        print("menu")
+                    } else {
+                        print("no menu")
+                    }
+                }
+                if gesture.translation.width < 0 {
+                    bigModel.showMenu = false
                     if bigModel.showMenu {
                         print("menu")
                     } else {

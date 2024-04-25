@@ -40,8 +40,10 @@ struct HelpView: View {
                                 
                                 VStack(alignment: .leading, spacing: 10) {
                                     
-                                    Text("Personnes")
+                                    Text("persons")
                                         .font(Font.title.weight(.semibold))
+                                    
+                                    Text("persons-explanations")
                                     
                                 }.padding(.vertical, 10)
                                 
@@ -54,8 +56,10 @@ struct HelpView: View {
                                 
                                 VStack(alignment: .leading, spacing: 10) {
                                     
-                                    Text("Mensurations")
+                                    Text("measurements")
                                         .font(Font.title.weight(.semibold))
+                                    
+                                    Text("measurements-explanations")
                                     
                                     
                                     //Text("Pour chaque produit, des ") + Text("mensurations").bold() + Text(" spécifiques à l’article sélectionné vous sont demandées afin de préparer votre commande. Des") + Text(" vidéos explicatives ").bold() + Text("pour prendre au mieux ses mensurations sont à votre disposition pour vous aider.")
@@ -74,7 +78,7 @@ struct HelpView: View {
                     } else {
                         // Fallback on earlier versions
                     }
-                }.padding(20)
+                }
                     
                 Spacer()
                     
@@ -103,7 +107,7 @@ struct HelpView: View {
                     }
                 }
                 
-            }
+            }.padding(20)
                 
         }
         

@@ -156,4 +156,6 @@
 "hips-navel-explenations" = "Placez l'extrémité du mètre ruban à votre nombril et laissez-le descendre jusqu'à vos hanches";
 "waist-navel-explenations" = "Placez l'extrémité du mètre ruban à votre nombril, puis remontez vers votre visage jusqu'à ce qu'il croise la ligne imaginaire de votre taille";
 "tits-middle-of-breasts-explenations" = "Placez l'extrémité du mètre ruban sur votre mamelon gauche et mesurez jusqu'au milieu de vos deux mamelons en suivant la forme de votre corps avec le mètre ruban";
-"new-person" = "New person";
+"new-person" = "Nouvelle personne";
+"measurements-explanations" = "À chaque compte sont associés des personnes qui ont des mensurations spécifiques et des données de localisation spécifiques. Grâce à ça, vous pouvez commander des produits aux mensurations de plusieurs personnes en utilisant qu’un seul compte. Cependant, les données relatives aux données de paiement sont communes à chaque personne.";
+"persons-explanations" = "Pour chaque produit, des mensurations spécifiques à l’article sélectionné vous sont demandées afin de préparer votre commande. Des vidéos explicatives pour prendre au mieux ses mensurations sont à votre disposition pour vous aider.";

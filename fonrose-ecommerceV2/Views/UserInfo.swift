@@ -55,7 +55,7 @@ struct UserInfo: View {
                             .foregroundColor(Color.blue)
                             .onTapGesture {
                                 if bigModel.currentPersonIndex == nil {
-                                    alertTF(title: "Alert", message: "string containts letters", primaryTitle: "Ok") {
+                                    alertTF(title: "alert", message: "string containts letters", primaryTitle: "Ok") {
                                         
                                     }
                                 } else {
@@ -109,7 +109,7 @@ struct UserInfo: View {
                         
                         if isEditModeOn {
                             HStack {
-                                Text("Validate")
+                                Text("validate")
                                     .foregroundColor(.blue)
                                     .font(.caption)
                             }.onTapGesture {

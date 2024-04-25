@@ -13,8 +13,9 @@ import AVFoundation
 struct AboutUs: View {
     
     @EnvironmentObject var bigModel: BigModel
-    let aboutUsTexts = [Text("Nous vivons dans un monde authentique, entourés de personnes toutes") + Text(" uniques").bold().italic() + Text(", bien loin des standards de beauté."),
+    let aboutUsTextsFrench = [Text("Nous vivons dans un monde authentique, entourés de personnes toutes") + Text(" uniques").bold().italic() + Text(", bien loin des standards de beauté."),
     Text("L’objectif : créer des vêtements pour tout le spectre de") + Text(" morphologies ").bold().italic() + Text("dans le but de") + Text(" représenter ").bold().italic() +  Text("toutes les") + Text(" femmes").bold().italic() + Text(", bien au-delà des silhouettes stéréotypées.")]
+    @State var aboutUsTexts: [Text] = []
     @State private var index = 0
     
     var body: some View {
@@ -52,6 +53,8 @@ struct AboutUs: View {
                 .padding()
                 
             }
+        }.onAppear {
+            aboutUsTexts = aboutUsTextsFrench
         }
     }
 }

@@ -55,7 +55,7 @@ struct PersonPickerViewHome: View {
                     
                     HStack {
                         
-                        Text("Back")
+                        Text("back")
                             .foregroundColor(Color.blue)
                             .fontWeight(.semibold)
                             .onTapGesture {
@@ -206,7 +206,7 @@ struct PersonPickerViewHome: View {
                         Image(systemName: "person.badge.plus")
                             .foregroundStyle(Color.white)
                             .padding(.vertical, 7)
-                        Text("New person")
+                        Text("new-person")
                             .foregroundColor(Color.white)
                             .fontWeight(.bold)
                             .padding(7)
@@ -236,7 +236,7 @@ struct DeletePersonView: View {
             Text("")
                 .alert(isPresented: $showAlert, content: {
                 
-                    Alert(title: Text("Delete \(bigModel.deletedPersonName)"), message: Text("Are you sure you want to delete this person ?"), primaryButton: .default(Text("No")) {
+                    Alert(title: Text("delete \(bigModel.deletedPersonName)"), message: Text("delete-message"), primaryButton: .default(Text("no")) {
                         bigModel.deletedPersonID = ""
                 }, secondaryButton: .default(Text("Yes").font(.system(.caption))) {
                     

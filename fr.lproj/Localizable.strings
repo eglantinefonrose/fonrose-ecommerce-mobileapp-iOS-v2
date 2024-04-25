@@ -1,3 +1,6 @@
+"the-dress" = "La robe";
+"le-serpent" = "Le serpent";
+"about-us" = "À propos de nous";
 "customer-service" = "Service client";
 "back" = "Retour";
 "buy" = "Acheter";
@@ -160,3 +163,7 @@
 "measurements-explanations" = "À chaque compte sont associés des personnes qui ont des mensurations spécifiques et des données de localisation spécifiques. Grâce à ça, vous pouvez commander des produits aux mensurations de plusieurs personnes en utilisant qu’un seul compte. Cependant, les données relatives aux données de paiement sont communes à chaque personne.";
 "persons-explanations" = "Pour chaque produit, des mensurations spécifiques à l’article sélectionné vous sont demandées afin de préparer votre commande. Des vidéos explicatives pour prendre au mieux ses mensurations sont à votre disposition pour vous aider.";
 "no-persons" = "Aucune personne n'a été créée, cliquez ici pour créer une nouvelle personne";
+"person-already-exists" = "Une personne portant le même nom existe déjà, veuillez en choisir un autre";
+"alert" = "Alerte";
+"plz-select-a-person" = "Veuillez selectionner une personne";
+"validate" = "Valider";

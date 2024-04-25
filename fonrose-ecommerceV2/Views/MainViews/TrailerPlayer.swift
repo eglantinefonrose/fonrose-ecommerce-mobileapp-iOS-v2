@@ -73,7 +73,7 @@ struct TrailerPlayer: View {
                 
                 Spacer()
                 
-                Text("Buy")
+                Text("buy")
                     .foregroundColor(.blue)
                     .onTapGesture {
                         bigModel.lastViews.append(.VideoPlayer_trailerPlayer)

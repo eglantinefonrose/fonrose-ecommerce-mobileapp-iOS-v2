@@ -102,7 +102,7 @@ struct NewPersonView: View {
                     .frame(height: 30)
                     
                     if !isFinalEmailValid {
-                        Text("The email adress is not valid, please verify your email adress.")
+                        Text("email-adress-not-valid")
                             .foregroundColor(.red)
                     }
                     
@@ -133,7 +133,7 @@ struct NewPersonView: View {
                                 if newPersonEmail != "" && newPersonName != "" {
                                     
                                     if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
-                                        alertTF(title: "Alert", message: "A person with the same name already exists, please choose another name", primaryTitle: "Ok") {
+                                        alertTF(title: "alert", message: "person-already-exists", primaryTitle: "Ok") {
                                             
                                         }
                                     } else {

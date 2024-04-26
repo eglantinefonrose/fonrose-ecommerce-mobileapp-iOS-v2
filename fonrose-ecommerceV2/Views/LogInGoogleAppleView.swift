@@ -8,11 +8,7 @@
 //
 
 import SwiftUI
-import Firebase
-import FirebaseAuth
 import AuthenticationServices
-import GoogleSignIn
-import GoogleSignInSwift
 
 @available(iOS 14.0, *)
 struct LogInGoogleAppleView: View {
@@ -61,7 +57,7 @@ struct LogInGoogleAppleView: View {
                                                                             
                     VStack {
                                             
-                        SignInWithAppleButton { (request) in
+                        /*SignInWithAppleButton { (request) in
                             
                             bigModel.nonce = randomNonceString(length: 32)
                             request.requestedScopes = [.email,.fullName]
@@ -83,9 +79,25 @@ struct LogInGoogleAppleView: View {
                                 print (error.localizedDescription)
                             }
                             
-                        }.frame(height: 40)
+                        }.frame(height: 40)*/
                         
-                        GoogleSignInButton {
+                        SignInWithAppleButton(.signIn) { request in
+                            request.requestedScopes = [.fullName, .email]
+                        } onCompletion: { result in
+                            switch result {
+                                case .success(let authResults):
+                                    if let credential = authResults.credential as? ASAuthorizationAppleIDCredential {
+                                        Task {
+                                            print("credential.user = \(credential.user)")
+                                            await bigModel.signInWithApple(inputID: credential.user, inputEmail: credential.email ?? "")
+                                        }
+                                    }
+                                case .failure(let error):
+                                    print("Authorisation failed: \(error.localizedDescription)")
+                            }
+                        }.frame(height: 50)
+                        
+                        /*GoogleSignInButton {
                             
                             guard let clientID = FirebaseApp.app()?.options.clientID else { return }
                             
@@ -118,7 +130,7 @@ struct LogInGoogleAppleView: View {
                                     
                                 }
                             }
-                        }
+                        }*/
                     }
                     
                     Spacer()

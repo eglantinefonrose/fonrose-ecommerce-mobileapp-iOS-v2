@@ -46,7 +46,7 @@ class BigModel : NSObject, ObservableObject {
     
     //MARK: UserModel
     struct User: Identifiable, Codable {
-        var id: String = UUID().uuidString
+        @DocumentID var id: String?
         var email: String
         var persons: [Person]
     }
@@ -542,7 +542,7 @@ class BigModel : NSObject, ObservableObject {
     
     func fetchPerson() async {
         do {
-            guard let userId = auth.currentUser?.uid else { return }
+            let userId: String = self.user.id!
             let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").getDocuments()
             
             var newlyLoadedPersons : [Person] = []
@@ -869,9 +869,9 @@ class BigModel : NSObject, ObservableObject {
         
         DispatchQueue.main.async {
             Task {
-                self.user.id = self.auth.currentUser?.uid ?? "nil"
-                self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
-                self.signedIn = true
+                //self.user.id = self.auth.currentUser?.uid ?? "nil"
+                //self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
+                //self.signedIn = true
                 
                 // Charge les Person qui correspondent au User connecté (signedIn)
                 await self.fetchPerson()
@@ -1005,12 +1005,221 @@ class BigModel : NSObject, ObservableObject {
         self.signedIn = false
     }
     
+    //
+    //
+    //
+    //
+    // MARK: SIGN IN WITH APPLE (SQLITE)
+    //
+    //
+    //
+    //
+    
+    /*func signInWithApple(inputID: String, inputEmail: String) async {
+        
+        do {
+            // L'URL de la requête
+            let urlString = "http://127.0.0.1:8080/signInWithApple/id/\(inputID)"
+
+            // Convertir l'URL en objet URL
+            guard let url = URL(string: urlString) else {
+                print("URL invalide")
+                return
+            }
+
+            // Créer une session URLSession
+            let session = URLSession.shared
+            
+            // Créer une tâche de requête
+            let task = session.dataTask(with: url) { data, response, error in
+                // Vérifier s'il y a des erreurs
+                if let error = error {
+                    print("Erreur : \(error)")
+                    return
+                }
+
+                // Vérifier la réponse HTTP
+                if let httpResponse = response as? HTTPURLResponse {
+                    if !(200...299).contains(httpResponse.statusCode) {
+                        print("La requête a échoué avec le code HTTP \(httpResponse.statusCode)")
+                        return
+                    }
+                }
+
+                // Vérifier s'il y a des données de réponse
+                guard let responseData = data else {
+                    print("Aucune donnée reçue")
+                    return
+                }
+                
+                Task {
+                   
+                    let decoder = JSONDecoder()
+                    // Essayer de décoder le JSON en utilisant la structure BankAccountDTO
+                    
+                    let connectUserID: String = String(data: responseData, encoding: .utf8) ?? ""
+                    print(connectUserID)
+                    
+                    if connectUserID != "" {
+                        
+                        do {
+                            let docRef = self.db.collection("users").document("user\(connectUserID)")
+                            
+                            docRef.getDocument { (document, error) in
+                                if let document = document {
+                                    if document.exists {
+                                        do {
+                                            let jsonData = try document.data(as: User.self)
+                                            DispatchQueue.main.async {
+                                                Task {
+                                                    self.user = jsonData
+                                                    self.signedIn = true
+                                                    await self.fetchPerson()
+                                                    self.authCurrentView = .Auth_PersonPickerView
+                                                }
+                                            }
+                                        } catch {
+                                            print("Error decoding user data: \(error.localizedDescription)")
+                                        }
+                                    } else {
+                                        do {
+                                            let newUser: User = User(id: connectUserID, email: inputEmail, persons: [])
+                                            self.db.collection("users").document(connectUserID).setData(["email": inputEmail])
+                                            Task {
+                                                self.user = newUser
+                                                self.signedIn = true
+                                                await self.fetchPerson()
+                                                self.authCurrentView = .Auth_PersonPickerView
+                                            }
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                } else {
+                                    
+                                }
+                            }
+                                        
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                        
+                    } else {
+                        print("connectUserID = ''")
+                    }
+                    
+                    /*DispatchQueue.main.async {
+                        if connectUser.id != "" {
+                            self.user = connectUser
+                            self.currentview = .Auth_AuthView
+                            UserDefaults.standard.set(true, forKey: "SavedData")
+                            UserDefaults.standard.set(inputID, forKey: "UserID")
+                        }
+                    }*/
+                    
+                    /*func fetchMeasurements() async {
+                        
+                        do {
+                            guard let userId = auth.currentUser?.uid else { return }
+                            let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments()
+                            
+                            self.user.persons[self.currentPersonIndex ?? 0].measurements = Measurements(measurements: [])
+                            for document in collectionRef.documents {
+                                var measurements: Measurements = Measurements(measurements: [])
+                                do {
+                                    measurements = try document.data(as: Measurements.self)
+                                    self.user.persons[self.currentPersonIndex ?? 0].measurements = measurements
+                                    UserDefaults.standard.set(measurements.measurements[0].measurementValue, forKey: "measurementText0")
+                                    UserDefaults.standard.set(measurements.measurements[1].measurementValue, forKey: "measurementText1")
+                                    UserDefaults.standard.set(measurements.measurements[2].measurementValue, forKey: "measurementText2")
+                                    UserDefaults.standard.set(measurements.measurements[3].measurementValue, forKey: "measurementText3")
+                                    UserDefaults.standard.set(measurements.measurements[4].measurementValue, forKey: "measurementText4")
+                                    UserDefaults.standard.set(measurements.measurements[5].measurementValue, forKey: "measurementText5")
+                                    UserDefaults.standard.set(measurements.measurements[6].measurementValue, forKey: "measurementText6")
+                                    UserDefaults.standard.set(measurements.measurements[7].measurementValue, forKey: "measurementText7")
+                                    UserDefaults.standard.set(measurements.measurements[8].measurementValue, forKey: "measurementText8")
+                                    UserDefaults.standard.set(measurements.measurements[9].measurementValue, forKey: "measurementText9")
+                                    UserDefaults.standard.set(measurements.measurements[10].measurementValue, forKey: "measurementText10")
+                                    UserDefaults.standard.set(measurements.measurements[11].measurementValue, forKey: "measurementText11")
+                                }
+                                catch {
+                                    print(error)
+                                }
+                                
+                            }
+                                        
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }*/
+                    
+                }
+                
+            }
+            
+            task.resume()
+            
+        }
+        
+    }*/
+    
+    func signInWithApple(inputID: String, inputEmail: String) {
+        
+        if inputID != "" {
+            
+            do {
+                let docRef = self.db.collection("users").document("user\(inputID)")
+                
+                docRef.getDocument { (document, error) in
+                    if let document = document {
+                        if document.exists {
+                            do {
+                                let jsonData = try document.data(as: User.self)
+                                DispatchQueue.main.async {
+                                    Task {
+                                        self.user = jsonData
+                                        self.signedIn = true
+                                        await self.fetchPerson()
+                                        self.authCurrentView = .Auth_PersonPickerView
+                                    }
+                                }
+                            } catch {
+                                print("Error decoding user data: \(error.localizedDescription)")
+                            }
+                        } else {
+                            do {
+                                let newUser: User = User(id: inputID, email: inputEmail, persons: [])
+                                self.db.collection("users").document(inputID).setData(["email": inputEmail])
+                                Task {
+                                    self.user = newUser
+                                    self.signedIn = true
+                                    await self.fetchPerson()
+                                    self.authCurrentView = .Auth_PersonPickerView
+                                }
+                            } catch {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    } else {
+                        
+                    }
+                }
+                            
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        } else {
+            print("connectUserID = ''")
+        }
+        
+    }
     
     //
     //
     //
     //
-    // SIGN IN WITH PHONE NUMBER
+    // MARK: SIGN IN WITH PHONE NUMBER
     //
     //
     //

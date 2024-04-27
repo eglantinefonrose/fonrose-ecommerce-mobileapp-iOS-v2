@@ -126,21 +126,14 @@ struct NewPersonView: View {
                     .padding(.vertical, 15)
                     .background(Color.blue)
                     .onTapGesture {
-                        
                         if newPersonEmail.isValideEmailAdress() {
                             Task {
-                                
                                 if newPersonEmail != "" && newPersonName != "" {
-                                    
                                     if bigModel.isThereAPersonWithTheSameName(name: newPersonName) == true {
                                         alertTF(title: "alert", message: "person-already-exists", primaryTitle: "Ok") {
-                                            
                                         }
                                     } else {
-                                        
                                         try db.collection("users").document("user\(bigModel.user.id ?? "")").collection("persons").document().setData(from: BigModel.Person(email: newPersonEmail, name: newPersonName, orders: []))
-                                        
-                                        //setData(["email": newPersonEmail, "name": newPersonName])
                                         
                                         await bigModel.fetchPerson()
                                         bigModel.authCurrentView = .Auth_PersonPickerView
@@ -148,7 +141,6 @@ struct NewPersonView: View {
                                         bigModel.fullViewHistory.append(.Auth_NewUserView)
                                     }
                                 }
-                                
                             }
                         }
                         

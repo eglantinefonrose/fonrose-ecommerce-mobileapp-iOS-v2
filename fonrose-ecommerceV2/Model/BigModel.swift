@@ -995,11 +995,10 @@ class BigModel : NSObject, ObservableObject {
         self.user.id = ""
         self.user.email = ""
         self.user.persons = []
-        UserDefaults.standard.set("", forKey: "lastUserEmail")
-        UserDefaults.standard.set("", forKey: "lastUserPassword")
-        UserDefaults.standard.set("", forKey: "lastCurrentPersonIndex")
+        UserDefaults.standard.set(false, forKey: "signedIn")
+        UserDefaults.standard.set("", forKey: "ID")
+        UserDefaults.standard.set("", forKey: "email")
         
-        //self.currentview = .Home_homeFeed0
         self.authCurrentView = .Auth_LogInEmailView
         
         self.signedIn = false
@@ -1193,6 +1192,9 @@ class BigModel : NSObject, ObservableObject {
                                 Task {
                                     self.user = newUser
                                     self.signedIn = true
+                                    UserDefaults.standard.set(inputID, forKey: "ID")
+                                    UserDefaults.standard.set(inputEmail, forKey: "email")
+                                    UserDefaults.standard.set(true, forKey: "signedIn")
                                     await self.fetchPerson()
                                     self.authCurrentView = .Auth_PersonPickerView
                                 }
@@ -1212,6 +1214,10 @@ class BigModel : NSObject, ObservableObject {
         } else {
             print("connectUserID = ''")
         }
+        
+    }
+    
+    func saveIDAndEmail(ID: String, email: String) {
         
     }
     
@@ -1531,7 +1537,14 @@ class BigModel : NSObject, ObservableObject {
     //
     
     override init() {
+        super.init()
         print("Constructor BigModel - default")
+        signedIn = UserDefaults.standard.bool(forKey: "signedIn")
+        if signedIn {
+            let ID = UserDefaults.standard.string(forKey: "ID") ?? ""
+            let email = UserDefaults.standard.string(forKey: "email") ?? ""
+            signInWithApple(inputID: ID, inputEmail: email)
+        }
     }
 
     init(shouldInjectMockedData: Bool) {

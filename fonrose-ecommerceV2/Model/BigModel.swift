@@ -793,77 +793,6 @@ class BigModel : NSObject, ObservableObject {
     //MARK: Auth
     //
     //
-    func signIn(email: String, password: String) {
-        
-        //[weak self] sert à ce que Xcode considère les variables email et password comme des "Strongs References" pour pas qu'elles soient effacées si jamais elles ne servent pas
-        // !!!!!! il faut que l'adresse email soit valide et que le mdp ait + de 6 caractères, sinon erreur
-    
-        auth.signIn(withEmail: email, password: password) { Result, Error in
-            guard Result != nil, Error == nil else {
-                print((Error != nil) ? "error message = \(String(describing: Error?.localizedDescription))" : "no error")
-                self.signInErrorMessage = Error?.localizedDescription ?? ""
-                return
-            }
-            
-            print("sign in")
-            print(self.auth.currentUser?.uid ?? "fck")
-            
-            DispatchQueue.main.async {
-                Task {
-                    self.user.id = self.auth.currentUser?.uid ?? "nil"
-                    self.user = User(id: self.auth.currentUser?.uid ?? "error", email: self.auth.currentUser?.email ?? "error", persons: [])
-                    self.signedIn = true
-                    
-                    // Charge les Person qui correspondent au User connecté (signedIn)
-                    await self.fetchPerson()
-                }
-            }
-            
-            //self.currentview = .Auth_PersonPickerView
-            
-            if (self.user.persons.count != 0) && (self.currentPersonIndex != nil) {
-                self.authCurrentView = .Auth_UserInfo
-            } else {
-                self.authCurrentView = .Auth_PersonPickerView
-            }
-            
-            UserDefaults.standard.set(email , forKey: "lastUserEmail")
-            UserDefaults.standard.set(password , forKey: "lastUserPassword")
-            UserDefaults.standard.set(self.auth.currentUser?.uid ?? "error", forKey: "lastUserID")
-            
-        }
-    }
-    
-    @Published var nonce = ""
-    
-    func authentificateWithApple(credential: ASAuthorizationAppleIDCredential) {
-        
-        guard let token = credential.identityToken else {
-            print("error with firebase")
-            return
-        }
-        
-        guard let tokenString = String(data: token, encoding: .utf8) else {
-            print("error with Token")
-            return
-        }
-        
-        let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com", idToken: tokenString, rawNonce: nonce)
-        
-        Auth.auth().signIn(with: firebaseCredential) { [self] (result, err) in
-            if let error = err {
-            print(error.localizedDescription)
-            return
-            }
-            // Userl Successfully Logged Into Firebase.
-            print ("Logged In Success")
-            
-            self.updateUserInfos()
-                        
-        }
-        
-    }
-    
     
     func updateUserInfos() {
         
@@ -887,26 +816,6 @@ class BigModel : NSObject, ObservableObject {
                     }
                 }
             }
-        }
-        
-    }
-    
-    //MARK: Des modifications de l'appli à la db Firebase
-    func newUserSignIn(email: String, password: String) {
-        
-        //[weak self] sert à ce que Xcode considère les variables email et password comme des "Strongs References" pour pas qu'elles soient effacées si jamais elles ne servent pas
-        // !!!!!! il faut que l'adresse email soit valide et que le mdp ait + de 6 caractères, sinon erreur
-        auth.signIn(withEmail: email, password: password) { [weak self] Result, Error in
-            guard Result != nil, Error == nil else {
-                print((Error != nil) ? "error message = \(Error.debugDescription)" : "no error")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self!.signedIn = true
-            }
-
-            
         }
         
     }
@@ -941,46 +850,65 @@ class BigModel : NSObject, ObservableObject {
          }
         
     }
+        
     
-    //MARK: Sign up
+    //
+    //
+    //
+    //
+    // MARK: SIGN IN WITH APPLE
+    //
+    //
+    //
+    //
     
     @Published var authCurrentView =  ViewEnum.Auth_LogInEmailView
     @Published var authLastViews: [ViewEnum] = []
     
-    var newUserAccountEmail: String = ""
-    var newUserAccountPassword: String = ""
-    
-    func signUp(newUserEmail: String, newUserPassword: String) {
+    func signInWithApple(inputID: String, inputEmail: String) {
         
-        auth.createUser(withEmail: newUserEmail, password: newUserPassword) { Result, Error in
-            guard Result != nil, Error == nil else {
-                self.signOutErrorMessage = Error?.localizedDescription ?? ""
-                return
-            }
-
-            self.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").setData(["email": self.auth.currentUser?.email ?? "no email"])
-            self.user.id = self.auth.currentUser?.uid ?? "nil"
-            self.user.email = self.auth.currentUser?.email ?? "nil"
-            self.currentPersonIndex = nil
-            self.signedIn = true
-            self.authCurrentView = .Auth_PersonPickerView
+        if inputID != "" {
             
+            let docRef = self.db.collection("users").document("user\(inputID)")
+            
+            docRef.getDocument { (document, error) in
+                if let document = document {
+                    if document.exists {
+                        do {
+                            let jsonData = try document.data(as: User.self)
+                            DispatchQueue.main.async {
+                                Task {
+                                    self.user = jsonData
+                                    self.signedIn = true
+                                    await self.fetchPerson()
+                                    self.authCurrentView = .Auth_PersonPickerView
+                                }
+                            }
+                        } catch {
+                            print("Error decoding user data: \(error.localizedDescription)")
+                        }
+                    } else {
+                        let newUser: User = User(id: inputID, email: inputEmail, persons: [])
+                        self.db.collection("users").document(inputID).setData(["email": inputEmail])
+                        Task {
+                            self.user = newUser
+                            self.signedIn = true
+                            UserDefaults.standard.set(inputID, forKey: "ID")
+                            UserDefaults.standard.set(inputEmail, forKey: "email")
+                            UserDefaults.standard.set(true, forKey: "signedIn")
+                            await self.fetchPerson()
+                            self.authCurrentView = .Auth_PersonPickerView
+                        }
+                    }
+                } else {
+                    
+                }
+            }
+            
+        } else {
+            print("connectUserID = ''")
         }
-    
-    }
-    
-    var newEmail: String = ""
-    
-    func changeEmailAdress(_ newValue : String) {
-        newEmail = newValue
-        objectWillChange.send()
-    }
-    
-    var newPassword: String = ""
-    
-    func changePassword(_ newValue : String) {
-        newPassword = newValue
-        objectWillChange.send()
+        
     }
     
     func signOut() {
@@ -1002,292 +930,6 @@ class BigModel : NSObject, ObservableObject {
         self.authCurrentView = .Auth_LogInEmailView
         
         self.signedIn = false
-    }
-    
-    //
-    //
-    //
-    //
-    // MARK: SIGN IN WITH APPLE (SQLITE)
-    //
-    //
-    //
-    //
-    
-    /*func signInWithApple(inputID: String, inputEmail: String) async {
-        
-        do {
-            // L'URL de la requête
-            let urlString = "http://127.0.0.1:8080/signInWithApple/id/\(inputID)"
-
-            // Convertir l'URL en objet URL
-            guard let url = URL(string: urlString) else {
-                print("URL invalide")
-                return
-            }
-
-            // Créer une session URLSession
-            let session = URLSession.shared
-            
-            // Créer une tâche de requête
-            let task = session.dataTask(with: url) { data, response, error in
-                // Vérifier s'il y a des erreurs
-                if let error = error {
-                    print("Erreur : \(error)")
-                    return
-                }
-
-                // Vérifier la réponse HTTP
-                if let httpResponse = response as? HTTPURLResponse {
-                    if !(200...299).contains(httpResponse.statusCode) {
-                        print("La requête a échoué avec le code HTTP \(httpResponse.statusCode)")
-                        return
-                    }
-                }
-
-                // Vérifier s'il y a des données de réponse
-                guard let responseData = data else {
-                    print("Aucune donnée reçue")
-                    return
-                }
-                
-                Task {
-                   
-                    let decoder = JSONDecoder()
-                    // Essayer de décoder le JSON en utilisant la structure BankAccountDTO
-                    
-                    let connectUserID: String = String(data: responseData, encoding: .utf8) ?? ""
-                    print(connectUserID)
-                    
-                    if connectUserID != "" {
-                        
-                        do {
-                            let docRef = self.db.collection("users").document("user\(connectUserID)")
-                            
-                            docRef.getDocument { (document, error) in
-                                if let document = document {
-                                    if document.exists {
-                                        do {
-                                            let jsonData = try document.data(as: User.self)
-                                            DispatchQueue.main.async {
-                                                Task {
-                                                    self.user = jsonData
-                                                    self.signedIn = true
-                                                    await self.fetchPerson()
-                                                    self.authCurrentView = .Auth_PersonPickerView
-                                                }
-                                            }
-                                        } catch {
-                                            print("Error decoding user data: \(error.localizedDescription)")
-                                        }
-                                    } else {
-                                        do {
-                                            let newUser: User = User(id: connectUserID, email: inputEmail, persons: [])
-                                            self.db.collection("users").document(connectUserID).setData(["email": inputEmail])
-                                            Task {
-                                                self.user = newUser
-                                                self.signedIn = true
-                                                await self.fetchPerson()
-                                                self.authCurrentView = .Auth_PersonPickerView
-                                            }
-                                        } catch {
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                } else {
-                                    
-                                }
-                            }
-                                        
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                        
-                    } else {
-                        print("connectUserID = ''")
-                    }
-                    
-                    /*DispatchQueue.main.async {
-                        if connectUser.id != "" {
-                            self.user = connectUser
-                            self.currentview = .Auth_AuthView
-                            UserDefaults.standard.set(true, forKey: "SavedData")
-                            UserDefaults.standard.set(inputID, forKey: "UserID")
-                        }
-                    }*/
-                    
-                    /*func fetchMeasurements() async {
-                        
-                        do {
-                            guard let userId = auth.currentUser?.uid else { return }
-                            let collectionRef = try await db.collection("users").document("user\(userId)").collection("persons").document(self.currentPersonId).collection("Measurements").getDocuments()
-                            
-                            self.user.persons[self.currentPersonIndex ?? 0].measurements = Measurements(measurements: [])
-                            for document in collectionRef.documents {
-                                var measurements: Measurements = Measurements(measurements: [])
-                                do {
-                                    measurements = try document.data(as: Measurements.self)
-                                    self.user.persons[self.currentPersonIndex ?? 0].measurements = measurements
-                                    UserDefaults.standard.set(measurements.measurements[0].measurementValue, forKey: "measurementText0")
-                                    UserDefaults.standard.set(measurements.measurements[1].measurementValue, forKey: "measurementText1")
-                                    UserDefaults.standard.set(measurements.measurements[2].measurementValue, forKey: "measurementText2")
-                                    UserDefaults.standard.set(measurements.measurements[3].measurementValue, forKey: "measurementText3")
-                                    UserDefaults.standard.set(measurements.measurements[4].measurementValue, forKey: "measurementText4")
-                                    UserDefaults.standard.set(measurements.measurements[5].measurementValue, forKey: "measurementText5")
-                                    UserDefaults.standard.set(measurements.measurements[6].measurementValue, forKey: "measurementText6")
-                                    UserDefaults.standard.set(measurements.measurements[7].measurementValue, forKey: "measurementText7")
-                                    UserDefaults.standard.set(measurements.measurements[8].measurementValue, forKey: "measurementText8")
-                                    UserDefaults.standard.set(measurements.measurements[9].measurementValue, forKey: "measurementText9")
-                                    UserDefaults.standard.set(measurements.measurements[10].measurementValue, forKey: "measurementText10")
-                                    UserDefaults.standard.set(measurements.measurements[11].measurementValue, forKey: "measurementText11")
-                                }
-                                catch {
-                                    print(error)
-                                }
-                                
-                            }
-                                        
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }*/
-                    
-                }
-                
-            }
-            
-            task.resume()
-            
-        }
-        
-    }*/
-    
-    func signInWithApple(inputID: String, inputEmail: String) {
-        
-        if inputID != "" {
-            
-            do {
-                let docRef = self.db.collection("users").document("user\(inputID)")
-                
-                docRef.getDocument { (document, error) in
-                    if let document = document {
-                        if document.exists {
-                            do {
-                                let jsonData = try document.data(as: User.self)
-                                DispatchQueue.main.async {
-                                    Task {
-                                        self.user = jsonData
-                                        self.signedIn = true
-                                        await self.fetchPerson()
-                                        self.authCurrentView = .Auth_PersonPickerView
-                                    }
-                                }
-                            } catch {
-                                print("Error decoding user data: \(error.localizedDescription)")
-                            }
-                        } else {
-                            do {
-                                let newUser: User = User(id: inputID, email: inputEmail, persons: [])
-                                self.db.collection("users").document(inputID).setData(["email": inputEmail])
-                                Task {
-                                    self.user = newUser
-                                    self.signedIn = true
-                                    UserDefaults.standard.set(inputID, forKey: "ID")
-                                    UserDefaults.standard.set(inputEmail, forKey: "email")
-                                    UserDefaults.standard.set(true, forKey: "signedIn")
-                                    await self.fetchPerson()
-                                    self.authCurrentView = .Auth_PersonPickerView
-                                }
-                            } catch {
-                                print(error.localizedDescription)
-                            }
-                        }
-                    } else {
-                        
-                    }
-                }
-                            
-            } catch {
-                print(error.localizedDescription)
-            }
-            
-        } else {
-            print("connectUserID = ''")
-        }
-        
-    }
-    
-    func saveIDAndEmail(ID: String, email: String) {
-        
-    }
-    
-    //
-    //
-    //
-    //
-    // MARK: SIGN IN WITH PHONE NUMBER
-    //
-    //
-    //
-    //
-    
-    
-    @Published var mobileNo: String = ""
-    @Published var otpCode: String = ""
-    @Published var CLIENT_CODE: String = ""
-    @Published var showError: Bool = false
-    @Published var errorMessage: String = ""
-    
-    func getOTPCode() {
-        UIApplication.shared.closeKeyboard()
-        Task {
-            do {
-                Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-                let code = try await PhoneAuthProvider.provider().verifyPhoneNumber("+\(mobileNo)", uiDelegate: nil)
-                
-                await MainActor.run(body: {
-                    CLIENT_CODE = code
-                })
-                
-            } catch {
-                await handleError(error: error)
-            }
-        }
-    }
-    
-    func verifyOTPCode() {
-        UIApplication.shared.closeKeyboard()
-        Task {
-            // do : si il n'y a pas d'erreur lors de l'appel de la fonction Auth.auth().signIn(with: credential)
-            do {
-                let credential = PhoneAuthProvider.provider().credential(withVerificationID: CLIENT_CODE, verificationCode: otpCode)
-                // try await dit au programme d'attendre la réponse de la fonction Auth.auth().signIn avant d'éxecuter la suite (print("Success !"))
-                try await Auth.auth().signIn(with: credential)
-                print("Success !")
-                
-                DispatchQueue.main.async {
-                    Task {
-                        self.signedIn = true
-                        await self.fetchPerson()
-                        self.authCurrentView = .Auth_PersonPickerView
-                        self.user.id = self.auth.currentUser?.uid ?? "nil"
-                    }
-                }
-                
-            } catch {
-                // catch : si il y a une erreur, les lignes suivantes sont executées
-                await handleError(error: error)
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func handleError(error: Error) async {
-        await MainActor.run(body: {
-            errorMessage = error.localizedDescription
-            print(errorMessage)
-            showError.toggle()
-        })
     }
     
     

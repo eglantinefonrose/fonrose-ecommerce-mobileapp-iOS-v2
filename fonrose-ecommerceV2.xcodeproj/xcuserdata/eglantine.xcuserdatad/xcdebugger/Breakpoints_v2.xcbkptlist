@@ -94,8 +94,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1389"
-            endingLineNumber = "1389"
+            startingLineNumber = "1031"
+            endingLineNumber = "1031"
             landmarkName = "getRequestedMeasurements()"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,26 +190,10 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1583"
-            endingLineNumber = "1583"
+            startingLineNumber = "1225"
+            endingLineNumber = "1225"
             landmarkName = "paymentAuthorizationController(_:didAuthorizePayment:handler:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "789A6EB3-3192-45C2-9228-252A69C95D29"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1021"
-            endingLineNumber = "1021"
-            landmarkName = "BigModel"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -222,8 +206,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1182"
-            endingLineNumber = "1182"
+            startingLineNumber = "884"
+            endingLineNumber = "884"
             landmarkName = "signInWithApple(inputID:inputEmail:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +222,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1199"
-            endingLineNumber = "1199"
+            startingLineNumber = "900"
+            endingLineNumber = "900"
             landmarkName = "signInWithApple(inputID:inputEmail:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -254,8 +238,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1542"
-            endingLineNumber = "1542"
+            startingLineNumber = "1184"
+            endingLineNumber = "1184"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +254,8 @@
             filePath = "fonrose-ecommerceV2/Model/BigModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1544"
-            endingLineNumber = "1544"
+            startingLineNumber = "1186"
+            endingLineNumber = "1186"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>

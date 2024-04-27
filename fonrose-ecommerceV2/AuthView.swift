@@ -19,7 +19,7 @@ struct AuthView: View {
         VStack {
                             
             if (self.bigModel.authCurrentView == .Auth_LogInEmailView) {
-                LogInGoogleAppleView()
+                LogInAppleView()
             }
                 
             if (self.bigModel.authCurrentView == .Auth_UserInfo) {

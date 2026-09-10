@@ -31,6 +31,7 @@ struct PersonPickerView: View {
 @available(iOS 14.0, *)
 struct PersonPickerViewHome: View {
     
+    @Environment(\.colorScheme) var colorScheme
     let db = Firestore.firestore()
     var auth = Auth.auth()
     @State var email: String = ""
@@ -44,176 +45,181 @@ struct PersonPickerViewHome: View {
     var body: some View {
         
         ZStack {
+            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
                             
-                HStack {
-                                   
-                    VStack {
-                                                    
-                        HStack {
-                            
-                            Text("Back")
-                                .foregroundColor(Color.blue)
-                                .fontWeight(.semibold)
-                                .onTapGesture {
-                                    if !self.bigModel.authLastViews.isEmpty {
-                                        print("back")
-                                        self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
-                                        self.bigModel.authLastViews.removeLast()
-                                        print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
-                                    } else { print("array empty") }
-                                }
-                            
-                            Spacer()
-                            
-                            Text("Persons")
-                                .foregroundColor(Color.white)
-                                .fontWeight(.semibold)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "house")
-                                .foregroundColor(Color.blue)
-                                .onTapGesture {
-                                    if bigModel.currentPersonId != "" {
-                                        self.bigModel.currentview = .Home_homeFeed
-                                    } else {
-                                        alertTF(title: "No person chosen", message: "Please click on the person you want to select", primaryTitle: "Ok") {
-                                            
-                                        }
-                                    }
-
-                                }
-                            
-                        }.padding(20)
+            VStack {
+                
+                VStack {
+                    
+                    HStack {
                         
-                    List {
-                        ForEach(bigModel.user.persons.indices, id: \.self) { index in
-                            
-                            HStack {
-                                
-                                HStack {
-                                
-                                Text(bigModel.user.persons[index].name)
-                                    .foregroundColor(.white)
-                                    .onTapGesture {
-                                        
-                                        bigModel.currentPersonIndex = index
-                                        bigModel.currentPersonId = bigModel.user.persons[index].id
-                                        print("current person id \(bigModel.currentPersonId)")
-                                        bigModel.authCurrentView = .Auth_UserInfo
-                                        bigModel.lastViews.append(.Auth_PersonPickerView)
-                                        
-                                        //if bigModel.signedIn {
-                                            
-                                        print("signed in")
-                                        
-                                        //récupération des données de localisation de la personne selectionnée
-                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Location").getDocuments { snapshot, error in
-                                            
-                                            guard error == nil else {
-                                                print(error!.localizedDescription)
-                                                return
-                                            }
-                                            
-                                            if let snapshot = snapshot {
-                                                for document in snapshot.documents {
-                                                    
-                                                    let dbCivility = document.data()["civility"] as? String ?? ""
-                                                    let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                                    let dbLastName = document.data()["lastName"] as? String ?? ""
-                                                    let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                                    let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                                    let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                                    let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                                    let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                                    let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                                    let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                                    let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                                    let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                                    let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                                    let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-                                                    
-                                                    bigModel.user.persons[bigModel.user.persons.count-1].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
-                                                    
-                                                }
-                                            }
-                                            
-                                        }
-                                        
-                                        db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.user.persons[bigModel.user.persons.count-1].id).collection("Measurements").getDocuments { snapshot, error in
-                                            guard error == nil else {
-                                                print(error!.localizedDescription)
-                                                return
-                                            }
-                                            
-                                            if let snapshot = snapshot {
-                                                for document in snapshot.documents {
-                                                    let dbArmpitsMeasurement = document.data()["ArmpitsMeasurement"] as? String ?? ""
-                                                    let dbArmsLength = document.data()["ArmsLength"] as? String ?? ""
-                                                    let dbHeadMeasurement = document.data()["HeadMeasurement"] as? String ?? ""
-                                                    let dbPelvisMeasurement = document.data()["PelvisMeasurement"] as? String ?? ""
-                                                    let dbPelvisKnee = document.data()["PelvisKnee"] as? String ?? ""
-                                                    let dbShouldersMeasurement = document.data()["ShouldersMeasurement"] as? String ?? ""
-                                                    let dbShouldersPelvis = document.data()["ShouldersPelvis"] as? String ?? ""
-                                                    
-                                                    bigModel.user.persons[bigModel.currentPersonIndex].measurements = BigModel.Measurements(id: document.documentID, ArmpitsMeasurement: dbArmpitsMeasurement, ArmsLength: dbArmsLength, HeadMeasurement: dbHeadMeasurement, PelvisMeasurement: dbPelvisMeasurement, PelvisKnee: dbPelvisKnee, ShouldersMeasurement: dbShouldersMeasurement, ShouldersPelvis: dbShouldersPelvis)
-                                                    
-                                                    
-                                                }
-                                            }
-                                        }
-                                        
-                                        print(index)
+                        Text("back")
+                            .foregroundColor(Color.blue)
+                            .fontWeight(.semibold)
+                            .onTapGesture {
+                                if !self.bigModel.authLastViews.isEmpty {
+                                    print("back")
+                                    self.bigModel.authCurrentView = self.bigModel.authLastViews.last ?? .AboutUsScreen
+                                    self.bigModel.authLastViews.removeLast()
+                                    print("previous View = \(String(describing: self.bigModel.authLastViews.last))")
+                                } else { print("array empty") }
+                            }
+                        
+                        Spacer()
+                        
+                        Text("persons")
+                            .fontWeight(.semibold)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "house")
+                            .foregroundColor(Color.blue)
+                            .onTapGesture {
+                                if bigModel.currentPersonIndex == nil {
+                                    alertTF(title: "Alert", message: "Select a person first", primaryTitle: "Ok") {
                                         
                                     }
+                                } else {
+                                    self.bigModel.currentview = .Home_homeFeed0
+                                }
+                            }
+                        
+                    }
+                    
+                    if #available(iOS 15.0, *) {
+                                                                                    
+                        if #available(iOS 16.0, *) {
+                            
+                            if bigModel.user.persons.count != 0 {
+                                List {
                                     
-                                Spacer() }
-                                
-                                Image(systemName: "trash")
-                                    .foregroundColor(.blue)
-                                    .onTapGesture {
+                                    ForEach(bigModel.user.persons.indices, id: \.self) { index in
                                         
-                                        //affichage de l'alerte
-                                        bigModel.deletedPersonID = bigModel.user.persons[index].id
-                                        showAlert = true
-                                        
+                                        HStack {
+                                            
+                                            HStack {
+                                                
+                                                Text(bigModel.user.persons[index].name)
+                                                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                                                    .foregroundColor(.black)
+                                                
+                                                Spacer()
+                                                
+                                            }.onTapGesture {
+                                                
+                                                //Task {
+                                                    
+                                                bigModel.currentPersonIndex = index
+                                                UserDefaults.standard.set(index, forKey: "lastCurrentPersonIndex")
+                                                bigModel.currentPersonId = bigModel.user.persons[index].id ?? "nilcb"
+                                                UserDefaults.standard.set(index, forKey: "lastCurrentPersonId")
+                                                bigModel.isMeasurementModelUpdated = true
+                                                //bigModel.selectedProductId = nil
+                                                
+                                                Task {
+                                                    
+                                                    await bigModel.fetchMeasurements()
+                                                    
+                                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].measurements?.measurements.count == 0 {
+                                                        print("measurments nil")
+                                                        await bigModel.initializeMeasurements()
+                                                        await bigModel.fetchMeasurements()
+                                                    } else {
+                                                        print("not nil")
+                                                    }
+                                                    
+                                                    await bigModel.fetchLocation()
+                                                    
+                                                    if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
+                                                        print("location nil")
+                                                        await bigModel.initializeLocation()
+                                                        await bigModel.fetchLocation()
+                                                    } else {
+                                                        print("not nil")
+                                                    }
+                                                }
+                                                
+                                                bigModel.authCurrentView = .Auth_UserInfo
+                                                bigModel.authLastViews.append(.Auth_PersonPickerView)
+                                                bigModel.fullViewHistory.append(.Auth_PersonPickerView)
+                                                
+                                                
+                                            }
+                                            
+                                            Image(systemName: "trash")
+                                                .foregroundColor(.blue)
+                                                .onTapGesture {
+                                                    print(index)
+                                                    print(bigModel.user.persons[index].id)
+                                                    print(bigModel.user.persons[index].name)
+                                                    //affichage de l'alerte
+                                                    bigModel.deletedPersonID = bigModel.user.persons[index].id ?? "nil"
+                                                    bigModel.deletedPersonName = bigModel.user.persons[index].name
+                                                }
+                                        }.padding(.vertical, 10)
+                                    }.listRowBackground(Color("Background"))
+                                }.listStyle(PlainListStyle())
+                                .background(Color("Background"))
+                                .scrollContentBackground(.hidden)
+                            } else {
+                                Spacer()
+                                VStack(spacing: 20) {
+                                    Text("no-persons")
+                                        .multilineTextAlignment(.center)
+                                    ZStack {
+                                        Circle()
+                                            .foregroundStyle(Color(UIColor.lightGray))
+                                            .frame(width: 70, height: 70)
+                                        Image(systemName: "person.badge.plus")
+                                            .font(.title)
+                                            .foregroundStyle(Color.white)
+                                    }.onTapGesture {
+                                        bigModel.authCurrentView = .Auth_NewUserView
                                     }
+                                }
+                                Spacer()
+                            }
                             
-                            }.padding(15)
-                        
-                        }.listRowBackground(Color.black)
-                        
-                    }.background(Color.black)
-                    .onAppear(perform: {
-                        UITableView.appearance().backgroundColor = .clear
-                        
-                    })
-                    .onAppear(perform: {
-                            UITableView.appearance().contentInset.top = 0
-                    })
-                        
+                        } else {
+                            // Fallback on earlier versions
+                        }
+                    
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                    
+                    Text("sign-out")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            bigModel.signOut()
+                            bigModel.authCurrentView = ViewEnum.Auth_LogInEmailView
+                        }
+                    
+                }.padding(.horizontal, 20)
+                .padding(.top, 20)
+                
+                VStack {
+                    HStack {
                         Spacer()
-                        
-                        Text("Sign out")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                bigModel.signOut()
-                                bigModel.authCurrentView = ViewEnum.Auth_SignInView
-                            }
-                        
-                        Text("+")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                print()
-                                bigModel.authCurrentView = .Auth_NewUserView
-                            }
-                        
+                        Image(systemName: "person.badge.plus")
+                            .foregroundStyle(Color.white)
+                            .padding(.vertical, 7)
+                        Text("new-person")
+                            .foregroundColor(Color.white)
+                            .fontWeight(.bold)
+                            .padding(7)
                         Spacer()
-                        
-                    }.background(Color.black)
-                                      
-                }
-        }
+                    }
+                    .padding(.vertical, 10)
+                    .onTapGesture {
+                        bigModel.authCurrentView = .Auth_NewUserView
+                    }
+                }.background(Color(UIColor.lightGray))
+                
+            }
+        }.edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -230,41 +236,17 @@ struct DeletePersonView: View {
             Text("")
                 .alert(isPresented: $showAlert, content: {
                 
-                Alert(title: Text("Previous location data"), message: Text("Do you want to keep your saved location ?"), primaryButton: .default(Text("Change")) {
-                
-                }, secondaryButton: .default(Text("Keep").font(.system(.caption))) {
+                    Alert(title: Text("delete \(bigModel.deletedPersonName)"), message: Text("delete-message"), primaryButton: .default(Text("no")) {
+                        bigModel.deletedPersonID = ""
+                }, secondaryButton: .default(Text("Yes").font(.system(.caption))) {
                     
                     //suppression de la personne
-                    db.collection("users").document("user\(Auth.auth().currentUser?.uid ?? "nil")").collection("persons").document(bigModel.deletedPersonID).delete() { err in
-                        if let err = err {
-                            print("Error removing document: \(err)")
-                        } else {
-                            print("Document successfully removed!")
+                    
+                    Task {
                         
-                            //récupération des nouvelles données des personnes
-                            bigModel.db.collection("users").document("user\(self.auth.currentUser?.uid ?? "nil")").collection("persons").getDocuments { snapshot, error in
-                                guard error == nil else {
-                                    print(error!.localizedDescription)
-                                    return
-                                }
-                                
-                                bigModel.user.persons.removeAll()
-                                if let snapshot = snapshot {
-                                    for document in snapshot.documents {
-                                        let dbID = document.documentID
-                                        let dbName = document.data()["name"] as? String ?? ""
-                                        let dbEmail = document.data()["email"] as? String ?? ""
-                                        
-                                        bigModel.user.persons.append(BigModel.Person(id: dbID, email: dbEmail, name: dbName))
-                                        
-                                        print("doc added")
-                                    }
-                                }
-                                bigModel.deletedPersonID = ""
-                                
-                            }
+                        bigModel.deleteSelectedPerson()
+                        await bigModel.fetchPerson()
                         
-                        }
                     }
                 
                 })
@@ -278,7 +260,7 @@ struct PersonPickerView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             PersonPickerView()
-                .environmentObject(BigModel())
+                .environmentObject(BigModel(shouldInjectMockedData: true))
         } else {
             // Fallback on earlier versions
         }

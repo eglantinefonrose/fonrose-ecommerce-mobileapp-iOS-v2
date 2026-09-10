@@ -9,116 +9,107 @@
 import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
-import iPhoneNumberField
 
 @available(iOS 14.0, *)
 struct LocationRecapView: View {
-    
-    @EnvironmentObject var bigModel: BigModel
+
     @available(iOS 14.0, *)
+    @EnvironmentObject var bigModel: BigModel
     @StateObject var mapData = LocationViewModel()
     var db = Firestore.firestore()
+    @State private var orientation = UIDeviceOrientation.portrait
     
     var body: some View {
         
-        VStack {
+        if #available(iOS 15.0, *) {
+        
+        ZStack {
             
-            Spacer()
-                .frame(height: 20)
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-            HStack {
-                Spacer()
-                    .frame(width: 20)
+            VStack {
                 
-                Text("Back")
-                    .foregroundColor(Color.blue)
+                BackButtonModel(text: "location-recap", viewName: .LivraisonViews_RecapLivraison)
+                
+                Spacer()
+                                                          
+                Text("recap")
+                    .font(.system(size: 35, weight: .bold, design: .default))
                     .fontWeight(.semibold)
-                    .onTapGesture {
-                        if !self.bigModel.lastViews.isEmpty {
-                            print("back")
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                            self.bigModel.lastViews.removeLast()
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                        } else { print("array empty") }
-                    }
+                    .foregroundColor(.white)
                 
                 Spacer()
-                
-                Text("Recap")
-                    .foregroundColor(Color.black)
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                Image(systemName: "house")
-                    .foregroundColor(Color.blue)
-                    .onTapGesture {
-                        self.bigModel.currentview = .Home_homeFeed
-                    }
-                
-                Spacer()
-                    .frame(width: 20)
-                
-            }
-            
-            Spacer()
-            
-            ScrollView {
-                VStack(spacing: 15) {
-                    LocationText(locationName: "Civility", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "")
-                    LocationText(locationName: "First Name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "")
-                    LocationText(locationName: "Last Name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "")
-                    LocationText(locationName: "emailAdress", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "")
-                    LocationText(locationName: "phoneNumber", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "")
-                    LocationText(locationName: "adressCountry", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "")
-                    VStack {
-                        LocationText(locationName: "adressPostalCode", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "")
-                        LocationText(locationName: "adressCity", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "")
-                        LocationText(locationName: "adressStreet", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "")
-                        LocationText(locationName: "adressMailBox", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "")
-                        LocationText(locationName: "adressBasement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "")
-                        LocationText(locationName: "adressStage", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "")
-                    }
+                                                                
+                LazyVStack  {
+                                                    
+                    ScrollView {
+                                                        
+                            VStack {
+                                
+                                LocationText(locationName: "civility", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "")
+                                    
+                                LocationText(locationName: "first-name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "")
+                                    
+                                LocationText(locationName: "last-name", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "")
+                                
+                                LocationText(locationName: "email-adress", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "")
+                                
+                                LocationText(locationName: "phone-number", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "")
+                                
+                            }
+                                
+                            LocationText(locationName: "adress-country", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "")
+                            
+                            LocationText(locationName: "adress-postal-code", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "")
+                            
+                            LocationText(locationName: "adress-city", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "")
+                            
+                            LocationText(locationName: "adress-street", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "")
+                            
+                            LocationText(locationName: "adress-mail-box", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "")
+                        
+                            LocationText(locationName: "adress-basement", locationNameValue: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "")
+                            
+                        }.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 450 : 100)
+                        .onRotate { newOrientation in orientation = newOrientation }
+                                                    
                 }
-            }
-            
-            Spacer()
-            
-            Text("Edit location informations")
-                .foregroundColor(.blue)
-                .onTapGesture {
-                    bigModel.currentview = .LivraisonViews_Livraison
-                }
-            
-            HStack {
                 
-                Spacer()
-                
-                HStack {
-                    
                     Spacer()
-                    Text("Location")
-                        .foregroundColor(Color.white)
-                        .fontWeight(.semibold)
+                    
+                    VStack {
+                                                                                     
+                        Text("edit-location-informations")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                bigModel.currentview = .LivraisonViews_Livraison
+                                print(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "nil")
+                                print(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "nil")
+                            }
+                        
+                        HStack {
+                            Spacer()
+                            Text("save")
+                                .foregroundColor(Color.white)
+                                .fontWeight(.semibold)
+                                .padding(10)
+                            Spacer()
+                        }.background(Color.blue)
+                        .cornerRadius(15)
                         .onTapGesture {
                             bigModel.lastViews.append(.LivraisonViews_RecapLivraison)
+                            bigModel.fullViewHistory.append(.LivraisonViews_RecapLivraison)
+                            bigModel.currentview = .FinalizeOrderViews_PaymentScreen
                         }
-                    Spacer()
-                
-                }.background(Color.blue)
-                .frame(width: 150)
-                .cornerRadius(5)
-                
-                Spacer()
-                
-            }.frame(width: 120, height: 35)
-            .background(Color.blue)
-            .cornerRadius(15)
-            
-            Spacer()
-            
-        }
+                    }
+                                    
+                }.padding(20)
+            }
         
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
 
@@ -126,14 +117,17 @@ struct LocationText: View {
     var locationName: String
     var locationNameValue: String
     var body: some View {
-        HStack {
-            Spacer()
-                .frame(width: 15)
-            Text(locationName)
-            Spacer()
-            Text(locationNameValue)
-            Spacer()
-                .frame(width: 15)
+        if #available(iOS 15.0, *) {
+            HStack {
+                Text(locationName)
+                    .fontWeight(.medium)
+                Spacer()
+                Text(locationNameValue)
+                    .fontWeight(.medium)
+                    .foregroundColor(.gray)
+            }.padding(EdgeInsets(top: 5, leading: 15, bottom: 5, trailing: 15))
+        } else {
+            // Fallback on earlier versions
         }
     }
 }
@@ -142,6 +136,7 @@ struct LocationRecapView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             LocationRecapView()
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

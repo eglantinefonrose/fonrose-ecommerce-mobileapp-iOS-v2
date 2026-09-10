@@ -9,9 +9,9 @@
 import UIKit
 import Firebase
 import CoreData
+import GoogleSignIn
 
 @UIApplicationMain
-
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
@@ -20,6 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 
         FirebaseApp.configure()
+        
+        Auth.auth().addStateDidChangeListener { [weak self] (_, user) in
+            if let user = user {
+                // user is already logged in
+            } else {
+                // user is not logged in
+            }
+        }
         
         // Connect to the Firebase emulator - BEGIN
         /*print("WARNING - --------------------------------------- ")
@@ -44,6 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITableView.appearance().separatorColor = .clear
 
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
     // MARK: UISceneSession Lifecycle

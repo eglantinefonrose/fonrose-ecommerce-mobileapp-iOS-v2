@@ -8,232 +8,105 @@
 
 import SwiftUI
 
-struct PagingView<Content>: View where Content: View {
-
-    @EnvironmentObject var bigModel: BigModel
-    @Binding var index: Int
-    let maxIndex: Int
-    let content: () -> Content
-
-    @State private var offset = CGFloat.zero
-    @State private var dragging = false
-
-    init(index: Binding<Int>, maxIndex: Int, @ViewBuilder content: @escaping () -> Content) {
-        self._index = index
-        self.maxIndex = maxIndex
-        self.content = content
-    }
-
-    //var model: MeasurementInfos
-    
-    var body: some View {
-                    
-        ZStack {
-            VStack {
-                    
-                    ZStack {
-                        
-                        ZStack(alignment: .bottomTrailing) {
-                            GeometryReader { geometry in
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 0) {
-                                        self.content()
-                                            .frame(width: geometry.size.width, height: geometry.size.height)
-                                            .clipped()
-                                    }
-                                }
-                                .content.offset(x: self.offset(in: geometry), y: 0)
-                                .frame(width: geometry.size.width, alignment: .leading)
-                                .gesture(
-                                    DragGesture().onChanged { value in
-                                        self.dragging = true
-                                        self.offset = -CGFloat(self.index) * geometry.size.width + value.translation.width
-                                    }
-                                    .onEnded { value in
-                                        let predictedEndOffset = -CGFloat(self.index) * geometry.size.width + value.predictedEndTranslation.width
-                                        let predictedIndex = Int(round(predictedEndOffset / -geometry.size.width))
-                                        self.index = self.clampedIndex(from: predictedIndex)
-                                        withAnimation(.easeOut) {
-                                            self.dragging = false
-                                        }
-                                    }
-                                )
-                            }
-                            .clipped()
-
-                            PageControl(index: $index, maxIndex: maxIndex)
-                            
-                        }.frame(height: UIScreen.main.bounds.height-150)
-                        
-                        VStack {
-                        Text("La robe")
-                            .font(.system(size: 35, weight: .bold, design: .default))
-                            .foregroundColor(Color.white)
-                            .frame(width: 200)
-                            
-                        Spacer()
-                            .frame(height: 30)
-                        
-                        Text("85€")
-                            .foregroundColor(Color.gray)
-                            .font(.system(size: 25, weight: .semibold, design: .default))
-                            
-                        }
-                        
-                    }
-                                    
-                    VStack {
-                        
-                        Spacer()
-                        
-                        HStack {
-                            
-                            HStack {
-                                
-                                Spacer()
-                                
-                                Button(action: {
-                                    //self.bigModel.currentview = bigModel.user.persons[bigModel.currentPersonIndex].id == "" ? ViewEnum.Measurement_Mensurations : ViewEnum.Auth_SignInView
-                                    self.bigModel.currentview = ViewEnum.Measurement_Mensurations
-                                    self.bigModel.lastViews.append(.MeasurementCarouselView)
-                                }) {
-                                    Text("Acheter")
-                                        .foregroundColor(.blue)
-                                        .font(.system(size: 17, weight: .bold, design: .default))
-                                }
-                                
-                                Spacer()
-                                
-                            }
-                            
-                        }
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        HStack {
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                self.bigModel.currentview = .AboutUsScreen
-                                self.bigModel.lastViews.append(.MeasurementCarouselView)
-                            }) {
-                                Text("About us")
-                                    .foregroundColor(.blue)
-                                    .font(.system(size: 17, weight: .regular, design: .default))
-                            }
-                            
-                            Spacer()
-                            
-                        }
-                    
-                    Spacer()
-                    
-                }
-                //.padding(.vertical, -16)
-                                
-                }.background(Color.black)
-            .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Spacer()
-                    .frame(height: 10)
-                HStack {
-                    Spacer()
-                        .frame(width: 20)
-                    Text("Back")
-                        .foregroundColor(Color.blue)
-                        .fontWeight(.semibold)
-                        .onTapGesture {
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                        }
-                    Spacer()
-                    Image(systemName: "house")
-                        .foregroundColor(Color.blue)
-                        .onTapGesture {
-                            self.bigModel.currentview = .Home_homeFeed
-                        }
-                    
-                    Spacer()
-                        .frame(width: 20)
-                }
-                .frame(width: UIScreen.main.bounds.width)
-                Spacer()
-            }
-            
-        }
-        
-    }//acolade fermante body
-
-    func offset(in geometry: GeometryProxy) -> CGFloat {
-        if self.dragging {
-            return max(min(self.offset, 0), -CGFloat(self.maxIndex) * geometry.size.width)
-        } else {
-            return -CGFloat(self.index) * geometry.size.width
-        }
-    }
-
-    func clampedIndex(from predictedIndex: Int) -> Int {
-        let newIndex = min(max(predictedIndex, self.index - 1), self.index + 1)
-        guard newIndex >= 0 else { return 0 }
-        guard newIndex <= maxIndex else { return maxIndex }
-        return newIndex
-    }
-}
-
-struct PageControl: View {
-    @Binding var index: Int
-    let maxIndex: Int
-
-    var body: some View {
-        
-        HStack {
-            Spacer()
-            HStack(spacing: 8) {
-                ForEach(0...maxIndex, id: \.self) { index in
-                    Circle()
-                        .fill(index == self.index ? Color.white : Color.gray)
-                        .frame(width: 8, height: 8)
-                }
-            }
-            .padding(15)
-            Spacer()
-        }
-        
-    }
-}
-
-
 struct CarouselView: View {
     
+    @Environment(\.colorScheme) var theColorScheme
+    @EnvironmentObject var bigModel: BigModel
     @State var index = 0
+    @State var isFetchingNeededMeasurementsInfo = false
 
-        var images = ["IMG_0858(1) copy", "PHOTO DOS", "IMG_1019 copy", "IMG_0869(1) copy", "IMG_0854(2)", "IMG_1033"]
-
-        var body: some View {
+    var body: some View {
+        
+        VStack {
             
-                VStack(spacing: 20) {
-                    PagingView(index: $index.animation(), maxIndex: images.count - 1) {
-                        ForEach(self.images, id: \.self) { imageName in
-                            Image(imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(alignment: .top)
-                        }
-                    }
-                    .aspectRatio(4/3, contentMode: .fill)
-
+            ZStack {
+                
+                if #available(iOS 14.0, *) {
+                        
+                        VStack {
+                            TabView(selection: $index) {
+                                ForEach((0..<bigModel.dressPictures[bigModel.selectedProductId ?? 0].carouselProductPictures.count), id: \.self) { index in
+                                    ProductCardView(imageName: bigModel.dressPictures[bigModel.selectedProductId ?? 0].carouselProductPictures[index])
+                                }
+                            }
+                            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                        }.edgesIgnoringSafeArea(.all)
+                        
                 }
+                
+                VStack {
+                    BackButtonModel(text: "", viewName: .MeasurementCarouselView)
+                    Spacer()
+                }.padding(20)
+                
+                VStack {
+                    Spacer()
+                    Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
+                        .font(.system(size: 35, weight: .bold, design: .default))
+                        .foregroundColor(Color.white)
+                        .frame(width: 200)
+                    Spacer()
+                }
+                
+            }
             
+            //VStack {
+                //Spacer()
+                ZStack {
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(theColorScheme == .dark ? .white : .black, lineWidth: 2)
+                        .foregroundColor(theColorScheme == .dark ? .black : .white)
+                        .frame(height: 40)
+                    Text("buy")
+                        .foregroundColor(theColorScheme == .dark ? .white : .black)
+                        .onTapGesture {
+                            
+                            isFetchingNeededMeasurementsInfo = true
+                            
+                            self.bigModel.lastViews.append(.MeasurementCarouselView)    // On gère le back à la main (car on n'utilise pas de NavigationView)
+                            self.bigModel.fullViewHistory.append(.MeasurementCarouselView)
+                            if bigModel.selectedProductId != nil {
+                                
+                                print("bigModel.selectedProductId != nil")
+                                DispatchQueue.main.async {
+                                    Task {
+                                        await bigModel.getRequestedMeasurements()
+                                        bigModel.updateTotal()
+                                    }
+                                }
+                                
+                            } else {
+                                print("bigModel.selectedProductId = nil")
+                            }
+                            
+                        }.disabled(isFetchingNeededMeasurementsInfo)
+
+                }.padding(10)
+            //}
             
         }
+            
     }
+}
     
+struct ProductCardView: View {
+    
+    //var text: String
+    var imageName: String
+    
+    var body: some View{
+        ZStack {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+        }.edgesIgnoringSafeArea(.all)
+    }
+}
 
 struct CarouselView_Previews: PreviewProvider {
-        
+     
     static var previews: some View {
         CarouselView()
+            .environmentObject(BigModel.shared)
     }
 }

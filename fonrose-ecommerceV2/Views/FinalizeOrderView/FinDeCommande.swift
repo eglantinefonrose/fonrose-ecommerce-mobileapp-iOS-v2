@@ -37,17 +37,17 @@ struct FinDeCommande : View {
                     VStack {//élement 1
                               
                         if seconds < 4 {
-                            Text("Félicitations")
+                            Text("congratulations")
                                 .font(.system(size: 45, weight: .bold, design: .default))
                                 .foregroundColor(Color.white)
                         } else {
-                            Text("Merci")
+                            Text("thanks")
                             .font(.system(size: 45, weight: .bold, design: .default))
                             .foregroundColor(Color.white)
                         }
                         
                         if seconds < 4 {
-                            Text("pour votre achat")
+                            Text("for-your-purchase")
                             .foregroundColor(Color.gray)
                             .font(.system(size: 30, weight: .semibold, design: .default))
                             
@@ -64,7 +64,7 @@ struct FinDeCommande : View {
                         Image(systemName: "house")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                self.bigModel.currentview = .Home_homeFeed
+                                self.bigModel.currentview = .Home_homeFeed0
                                 self.bigModel.lastViews.removeAll()
                             }
                         

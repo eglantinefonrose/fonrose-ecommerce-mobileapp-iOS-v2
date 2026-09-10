@@ -9,103 +9,63 @@
 import SwiftUI
 import AVFoundation
 
+@available(iOS 15.0, *)
 struct AboutUs: View {
     
     @EnvironmentObject var bigModel: BigModel
+    let aboutUsTextsFrench = [Text("Nous vivons dans un monde authentique, entourés de personnes toutes") + Text(" uniques").bold().italic() + Text(", bien loin des standards de beauté."),
+    Text("L’objectif : créer des vêtements pour tout le spectre de") + Text(" morphologies ").bold().italic() + Text("dans le but de") + Text(" représenter ").bold().italic() +  Text("toutes les") + Text(" femmes").bold().italic() + Text(", bien au-delà des silhouettes stéréotypées.")]
+    @State var aboutUsTexts: [Text] = []
+    @State private var index = 0
     
     var body: some View {
         
-        Text("Back")
-            .onTapGesture {
-                print("back")
-                bigModel.currentview = bigModel.lastViews.last ?? .AboutUsScreen
-            }
-        
-        
-        /*ZStack {
-        
-            LoopingPlayer()
-
+        ZStack {
+            
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
+            
             VStack {
+                BackButtonModel(text: "about-us", viewName: .AboutUsScreen)
+                    .padding(20)
+                
+                TabView(selection: $index) {
+                    ForEach((0..<aboutUsTexts.count), id: \.self) { index in
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.gray)
+                                .opacity(0.3)
+                            aboutUsTexts[index]
+                                .font(.largeTitle)
+                                .padding(20)
+                        }
+                    }
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                HStack(spacing: 15) {
+                    ForEach((0..<aboutUsTexts.count), id: \.self) { index in
+                        Circle()
+                            .fill(index == self.index ? Color.gray : Color.gray.opacity(0.5))
+                            .frame(width: 10, height: 10)
 
-                Spacer()
-                    .frame(height: 30)
-
-                HStack {
-
-                   Spacer()
-                        .frame(width: 30)
-
-                   Button(action: {
-                       self.bigModel.currentview = .Home_homeFeed
-                   }) {
-                       Text("Back")
-                   }
-
-                   Spacer()
-
-                }.frame(width: UIScreen.main.bounds.width)
-
-                Spacer()
-
-            }.frame(height: UIScreen.main.bounds.height)
-
-            Text("Hi, my name’s Eglantine Fonrose and I’m a 16 years old creative girl. I really like to make videos, sew, create and discover new things. Hoping you will like the brand, an about the brand video will be available soon ツ")
-                .multilineTextAlignment(.center)
-                .foregroundColor(.white)
-                .font(.system(size: 16, weight: .heavy, design: .default))
-                .frame(width: UIScreen.main.bounds.width-40)
-
-        }.frame(width: UIScreen.main.bounds.width)
-            .edgesIgnoringSafeArea(.all)
-        
+                    }
+                }
+                .padding()
+                
+            }
+        }.onAppear {
+            aboutUsTexts = aboutUsTextsFrench
+        }
     }
 }
 
-struct LoopingPlayer: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        return PlayerUIView(frame: .zero)
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
-        // Do nothing here
-    }
-}
-
-class PlayerUIView: UIView {
-    
-    private var playerLayer = AVPlayerLayer()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    
-        let fileUrl = Bundle.main.url(forResource: "IMG_0247", withExtension: "mp4")!
-        let playerItem = AVPlayerItem(url: fileUrl)
-        
-        let player = AVPlayer(playerItem: playerItem)
-        playerLayer.player = player
-        playerLayer.videoGravity = .resizeAspectFill
-        layer.addSublayer(playerLayer)
-        
-        player.actionAtItemEnd = .none
-        NotificationCenter.default.addObserver(self, selector: #selector(rewindVideo(notification:)), name: .AVPlayerItemDidPlayToEndTime, object: player.currentItem)
-        
-        player.play()
-        
-    }
-    
-    @objc
-    func rewindVideo(notification: Notification) {
-        playerLayer.player?.seek(to: .zero)
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        playerLayer.frame = bounds
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }*/
+struct AboutUsView_Previews: PreviewProvider {
+     
+    static var previews: some View {
+        if #available(iOS 15.0, *) {
+            AboutUs()
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import iPhoneNumberField
+import MapKit
 
 @available(iOS 14.0, *)
 struct LocationView: View {
@@ -18,27 +19,52 @@ struct LocationView: View {
     @available(iOS 14.0, *)
     @StateObject var mapData = LocationViewModel()
     var db = Firestore.firestore()
-    var test: String = ""
+    @State var test: String = "k"
     
     var body: some View {
         
-        LocationTextField(civilityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.civility ?? "",
-                          firstNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.firstName ?? "",
-                          lastNameText: bigModel.user.persons[bigModel.currentPersonIndex].location?.lastName ?? "",
-                          emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex].location?.emailAdress ?? "",
-                          phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex].location?.phoneNumber ?? "",
-                          adressCountryText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCountry ?? "",
-                          adressPostalCodeText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressPostalCode ?? "",
-                          adressCityText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressCity ?? "",
-                          adressStreetText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStreet ?? "",
-                          adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressMailBox ?? "",
-                          adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressBasement ?? "",
-                          adressStageText: bigModel.user.persons[bigModel.currentPersonIndex].location?.adressStage ?? "",
-                          showPostalCodeCompletion: false,
-                          showCountryCompletion: false,
-                          showCityCompletion: false,
-                          showStreetCompletion: false)
-            .environment(\.colorScheme, .dark)
+        if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressStreet ?? "nil" == "" &&
+            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCity ?? "nil" == "" &&
+            bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressPostalCode ?? "nil" == ""
+            && bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressCountry ?? "nil" == "" {
+            
+            LocationTextField(
+                civilityText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "nil",
+                firstNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "nil",
+                lastNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "nil",
+                emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "nil",
+                phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "nil",
+                adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "nil",
+                adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "nil")
+            
+        } else {
+            LocationTextField(
+                civilityText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.civility ?? "nil",
+                firstNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.firstName ?? "nil",
+                lastNameText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.lastName ?? "nil",
+                emailAdressText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.emailAdress ?? "nil",
+                phoneNumberText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.phoneNumber ?? "nil",
+                adressMailBoxText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressMailBox ?? "nil",
+                adressBasementText: bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.adressBasement ?? "nil")
+        }
+        
+        
+        
+        /*LocationTextField(
+            civilityText: "woman",
+            firstNameText: "nil",
+            lastNameText: "nil",
+            emailAdressText: "nil",
+            phoneNumberText: "nil",
+            adressCountryText: "nil",
+            adressPostalCodeText: "nil",
+            adressCityText: "nil",
+            adressStreetText: "nil",
+            adressStreet: "nil",
+            adressMailBoxText: "nil",
+            adressBasementText: "nil",
+            adressStageText: "nil")*/
+        
         
     }
 }
@@ -51,358 +77,437 @@ struct LocationTextField: View {
     var db = Firestore.firestore()
     var auth = Auth.auth()
     @StateObject var mapData = LocationViewModel()
-    @State var civilityText: String = ""
-    @State var firstNameText: String = ""
-    @State var lastNameText: String = ""
-    @State var emailAdressText: String = ""
-    @State var phoneNumberText: String = ""
-    @State var adressCountryText: String = ""
-    @State var adressPostalCodeText: String = ""
-    @State var adressCityText: String = ""
-    @State var adressStreetText: String = ""
-    @State var adressMailBoxText: String = ""
-    @State var adressBasementText: String = ""
-    @State var adressStageText: String = ""
-    @State var showPostalCodeCompletion: Bool = false
-    @State var showCountryCompletion: Bool = false
-    @State var showCityCompletion: Bool = false
+    @State private var orientation = UIDeviceOrientation.portrait
+    @Environment(\.colorScheme) var theColorScheme
+    
+    @State var isAMan = false
+    @State var isAWoman = false
+    @State var civilityText: String
+    @State var firstNameText: String
+    @State var lastNameText: String
+    @State var emailAdressText: String
+    @State var phoneNumberText: String
+    @State var adressMailBoxText: String
+    @State var adressBasementText: String
     @State var showStreetCompletion: Bool = false
+    @State var isTheFinalNumberCorrect: Bool = true
+    @State var isTheFinalEmailCorrect: Bool = true
+    
+    @State private var searchText = ""
+    @State private var searchResults: [MKMapItem] = []
+    @State private var isSearching = false
     
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            Spacer()
-                .frame(height: 20)
+            Color("Background")
+                .edgesIgnoringSafeArea(.all)
             
-            HStack {
-                Spacer()
-                    .frame(width: 20)
+            VStack {
                 
-                Text("Back")
-                    .foregroundColor(Color.blue)
-                    .fontWeight(.semibold)
-                    .onTapGesture {
-                        if !self.bigModel.lastViews.isEmpty {
-                            print("back")
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                            self.bigModel.lastViews.removeLast()
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                        } else { print("array empty") }
-                    }
+                BackButtonModel(text: "location", viewName: .LivraisonViews_Livraison)
                 
-                Spacer()
-                
-                Text("Location")
-                    .foregroundColor(Color.black)
-                    .fontWeight(.semibold)
-                
-                Spacer()
-                
-                Image(systemName: "house")
-                    .foregroundColor(Color.blue)
-                    .onTapGesture {
-                        self.bigModel.currentview = .Home_homeFeed
-                    }
-                
-                Spacer()
-                    .frame(width: 20)
-                
-            }
-            
-            Spacer()
-            
-            HStack {
-                
-                Spacer()
-                    .frame(width: 20)
-                
-                ScrollView {
-                
-                    VStack(spacing: 10)  {
-                        
-                        Spacer()
-                        
-                        VStack {
-                            
-                            VStack {
-                                
-                                TextField("Civility", text: $civilityText)
-                                    .disableAutocorrection(true)
-                                
-                                Spacer()
-                                
-                                TextField("First name", text: $firstNameText)
-                                    .disableAutocorrection(true)
-                                
-                                Spacer()
-                                
-                                TextField("Last name", text: $lastNameText)
-                                    .disableAutocorrection(true)
-                                
-                                Spacer()
-                                
-                            }
-                            
-                            TextField("Email Adress", text: $emailAdressText)
-                                .disableAutocorrection(true)
-                                .autocapitalization(.none)
-                            
-                            Spacer()
-                            
-                            iPhoneNumberField("Phone", text: $phoneNumberText)
-                                            
-                        }
-                        
-                        Spacer()
-                        
-                        VStack {
-                            
-                            VStack {
-                                
-                                TextField("Country", text: $adressCountryText)
-                                
-                                //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
-                                // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
-                                // place est de type "Place"
-                                if showCountryCompletion {
-                                    ScrollView {
-                                        VStack(spacing: 15) {
-                                            ForEach(mapData.places) { place in
-                                                Text(place.placemark.country ?? "")
-                                                    .foregroundColor(.black)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .onTapGesture {
-                                                        self.adressCountryText = place.placemark.country ?? ""
-                                                        if adressCountryText == place.placemark.country ?? "" {
-                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                                showCountryCompletion = false
-                                                            }
-                                                        }
-                                                    }
-                                                Divider()
-                                            }
-                                        }.frame(height: 100)
-                                    }.background(Color.white)
-                                }
-                            }.onChange(of: adressCountryText, perform: { value in
-                                        
-                                let delay = 0.3
-                                showCountryCompletion = true
-                                print("adressCountryText changed")
-                                        
-                                // On se sert de DispatchQueue pour ne pas faire freezer le reste de l'appli
-                                // je ne comprends pas pourquoi mais value a la valeur de mapData.searchTxt donc quand on tape qqch dans le TextField, la recherche se met en route instantanement (utilisation de la fonction self.mapData.searchQuery() )
-                                        
-                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                    if value == adressCountryText {
-                                        self.mapData.searchQuery(searchTxt: adressCountryText)
-                                    }
-                                }
-                                        
-                            })
-                            
-                            Spacer()
-                            
-                            VStack {
-                                
-                                TextField("Postal code", text: $adressPostalCodeText)
-                                
-                                //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
-                                // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
-                                // place est de type "Place"
-                                if showPostalCodeCompletion {
-                                    ScrollView {
-                                        VStack(spacing: 15) {
-                                            ForEach(mapData.places) { place in
-                                                Text(place.placemark.postalCode ?? "")
-                                                    .foregroundColor(.black)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .onTapGesture {
-                                                        self.adressPostalCodeText = place.placemark.postalCode ?? ""
-                                                        if adressPostalCodeText == place.placemark.postalCode ?? "" {
-                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                                showPostalCodeCompletion = false
-                                                            }
-                                                        }
-                                                    }
-                                                Divider()
-                                            }
-                                        }.frame(height: 100)
-                                    }.background(Color.white)
-                                }
-                            }.onChange(of: adressPostalCodeText, perform: { value in
-                                        
-                                let delay = 0.3
-                                showPostalCodeCompletion = true
-                                        
-                                // On se sert de DispatchQueue pour ne pas faire freezer le reste de l'appli
-                                // je ne comprends pas pourquoi mais value a la valeur de mapData.searchTxt donc quand on tape qqch dans le TextField, la recherche se met en route instantanement (utilisation de la fonction self.mapData.searchQuery() )
-                                        
-                                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                    if value == adressPostalCodeText {
-                                        self.mapData.searchQuery(searchTxt: adressPostalCodeText)
-                                    }
-                                }
-                                        
-                            })
-                            
-                            Spacer()
-                            
-                        }
-                        
-                        VStack {
-                            
-                            TextField("City", text: $adressCityText)
-                            
-                            //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
-                            // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
-                            // place est de type "Place"
-                            if showCityCompletion {
-                                ScrollView {
-                                    VStack(spacing: 15) {
-                                        ForEach(mapData.places) { place in
-                                            Text(place.placemark.locality ?? "")
-                                                .foregroundColor(.black)
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .onTapGesture {
-                                                    self.adressCityText = place.placemark.locality ?? ""
-                                                    if adressCityText == place.placemark.locality ?? "" {
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                            showCityCompletion = false
-                                                        }
-                                                    }
-                                                }
-                                            Divider()
-                                        }
-                                    }.frame(height: 100)
-                                }.background(Color.white)
-                            }
-                        }.onChange(of: adressCityText, perform: { value in
-                                    
-                            let delay = 0.3
-                            showCityCompletion = true
-                                    
-                            // On se sert de DispatchQueue pour ne pas faire freezer le reste de l'appli
-                            // je ne comprends pas pourquoi mais value a la valeur de mapData.searchTxt donc quand on tape qqch dans le TextField, la recherche se met en route instantanement (utilisation de la fonction self.mapData.searchQuery() )
-                                    
-                            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                if value == adressCityText {
-                                    self.mapData.searchQuery(searchTxt: adressCityText)
-                                }
-                            }
-                                    
-                        })
-                        
-                        Spacer()
-                        
-                        VStack {
-                            
-                            TextField("Street", text: $adressStreetText)
-                            
-                            //&& renvoie la scrollView que si mapData.places et mapData.searchTxt n'est pas vide
-                            // rappel : "places" est un tableau d'objets de type "Place" (placemark avec UUID)
-                            // place est de type "Place"
-                            if showStreetCompletion {
-                                ScrollView {
-                                    VStack(spacing: 15) {
-                                        ForEach(mapData.places) { place in
-                                            Text(place.placemark.name ?? "")
-                                                .foregroundColor(.black)
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                .onTapGesture {
-                                                    self.adressStreetText = place.placemark.name ?? ""
-                                                    if adressStreetText == place.placemark.name ?? "" {
-                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                            showStreetCompletion = false
-                                                        }
-                                                    }
-                                                }
-                                            Divider()
-                                        }
-                                    }.frame(height: 100)
-                                }.background(Color.white)
-                            }
-                        }.onChange(of: adressStreetText, perform: { value in
-                                    
-                            let delay = 0.3
-                            showStreetCompletion = true
-                                    
-                            // On se sert de DispatchQueue pour ne pas faire freezer le reste de l'appli
-                            // je ne comprends pas pourquoi mais value a la valeur de mapData.searchTxt donc quand on tape qqch dans le TextField, la recherche se met en route instantanement (utilisation de la fonction self.mapData.searchQuery() )
-                                    
-                            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                                if value == adressStreetText {
-                                    self.mapData.searchQuery(searchTxt: adressStreetText)
-                                }
-                            }
-                                    
-                        })
-                        
-                        VStack {
-                            
-                            TextField("Mail box", text: $adressMailBoxText)
-                            
-                            Spacer()
-                            
-                            TextField("Basement", text: $adressBasementText)
-                            
-                            Spacer()
-                            
-                            TextField("Stage", text: $adressStageText)
-                            
-                        }
-                        
-                    }
+                ZStack {
                     
+                    //if !showStreetCompletion {
+                        VStack(spacing: 20) {
+                            
+                            VStack {
+                                
+                                //Spacer()
+                                
+                                if #available(iOS 15.0, *) {
+                                    ScrollView {
+                                        
+                                        LazyVStack {
+                                            
+                                            VStack {
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                HStack {
+                                                    
+                                                    Image(systemName: civilityText == "man" ? "circle.circle.fill" : "circle")
+                                                        .foregroundColor(.blue)
+                                                        .onTapGesture {
+                                                            self.civilityText = "man"
+                                                        }
+                                                    
+                                                    Text("mr")
+                                                        //.foregroundColor(.black)
+                                                    
+                                                    Spacer()
+                                                    
+                                                    Image(systemName: civilityText == "woman" ? "circle.circle.fill" : "circle")
+                                                        .foregroundColor(.blue)
+                                                        .onTapGesture {
+                                                            self.civilityText = "woman"
+                                                        }
+                                                    
+                                                    Text("mme")
+                                                        //.foregroundColor(.black)
+                                                    
+                                                }
+                                                 
+                                                 Spacer()
+
+                                                }.padding(10)
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if firstNameText.isEmpty {
+                                                             Text("first-name")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         TextField("", text: $firstNameText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if lastNameText.isEmpty {
+                                                             Text("last-name")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         TextField("", text: $lastNameText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if emailAdressText.isEmpty {
+                                                             Text("email-adress")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         TextField("", text: $emailAdressText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                         
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                                if !isTheFinalEmailCorrect {
+                                                    Text("email-adress-not-valid")
+                                                        .foregroundColor(.red)
+                                                }
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if phoneNumberText.isEmpty {
+                                                             Text("phone")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         iPhoneNumberField("", text: $phoneNumberText)
+                                                             .prefixHidden(false)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                                if !isTheFinalNumberCorrect {
+                                                    Text("unvalid-phone-number")
+                                                        .foregroundColor(.red)
+                                                }
+                                                
+                                            }
+                                            
+                                            VStack {
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if adressMailBoxText.isEmpty {
+                                                             Text("mail-box")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         TextField("", text: $adressMailBoxText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                                Spacer()
+                                                
+                                                VStack {
+                                                 
+                                                 Spacer()
+                                                 
+                                                 HStack {
+                                                                                     
+                                                     Spacer()
+                                                     
+                                                     ZStack(alignment: .leading) {
+                                                         if adressBasementText.isEmpty {
+                                                             Text("basement")
+                                                                 .foregroundColor(.gray)
+                                                                 .opacity(0.6)
+                                                                 .padding(.horizontal, 5)
+                                                         }
+                                                         TextField("", text: $adressBasementText)
+                                                             .disableAutocorrection(true)
+                                                             .autocapitalization(.none)
+                                                     }
+                                                     
+                                                 }
+                                                 
+                                                 Spacer()
+
+                                                }.background(theColorScheme == .dark ? Color.gray : Color.white)
+                                                .cornerRadius(7)
+                                                .frame(height: 30)
+                                                .padding(10)
+                                                
+                                            }
+                                            
+                                        }
+                                        
+                                    }//.frame(height: orientation == .portrait || orientation == .portraitUpsideDown ? 400 : 100)
+                                    .frame(maxHeight: .infinity)
+                                    .onRotate { newOrientation in orientation = newOrientation }
+                                    
+                                } else {
+                                    
+                                }
+                                
+                            }
+                            
+                            VStack {
+                                
+                                //Spacer()
+                                
+                                //Text("Swipe down to see the full list of requested informations")
+                                    //.multilineTextAlignment(.center)
+                                
+                                HStack {
+                                    Spacer()
+                                    Text("save")
+                                        .foregroundColor(Color.white)
+                                        .fontWeight(.semibold)
+                                        .padding(10)
+                                    Spacer()
+                                }.background(Color.blue)
+                                    .cornerRadius(15)
+                                    .padding(20)
+                                    .onTapGesture {
+                                        
+                                        Task {
+                                            if emailAdressText.isValideEmailAdress() {
+                                                let docRef = db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location?.id ?? "nil")
+                                                if civilityText != "" && firstNameText != "" && lastNameText != "" && civilityText != "" && emailAdressText != "" && phoneNumberText != "" {
+                                                    
+                                                    do {
+                                                        try docRef.setData(from: BigModel.Location(civility: civilityText, firstName: firstNameText, lastName: lastNameText, emailAdress: emailAdressText, phoneNumber: phoneNumberText, adressCountry: "", adressPostalCode: "", adressCity: "", adressStreet: "", adressMailBox: adressMailBoxText, adressBasement: adressBasementText, adressStage: ""))
+                                                        await bigModel.fetchLocation()
+                                                        bigModel.currentview = .LivraisonViews_RecapLivraison
+                                                        bigModel.lastViews.append(.LivraisonViews_Livraison)
+                                                        bigModel.fullViewHistory.append(.LivraisonViews_Livraison)
+                                                        
+                                                      }
+                                                      catch {
+                                                        print(error)
+                                                      }
+                                                    
+                                                } else {
+                                                    alertTF(title: "some-fields-empty", message: "fill-all-the-fields", primaryTitle: "ok") {
+                                                    }
+                                                }
+                                            } else {
+                                                if !phoneNumberText.isValidPhoneNumber() {
+                                                    isTheFinalNumberCorrect = false
+                                                }
+                                                if !emailAdressText.isValideEmailAdress() {
+                                                    isTheFinalEmailCorrect = false
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                            }
+                        }
+                    //}
                 }
                 
-            }
-                
-            Spacer()
-            
-            HStack {
-                
-                Spacer()
-                
-                HStack {
-                    
-                    Spacer()
-                    Text("Location")
-                        .foregroundColor(Color.white)
-                        .fontWeight(.semibold)
-                    Spacer()
-                
-                }.background(Color.blue)
-                .frame(width: 150)
-                .cornerRadius(5)
-                
-                Spacer()
-                
-            }.frame(width: 120, height: 35)
-            .background(Color.blue)
-            .cornerRadius(15)
-            .onTapGesture {
-                
-                db.collection("users").document("user\(auth.currentUser?.uid ?? "nil")").collection("persons").document(bigModel.currentPersonId).collection("Location").document(bigModel.user.persons[bigModel.currentPersonIndex].location?.id ?? "prout").setData(["civility": civilityText, "firstName": firstNameText, "lastName": lastNameText, "emailAdress": emailAdressText, "phoneNumber": phoneNumberText, "adressPostalCode": adressPostalCodeText, "adressCity": adressCityText, "adressStreet": adressStreetText, "adressMailBox": adressMailBoxText, "adressBasement": adressBasementText, "adressStage": adressStageText, "adressLat": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLat ?? 0, "adressLong": bigModel.user.persons[bigModel.currentPersonIndex].location?.adressLong ?? 0])
-                bigModel.currentview = .LivraisonViews_RecapLivraison
-                bigModel.lastViews.append(.LivraisonViews_Livraison)
-                
-            }
-                
-            Spacer()
-                .frame(height: 20)
+            }.padding(20)
             
         }
     }
+    
+    private func search() {
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = searchText
+            let search = MKLocalSearch(request: request)
+
+            search.start { response, _ in
+                guard let response = response else {
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    self.searchResults = response.mapItems
+                }
+            }
+        }
+    
 }
 
+struct SearchBar: View {
+    @Binding var text: String
+    @Binding var isSearching: Bool
 
-struct LocationRecap_Previews: PreviewProvider {
+    var body: some View {
+        HStack {
+            TextField("Search for an address", text: $text)
+                .padding(.leading, 24)
+                .onChange(of: text) { _ in
+                    isSearching = true
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+
+            if isSearching {
+                Button(action: {
+                    withAnimation {
+                        text = ""
+                        isSearching = false
+                    }
+                }) {
+                    Image(systemName: "multiply.circle.fill")
+                        .foregroundColor(.gray)
+                        .padding(.trailing, 8)
+                }
+                .transition(.move(edge: .trailing))
+                .animation(.easeInOut)
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+@available(iOS 14.0, *)
+struct Detail: View {
+    
+    @State var category: String
+    @State var requestedInfo: String
+    @State var showCompletion: Bool
+    @StateObject var mapData = LocationViewModel()
+    
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 15) {
+                ForEach(mapData.places) { place in
+                    Text(place.placemark.postalCode ?? "")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .onTapGesture {
+                            requestedInfo = category
+                            if requestedInfo == category {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                    showCompletion = false
+                                }
+                            }
+                        }
+                    Divider()
+                }
+            }.frame(height: 100)
+        }.background(Color.white)
+    }
+}
+
+struct LocationView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 14.0, *) {
             LocationView()
-                .environmentObject(BigModel.shared)
+                .environmentObject(BigModel())
         } else {
             // Fallback on earlier versions
         }

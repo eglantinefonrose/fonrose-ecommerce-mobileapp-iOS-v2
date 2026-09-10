@@ -8,26 +8,18 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
+@available(iOS 15.0, *)
 struct AuthView: View {
     
     @EnvironmentObject var bigModel: BigModel
     
-    @available(iOS 14.0, *)
+    @available(iOS 15.0, *)
     var body: some View {
                                                 
         VStack {
                             
-            if (self.bigModel.authCurrentView == .Auth_SignInView) {
-                SignInView()
-            }
-                
-            if (self.bigModel.authCurrentView == .Auth_SignUpView) {
-                SignUpView()
-            }
-                
-            if (self.bigModel.authCurrentView == .Auth_LogInNewUserView) {
-                LogInNewUser()
+            if (self.bigModel.authCurrentView == .Auth_LogInEmailView) {
+                LogInAppleView()
             }
                 
             if (self.bigModel.authCurrentView == .Auth_UserInfo) {
@@ -35,12 +27,28 @@ struct AuthView: View {
             }
             
             if (self.bigModel.authCurrentView == .Auth_PersonPickerView) {
-                PersonPickerView()
+                if bigModel.deletedPersonID == "" {
+                    PersonPickerView()
+                } else {
+                    DeletePersonView()
+                }
             }
             
             if (self.bigModel.authCurrentView == .Auth_NewUserView) {
                 NewPersonView()
             }
+            
+            if (self.bigModel.authCurrentView == .Auth_DeleteScreen) {
+                DeletePersonView()
+            }
+            
+            if (self.bigModel.authCurrentView == .HelpView) {
+                HelpView()
+            }
+            
+            /*if (self.bigModel.authCurrentView == .Auth_EditPerson) {
+                EditPersonView()
+            }*/
             
         }
         

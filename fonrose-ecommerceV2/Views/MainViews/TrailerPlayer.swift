@@ -12,84 +12,86 @@ import AVKit
 struct TrailerPlayer: View {
     
     @EnvironmentObject var bigModel: BigModel
+    @State private var orientation = UIDeviceOrientation.portrait
     @Environment(\.presentationMode) var presentationMode
+    let url : URL
     
     var body: some View {
 
         ZStack {
             
-            player()
-        
+            Rectangle()
+                .edgesIgnoringSafeArea(.all)
+                .foregroundColor(.black)
+            
+            if #available(iOS 14.0, *) {
+                
+                VideoPlayer(player: AVPlayer(url: url))
+               
+            } else {
+                // Fallback on earlier versions
+            }
+            
             VStack {
                 
-                Spacer()
-                    .frame(height: 40)
+                /*HStack {
+                    
+                    Text("Back")
+                        .foregroundColor(Color.blue)
+                        .fontWeight(.semibold)
+                        .onTapGesture {
+                            if !self.bigModel.lastViews.isEmpty {
+                                print("back")
+                                self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
+                                self.bigModel.lastViews.removeLast()
+                                print("previous View = \(String(describing: self.bigModel.lastViews.last))")
+                            } else { print("array empty") }
+                        }
+                    
+                    Spacer()
+                    
+                    Text(bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName)
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        .fontWeight(.semibold)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "house")
+                        .foregroundColor(Color.blue)
+                        .onTapGesture {
+                            bigModel.lastViews.append(.VideoPlayer_trailerPlayer)
+                            bigModel.currentview = .Home_homeFeed0
+                        }
                 
-                if #available(iOS 14.0, *) {
-                    HStack {
-                        
-                        Spacer()
-                            .frame(width: 20)
-                        
-                        Text("Back")
-                            .foregroundColor(Color.blue)
-                            .fontWeight(.semibold)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "house")
-                            .foregroundColor(Color.blue)
-                            .onTapGesture {
-                                self.bigModel.currentview = .Home_homeFeed
-                                self.bigModel.lastViews.removeAll()
-                            }
-                        
-                        Spacer()
-                            .frame(width: 20)
-                        
-                    }.onTapGesture {
-                        if !self.bigModel.lastViews.isEmpty {
-                            self.bigModel.currentview = self.bigModel.lastViews.last ?? .AboutUsScreen
-                            self.bigModel.lastViews.removeLast()
-                            print("previous View = \(String(describing: self.bigModel.lastViews.last))")
-                        } else { print("array empty") }
+                }*/
+                
+                BackButtonModel(text: bigModel.dressPictures[bigModel.selectedProductId ?? 0].productName, viewName: .VideoPlayer_trailerPlayer)
+                    .onRotate { newOrientation in orientation = newOrientation }
+                    .padding(20)
+                    .frame(width: UIScreen.main.bounds.width)
+                
+                Spacer()
+                
+                Text("buy")
+                    .foregroundColor(.blue)
+                    .onTapGesture {
+                        bigModel.lastViews.append(.VideoPlayer_trailerPlayer)
+                        bigModel.fullViewHistory.append(.VideoPlayer_trailerPlayer)
+                        bigModel.currentview = .MeasurementCarouselView
                     }
-                } else {
-                    // Fallback on earlier versions
-                }
-                
-                Spacer()
                 
             }
             
-        }.edgesIgnoringSafeArea(.all)
-        .background(Color.black)
+        }//.frame(width: orientation == .portrait || orientation == .portraitUpsideDown ? UIScreen.main.bounds.width : UIScreen.main.bounds.height)
 
     }
     
 }
 
-
-    // MARK: Controller pour video
-struct player : UIViewControllerRepresentable {
-    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: UIViewControllerRepresentableContext<player>) {
-        
-    }
-    
-        func makeUIViewController(context: UIViewControllerRepresentableContext<player>) -> AVPlayerViewController {
-            let controller = AVPlayerViewController()
-            let url = "https://www.jacquemus.com/content/uploads/2020/04/Jacquemus-SS20-Reimagined-Mobile.mp4.mp4" // url non existante
-            let player1 = AVPlayer(url: URL(string: url)!)
-            controller.player = player1
-            return controller
-        }
-}
-
-
-
-
-struct DetailedView_Previews: PreviewProvider {
+/*struct DetailedView_Previews: PreviewProvider {
     static var previews: some View {
-        player()
+        TrailerPlayer()
+            .environmentObject(BigModel(shouldInjectMockedData: true))
     }
-}
+}*/

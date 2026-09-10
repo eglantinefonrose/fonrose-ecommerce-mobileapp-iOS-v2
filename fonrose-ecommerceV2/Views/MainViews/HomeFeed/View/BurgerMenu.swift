@@ -29,40 +29,33 @@ struct BurgerMenu: View {
             
             VStack(alignment: .leading, spacing: 20) {
                 
-                Spacer()
-                    .frame(height: 0)
-                
-                VStack(alignment: .leading, spacing: 20) {
-                    Text("Watch the clip")
+                ForEach(bigModel.productMainArrayInfos.indices, id: \.self) { index in
+                    Text(bigModel.productMainArrayInfos[index].productName)
                         .foregroundColor(.white)
                         .font(.headline)
                         .onTapGesture {
-                            proxy.scrollTo(0)
-                            self.bigModel.showMenu = false
-                        }
-                    
-                    Text("The dress")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .onTapGesture {
-                            proxy.scrollTo(1)
-                            self.bigModel.showMenu = false
-                        }
-                    
-                    Text("About us")
-                        .foregroundColor(.white)
-                        .font(.headline)
-                        .onTapGesture {
-                            proxy.scrollTo(2)
+                            proxy.scrollTo(index)
                             self.bigModel.showMenu = false
                         }
                 }
                 
-                Text("Customer service")
+                ForEach(bigModel.mainArrayInfos.indices, id: \.self) { index in
+                    Text(LocalizedStringKey(bigModel.mainArrayInfos[index].text))
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .onTapGesture {
+                            bigModel.currentview = bigModel.mainArrayInfos[index].nextScreen
+                            self.bigModel.showMenu = false
+                        }
+                }
+                
+                Text("All products")
                     .foregroundColor(.white)
                     .font(.headline)
                     .onTapGesture {
-                        proxy.scrollTo(3)
+                        bigModel.currentview = ViewEnum.ProductsView
+                        bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
                         self.bigModel.showMenu = false
                     }
                 
@@ -70,8 +63,17 @@ struct BurgerMenu: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .onTapGesture {
-                        bigModel.currentview = ViewEnum.Measurement_Mensurations
-                        bigModel.lastViews.append(.Home_homeFeed)
+                        
+                        if bigModel.currentPersonIndex == nil {
+                            bigModel.currentview = ViewEnum.Measurement_MeasurementsTut
+                        } else {
+                            bigModel.currentview = ViewEnum.Measurement_Mensurations
+                        }
+                        
+                        bigModel.selectedProductId = nil
+                        bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
+                        bigModel.needToSeeEveryMeasurements = true
                         self.bigModel.showMenu = false
                     }
                 
@@ -79,89 +81,40 @@ struct BurgerMenu: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .onTapGesture {
-                        bigModel.currentview = ViewEnum.LivraisonViews_Livraison
-                        bigModel.lastViews.append(.Home_homeFeed)
-                        self.bigModel.showMenu = false
-                        
-                        if bigModel.signedIn {
+                        Task {
                             
-                            print("signed in")
-                            
-                            if bigModel.currentPersonIndex+1 < 10 {
+                            if bigModel.currentPersonIndex != nil {
                                 
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person0\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
+                                await bigModel.fetchLocation()
+                                
+                                if bigModel.user.persons[bigModel.currentPersonIndex ?? 0].location == nil {
                                     
-                                    if let snapshot = snapshot {
-                                        
-                                        for document in snapshot.documents {
-                                            let dbCivility = document.data()["civility"] as? String ?? ""
-                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                            let dbLastName = document.data()["lastName"] as? String ?? ""
-                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-                                            
-                                            bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: dbAdressLat, adressLong: dbAdressLong)
-                                            
-                                        }
-                                        
-                                    }
-
+                                    await bigModel.initializeLocation()
+                                    await bigModel.fetchLocation()
                                     
+                                } else {
+                                    bigModel.currentview = ViewEnum.LivraisonViews_Livraison
+                                    bigModel.lastViews.append(.Home_homeFeed0)
+                                    bigModel.fullViewHistory.append(.Home_homeFeed0)
+                                    self.bigModel.showMenu = false
                                 }
-                                  
-                            }
-                            
-                            else {
-                                
-                                db.collection("user\(Auth.auth().currentUser?.uid ?? "nil")").document("person\(bigModel.currentPersonIndex+1)").collection("Location").getDocuments { snapshot, error in
-                                    guard error == nil else {
-                                        print(error!.localizedDescription)
-                                        return
-                                    }
-                                    
-                                    if let snapshot = snapshot {
-                                        
-                                        for document in snapshot.documents {
-                                            let dbCivility = document.data()["civility"] as? String ?? ""
-                                            let dbFirstName = document.data()["firstName"] as? String ?? ""
-                                            let dbLastName = document.data()["lastName"] as? String ?? ""
-                                            let dbEmailAdress = document.data()["emailAdress"] as? String ?? ""
-                                            let dbPhoneNumber = document.data()["phoneNumber"] as? String ?? ""
-                                            let dbAdressCountry = document.data()["adressCountry"] as? String ?? ""
-                                            let dbAdressPostalCode = document.data()["adressPostalCode"] as? String ?? ""
-                                            let dbAdressCity = document.data()["adressCity"] as? String ?? ""
-                                            let dbAdressStreet = document.data()["adressStreet"] as? String ?? ""
-                                            let dbAdressMailBox = document.data()["adressMailBox"] as? String ?? ""
-                                            let dbAdressBasement = document.data()["adressBasement"] as? String ?? ""
-                                            let dbAdressStage = document.data()["adressStage"] as? String ?? ""
-                                            let dbAdressLat = document.data()["adressLat"] as? CGFloat ?? 44
-                                            let dbAdressLong = document.data()["adressLong"] as? CGFloat ?? 44
-                                            
-                                            bigModel.user.persons[bigModel.currentPersonIndex].location = BigModel.Location(id: document.documentID, civility: dbCivility, firstName: dbFirstName, lastName: dbLastName, emailAdress: dbEmailAdress, phoneNumber: dbPhoneNumber, adressCountry: dbAdressCountry, adressPostalCode: dbAdressPostalCode, adressCity: dbAdressCity, adressStreet: dbAdressStreet, adressMailBox: dbAdressMailBox, adressBasement: dbAdressBasement, adressStage: dbAdressStage, adressLat: CGFloat(dbAdressLat), adressLong: CGFloat(dbAdressLong))
-                                            
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
+                            } else {
+                                bigModel.currentview = ViewEnum.LivraisonViews_Livraison
+                                bigModel.lastViews.append(.Home_homeFeed0)
+                                bigModel.fullViewHistory.append(.Home_homeFeed0)
+                                self.bigModel.showMenu = false
                             }
                             
                         }
-                        
+                    }
+                
+                Image(systemName: "questionmark.circle")
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .onTapGesture {
+                        bigModel.currentview = .HelpView
+                        bigModel.lastViews.append(.Home_homeFeed0)
+                        bigModel.fullViewHistory.append(.Home_homeFeed0)
                     }
                 
                 Spacer()
